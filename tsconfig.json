@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["react/next", "react-dom/next"],
+    "types": ["react/next", "react-dom/next", "jest"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "outDir": "dist",
@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true, //https://swizec.com/blog/how-to-configure-jest-with-typescript/
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -19,5 +19,5 @@
     "jsx": "react-jsx"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist/**/*"]
+  "exclude": ["node_modules", "dist/**/*", "**/*.test.*", "**/__mocks__/*", "**/__tests__/*"]
 }
