@@ -1,12 +1,11 @@
 import { ReactElement, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AppService } from "./Service";
 
-async function http(request: RequestInfo): Promise<any> {
-  const response = await fetch(request);
-  const body = await response.json();
-  return body;
-}
+// async function http(request: RequestInfo): Promise<any> {
+//   const response = await fetch(request);
+//   const body = await response.json();
+//   return body;
+// }
 
 interface Todo {
   userId: number;
@@ -20,10 +19,11 @@ const Call = (): ReactElement => {
 
   useEffect(() => {
     const api = async () => {
-      const APICall = new AppService("https://jsonplaceholder.typicode.com/todos");
-      const data = await APICall.getItems();
-      // console.log(data);
-      setResult(data);
+      // const APICall = new AppService("https://jsonplaceholder.typicode.com/todos");
+      // const data = await APICall.getItems();
+
+      setResult(null);
+      // setResult(data);
     };
     // const api = async () => {
     //   const data = await fetch("https://jsonplaceholder.typicode.com/todos");

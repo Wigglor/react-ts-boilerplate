@@ -1,17 +1,16 @@
-import axios from "axios";
-import { FormEvent, ReactElement, useState } from "react";
+import { FormEvent, ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 
-type LoginCredentials = {
-  //   credentials: { username: string; password: string };
-  username: string | undefined;
-  password: string | undefined;
-};
+// type LoginCredentials = {
+//   //   credentials: { username: string; password: string };
+//   username: string | undefined;
+//   password: string | undefined;
+// };
 
-type Credential = string | undefined;
-type Token = string | null;
+// type Credential = string | undefined;
+// type Token = string | null;
 
-const loginUser = async (username: Credential, password: Credential): Promise<Token> => {
+/*const loginUser = async (username: Credential, password: Credential): Promise<Token> => {
   const credentials = { username: username, password: password };
   return fetch("http://localhost:3000/login", {
     method: "POST",
@@ -20,24 +19,24 @@ const loginUser = async (username: Credential, password: Credential): Promise<To
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
-};
+};*/
 
 const Login = (): ReactElement => {
   const navigate = useNavigate();
-  const [username, setUserName] = useState<string | undefined>();
-  const [password, setPassword] = useState<string | undefined>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [username, setUserName] = useState<string | undefined>();
+  // const [password, setPassword] = useState<string | undefined>();
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const credentials = { username: username, password: password };
+    // const credentials = { username: username, password: password };
     // const token = await loginUser(username, password);
-    const token = await signIn(username, password);
+    // const token = await signIn(username, password);
     navigate("/dashboard");
     // setToken(token);
   };
-
-  const signIn = async (username: Credential, password: Credential): Promise<Token | undefined> => {
+  // console.log(isLoading);
+  /*const signIn = async (username: Credential, password: Credential): Promise<Token | undefined> => {
     try {
       setIsLoading(true);
       const response = await axios({
@@ -60,17 +59,17 @@ const Login = (): ReactElement => {
     } finally {
       setIsLoading(false);
     }
-  };
+  };*/
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
         <p>Username</p>
-        <input type="text" onChange={(e) => setUserName(e.target.value)} />
+        {/* <input type="text" onChange={(e) => setUserName(e.target.value)} /> */}
       </label>
       <label>
         <p>Password</p>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
+        {/* <input type="password" onChange={(e) => setPassword(e.target.value)} /> */}
       </label>
       <div>
         <button type="submit">Submit</button>

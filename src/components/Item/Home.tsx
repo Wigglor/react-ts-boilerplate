@@ -22,7 +22,7 @@ interface MyObject {
   nationality: string;
 }
 
-const myUnion: string | null = "test union";
+// const myUnion: string | null = "test union";
 // myUnion = "test union";
 
 const Home = ({ name }: AppName): ReactElement => {

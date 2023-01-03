@@ -4,8 +4,8 @@ export class AppService {
     this.url = url;
   }
 
-  public async getItems(): Promise<any> {
-    const response = await fetch(this.url);
-    return await response.json();
-  }
+  // public async getItems(): Promise<any> {
+  //   const response = await fetch(this.url);
+  //   return await response.json();
+  // }
 }

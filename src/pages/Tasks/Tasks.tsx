@@ -17,7 +17,7 @@ const Tasks = (): ReactElement => {
   const [visibility, setVisibility] = useState<boolean>(false);
   const [data, setData] = useState<FormData>();
   // const [data, setData] = useState<FormData>();
-  const [name, setName] = useState<string>();
+  // const [name, setName] = useState<string>();
 
   const tasks = useAppSelector((state) => state.tasks);
   const dispatch = useAppDispatch();

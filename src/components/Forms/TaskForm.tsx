@@ -1,5 +1,5 @@
 import { ReactElement, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import { addTask } from "../../store/tasks/taskSlice";
 import { FormDataType } from "../../types/task";
 import "./TaskForm.scss";
@@ -29,7 +29,7 @@ const TaskForm = (): ReactElement => {
     }
   };
 
-  const tasks = useAppSelector((state) => state.tasks);
+  // const tasks = useAppSelector((state) => state.tasks);
   const dispatch = useAppDispatch();
 
   return (

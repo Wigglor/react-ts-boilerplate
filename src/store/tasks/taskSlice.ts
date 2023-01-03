@@ -7,11 +7,11 @@ import type { RootState } from "../store";
 //   description: string;
 // }>;
 
-interface Task {
-  name: string;
-  description: string;
-  id: string;
-}
+// interface Task {
+//   name: string;
+//   description: string;
+//   id: string;
+// }
 
 interface TaskState {
   // tasks: Task[];

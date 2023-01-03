@@ -1,8 +1,8 @@
-interface FormData {
-  //   name: string | undefined;
-  //   description: string | undefined;
-  //   id: string | undefined;
-}
+// interface FormData {
+//     name: string | undefined;
+//     description: string | undefined;
+//     id: string | undefined;
+// }
 
 interface FormDataType {
   name: string;
@@ -10,11 +10,11 @@ interface FormDataType {
   id: string;
 }
 
-interface Task {
-  //   name: string | undefined;
-  //   description: string | undefined;
-  //   id: string | undefined;
-}
+// interface Task {
+//     name: string | undefined;
+//     description: string | undefined;
+//     id: string | undefined;
+// }
 
 interface TaskState {
   tasks: Task[];

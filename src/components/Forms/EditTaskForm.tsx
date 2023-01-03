@@ -15,16 +15,16 @@ const Backdrop = (/*props*/) => {
   return <div className="backdrop" /*onClick={props.onConfirm}*/></div>;
 };
 
-const FormOverlay = () => {
-  return (
-    <form className="formOverlay">
-      <label>
-        Task name:
-        <input type="text" />
-      </label>
-    </form>
-  );
-};
+// const FormOverlay = () => {
+//   return (
+//     <form className="formOverlay">
+//       <label>
+//         Task name:
+//         <input type="text" />
+//       </label>
+//     </form>
+//   );
+// };
 
 // type EditProps = {
 //   // editData: FormDataType;
