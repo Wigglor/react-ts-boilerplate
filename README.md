@@ -5,7 +5,7 @@ specific convention: https://github.com/angular/angular/blob/22b96b9/CONTRIBUTIN
 
 ## Eslint
 
-...add comments here
+...add comments here abour eslint setup
 
 # config
 
