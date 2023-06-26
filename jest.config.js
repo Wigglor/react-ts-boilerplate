@@ -1,3 +1,20 @@
+// export const roots = ["<rootDir>/src"];
+// export const moduleNameMapper = {
+//   "\\.(s(a|c)ss)$": "<rootDir>/src/styleMock.ts",
+// };
+// export const transform = {
+//   "^.+\\.tsx?$": "ts-jest",
+// };
+// export const setupFilesAfterEnv = [
+//   // "@testing-library/react/cleanup-after-each",
+//   // "@testing-library/jest-dom/extend-expect",
+//   "<rootDir>/src/setupTests.ts",
+//   // "@testing-library/react",
+//   // "@testing-library/jest-dom",
+// ];
+// export const testRegex = "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$";
+// export const moduleFileExtensions = ["ts", "tsx", "js", "jsx", "json", "node"];
+
 module.exports = {
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
