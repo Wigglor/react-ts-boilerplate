@@ -23,3 +23,7 @@ https://blog.webdevsimplified.com/2022-07/react-folder-structure/
 
 https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
 https://hygraph.com/blog/react-authentication
+
+# Security
+
+disable react dev tools in production (should be a npm package for this)

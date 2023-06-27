@@ -1,80 +1,113 @@
-import { FormEvent, ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
+import { Navigate /*useNavigate*/ } from "react-router-dom";
+import axios from "../../api/axios";
+// import { AuthContext } from "../../context/AuthProvider";
+import useAuth from "../../hooks/useAuth";
+import "./Login.module.scss";
 
-// type LoginCredentials = {
-//   //   credentials: { username: string; password: string };
-//   username: string | undefined;
-//   password: string | undefined;
-// };
-
-// type Credential = string | undefined;
-// type Token = string | null;
-
-/*const loginUser = async (username: Credential, password: Credential): Promise<Token> => {
-  const credentials = { username: username, password: password };
-  return fetch("http://localhost:3000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json());
-};*/
+const LOGIN_URL = "/cognito/signin";
 
 const Login = (): ReactElement => {
-  const navigate = useNavigate();
-  // const [username, setUserName] = useState<string | undefined>();
-  // const [password, setPassword] = useState<string | undefined>();
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const navigate = useNavigate();
+  const { setAuth } = useAuth();
+  const userRef = useRef(null);
+  const errRef = useRef<HTMLParagraphElement>(null);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // const credentials = { username: username, password: password };
-    // const token = await loginUser(username, password);
-    // const token = await signIn(username, password);
-    navigate("/dashboard");
-    // setToken(token);
-  };
-  // console.log(isLoading);
-  /*const signIn = async (username: Credential, password: Credential): Promise<Token | undefined> => {
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  //   useEffect(() => {
+  //     const userRef: RefObject<HTMLInputElement | null> = useRef(null);
+  //     if (userRef.current) {
+  //       userRef.current.focus();
+  //     }
+  //   }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd]);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
+    console.log(user, pwd);
     try {
-      setIsLoading(true);
-      const response = await axios({
-        method: "post",
-        url: "http://localhost:3000/login",
-        data: {
-          username,
-          password,
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ username: user, password: pwd }),
+        {
+          headers: { "Content-Type": "application/json" },
+          //   withCredentials: true,
         },
+      );
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.result.AuthenticationResult.AccessToken;
+      setAuth({
+        user: user,
+        pwd: pwd,
+        accessToken: accessToken,
       });
-      if (!response?.data?.token) {
-        console.log("Something went wrong during signing in: ", response);
-        return;
+      setUser("");
+      setPwd("");
+      setSuccess(true);
+    } catch (err: any) {
+      if (!err?.response) {
+        setErrMsg("No server response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing username or password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login failed");
       }
-      //   storeTokenInLocalStorage(response.data.token);
-      //   navigate("dashboard");
-      return response.data;
-    } catch (err) {
-      console.log("Some error occured during signing in: ", err);
-    } finally {
-      setIsLoading(false);
+      //   errRef.current?.focus();
     }
-  };*/
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <p>Username</p>
-        {/* <input type="text" onChange={(e) => setUserName(e.target.value)} /> */}
-      </label>
-      <label>
-        <p>Password</p>
-        {/* <input type="password" onChange={(e) => setPassword(e.target.value)} /> */}
-      </label>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <>
+      {success ? (
+        // <section>
+        //   <h1>You are logged in!</h1>
+        //   <br />
+        //   <p>
+        //     <a href="#">Go to Home</a>
+        //   </p>
+        // </section>
+        <Navigate to="/" />
+      ) : (
+        // navigate("/")
+        <div className="container">
+          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+            {errMsg}
+          </p>
+          <form className="login-form" onSubmit={handleSubmit}>
+            <h2>Login</h2>
+            <input
+              type="text"
+              placeholder="Username"
+              id="username"
+              ref={userRef}
+              autoComplete="off"
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+              required
+            />
+            <button type="submit">Log in</button>
+          </form>
+        </div>
+      )}
+    </>
   );
 };
 

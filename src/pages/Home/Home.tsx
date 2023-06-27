@@ -15,30 +15,9 @@ import "./Home.module.scss";
 // }
 
 const Home = (): ReactElement => {
-  //   const [result, setResult] = useState<Todo[] | null>([]);
-
-  //   useEffect(() => {
-  //     const api = async () => {
-  //       const APICall = new AppService("https://jsonplaceholder.typicode.com/todos");
-  //       const data = await APICall.getItems();
-  //       console.log(data);
-  //       setResult(data);
-  //     };
-
-  //     api();
-  //   }, []);
   return (
     <div>
-      {/* {result?.map((value) => {
-        return (
-          <div key={value.id}>
-            <Link to={{ pathname: `/${value.id}` }}>
-              <div>{value.title}</div>
-            </Link>
-            <div>{value.completed}</div>
-          </div>
-        );
-      })} */}
+      <h1>Home Page</h1>
     </div>
   );
 };
