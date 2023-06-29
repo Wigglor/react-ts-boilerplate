@@ -69,16 +69,8 @@ const Login = (): ReactElement => {
   return (
     <>
       {success ? (
-        // <section>
-        //   <h1>You are logged in!</h1>
-        //   <br />
-        //   <p>
-        //     <a href="#">Go to Home</a>
-        //   </p>
-        // </section>
         <Navigate to="/" />
       ) : (
-        // navigate("/")
         <div className="container">
           <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
             {errMsg}
