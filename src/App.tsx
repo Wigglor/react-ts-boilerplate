@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
-import NavBar from "./Layouts/NavBar/NavBar";
-import SideNav from "./Layouts/SideNav/SideNav";
+import Navigation from "./Layouts/Navigation/Navigation";
 import Account from "./pages/Account/Account";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -34,11 +33,18 @@ const App = () => {
               </>
             }
           > */}
-          <Route
+          {/* <Route
             element={
               <>
                 <NavBar />
                 <SideNav />
+              </>
+            }
+          > */}
+          <Route
+            element={
+              <>
+                <Navigation />
               </>
             }
           >

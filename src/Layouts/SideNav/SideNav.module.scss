@@ -5,13 +5,32 @@
   background-color: red;
   color: $base-color;
   height: 100%;
-  border-right: 1px solid #dbdbdb;
+  // border-right: 1px solid #dbdbdb;
   position: fixed;
   top: 3rem;
   bottom: 0;
   left: 0;
-  width: 15rem;
+  // width: 15rem;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+
+  ul {
+    list-style: none;
+    list-style: none;
+    padding: 0;
+    li {
+      padding: 0 1rem 0 1rem;
+      div {
+        svg {
+          text-align: center;
+          vertical-align: middle;
+          margin-right: 0.3rem;
+        }
+        span {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
 
   //   .sidenav__content {
   //     display: flex;
