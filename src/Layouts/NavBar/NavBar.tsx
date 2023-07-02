@@ -38,9 +38,7 @@ const NavBar = (): ReactElement => {
               </p>
             </li>
             <li>
-              <li>
-                <Link to="/account">Account Settings</Link>
-              </li>
+              <Link to="/account">Account Settings</Link>
             </li>
             <li>
               <Link to="/signout">Logout</Link>
