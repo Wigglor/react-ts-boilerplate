@@ -20,7 +20,7 @@ const Login = (): ReactElement => {
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/account";
+  const from = location.state?.from?.pathname || "/";
 
   //   useEffect(() => {
   //     const userRef: RefObject<HTMLInputElement | null> = useRef(null);

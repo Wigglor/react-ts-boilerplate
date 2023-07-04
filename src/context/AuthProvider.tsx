@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }: any) => {
     // pwd: "",
     accessToken: "",
   });
+  const initialPersist = localStorage.getItem("persist");
+  const [persist, setPersist] = useState(initialPersist ? JSON.parse(initialPersist) : false);
 
   return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
 };
