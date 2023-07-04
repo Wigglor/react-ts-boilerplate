@@ -12,7 +12,7 @@ const RequireAuth = () => {
   // ) : (
   //   <Navigate to="/login" state={{ from: location }} replace />
   // );
-
+  console.log(`auth: ${JSON.stringify(auth)}`);
   return auth?.user ? (
     <Outlet />
   ) : (
