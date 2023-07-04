@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Navigation from "./Layouts/Navigation/Navigation";
+import RequireAuth from "./components/requireAuth";
 import Account from "./pages/Account/Account";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
-// import RequireAuth from "./components/requireAuth";
 
 const App = () => {
   // const [token, setToken] = useState<string | null>();
@@ -48,8 +48,12 @@ const App = () => {
               </>
             }
           >
-            <Route path="" element={<Home />} />
-            <Route path="/account" element={<Account />} />
+            {/* <ProtectedRoute path="" element={<Home />} /> */}
+            {/* <Route path="" element={<Home />} /> */}
+            <Route element={<RequireAuth />}>
+              <Route path="account" element={<Account />} />
+              <Route path="" element={<Home />} />
+            </Route>
           </Route>
         </Route>
         {/* <Route path="/login" element={<Login />}> */}

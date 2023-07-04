@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
-import { Navigate /*useNavigate*/ } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 // import { AuthContext } from "../../context/AuthProvider";
 import useAuth from "../../hooks/useAuth";
@@ -18,6 +18,9 @@ const Login = (): ReactElement => {
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/account";
 
   //   useEffect(() => {
   //     const userRef: RefObject<HTMLInputElement | null> = useRef(null);
@@ -43,17 +46,21 @@ const Login = (): ReactElement => {
         },
       );
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.result.AuthenticationResult.AccessToken;
+      // const accessToken = response?.data?.result.AuthenticationResult.AccessToken;
+      const accessToken = response?.data.accessToken;
+      console.log(accessToken);
       setAuth({
         user: user,
-        pwd: pwd,
+        // pwd: pwd,
         accessToken: accessToken,
       });
       setUser("");
       setPwd("");
       setSuccess(true);
+      navigate(from, { replace: true });
     } catch (err: any) {
       if (!err?.response) {
+        console.log(err);
         setErrMsg("No server response");
       } else if (err.response?.status === 400) {
         setErrMsg("Missing username or password");
@@ -68,37 +75,37 @@ const Login = (): ReactElement => {
 
   return (
     <>
-      {success ? (
+      {/* {success ? (
         <Navigate to="/" />
-      ) : (
-        <div className="container">
-          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
-            {errMsg}
-          </p>
-          <form className="login-form" onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <input
-              type="text"
-              placeholder="Username"
-              id="username"
-              ref={userRef}
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              id="password"
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-              required
-            />
-            <button type="submit">Log in</button>
-          </form>
-        </div>
-      )}
+      ) : ( */}
+      <div className="container">
+        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+          {errMsg}
+        </p>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h2>Login</h2>
+          <input
+            type="text"
+            placeholder="Username"
+            id="username"
+            ref={userRef}
+            autoComplete="off"
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            onChange={(e) => setPwd(e.target.value)}
+            value={pwd}
+            required
+          />
+          <button type="submit">Log in</button>
+        </form>
+      </div>
+      {/* )} */}
     </>
   );
 };

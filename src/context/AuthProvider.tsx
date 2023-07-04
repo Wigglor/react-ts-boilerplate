@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 
 interface Auth {
   user: string;
-  pwd: string;
+  // pwd: string;
   accessToken: string;
 }
 
@@ -16,7 +16,11 @@ interface AuthContextType {
 // const AuthContext = createContext({});
 // const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthContext = createContext<AuthContextType>({
-  auth: { user: "", pwd: "", accessToken: "" },
+  auth: {
+    user: "",
+    //  pwd: "",
+    accessToken: "",
+  },
   setAuth: () => {},
 });
 
@@ -25,7 +29,7 @@ export const AuthProvider = ({ children }: any) => {
   //   const [auth, setAuth] = useState<boolean>(false);
   const [auth, setAuth] = useState<Auth>({
     user: "",
-    pwd: "",
+    // pwd: "",
     accessToken: "",
   });
 
