@@ -25,14 +25,23 @@ const App = () => {
           <Route
             element={
               <>
-                <PersistLogin />
                 <Navigation />
+                {/* <PersistLogin /> */}
               </>
             }
           >
-            <Route element={<RequireAuth />}>
-              <Route path="account" element={<Account />} />
-              <Route path="" element={<Home />} />
+            <Route
+              element={
+                <>
+                  {/* <Navigation /> */}
+                  <PersistLogin />
+                </>
+              }
+            >
+              <Route element={<RequireAuth />}>
+                <Route path="" element={<Home />} />
+                <Route path="account" element={<Account />} />
+              </Route>
             </Route>
           </Route>
         </Route>

@@ -1,5 +1,52 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-function */
+
+// import { createContext, useState } from "react";
+
+// const AuthContext = createContext({});
+
+// export const AuthProvider = ({ children }:any) => {
+//     const [auth, setAuth] = useState({});
+//     return (
+//         <AuthContext.Provider value={{ auth, setAuth }}>
+//             {children}
+//         </AuthContext.Provider>
+//     )
+// }
+
+// export default AuthContext;
+
+// ---------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------
+
+/*import { createContext, useState } from "react";
+
+interface Auth {
+  user: string;
+  // pwd: string;
+  accessToken: string;
+}
+
+type AuthContextType = {
+  auth: Auth | null;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
+};
+
+// const AuthContext = createContext({});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: any) => {
+  // const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState<Auth | null>(null);
+
+  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
+};
+
+export default AuthContext;*/
+
+// ---------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------
+
 import { createContext, useState } from "react";
 
 interface Auth {
@@ -33,7 +80,9 @@ export const AuthProvider = ({ children }: any) => {
   //   const [auth, setAuth] = useState<boolean>(false);
   const [auth, setAuth] = useState<Auth>({
     user: "",
+    // user: "hehe",
     // pwd: "",
+    // accessToken: "hehe",
     accessToken: "",
   });
   // const initialPersist = localStorage.getItem("persist");
@@ -45,4 +94,4 @@ export const AuthProvider = ({ children }: any) => {
   );
 };
 
-// export default AuthContext;
+// export default AuthContext;*/

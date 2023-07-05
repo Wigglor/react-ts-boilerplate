@@ -12,11 +12,13 @@ const RequireAuth = () => {
   // ) : (
   //   <Navigate to="/login" state={{ from: location }} replace />
   // );
-  console.log(`auth: ${JSON.stringify(auth)}`);
-  return auth?.user ? (
+  console.log(`requireAuth: ${JSON.stringify(auth)}`);
+  // return auth?.user ? (
+  return auth?.accessToken ? (
     <Outlet />
   ) : (
-    <Navigate to="/unauthorized" state={{ from: location }} replace />
+    <Navigate to="/login" state={{ from: location }} replace />
+    // <Navigate to="/unauthorized" state={{ from: location }} replace />
   );
 };
 

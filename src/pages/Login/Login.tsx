@@ -56,7 +56,7 @@ const Login = (): ReactElement => {
       });
       setUser("");
       setPwd("");
-      setSuccess(true);
+      // setSuccess(true);
       navigate(from, { replace: true });
     } catch (err: any) {
       if (!err?.response) {
