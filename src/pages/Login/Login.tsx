@@ -42,12 +42,12 @@ const Login = (): ReactElement => {
         JSON.stringify({ username: user, password: pwd }),
         {
           headers: { "Content-Type": "application/json" },
-          //   withCredentials: true,
+          withCredentials: true,
         },
       );
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.result.AuthenticationResult.AccessToken;
-      // const accessToken = response?.data.accessToken;
+      // const accessToken = response?.data?.result.AuthenticationResult.AccessToken;
+      const accessToken = response?.data.accessToken;
       console.log(accessToken);
       setAuth({
         user: user,

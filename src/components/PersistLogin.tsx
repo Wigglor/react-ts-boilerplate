@@ -8,6 +8,7 @@ const PersistLogin = () => {
   const refresh = useRefreshToken();
   //   const { auth, persist } = useAuth();
   const { auth } = useAuth();
+  console.log(`first auth in PersistLogin: ${JSON.stringify(auth)}`);
 
   useEffect(() => {
     let isMounted = true;
