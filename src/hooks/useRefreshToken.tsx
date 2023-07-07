@@ -11,13 +11,14 @@ const useRefreshToken = () => {
     setAuth((prev) => {
       console.log(`previous accessToken: ${JSON.stringify(prev)}`);
       // console.log(`new accessToken: ${response.data.accessToken}`);
-      console.log(`new accessToken: ${response.data.AuthenticationResult.AccessToken}`);
+      console.log(`new accessToken: ${response.data.result.AuthenticationResult.AccessToken}`);
       return {
         ...prev,
-        accessToken: response.data.AuthenticationResult.AccessToken /*response.data.accessToken*/,
+        accessToken:
+          response.data.result.AuthenticationResult.AccessToken /*response.data.accessToken*/,
       };
     });
-    return response.data.AuthenticationResult.AccessToken;
+    return response.data.result.AuthenticationResult.AccessToken;
   };
   return refresh;
 };
