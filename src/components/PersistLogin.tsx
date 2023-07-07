@@ -16,6 +16,7 @@ const PersistLogin = () => {
     const verifyRefreshToken = async () => {
       try {
         await refresh();
+        console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
       } catch (err) {
         console.error(err);
       } finally {
@@ -27,7 +28,11 @@ const PersistLogin = () => {
     // Avoids unwanted call to verifyRefreshToken
     // !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
     console.log(`auth in PersistLogin: ${JSON.stringify(auth)}`);
-    !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+    console.log(`is there an accessToken?: ${JSON.stringify(!auth?.accessToken)}`);
+    console.log(`length of accessToken?: ${JSON.stringify(auth?.accessToken.length)}`);
+    const tokenLength = auth?.accessToken.length as number;
+    console.log(`data type: ${typeof tokenLength}`);
+    tokenLength < 1 ? verifyRefreshToken() : setIsLoading(false);
 
     // return () => (isMounted = false);
     return () => {

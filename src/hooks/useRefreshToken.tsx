@@ -1,15 +1,13 @@
-// import axios from "../api/axios";
-// import axios from "../api/axios";
-import axiosPrivate from "../api/axios";
+import axios from "../api/axios";
 import useAuth from "./useAuth";
 
 const useRefreshToken = () => {
   const { setAuth } = useAuth();
   const refresh = async () => {
-    // const response = await axios.post("/cognito/refreshtoken", {
-    const response = await axiosPrivate.post("/cognito/refreshtoken", {
+    const response = await axios.post("/cognito/refreshtoken", null, {
       withCredentials: true,
     });
+    console.log(JSON.stringify(response.data));
     setAuth((prev) => {
       console.log(`previous accessToken: ${JSON.stringify(prev)}`);
       // console.log(`new accessToken: ${response.data.accessToken}`);
@@ -19,7 +17,7 @@ const useRefreshToken = () => {
         accessToken: response.data.AuthenticationResult.AccessToken /*response.data.accessToken*/,
       };
     });
-    return response.data.accessToken;
+    return response.data.AuthenticationResult.AccessToken;
   };
   return refresh;
 };
