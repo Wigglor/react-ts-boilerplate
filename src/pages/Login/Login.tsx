@@ -3,6 +3,7 @@ import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
+import useRefreshToken from "../../hooks/useRefreshToken";
 import "./Login.module.scss";
 // import Cookies from 'js-cookie';
 
@@ -19,6 +20,7 @@ const Login = (): ReactElement => {
   // const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const refresh = useRefreshToken();
   const from = location.state?.from?.pathname || "/";
 
   // useEffect(() => {
@@ -44,9 +46,20 @@ const Login = (): ReactElement => {
   } else {
     console.log(`Noooooooooot Navigating: ${JSON.stringify(refreshToken)}`);
   }*/
-  // useEffect(() => {
-  //   navigate("/", { replace: true });
-  // }, []);
+  useEffect(() => {
+    const verifyRefreshToken = async () => {
+      try {
+        await refresh();
+        navigate("/", { replace: true });
+        console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
+      } catch (err) {
+        console.error(err);
+        // } finally {
+        //   isMounted && setIsLoading(false);
+      }
+    };
+    verifyRefreshToken();
+  }, []);
 
   useEffect(() => {
     setErrMsg("");
@@ -91,37 +104,37 @@ const Login = (): ReactElement => {
 
   return (
     <>
-      {/* {success ? (
-        <Navigate to="/" />
-      ) : ( */}
-      <div className="container">
-        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
-          {errMsg}
-        </p>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <h2>Login</h2>
-          <input
-            type="text"
-            placeholder="Username"
-            id="username"
-            ref={userRef}
-            autoComplete="off"
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            id="password"
-            onChange={(e) => setPwd(e.target.value)}
-            value={pwd}
-            required
-          />
-          <button type="submit">Log in</button>
-        </form>
-      </div>
-      {/* )} */}
+      {!auth.accessToken ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="container">
+          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+            {errMsg}
+          </p>
+          <form className="login-form" onSubmit={handleSubmit}>
+            <h2>Login</h2>
+            <input
+              type="text"
+              placeholder="Username"
+              id="username"
+              ref={userRef}
+              autoComplete="off"
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+              required
+            />
+            <button type="submit">Log in</button>
+          </form>
+        </div>
+      )}
     </>
   );
 };
