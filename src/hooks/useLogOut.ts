@@ -7,7 +7,6 @@ const useLogout = () => {
   const logout = async () => {
     setAuth({
       user: "",
-      // pwd: pwd,
       accessToken: "",
     });
     try {

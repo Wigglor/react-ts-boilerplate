@@ -1,6 +1,5 @@
 import App from "./App";
 // import reportWebVitals from "./reportWebVitals";
-import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 // import { store } from "./store/store";
@@ -11,17 +10,14 @@ const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Failed to find the root element");
 const root = ReactDOM.createRoot(rootElement);
 root.render(
-  <React.StrictMode>
-    {/* <Provider store={store}> */}
+  // <React.StrictMode>
+  <BrowserRouter>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </BrowserRouter>,
 
-    <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </BrowserRouter>
-
-    {/* </Provider> */}
-  </React.StrictMode>,
+  // </React.StrictMode>,
 );
 
 // reportWebVitals();

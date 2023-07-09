@@ -45,13 +45,12 @@ const Login = (): ReactElement => {
           withCredentials: true,
         },
       );
-      console.log(JSON.stringify(response?.data));
+      // console.log(JSON.stringify(response?.data));
       // const accessToken = response?.data?.result.AuthenticationResult.AccessToken;
       const accessToken = response?.data.accessToken;
       console.log(accessToken);
       setAuth({
         user: user,
-        // pwd: pwd,
         accessToken: accessToken,
       });
       setUser("");
