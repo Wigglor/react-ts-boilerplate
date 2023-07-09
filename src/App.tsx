@@ -22,28 +22,16 @@ const App = () => {
         <Route path="/" /*element={<Layout />}*/>
           <Route path="login" element={<Login />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-          <Route
-            element={
-              <>
-                <Navigation />
-                {/* <PersistLogin /> */}
-              </>
-            }
-          >
-            <Route
-              element={
-                <>
-                  {/* <Navigation /> */}
-                  <PersistLogin />
-                </>
-              }
-            >
-              <Route element={<RequireAuth />}>
+          {/* <Route element={<Navigation />}> */}
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth />}>
+              <Route element={<Navigation />}>
                 <Route path="" element={<Home />} />
                 <Route path="account" element={<Account />} />
               </Route>
             </Route>
           </Route>
+          {/* </Route> */}
         </Route>
       </Routes>
     </>

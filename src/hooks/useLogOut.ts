@@ -1,8 +1,9 @@
-import axios from "../api/axios";
 import useAuth from "./useAuth";
+import useAxiosPrivate from "./useAxiosPrivate";
 
 const useLogout = () => {
   const { setAuth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
 
   const logout = async () => {
     setAuth({
@@ -11,7 +12,8 @@ const useLogout = () => {
     });
     try {
       // const response = await axios('/cognito/signout', {
-      await axios("/cognito/signout", {
+      // await axios.post("/cognito/signout", {
+      await axiosPrivate.post("/cognito/signout", {
         withCredentials: true,
       });
     } catch (err) {

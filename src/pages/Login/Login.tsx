@@ -2,32 +2,51 @@
 import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-// import { AuthContext } from "../../context/AuthProvider";
 import useAuth from "../../hooks/useAuth";
 import "./Login.module.scss";
+// import Cookies from 'js-cookie';
 
 const LOGIN_URL = "/cognito/signin";
 
 const Login = (): ReactElement => {
-  // const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const userRef = useRef(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  //   useEffect(() => {
-  //     const userRef: RefObject<HTMLInputElement | null> = useRef(null);
-  //     if (userRef.current) {
-  //       userRef.current.focus();
-  //     }
-  //   }, []);
+  // useEffect(() => {
+  //   const userRef: RefObject<HTMLInputElement | null> = useRef(null);
+  //   if (userRef.current) {
+  //     userRef.current.focus();
+  //   }
+  // }, []);
+
+  // if (auth?.accessToken) {
+  //   console.log("Navigatiiiiiiiiiiiiiing");
+  //   navigate("/", { replace: true });
+  // } else {
+  //   console.log("Noooooooooot Navigating");
+  // }
+  /*const refreshToken = document;
+  // .cookie;
+  // .split("; ")
+  // .find((cookie) => cookie.startsWith("refreshToken"));
+  if (refreshToken) {
+    console.log(`Navigatiiiiiiiiiiiiiing: ${JSON.stringify(refreshToken)}`);
+    navigate("/", { replace: true });
+  } else {
+    console.log(`Noooooooooot Navigating: ${JSON.stringify(refreshToken)}`);
+  }*/
+  // useEffect(() => {
+  //   navigate("/", { replace: true });
+  // }, []);
 
   useEffect(() => {
     setErrMsg("");
@@ -45,8 +64,6 @@ const Login = (): ReactElement => {
           withCredentials: true,
         },
       );
-      // console.log(JSON.stringify(response?.data));
-      // const accessToken = response?.data?.result.AuthenticationResult.AccessToken;
       const accessToken = response?.data.accessToken;
       console.log(accessToken);
       setAuth({

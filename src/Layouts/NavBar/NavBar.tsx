@@ -1,9 +1,17 @@
 import { ReactElement } from "react";
 import { MdManageAccounts } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useLogout from "../../hooks/useLogOut";
 import styles from "./NavBar.module.scss";
 
 const NavBar = (): ReactElement => {
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
+    // navigate('/linkpage');
+  };
   return (
     <header className={styles.header}>
       <nav className={styles.navbar}>
@@ -46,7 +54,10 @@ const NavBar = (): ReactElement => {
               <Link to="/account">Account Settings</Link>
             </li>
             <li>
-              <Link to="/signout">Logout</Link>
+              {/* <Link to="/login" onClick={signOut}> */}
+              <Link to="/login" onClick={signOut}>
+                Logout
+              </Link>
             </li>
           </ul>
         </div>
