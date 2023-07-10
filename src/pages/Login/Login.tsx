@@ -10,7 +10,8 @@ import "./Login.module.scss";
 const LOGIN_URL = "/cognito/signin";
 
 const Login = (): ReactElement => {
-  const { auth, setAuth } = useAuth();
+  // const { setAuth, persist, setPersist } = useAuth();
+  const { setAuth } = useAuth();
   const userRef = useRef(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 
@@ -53,6 +54,10 @@ const Login = (): ReactElement => {
     verifyRefreshToken();
   }, []);*/
 
+  /*useEffect(() => {
+    localStorage.setItem("persist", JSON.stringify(persist));
+  }, [persist]);*/
+
   useEffect(() => {
     setErrMsg("");
   }, [user, pwd]);
@@ -78,6 +83,7 @@ const Login = (): ReactElement => {
       setUser("");
       setPwd("");
       // setSuccess(true);
+      // setPersist(true);
       navigate(from, { replace: true });
     } catch (err: any) {
       if (!err?.response) {
