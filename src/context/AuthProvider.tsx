@@ -67,7 +67,6 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   auth: {
     user: "",
-    //  pwd: "",
     accessToken: "",
   },
   setAuth: () => {},
@@ -78,16 +77,12 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider = ({ children }: any) => {
   //   const [auth, setAuth] = useState({});
   //   const [auth, setAuth] = useState<boolean>(false);
-  // console.log(`setting auth... ${AuthContext}`);
-  // console.log(`checking auth 1... ${JSON.stringify(AuthContext)}`);
   const [auth, setAuth] = useState<Auth>({
     user: "",
     // user: "hehe",
-    // pwd: "",
     // accessToken: "hehe",
     accessToken: "",
   });
-  // console.log(`setting auth 2... ${JSON.stringify(AuthContext)}`);
   // const initialPersist = localStorage.getItem("persist");
   // const [persist, setPersist] = useState(initialPersist ? JSON.parse(initialPersist) : false);
 

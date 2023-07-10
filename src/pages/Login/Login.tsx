@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import useRefreshToken from "../../hooks/useRefreshToken";
@@ -17,6 +17,8 @@ const Login = (): ReactElement => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,36 +32,26 @@ const Login = (): ReactElement => {
   //   }
   // }, []);
 
-  // if (auth?.accessToken) {
-  //   console.log("Navigatiiiiiiiiiiiiiing");
-  //   navigate("/", { replace: true });
-  // } else {
-  //   console.log("Noooooooooot Navigating");
-  // }
-  /*const refreshToken = document;
-  // .cookie;
-  // .split("; ")
-  // .find((cookie) => cookie.startsWith("refreshToken"));
-  if (refreshToken) {
-    console.log(`Navigatiiiiiiiiiiiiiing: ${JSON.stringify(refreshToken)}`);
-    navigate("/", { replace: true });
-  } else {
-    console.log(`Noooooooooot Navigating: ${JSON.stringify(refreshToken)}`);
-  }*/
-  useEffect(() => {
+  /*useEffect(() => {
     const verifyRefreshToken = async () => {
       try {
         await refresh();
-        navigate("/", { replace: true });
+        setIsAuthenticated(true);
+        // setIsLoading(false);
+        // navigate("/", { replace: true });
         console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
       } catch (err) {
+        console.log("no refresh token available");
         console.error(err);
         // } finally {
         //   isMounted && setIsLoading(false);
+      } finally {
+        // isMounted && setIsLoading(false);
+        setIsLoading(false);
       }
     };
     verifyRefreshToken();
-  }, []);
+  }, []);*/
 
   useEffect(() => {
     setErrMsg("");
@@ -104,37 +96,45 @@ const Login = (): ReactElement => {
 
   return (
     <>
-      {!auth.accessToken ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="container">
-          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
-            {errMsg}
-          </p>
-          <form className="login-form" onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <input
-              type="text"
-              placeholder="Username"
-              id="username"
-              ref={userRef}
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              id="password"
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-              required
-            />
-            <button type="submit">Log in</button>
-          </form>
-        </div>
-      )}
+      {
+        // isLoading ? (
+        //   <p>Loading...</p>
+        // ) :
+        isAuthenticated ? (
+          <Navigate to="/" state={{ from: location }} replace />
+        ) : (
+          // )
+          // <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+          // navigate("/", { replace: true })
+          <div className="container">
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+              {errMsg}
+            </p>
+            <form className="login-form" onSubmit={handleSubmit}>
+              <h2>Login</h2>
+              <input
+                type="text"
+                placeholder="Username"
+                id="username"
+                ref={userRef}
+                autoComplete="off"
+                onChange={(e) => setUser(e.target.value)}
+                value={user}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                id="password"
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
+                required
+              />
+              <button type="submit">Log in</button>
+            </form>
+          </div>
+        )
+      }
     </>
   );
 };
