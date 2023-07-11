@@ -3,15 +3,15 @@ import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
-import useRefreshToken from "../../hooks/useRefreshToken";
+// import useRefreshToken from "../../hooks/useRefreshToken";
 import "./Login.module.scss";
 // import Cookies from 'js-cookie';
 
 const LOGIN_URL = "/cognito/signin";
 
 const Login = (): ReactElement => {
-  const { setAuth, persist, setPersist } = useAuth();
-  // const { setAuth } = useAuth();
+  // const { setAuth, persist, setPersist } = useAuth();
+  const { setAuth } = useAuth();
   const userRef = useRef(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 
@@ -19,11 +19,11 @@ const Login = (): ReactElement => {
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   // const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const refresh = useRefreshToken();
+  // const refresh = useRefreshToken();
   const from = location.state?.from?.pathname || "/";
 
   // useEffect(() => {

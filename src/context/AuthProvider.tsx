@@ -64,8 +64,8 @@ type Persist = boolean;
 interface AuthContextType {
   auth: Auth;
   setAuth: React.Dispatch<React.SetStateAction<Auth>>;
-  persist: Persist;
-  setPersist: React.Dispatch<React.SetStateAction<Persist>>;
+  // persist: Persist;
+  // setPersist: React.Dispatch<React.SetStateAction<Persist>>;
 }
 
 // const AuthContext = createContext({});
@@ -76,8 +76,8 @@ export const AuthContext = createContext<AuthContextType>({
     accessToken: "",
   },
   setAuth: () => {},
-  persist: false,
-  setPersist: () => {},
+  // persist: false,
+  // setPersist: () => {},
 });
 
 export const AuthProvider = ({ children }: any) => {
@@ -91,10 +91,10 @@ export const AuthProvider = ({ children }: any) => {
   const [persist, setPersist] = useState(initialPersist ? JSON.parse(initialPersist) : false);
 
   return (
-    // <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>
-    <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>
+    // <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
+    //   {children}
+    // </AuthContext.Provider>
   );
 };
 
