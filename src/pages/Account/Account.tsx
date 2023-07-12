@@ -9,9 +9,15 @@ interface ApiResponse<T> {
   data: T;
 }
 
+interface UserAttribute {
+  Name: string;
+  Value: string;
+}
+
 interface User {
   result: {
     Username: string;
+    UserAttributes: UserAttribute[];
   };
   // name: string;
   // email: string;
@@ -70,6 +76,9 @@ const Account = (): ReactElement => {
             <div>
               <p>
                 <b>email</b>
+              </p>
+              <p>
+                <div>{user?.result.UserAttributes[3].Value}</div>
               </p>
             </div>
             <div>
