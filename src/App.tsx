@@ -6,6 +6,7 @@ import RequireAuth from "./components/requireAuth";
 import Account from "./pages/Account/Account";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 
 const App = () => {
@@ -21,6 +22,8 @@ const App = () => {
       <Routes>
         <Route path="/" /*element={<Layout />}*/>
           <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgotpassword" element={<Register />} />
           <Route path="unauthorized" element={<Unauthorized />} />
           {/* <Route element={<Navigation />}> */}
           <Route element={<PersistLogin />}>

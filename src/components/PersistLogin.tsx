@@ -10,7 +10,8 @@ const PersistLogin = () => {
   const { auth } = useAuth();
 
   useEffect(() => {
-    let isMounted = true;
+    // let isMounted = true;
+    const abortController = new AbortController();
 
     const verifyRefreshToken = async () => {
       try {
@@ -19,7 +20,8 @@ const PersistLogin = () => {
       } catch (err) {
         console.error(err);
       } finally {
-        isMounted && setIsLoading(false);
+        // isMounted && setIsLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -33,7 +35,8 @@ const PersistLogin = () => {
 
     // return () => (isMounted = false);
     return () => {
-      isMounted = false;
+      abortController.abort();
+      // isMounted = false;
     };
   }, []);
 
@@ -42,7 +45,7 @@ const PersistLogin = () => {
     console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
   }, [isLoading]);*/
 
-  return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;
+  return <>{isLoading ? <p>Loading..............</p> : <Outlet />}</>;
   //   return <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>;
 };
 

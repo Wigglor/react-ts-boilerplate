@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 // import useRefreshToken from "../../hooks/useRefreshToken";
@@ -14,6 +14,7 @@ const Login = (): ReactElement => {
   const { setAuth } = useAuth();
   const userRef = useRef(null);
   const errRef = useRef<HTMLParagraphElement>(null);
+  // const history = useHistory();
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
@@ -60,6 +61,14 @@ const Login = (): ReactElement => {
   }, [persist]);*/
 
   useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      // Redirect to the homepage
+      navigate("/"); // Replace '/homepage' with the actual route of your homepage
+    }
+  }, []);
+
+  useEffect(() => {
     setErrMsg("");
   }, [user, pwd]);
 
@@ -85,6 +94,8 @@ const Login = (): ReactElement => {
       // const persistState = localStorage.setItem("persist", JSON.stringify(true));
       setUser("");
       setPwd("");
+      const isLoggedIn = true;
+      localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
       // setSuccess(true);
       // setPersist(true);
       navigate(from, { replace: true });
@@ -109,40 +120,36 @@ const Login = (): ReactElement => {
         // isLoading ? (
         //   <p>Loading...</p>
         // ) :
-        isAuthenticated ? (
-          <Navigate to="/" state={{ from: location }} replace />
-        ) : (
-          // )
-          // <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-          // navigate("/", { replace: true })
-          <div className="container">
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
-              {errMsg}
-            </p>
-            <form className="login-form" onSubmit={handleSubmit}>
-              <h2>Login</h2>
-              <input
-                type="text"
-                placeholder="Username"
-                id="username"
-                ref={userRef}
-                autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                id="password"
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                required
-              />
-              <button type="submit">Log in</button>
-            </form>
-          </div>
-        )
+        // isAuthenticated ? (
+        //   <Navigate to="/" state={{ from: location }} replace />
+        // ) : (
+        <div className="container">
+          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+            {errMsg}
+          </p>
+          <form className="login-form" onSubmit={handleSubmit}>
+            <h2>Login</h2>
+            <input
+              type="text"
+              placeholder="Username"
+              id="username"
+              ref={userRef}
+              autoComplete="off"
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+              required
+            />
+            <button type="submit">Log in</button>
+          </form>
+        </div>
       }
     </>
   );

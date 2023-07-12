@@ -1,7 +1,53 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { axiosPrivate } from "../../api/axios";
 import styles from "./Account.module.scss";
 
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
+
+interface User {
+  result: {
+    Username: string;
+  };
+  // name: string;
+  // email: string;
+}
+
 const Account = (): ReactElement => {
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const navigate = useNavigate();
+  useEffect(() => {
+    // let isMounted = true;
+    const controller = new AbortController();
+    const getUser = async () => {
+      try {
+        const response: ApiResponse<User> = await axiosPrivate.post("/cognito/getuser", {
+          // signal: controller.signal,
+          withCredentials: true,
+        });
+
+        console.log(response);
+        // setUser(response.data.Username);
+        setUser(response.data);
+        // isMounted && setUser(response.data.result);
+      } catch (err) {
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUser();
+
+    return () => {
+      // isMounted = false;
+      controller.abort();
+    };
+  }, []);
+
   return (
     <main className={styles.Account}>
       <h1>Account</h1>
@@ -17,6 +63,9 @@ const Account = (): ReactElement => {
               <p>
                 <b>Username</b>
               </p>
+              <p>
+                <div>{user?.result.Username}</div>
+              </p>
             </div>
             <div>
               <p>
@@ -27,6 +76,12 @@ const Account = (): ReactElement => {
               <p>
                 <b>Role Access</b>
               </p>
+            </div>
+            <div>
+              <p>
+                <b>Data</b>
+              </p>
+              <div>{JSON.stringify(user)}</div>
             </div>
           </div>
         </div>
