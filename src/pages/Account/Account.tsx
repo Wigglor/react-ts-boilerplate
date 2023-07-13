@@ -19,8 +19,6 @@ interface User {
     Username: string;
     UserAttributes: UserAttribute[];
   };
-  // name: string;
-  // email: string;
 }
 
 const Account = (): ReactElement => {
@@ -32,7 +30,7 @@ const Account = (): ReactElement => {
     const getUser = async () => {
       try {
         const response: ApiResponse<User> = await axiosPrivate.post("/cognito/getuser", {
-          // signal: controller.signal,
+          signal: controller.signal,
           withCredentials: true,
         });
 
@@ -69,17 +67,14 @@ const Account = (): ReactElement => {
               <p>
                 <b>Username</b>
               </p>
-              <p>
-                <div>{user?.result.Username}</div>
-              </p>
+
+              <p>{user?.result.Username}</p>
             </div>
             <div>
               <p>
                 <b>email</b>
               </p>
-              <p>
-                <div>{user?.result.UserAttributes[3].Value}</div>
-              </p>
+              <p>{user?.result.UserAttributes[3].Value}</p>
             </div>
             <div>
               <p>
