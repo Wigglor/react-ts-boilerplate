@@ -50,6 +50,14 @@ const SideNav = (): ReactElement => {
                 </Link>
               </div>
             </li>
+            <li>
+              <div>
+                <Link to="/posts">
+                  <MdManageAccounts />
+                  <span>Posts</span>
+                </Link>
+              </div>
+            </li>
           </ul>
         </div>
       </div>

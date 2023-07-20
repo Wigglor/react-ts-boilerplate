@@ -1,0 +1,30 @@
+.Posts {
+  // color: #fff;
+  h1 {
+    margin: 0;
+    color: green;
+  }
+  height: 100vh;
+  margin-left: 115.406px;
+  margin-top: 47.7px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    thead {
+      background-color: gray;
+      tr {
+        th {
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
