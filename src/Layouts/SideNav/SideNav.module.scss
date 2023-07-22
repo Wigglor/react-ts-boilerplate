@@ -1,22 +1,20 @@
 @import "../../styles/abstracts/variables.module";
 
 .sidenav {
-  z-index: 50;
-  background-color: red;
-  color: $base-color;
+  background-color: #fff;
   height: 100%;
-  // border-right: 1px solid #dbdbdb;
-  position: fixed;
-  top: 3rem;
-  bottom: 0;
+  // width: 10rem;
+  position: absolute;
   left: 0;
-  // width: 15rem;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-
+  top: 0;
+  margin-top: 3rem;
+  // border-right: 0.0625rem solid #f1f1f1;
+  border-right: 0.0625rem solid #e5e7eb;
   ul {
     list-style: none;
     list-style: none;
     padding: 0;
+    margin: 0;
     li {
       padding: 0 1rem 0 1rem;
       div {
@@ -31,31 +29,64 @@
       }
     }
   }
-
-  //   .sidenav__content {
-  //     display: flex;
-  //     flex-direction: column;
-  //     align-items: center;
-  //     &--logo {
-  //       // width: 13rem;
-  //       // height: auto;
-  //     }
-  //     ul {
-  //       list-style: none;
-  //       padding: 0;
-  //       li {
-  //         padding: 1rem;
-  //         div {
-  //           svg {
-  //             text-align: center;
-  //             vertical-align: middle;
-  //             margin-right: 0.3rem;
-  //           }
-  //           span {
-  //             vertical-align: middle;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
 }
+
+// .sidenav {
+//   z-index: 50;
+//   background-color: red;
+//   color: $base-color;
+//   height: 100%;
+//   // border-right: 1px solid #dbdbdb;
+//   position: fixed;
+//   top: 3rem;
+//   bottom: 0;
+//   left: 0;
+//   // width: 15rem;
+//   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+
+//   ul {
+//     list-style: none;
+//     list-style: none;
+//     padding: 0;
+//     li {
+//       padding: 0 1rem 0 1rem;
+//       div {
+//         svg {
+//           text-align: center;
+//           vertical-align: middle;
+//           margin-right: 0.3rem;
+//         }
+//         span {
+//           vertical-align: middle;
+//         }
+//       }
+//     }
+//   }
+
+//   .sidenav__content {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     &--logo {
+//       // width: 13rem;
+//       // height: auto;
+//     }
+//     ul {
+//       list-style: none;
+//       padding: 0;
+//       li {
+//         padding: 1rem;
+//         div {
+//           svg {
+//             text-align: center;
+//             vertical-align: middle;
+//             margin-right: 0.3rem;
+//           }
+//           span {
+//             vertical-align: middle;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

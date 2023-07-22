@@ -9,14 +9,54 @@ import styles from "./SideNav.module.scss";
 const SideNav = (): ReactElement => {
   return (
     <>
-      <div className={styles.sidenav}>
-        {/* <div> */}
-        <div className={styles["sidenav__content"]}>
-          {/* <Link to="/">
-            <div className={styles["sidenav__content--logo"]}>
-              <TbFileSpreadsheet />
+      <aside className={styles.sidenav}>
+        <ul>
+          <li>
+            <div>
+              <Link to="/files">
+                <BsFileEarmarkSpreadsheet />
+                <span>Files</span>
+              </Link>
             </div>
-          </Link> */}
+          </li>
+          <li>
+            <div>
+              <Link to="/exports">
+                <AiOutlineExport />
+                <span>Exports</span>
+              </Link>
+            </div>
+          </li>
+          <li>
+            <div>
+              <Link to="/analytics">
+                <SlGraph />
+                <span>Analytics</span>
+              </Link>
+            </div>
+          </li>
+          <li>
+            <div>
+              <Link to="/account">
+                <MdManageAccounts />
+                <span>Account</span>
+              </Link>
+            </div>
+          </li>
+          <li>
+            <div>
+              <Link to="/posts">
+                <MdManageAccounts />
+                <span>Posts</span>
+              </Link>
+            </div>
+          </li>
+        </ul>
+      </aside>
+      {/* <div className={styles.sidenav}>
+    
+        <div className={styles["sidenav__content"]}>
+          
           <ul>
             <li>
               <div>
@@ -60,7 +100,7 @@ const SideNav = (): ReactElement => {
             </li>
           </ul>
         </div>
-      </div>
+      </div> */}
 
       <Outlet />
     </>
