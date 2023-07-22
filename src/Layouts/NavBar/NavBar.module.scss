@@ -1,13 +1,14 @@
 .header {
-  color: #fff;
-  background-color: rgb(28, 44, 91);
-  // position: relative;
+  color: #111827;
+  // background-color: rgb(28, 44, 91);
+  background-color: #fff;
+  border-bottom: 0.0625rem solid #e5e7eb;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
 
-  //   z-index: 60;
+  z-index: 2;
 
   .navbar {
     // position: relative;
