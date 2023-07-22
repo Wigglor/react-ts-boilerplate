@@ -27,13 +27,24 @@
       li {
         position: relative;
         a {
-          padding: 0.67rem;
+          padding: 0.75rem;
           display: block;
           &:hover {
             background-color: #333;
             color: #fff;
           }
         }
+      }
+      .dropdown-menu {
+        display: none; /* Hide the dropdown by default */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #444;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block;
       }
     }
     div {

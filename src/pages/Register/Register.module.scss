@@ -1,0 +1,20 @@
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .registerform {
+    background-color: #fff;
+    border: 0.0625rem solid #e5e7eb;
+    padding: 2rem;
+
+    button {
+      background-color: #2e5ab0;
+    }
+  }
+
+  h2 {
+    margin-top: 0;
+    text-align: center;
+  }
+}

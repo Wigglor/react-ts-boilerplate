@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 // import useRefreshToken from "../../hooks/useRefreshToken";
-import "./Login.module.scss";
+import styles from "./Login.module.scss";
 // import Cookies from 'js-cookie';
 
 const LOGIN_URL = "/cognito/signin";
@@ -123,11 +123,11 @@ const Login = (): ReactElement => {
         // isAuthenticated ? (
         //   <Navigate to="/" state={{ from: location }} replace />
         // ) : (
-        <div className="container">
+        <div className={styles.container}>
           <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
             {errMsg}
           </p>
-          <form className="login-form" onSubmit={handleSubmit}>
+          <form className={styles["login-form"]} onSubmit={handleSubmit}>
             <h2>Login</h2>
             <input
               type="text"
@@ -147,7 +147,7 @@ const Login = (): ReactElement => {
               value={pwd}
               required
             />
-            <button type="submit">Log in</button>
+            <button type="submit">Login</button>
           </form>
         </div>
       }

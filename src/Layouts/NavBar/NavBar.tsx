@@ -27,18 +27,21 @@ const NavBar = (): ReactElement => {
           <li>
             <a href="/contact">Contact</a>
           </li>
-          <li>
-            {/* <a href="/account">Account</a> */}
-            <Link to="/account" />
+          <li className={styles.dropdown}>
+            <a href="#">Services</a>
+            <ul className={styles["dropdown-menu"]}>
+              <li>
+                <a href="#">Service 1</a>
+              </li>
+              <li>
+                <a href="#">Service 2</a>
+              </li>
+              <li>
+                <a href="#">Service 3</a>
+              </li>
+            </ul>
           </li>
         </ul>
-        {/* <ul>
-          <li>
-            <Link to="/account">
-              <MdManageAccounts />
-            </Link>
-          </li>
-        </ul> */}
 
         <div>
           <Link to="/account">
@@ -55,7 +58,6 @@ const NavBar = (): ReactElement => {
               <Link to="/account">Account Settings</Link>
             </li>
             <li>
-              {/* <Link to="/login" onClick={signOut}> */}
               <Link to="/login" onClick={signOut}>
                 Logout
               </Link>
