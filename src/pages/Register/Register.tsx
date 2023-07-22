@@ -50,7 +50,9 @@ const Register = (): ReactElement => {
             <label htmlFor="password">Password</label>
             <input id="password" type="password" value={form.password} onChange={handleChange} />
           </div>
-          <button type="submit">Signup</button>
+          <button className={styles["signup-button"]} type="submit">
+            Signup
+          </button>
         </form>
       </div>
     </main>

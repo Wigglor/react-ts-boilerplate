@@ -8,8 +8,18 @@ main {
     border: 0.0625rem solid #e5e7eb;
     padding: 2rem;
 
-    button {
+    .signup-button[type="submit"] {
+      width: 100%;
+      padding: 10px;
       background-color: #2e5ab0;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .signup-button[type="submit"]:hover {
+      background-color: #2e59b0e8;
     }
   }
 

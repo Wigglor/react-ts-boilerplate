@@ -32,7 +32,7 @@ input[type="password"] {
   border-radius: 4px;
 }
 
-button[type="submit"] {
+.login-button[type="submit"] {
   width: 100%;
   padding: 10px;
   background-color: #2e5ab0;
@@ -42,7 +42,7 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.login-button[type="submit"]:hover {
   background-color: #2e59b0e8;
 }
 

@@ -147,7 +147,9 @@ const Login = (): ReactElement => {
               value={pwd}
               required
             />
-            <button type="submit">Login</button>
+            <button className={styles["login-button"]} type="submit">
+              Login
+            </button>
           </form>
         </div>
       }
