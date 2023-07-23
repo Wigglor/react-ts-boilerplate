@@ -1,6 +1,9 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "../../api/axios";
 import styles from "./Register.module.scss";
-// import axios from "axios";
+
+const REGISTER_URL = "/signup2";
 
 const Register = (): ReactElement => {
   const INITIAL_STATE = {
@@ -11,6 +14,8 @@ const Register = (): ReactElement => {
     password: "",
   };
   const [form, setForm] = useState(INITIAL_STATE);
+  const [error, setError] = useState<Error | null>(null);
+  const navigate = useNavigate();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -19,14 +24,23 @@ const Register = (): ReactElement => {
     });
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    setForm(INITIAL_STATE);
+    try {
+      await axios.post(REGISTER_URL, JSON.stringify(form), {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+      setForm(INITIAL_STATE);
+      navigate("/account", { replace: true });
+    } catch (error: any) {
+      setError(error as Error);
+    }
   };
 
   return (
-    <main>
+    <main className={styles.register}>
+      {error ? <div className={styles.error}>Error Occurred! Please try again.</div> : null}
       <div className={styles.registerform}>
         <form onSubmit={handleSubmit}>
           <h2>Signup</h2>

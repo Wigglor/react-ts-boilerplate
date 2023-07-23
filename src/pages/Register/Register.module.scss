@@ -1,4 +1,4 @@
-main {
+.register {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -27,4 +27,12 @@ main {
     margin-top: 0;
     text-align: center;
   }
+}
+
+.error {
+  position: absolute;
+  top: 15rem;
+  background-color: rgb(231, 67, 67);
+  padding: 1rem;
+  color: #e6e6e6;
 }

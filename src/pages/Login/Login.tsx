@@ -129,6 +129,7 @@ const Login = (): ReactElement => {
           </p>
           <form className={styles["login-form"]} onSubmit={handleSubmit}>
             <h2>Login</h2>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               placeholder="Username"
@@ -139,6 +140,7 @@ const Login = (): ReactElement => {
               value={user}
               required
             />
+            <label htmlFor="username">Password</label>
             <input
               type="password"
               placeholder="Password"
