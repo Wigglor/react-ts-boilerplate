@@ -19,7 +19,8 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "node"],
   "rules": {
-    "@typescript-eslint/no-non-null-assertion": "off" //prevent err-msg on pre-commit
+    "@typescript-eslint/no-non-null-assertion": "off", //prevent err-msg on pre-commit
+    "react/prop-types": "off"
     // "react/react-in-jsx-scope": "off",
     // "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },

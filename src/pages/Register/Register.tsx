@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
+import ErrorMsg from "../../components/Error/ErrorMsg";
 import styles from "./Register.module.scss";
 
 const REGISTER_URL = "/signup2";
@@ -26,21 +27,35 @@ const Register = (): ReactElement => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(JSON.stringify(form));
     try {
-      await axios.post(REGISTER_URL, JSON.stringify(form), {
+      const response = await axios.post(REGISTER_URL, JSON.stringify(form), {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
+      console.log(response);
       setForm(INITIAL_STATE);
-      navigate("/account", { replace: true });
+      navigate("/login", { replace: true });
     } catch (error: any) {
-      setError(error as Error);
+      console.log(error);
+      console.log(error.message);
+      // setError(error as Error);
+      showError(error);
     }
+  };
+
+  const showError = (message: string) => {
+    setError(() => new Error(message));
+
+    // Clear the error message after 3 seconds (3000 milliseconds)
+    setTimeout(() => {
+      setError(null);
+    }, 3000);
   };
 
   return (
     <main className={styles.register}>
-      {error ? <div className={styles.error}>Error Occurred! Please try again.</div> : null}
+      {error ? <ErrorMsg message={error} /> : null}
       <div className={styles.registerform}>
         <form onSubmit={handleSubmit}>
           <h2>Signup</h2>
@@ -50,11 +65,16 @@ const Register = (): ReactElement => {
           </div>
           <div>
             <label htmlFor="accountEmail">Account Email</label>
-            <input id="accountEmail" type="text" value={form.name} onChange={handleChange} />
+            <input
+              id="accountEmail"
+              type="text"
+              value={form.accountEmail}
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label htmlFor="username">Username</label>
-            <input id="username" type="text" value={form.name} onChange={handleChange} />
+            <input id="username" type="text" value={form.username} onChange={handleChange} />
           </div>
           <div>
             <label htmlFor="email">Email</label>

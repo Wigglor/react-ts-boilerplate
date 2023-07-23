@@ -100,16 +100,22 @@ const Login = (): ReactElement => {
       // setPersist(true);
       navigate(from, { replace: true });
     } catch (err: any) {
-      if (!err?.response) {
-        console.log(err);
-        setErrMsg("No server response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing username or password");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("Login failed");
-      }
+      console.log(err);
+      console.log(err.response);
+      console.log(err.response.data.message);
+
+      const errorMessage = err.response.data.message;
+      setErrMsg(errorMessage);
+      // if (!err?.response) {
+      //   console.log(err);
+      //   setErrMsg("No server response");
+      // } else if (err.response?.status === 400) {
+      //   setErrMsg("Missing username or password");
+      // } else if (err.response?.status === 401) {
+      //   setErrMsg("Unauthorized");
+      // } else {
+      //   setErrMsg("Login failed");
+      // }
       //   errRef.current?.focus();
     }
   };
