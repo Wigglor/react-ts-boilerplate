@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import ErrorMsg from "../../components/Error/ErrorMsg";
 import styles from "./Register.module.scss";
@@ -88,6 +88,14 @@ const Register = (): ReactElement => {
             Signup
           </button>
         </form>
+        <div className={styles.or}>
+          <p>Or</p>
+        </div>
+        <div className={styles["login-link"]}>
+          <Link className={styles["login-link__text"]} to="/login">
+            Login
+          </Link>
+        </div>
       </div>
     </main>
   );

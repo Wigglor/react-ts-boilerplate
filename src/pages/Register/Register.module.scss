@@ -6,6 +6,9 @@
   .registerform {
     background-color: #fff;
     border: 0.0625rem solid #e5e7eb;
+    // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 0.6rem;
     padding: 2rem;
 
     .signup-button[type="submit"] {
@@ -20,6 +23,24 @@
 
     .signup-button[type="submit"]:hover {
       background-color: #2e59b0e8;
+    }
+  }
+
+  .or {
+    text-align: center;
+  }
+
+  .login-link {
+    background-color: #f8f8f8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.2rem;
+    border: 0.0625rem solid #e5e7eb;
+    &__text {
+      text-align: center;
+      //   color: #fff;
+      color: #333;
     }
   }
 

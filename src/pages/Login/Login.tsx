@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 // import useRefreshToken from "../../hooks/useRefreshToken";
@@ -158,6 +158,15 @@ const Login = (): ReactElement => {
             <button className={styles["login-button"]} type="submit">
               Login
             </button>
+
+            <div className={styles.or}>
+              <p>Or</p>
+            </div>
+            <div className={styles["register-link"]}>
+              <Link className={styles["register-link__text"]} to="/register">
+                Register
+              </Link>
+            </div>
           </form>
         </div>
       }

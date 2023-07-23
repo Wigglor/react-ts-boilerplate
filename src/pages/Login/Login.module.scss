@@ -6,6 +6,8 @@
 
   .login-form {
     background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 0.6rem;
     border: 0.0625rem solid #e5e7eb;
     padding: 2rem;
     // width: 300px;
@@ -15,6 +17,24 @@
     // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     // text-align: center;
     // margin: auto; /* Added this line */
+
+    .or {
+      text-align: center;
+    }
+
+    .register-link {
+      background-color: #f8f8f8e8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0.2rem;
+      border: 0.0625rem solid #e5e7eb;
+      &__text {
+        text-align: center;
+        //   color: #fff;
+        color: #333;
+      }
+    }
   }
 }
 
