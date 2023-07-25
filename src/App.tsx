@@ -5,7 +5,7 @@ import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/requireAuth";
 import Account from "./pages/Account/Account";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
+// import Login from "./pages/Login/Login";
 import Posts from "./pages/Posts/Posts";
 import ReactFormTest from "./pages/ReactFormTest/ReactFormTest";
 import Register from "./pages/Register/Register";
@@ -24,7 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/" /*element={<Layout />}*/>
           <Route path="testform" element={<ReactFormTest />} />
-          <Route path="login" element={<Login />} />
+          <Route path="login" element={<ReactFormTest />} />
           <Route path="register" element={<Register />} />
           <Route path="forgotpassword" element={<Register />} />
           <Route path="unauthorized" element={<Unauthorized />} />

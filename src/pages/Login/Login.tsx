@@ -123,12 +123,6 @@ const Login = (): ReactElement => {
   return (
     <>
       {
-        // isLoading ? (
-        //   <p>Loading...</p>
-        // ) :
-        // isAuthenticated ? (
-        //   <Navigate to="/" state={{ from: location }} replace />
-        // ) : (
         <div className={styles.container}>
           <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
             {errMsg}

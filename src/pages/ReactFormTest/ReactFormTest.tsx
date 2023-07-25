@@ -1,60 +1,109 @@
-import React from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
 import styles from "./ReactFormTest.module.scss";
+
+const LOGIN_URL = "/cognito/signin";
 
 type LoginFormValues = {
   username: string;
   password: string;
 };
 
-const LoginForm: React.FC = () => {
+const LoginForm = (): ReactElement => {
+  const { setAuth } = useAuth();
+  const [errMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      // Redirect to the homepage
+      navigate("/"); // Replace '/homepage' with the actual route of your homepage
+    }
+  }, []);
+
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<LoginFormValues>(); // Pass the LoginFormValues type as a generic parameter
 
-  const onSubmit = (data: LoginFormValues) => {
-    // Replace this with your login logic
+  const onSubmit = async (data: LoginFormValues) => {
+    console.log(data);
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ username: data.username, password: data.password }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        },
+      );
+      const accessToken = response?.data.accessToken;
+      console.log(accessToken);
+      setAuth({
+        user: data.username,
+        accessToken: accessToken,
+      });
+      const isLoggedIn = true;
+      localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+
+      navigate(from, { replace: true });
+    } catch (err: any) {
+      console.log(err);
+      console.log(err.response);
+      console.log(err.response.data.message);
+
+      const errorMessage = err.response.data.message;
+      setErrMsg(errorMessage);
+    }
     console.log(data);
   };
 
   return (
     <div className={styles.container}>
+      <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+        {errMsg}
+      </p>
       <form onSubmit={handleSubmit(onSubmit)} className={styles["login-form"]}>
+        <h2>Login</h2>
         <label>Username:</label>
-        <div>
-          <Controller
-            name="username"
-            control={control}
-            rules={{
-              required: "Username is required",
-              minLength: {
-                value: 3,
-                message: "Username must be at least 3 characters long",
-              },
-            }}
-            render={({ field }) => <input {...field} />}
-          />
-          {errors.username && <p>{errors.username.message}</p>}
-        </div>
-        <div>
-          <label>Password:</label>
-          <Controller
-            name="password"
-            control={control}
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters long",
-              },
-            }}
-            render={({ field }) => <input type="password" {...field} />}
-          />
-          {errors.password && <p>{errors.password.message}</p>}
-        </div>
+        {/* <div> */}
+        <Controller
+          name="username"
+          control={control}
+          rules={{
+            required: "Username is required",
+            minLength: {
+              value: 3,
+              message: "Username must be at least 3 characters long",
+            },
+          }}
+          render={({ field }) => <input type="text" placeholder="Username" {...field} />}
+        />
+        {errors.username && <p>{errors.username.message}</p>}
+        {/* </div> */}
+        {/* <div> */}
+        <label>Password:</label>
+        <Controller
+          name="password"
+          control={control}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 4,
+              message: "Password must be at least 6 characters long",
+            },
+          }}
+          render={({ field }) => <input type="password" placeholder="password" {...field} />}
+        />
+        {errors.password && <p>{errors.password.message}</p>}
+        {/* </div> */}
         <button type="submit" className={styles["login-button"]}>
           Login
         </button>
