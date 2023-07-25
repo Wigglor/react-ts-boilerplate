@@ -1,9 +1,11 @@
 import { ReactElement, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import styles from "./ReactFormTest.module.scss";
+
+// tutorial: https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
 
 const LOGIN_URL = "/cognito/signin";
 
@@ -29,7 +31,8 @@ const LoginForm = (): ReactElement => {
 
   const {
     handleSubmit,
-    control,
+    // control,
+    register,
     formState: { errors },
   } = useForm<LoginFormValues>(); // Pass the LoginFormValues type as a generic parameter
 
@@ -67,13 +70,48 @@ const LoginForm = (): ReactElement => {
 
   return (
     <div className={styles.container}>
-      <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+      {/* <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
         {errMsg}
-      </p>
+      </p> */}
       <form onSubmit={handleSubmit(onSubmit)} className={styles["login-form"]}>
         <h2>Login</h2>
-        <label>Username:</label>
-        {/* <div> */}
+        <div className="form-control">
+          <label>Email</label>
+          <input
+            type="text"
+            {...register("username", {
+              required: "Username is required.",
+              minLength: {
+                value: 3,
+                message: "Username must be at least 3 characters long",
+              },
+              //   pattern: {
+              //     value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+              //     message: "Email is not valid.",
+              //   },
+            })}
+          />
+          {errors.username && <p className="errorMsg">{errors.username.message}</p>}
+        </div>
+        <div className="form-control">
+          <label>Password</label>
+          <input
+            type="password"
+            {...register("password", {
+              required: "Password is required",
+              validate: {
+                checkLength: (value: string) =>
+                  value.length >= 6 || "Password should be at-least 6 characters.",
+                matchPattern: (value: string) =>
+                  /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$*])/.test(value) ||
+                  "Password should contain at least one uppercase letter, lowercase letter, digit, and special symbol.",
+              },
+            })}
+          />
+          {errors.password && <p className="errorMsg">{errors.password.message}</p>}
+        </div>
+        {/* <label>Username:</label>
+        <div>
         <Controller
           name="username"
           control={control}
@@ -87,8 +125,8 @@ const LoginForm = (): ReactElement => {
           render={({ field }) => <input type="text" placeholder="Username" {...field} />}
         />
         {errors.username && <p>{errors.username.message}</p>}
-        {/* </div> */}
-        {/* <div> */}
+        </div>
+        <div>
         <label>Password:</label>
         <Controller
           name="password"
@@ -103,7 +141,7 @@ const LoginForm = (): ReactElement => {
           render={({ field }) => <input type="password" placeholder="password" {...field} />}
         />
         {errors.password && <p>{errors.password.message}</p>}
-        {/* </div> */}
+        </div> */}
         <button type="submit" className={styles["login-button"]}>
           Login
         </button>
