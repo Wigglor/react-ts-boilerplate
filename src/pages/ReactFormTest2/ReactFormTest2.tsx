@@ -12,7 +12,6 @@ type LoginFormValues = {
   password: string;
 };
 
-// export default function App() {
 const ReactFormTest2 = (): ReactElement => {
   const { setAuth } = useAuth();
   const [errMsg, setErrMsg] = useState<string | null>(null);
