@@ -1,11 +1,11 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import styles from "./ReactFormTest2.module.scss";
 
-const LOGIN_URL = "/cognito/signin";
+const LOGIN_URL = "/signin";
 
 type LoginFormValues = {
   username: string;
@@ -19,13 +19,13 @@ const ReactFormTest2 = (): ReactElement => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  useEffect(() => {
+  /*useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn) {
       // Redirect to the homepage
       navigate("/"); // Replace '/homepage' with the actual route of your homepage
     }
-  }, []);
+  }, []);*/
 
   const {
     register,
@@ -35,8 +35,6 @@ const ReactFormTest2 = (): ReactElement => {
   } = useForm<LoginFormValues>();
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data: LoginFormValues) => {
-    console.log(data);
-    console.log(data);
     try {
       const response = await axios.post(
         LOGIN_URL,
@@ -46,16 +44,28 @@ const ReactFormTest2 = (): ReactElement => {
           withCredentials: true,
         },
       );
-      const accessToken = response?.data.accessToken;
-      console.log(accessToken);
-      setAuth({
-        user: data.username,
-        accessToken: accessToken,
-      });
-      const isLoggedIn = true;
-      localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
 
-      navigate(from, { replace: true });
+      const accessToken = response?.data.accessToken;
+      if (response?.data.hasAccount === false) {
+        setAuth({
+          user: data.username,
+          accessToken: accessToken,
+          accountComplete: false,
+        });
+        navigate("/onboarding", { replace: true });
+      } else {
+        console.log(`user data: ${JSON.stringify(response)}`);
+
+        setAuth({
+          user: data.username,
+          accessToken: accessToken,
+          accountComplete: true,
+        });
+        // const isLoggedIn = true;
+        // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+        console.log(`has account: ${response?.data.hasAccount}`);
+        navigate(from, { replace: true });
+      }
     } catch (err: any) {
       console.log(err);
       console.log(err.response);
@@ -64,7 +74,6 @@ const ReactFormTest2 = (): ReactElement => {
       const errorMessage = err.response.data.message;
       setErrMsg(errorMessage);
     }
-    console.log(data);
     reset();
   };
 

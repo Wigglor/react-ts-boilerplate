@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
@@ -21,13 +21,13 @@ const LoginForm = (): ReactElement => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  useEffect(() => {
+  /* useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn) {
       // Redirect to the homepage
       navigate("/"); // Replace '/homepage' with the actual route of your homepage
     }
-  }, []);
+  }, []);*/
 
   const {
     handleSubmit,
@@ -52,9 +52,10 @@ const LoginForm = (): ReactElement => {
       setAuth({
         user: data.username,
         accessToken: accessToken,
+        accountComplete: false,
       });
-      const isLoggedIn = true;
-      localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+      // const isLoggedIn = true;
+      // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
 
       navigate(from, { replace: true });
     } catch (err: any) {
