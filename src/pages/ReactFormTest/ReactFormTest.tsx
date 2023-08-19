@@ -52,7 +52,8 @@ const LoginForm = (): ReactElement => {
       setAuth({
         user: data.username,
         accessToken: accessToken,
-        accountComplete: false,
+        // accountComplete: false,
+        role: response?.data.user.roleAccess,
       });
       // const isLoggedIn = true;
       // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));

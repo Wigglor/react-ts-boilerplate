@@ -46,7 +46,27 @@ const ReactFormTest2 = (): ReactElement => {
       );
 
       const accessToken = response?.data.accessToken;
-      if (response?.data.hasAccount === false) {
+      // let accountComplete = true;
+      // if (response?.data.hasAccount === false) {
+      //   accountComplete = false;
+      //   console.log(`has account: ${response?.data.hasAccount}`);
+      // }
+      setAuth({
+        user: data.username,
+        accessToken: accessToken,
+        // accountComplete: accountComplete,
+        // role: response?.data.user.roleAccess,
+        role: response?.data.role,
+      });
+      // const isLoggedIn = true;
+      // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+
+      if (response?.data.role === "PENDING") {
+        navigate("/onboarding", { replace: true });
+      } else {
+        navigate(from, { replace: true });
+      }
+      /* if (response?.data.hasAccount === false) {
         setAuth({
           user: data.username,
           accessToken: accessToken,
@@ -65,7 +85,7 @@ const ReactFormTest2 = (): ReactElement => {
         // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
         console.log(`has account: ${response?.data.hasAccount}`);
         navigate(from, { replace: true });
-      }
+      }*/
     } catch (err: any) {
       console.log(err);
       console.log(err.response);
@@ -76,8 +96,6 @@ const ReactFormTest2 = (): ReactElement => {
     }
     reset();
   };
-
-  console.log(errors);
 
   return (
     <main className={styles["login-container"]}>

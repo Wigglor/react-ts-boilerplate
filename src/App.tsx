@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Navigation from "./Layouts/Navigation/Navigation";
 import PersistLogin from "./components/PersistLogin";
-import RestrictedRoute from "./components/RestrictedRoute";
 import RequireAuth from "./components/requireAuth";
 import Account from "./pages/Account/Account";
 import Home from "./pages/Home/Home";
@@ -22,6 +21,12 @@ const App = () => {
   //   return <Login />;
   // }
 
+  const ROLES = {
+    pending: "PENDING",
+    user: "USER",
+    admin: "ADMIN",
+  };
+
   return (
     <>
       <Routes>
@@ -32,21 +37,22 @@ const App = () => {
           <Route path="register" element={<Login />} />
           <Route path="forgotpassword" element={<Register />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-          {/* <Route path="onboarding" element={<Onboarding />} /> */}
-          {/* <Route element={<Navigation />}> */}
+
           <Route element={<PersistLogin />}>
-            <Route element={<RequireAuth />}>
-              <Route element={<RestrictedRoute />}>
-                <Route path="onboarding" element={<Onboarding />} />
-              </Route>
+            <Route element={<RequireAuth allowedRoles={[ROLES.pending]} />}>
+              <Route path="onboarding" element={<Onboarding />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={[ROLES.user, ROLES.admin]} />}>
+              {/* --------- set up private route so that only accountComplete: true has access ---------- */}
+
               <Route element={<Navigation />}>
                 <Route path="" element={<Home />} />
                 <Route path="account" element={<Account />} />
                 <Route path="posts" element={<Posts />} />
               </Route>
+              {/* -------------------------------------------------------------------------------------- */}
             </Route>
           </Route>
-          {/* </Route> */}
         </Route>
       </Routes>
     </>

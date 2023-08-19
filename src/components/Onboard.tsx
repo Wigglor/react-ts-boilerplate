@@ -1,8 +1,8 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 // const RestrictedRoute = ({ children, ...rest }) => {
-const RestrictedRoute = () => {
+const Onboard = () => {
   // const { isAuthenticated, hasCompletedSetup } = useAuth();
   const { auth } = useAuth();
   const location = useLocation();
@@ -12,8 +12,7 @@ const RestrictedRoute = () => {
   console.log("restricted route...");
   console.log(auth.role);
 
-  //   return <Outlet />;
-  return !auth?.role ? <Outlet /> : <Navigate to="/login" state={{ from }} replace />;
+  return <Outlet />;
   //   return !auth?.accountComplete ? <Outlet /> : <Navigate to="/login" state={{ from }} replace />;
 
   /* Perhaps add this. But should be added around the normal routes (home, posts etc) in App.tsx instead of onboarding path:
@@ -70,4 +69,4 @@ export default PrivateRoute;
   // );
 };
 
-export default RestrictedRoute;
+export default Onboard;

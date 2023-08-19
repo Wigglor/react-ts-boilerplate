@@ -15,6 +15,7 @@ const PersistLogin = () => {
 
     const verifyRefreshToken = async () => {
       try {
+        console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
         await refresh();
         console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
       } catch (err) {
