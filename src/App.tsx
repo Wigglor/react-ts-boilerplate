@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Navigation from "./Layouts/Navigation/Navigation";
+import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/requireAuth";
 import Account from "./pages/Account/Account";
@@ -39,18 +40,20 @@ const App = () => {
           <Route path="unauthorized" element={<Unauthorized />} />
 
           <Route element={<PersistLogin />}>
-            <Route element={<RequireAuth allowedRoles={[ROLES.pending]} />}>
-              <Route path="onboarding" element={<Onboarding />} />
-            </Route>
-            <Route element={<RequireAuth allowedRoles={[ROLES.user, ROLES.admin]} />}>
-              {/* --------- set up private route so that only accountComplete: true has access ---------- */}
-
-              <Route element={<Navigation />}>
+            <Route element={<Navigation />}>
+              <Route element={<RequireAuth allowedRoles={[ROLES.pending]} />}>
+                <Route path="onboarding" element={<Onboarding />} />
+              </Route>
+              <Route
+                element={<RequireAuth allowedRoles={[ROLES.user, ROLES.admin, ROLES.pending]} />}
+              >
                 <Route path="" element={<Home />} />
                 <Route path="account" element={<Account />} />
                 <Route path="posts" element={<Posts />} />
+                <Route element={<OnboardingRoute />}>
+                  <Route path="onboardingg" element={<Onboarding />} />
+                </Route>
               </Route>
-              {/* -------------------------------------------------------------------------------------- */}
             </Route>
           </Route>
         </Route>

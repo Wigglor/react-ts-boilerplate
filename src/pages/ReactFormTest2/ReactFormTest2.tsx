@@ -57,6 +57,7 @@ const ReactFormTest2 = (): ReactElement => {
         // accountComplete: accountComplete,
         // role: response?.data.user.roleAccess,
         role: response?.data.role,
+        setup: response?.data.setup,
       });
       // const isLoggedIn = true;
       // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));

@@ -54,7 +54,8 @@ interface Auth {
   // pwd: string;
   accessToken: string;
   // accountComplete: boolean;
-  role: string | null;
+  role: string;
+  setup: string;
   // access: string;
 }
 
@@ -79,6 +80,7 @@ export const AuthContext = createContext<AuthContextType>({
     accessToken: "",
     // accountComplete: false,
     role: "",
+    setup: "",
   },
   setAuth: () => {},
   // persist: false,
@@ -93,6 +95,7 @@ export const AuthProvider = ({ children }: any) => {
     accessToken: "",
     // accountComplete: false,
     role: "",
+    setup: "",
   });
   const initialPersist = localStorage.getItem("persist");
   const [persist, setPersist] = useState(initialPersist ? JSON.parse(initialPersist) : false);

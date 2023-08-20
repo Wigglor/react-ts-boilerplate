@@ -9,8 +9,8 @@ const useLogout = () => {
     setAuth({
       user: "",
       accessToken: "",
-      // accountComplete: false,
-      role: null,
+      role: "",
+      setup: "",
     });
     try {
       // const response = await axios('/cognito/signout', {

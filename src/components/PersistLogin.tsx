@@ -15,9 +15,9 @@ const PersistLogin = () => {
 
     const verifyRefreshToken = async () => {
       try {
-        console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
+        console.log(`verify refreshToken step 1: ${JSON.stringify(auth)}`);
         await refresh();
-        console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
+        console.log(`verify refreshToken step 2: ${JSON.stringify(auth)}`);
       } catch (err) {
         console.error(err);
       } finally {
@@ -29,10 +29,8 @@ const PersistLogin = () => {
     // persist added here AFTER tutorial video
     // Avoids unwanted call to verifyRefreshToken
     // !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
+    console.log(`is verifyRefreshToken needed: ${auth?.accessToken}`);
     !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
-    /*const tokenLength = auth?.accessToken.length as number;
-
-    tokenLength < 1 ? verifyRefreshToken() : setIsLoading(false);*/
 
     // return () => (isMounted = false);
     return () => {
@@ -40,11 +38,6 @@ const PersistLogin = () => {
       // isMounted = false;
     };
   }, []);
-
-  /*useEffect(() => {
-    console.log(`isLoading: ${isLoading}`);
-    console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
-  }, [isLoading]);*/
 
   return <>{isLoading ? <p>Loading..............</p> : <Outlet />}</>;
   //   return <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>;

@@ -14,6 +14,7 @@ type RequireAuthProps = {
 const RequireAuth = ({ allowedRoles }: RequireAuthProps) => {
   const { auth } = useAuth();
   const location = useLocation();
+  console.log(`auth for refresh: ${JSON.stringify(auth)}`);
 
   // return auth?.accessToken ? (
   //   // auth?.accountComplete ? (

@@ -91,6 +91,7 @@ const Login = (): ReactElement => {
         accessToken: accessToken,
         // accountComplete: false,
         role: response?.data.user.roleAccess,
+        setup: response?.data.user.setup,
       });
       // setPersist(true);
       // const persistState = localStorage.setItem("persist", JSON.stringify(true));
