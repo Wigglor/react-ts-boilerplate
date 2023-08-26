@@ -5,7 +5,7 @@ const OnboardingRoute = () => {
   const { auth } = useAuth();
   const location = useLocation();
   console.log(`OnboardingRoute: ${JSON.stringify(auth)}`);
-  return auth?.role === "PENDING" ? (
+  return auth?.setup === "PENDING" ? (
     <Outlet />
   ) : (
     <Navigate to="/unauthorized" state={{ from: location }} replace />

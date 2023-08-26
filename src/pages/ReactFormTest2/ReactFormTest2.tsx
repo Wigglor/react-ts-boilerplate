@@ -13,6 +13,7 @@ type LoginFormValues = {
 };
 
 const ReactFormTest2 = (): ReactElement => {
+  // const { setAuth, persist, setPersist } = useAuth();
   const { setAuth } = useAuth();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -61,36 +62,18 @@ const ReactFormTest2 = (): ReactElement => {
       });
       // const isLoggedIn = true;
       // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-
+      // localStorage.setItem("persist", "true");
+      // setPersist({"persist":true});
+      console.log(`role: ${response?.data.role}`);
       if (response?.data.role === "PENDING") {
         navigate("/onboarding", { replace: true });
       } else {
         navigate(from, { replace: true });
       }
-      /* if (response?.data.hasAccount === false) {
-        setAuth({
-          user: data.username,
-          accessToken: accessToken,
-          accountComplete: false,
-        });
-        navigate("/onboarding", { replace: true });
-      } else {
-        console.log(`user data: ${JSON.stringify(response)}`);
-
-        setAuth({
-          user: data.username,
-          accessToken: accessToken,
-          accountComplete: true,
-        });
-        // const isLoggedIn = true;
-        // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-        console.log(`has account: ${response?.data.hasAccount}`);
-        navigate(from, { replace: true });
-      }*/
     } catch (err: any) {
-      console.log(err);
-      console.log(err.response);
-      console.log(err.response.data.message);
+      // console.log(err);
+      // console.log(err.response);
+      // console.log(err.response.data.message);
 
       const errorMessage = err.response.data.message;
       setErrMsg(errorMessage);
@@ -98,17 +81,17 @@ const ReactFormTest2 = (): ReactElement => {
     reset();
   };
 
+  // useEffect(() => {
+  //   localStorage.setItem("persist", persist);
+  // }, []);
+
   return (
     <main className={styles["login-container"]}>
       <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
         <h2>Login</h2>
         {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
-        {/* <div className={styles["login-error"]}>Incorrect username or password.</div> */}
         <div>
           <label htmlFor="username">username</label>
-          {/* <span className={styles["error-username"]} role="alert">
-            error
-          </span> */}
 
           <input
             id="username"
@@ -119,7 +102,6 @@ const ReactFormTest2 = (): ReactElement => {
                 message: "min length is 5",
               },
             })}
-            // onChange={handleInputChange}
             type="text"
           />
           {errors.username && (
@@ -144,35 +126,6 @@ const ReactFormTest2 = (): ReactElement => {
               {errors.password.message}
             </span>
           )}
-          {/* <label>Email</label>
-          <input
-            type="text"
-            {...register("email", {
-              required: "Email is required.",
-              pattern: {
-                value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                message: "Email is not valid.",
-              },
-            })}
-          />
-          {errors.email && <p className="errorMsg">{errors.email.message}</p>}
-        </div>
-        <div className="form-control">
-          <label>Password</label>
-          <input
-            type="password"
-            {...register("password", {
-              required: "Password is required",
-              validate: {
-                checkLength: (value: string) =>
-                  value.length >= 6 || "Password should be at-least 6 characters.",
-                matchPattern: (value: string) =>
-                  /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$*])/.test(value) ||
-                  "Password should contain at least one uppercase letter, lowercase letter, digit, and special symbol.",
-              },
-            })}
-          />
-          {errors.password && <p className="errorMsg">{errors.password.message}</p>} */}
         </div>
         <button type="submit" className={styles["login-button"]}>
           Login
@@ -191,77 +144,3 @@ const ReactFormTest2 = (): ReactElement => {
 };
 
 export default ReactFormTest2;
-
-// const LOGIN_URL = "/cognito/signin";
-
-// type LoginFormValues = {
-//   username: string;
-//   password: string;
-// };
-
-// const ReactFormTest2 = (): ReactElement => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm<LoginFormValues>();
-
-//   const onSubmit = (data: LoginFormValues) => {
-//     console.log(data);
-//   };
-
-//   console.log(errors);
-
-//   return (
-//     <div className="App">
-//       <form onSubmit={handleSubmit(onSubmit)}>
-//         <div className="form-control">
-//           <label>Email</label>
-//           <input
-//             type="text"
-//             {...register("email", {
-//               required: "Email is required.",
-//               pattern: {
-//                 value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-//                 message: "Email is not valid.",
-//               },
-//             })}
-//           />
-//           {errors.email && <p className="errorMsg">{errors.email.message}</p>}
-//         </div>
-//         <div className="form-control">
-//           <label>Password</label>
-//           <input
-//             type="password"
-//             {...register("password", {
-//               required: true,
-//               validate: {
-//                 checkLength: (value) => value.length >= 6,
-//                 matchPattern: (value) =>
-//                   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/.test(value),
-//               },
-//             })}
-//           />
-//           {errors.password?.type === "required" && (
-//             <p className="errorMsg">Password is required.</p>
-//           )}
-//           {errors.password?.type === "checkLength" && (
-//             <p className="errorMsg">Password should be at-least 6 characters.</p>
-//           )}
-//           {errors.password?.type === "matchPattern" && (
-//             <p className="errorMsg">
-//               Password should contain at least one uppercase letter, lowercase letter, digit, and
-//               special symbol.
-//             </p>
-//           )}
-//         </div>
-//         <div className="form-control">
-//           <label></label>
-//           <button type="submit">Login</button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default ReactFormTest2;

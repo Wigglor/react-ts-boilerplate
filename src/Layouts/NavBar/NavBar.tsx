@@ -10,6 +10,7 @@ const NavBar = (): ReactElement => {
 
   const signOut = async () => {
     // localStorage.removeItem("isLoggedIn");
+    // localStorage.removeItem("persist");
     await logout();
     // navigate('/linkpage');
   };
