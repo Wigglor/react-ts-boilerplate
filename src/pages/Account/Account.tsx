@@ -33,8 +33,6 @@ const Account = (): ReactElement => {
           signal: controller.signal,
           withCredentials: true,
         });
-
-        console.log(response);
         // setUser(response.data.Username);
         setUser(response.data);
         // isMounted && setUser(response.data.result);

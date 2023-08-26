@@ -17,9 +17,9 @@ const PersistLogin = () => {
 
     const verifyRefreshToken = async () => {
       try {
-        console.log(`verify refreshToken step 1: ${JSON.stringify(auth)}`);
+        // console.log(`verify refreshToken step 1: ${JSON.stringify(auth)}`);
         await refresh();
-        console.log(`verify refreshToken step 2: ${JSON.stringify(auth)}`);
+        // console.log(`verify refreshToken step 2: ${JSON.stringify(auth)}`);
       } catch (err) {
         console.error(err);
       } finally {
@@ -31,7 +31,6 @@ const PersistLogin = () => {
     // persist added here AFTER tutorial video
     // Avoids unwanted call to verifyRefreshToken
 
-    console.log(`is verifyRefreshToken needed: ${auth?.accessToken}`);
     // console.log(`persist value: ${persist}`);
     // if (persist) {
     //   console.log("Persist is Truthy");
@@ -39,10 +38,11 @@ const PersistLogin = () => {
     //   console.log("Persist is Falsy");
     // }
     // !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
-    if (auth) {
-      console.log("YES - has auth!");
+    if (!auth?.accessToken) {
+      console.log(`YES - has auth! - ${auth?.accessToken}`);
+      console.log(`YES - has auth! - ${!auth?.accessToken}`);
     } else {
-      console.log("YES - has auth!");
+      console.log("NO - no auth!");
     }
     !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
 
