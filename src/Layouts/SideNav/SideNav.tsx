@@ -3,7 +3,7 @@ import { AiOutlineExport } from "react-icons/ai";
 import { BsFileEarmarkSpreadsheet } from "react-icons/bs";
 import { MdManageAccounts } from "react-icons/md";
 import { SlGraph } from "react-icons/sl";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./SideNav.module.scss";
 
 const SideNav = (): ReactElement => {
@@ -104,7 +104,7 @@ const SideNav = (): ReactElement => {
         </div>
       </div> */}
 
-      <Outlet />
+      {/* <Outlet /> */}
     </>
   );
 };

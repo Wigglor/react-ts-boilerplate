@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosPrivate } from "../../api/axios";
+// import { axiosPrivate } from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Posts.module.scss";
 
 interface ApiResponse<T> {
@@ -28,6 +29,7 @@ interface Post {
 }
 
 const Posts = (): ReactElement => {
+  const axiosPrivate = useAxiosPrivate();
   const [posts, setPosts] = useState<Post | undefined>(undefined);
   const navigate = useNavigate();
   useEffect(() => {

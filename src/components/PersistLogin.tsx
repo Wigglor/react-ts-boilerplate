@@ -19,7 +19,7 @@ const PersistLogin = () => {
       try {
         // console.log(`verify refreshToken step 1: ${JSON.stringify(auth)}`);
         await refresh();
-        // console.log(`verify refreshToken step 2: ${JSON.stringify(auth)}`);
+        console.log(`verify refreshToken step 2: ${JSON.stringify(auth)}`);
       } catch (err) {
         console.error(err);
       } finally {
@@ -38,12 +38,8 @@ const PersistLogin = () => {
     //   console.log("Persist is Falsy");
     // }
     // !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
-    if (!auth?.accessToken) {
-      console.log(`YES - has auth! - ${auth?.accessToken}`);
-      console.log(`YES - has auth! - ${!auth?.accessToken}`);
-    } else {
-      console.log("NO - no auth!");
-    }
+    console.log(`Persist - ${JSON.stringify(auth)}`);
+
     !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
 
     // return () => (isMounted = false);

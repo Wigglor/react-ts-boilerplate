@@ -13,6 +13,7 @@ const useLogout = () => {
       role: "",
       setup: "",
     });
+    localStorage.removeItem("isLoggedIn");
     // setPersist({ persist: false });
     try {
       await axiosPrivate.post("/signout", {

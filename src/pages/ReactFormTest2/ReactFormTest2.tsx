@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
@@ -14,19 +14,32 @@ type LoginFormValues = {
 
 const ReactFormTest2 = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
-  const { setAuth } = useAuth();
+  const { setAuth, auth } = useAuth();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  /*useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn) {
-      // Redirect to the homepage
-      navigate("/"); // Replace '/homepage' with the actual route of your homepage
+  useEffect(() => {
+    // const isLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log(`checking auth: ${JSON.stringify(auth)}`);
+    // console.log(`checking login: ${isLoggedIn}`);
+    // if (isLoggedIn) {
+    //   console.log("login status: SISISI!");
+    //   // Redirect to the homepage
+    //   navigate("/"); // Replace '/homepage' with the actual route of your homepage
+    // } else {
+    //   console.log("login status: NONONO!");
+    // }
+    // try {
+    //   navigate("/");
+    // } catch (error) {
+    //   console.log("unable to login");
+    // }
+    if (auth.accessToken) {
+      console.log("Can access auth context");
     }
-  }, []);*/
+  }, []);
 
   const {
     register,
@@ -60,8 +73,13 @@ const ReactFormTest2 = (): ReactElement => {
         role: response?.data.role,
         setup: response?.data.setup,
       });
+      console.log(`setAuth 1: ${data.username}`);
+      console.log(`setAuth 2: ${accessToken}`);
+      console.log(`setAuth 3: ${response?.data.role}`);
+      console.log(`setAuth 4: ${response?.data.setup}`);
       // const isLoggedIn = true;
       // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+      // localStorage.setItem("isLoggedIn", "true");
       // localStorage.setItem("persist", "true");
       // setPersist({"persist":true});
       console.log(`role: ${response?.data.role}`);

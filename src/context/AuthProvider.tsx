@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import { createContext, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 
 interface Auth {
   user: string;
@@ -17,6 +17,8 @@ interface Persist {
 interface AuthContextType {
   auth: Auth;
   setAuth: React.Dispatch<React.SetStateAction<Auth>>;
+  // persist: Persist;
+  // setPersist: React.Dispatch<React.SetStateAction<Persist>>;
 }
 
 const INITIAL_STATE: Auth = {
@@ -29,10 +31,21 @@ const INITIAL_STATE: Auth = {
 export const AuthContext = createContext<AuthContextType>({
   auth: INITIAL_STATE,
   setAuth: () => {},
+  // persist: {
+  //   persist: false,
+  // },
+  // setPersist: () => {},
 });
 
-export const AuthProvider = ({ children }: any) => {
+interface IAuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [auth, setAuth] = useState<Auth>(INITIAL_STATE);
+  // const [persist, setPersist] = useState(
+  //   JSON.parse(localStorage.getItem("persist") as string) || false,
+  // );
   console.log(`AUTHING - AuthProvider: ..........${JSON.stringify(auth)}`);
   return (
     <AuthContext.Provider value={{ auth, setAuth /*persist, setPersist*/ }}>
