@@ -166,15 +166,19 @@ function SignupPlan3() {
           withCredentials: true,
         },
       );
-      // setAuth({
-      //   user: setupResponse?.user?.username,
-      //   accessToken: setupResponse?.token,
-      //   // accountComplete: accountComplete,
-      //   // role: response?.data.user.roleAccess,
-      //   role: setupResponse?.result.user.role,
-      //   setup: setupResponse?.result.user.setup,
-      // });
+      console.log(`${setupResponse.data.user.user.userName}`);
+      console.log(`${setupResponse.data.accessToken}`);
+      console.log(`${setupResponse.data.user.user.roleAccess}`);
+      console.log(`${setupResponse.data.user.user.setup}`);
+      setAuth({
+        user: setupResponse.data.user.user.userName,
+        accessToken: setupResponse.data.accessToken,
+
+        role: setupResponse.data.user.user.roleAccess,
+        setup: setupResponse.data.user.user.setup,
+      });
       navigate("/", { replace: true });
+      console.log(JSON.stringify(setupResponse.data));
     } catch (error) {
       setError("An unexpected error occurred. Please try again later.");
       console.log(error);
