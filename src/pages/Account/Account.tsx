@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosPrivate } from "../../api/axios";
+// import { axiosPrivate } from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Account.module.scss";
 
 interface ApiResponse<T> {
@@ -22,6 +23,7 @@ interface User {
 }
 
 const Account = (): ReactElement => {
+  const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
   const navigate = useNavigate();
   useEffect(() => {
