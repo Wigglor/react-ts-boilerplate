@@ -1,13 +1,12 @@
 import { ReactElement } from "react";
-// import SignupPlan from "../../components/Form/SignupPlan/SignupPlan";
-import SignupPlan3 from "../../components/Form/SignupPlan/SignupPlan3";
+import CompleteSignup from "../../components/Form/SignupPlan/CompleteSignup";
 
 const Onboarding = (): ReactElement => {
   console.log("ONBOARDING!!!");
   return (
     // <SignupPlan></SignupPlan>
     // <SignupPlan2 />
-    <SignupPlan3 />
+    <CompleteSignup />
     // <main>
     //   {/* <main className={styles["signup"]}> */}
     //   <div>

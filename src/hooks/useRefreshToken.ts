@@ -10,7 +10,7 @@ const useRefreshToken = () => {
       const response = await axios.post("/refreshtoken", null, {
         withCredentials: true,
       });
-      // console.log(`refreshtoken response: ${JSON.stringify(response.data)}`);
+      console.log(`refreshtoken response: ${JSON.stringify(response.data)}`);
 
       // setAuth({
       //   user: response.data.user,

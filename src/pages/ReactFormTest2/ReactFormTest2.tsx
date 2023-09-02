@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
@@ -20,26 +20,26 @@ const ReactFormTest2 = (): ReactElement => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  useEffect(() => {
-    // const isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log(`checking auth: ${JSON.stringify(auth)}`);
-    // console.log(`checking login: ${isLoggedIn}`);
-    // if (isLoggedIn) {
-    //   console.log("login status: SISISI!");
-    //   // Redirect to the homepage
-    //   navigate("/"); // Replace '/homepage' with the actual route of your homepage
-    // } else {
-    //   console.log("login status: NONONO!");
-    // }
-    // try {
-    //   navigate("/");
-    // } catch (error) {
-    //   console.log("unable to login");
-    // }
-    if (auth.accessToken) {
-      console.log("Can access auth context");
-    }
-  }, []);
+  // useEffect(() => {
+  //   // const isLoggedIn = localStorage.getItem("isLoggedIn");
+  //   console.log(`checking auth: ${JSON.stringify(auth)}`);
+  //   // console.log(`checking login: ${isLoggedIn}`);
+  //   // if (isLoggedIn) {
+  //   //   console.log("login status: SISISI!");
+  //   //   // Redirect to the homepage
+  //   //   navigate("/"); // Replace '/homepage' with the actual route of your homepage
+  //   // } else {
+  //   //   console.log("login status: NONONO!");
+  //   // }
+  //   // try {
+  //   //   navigate("/");
+  //   // } catch (error) {
+  //   //   console.log("unable to login");
+  //   // }
+  //   if (auth.accessToken) {
+  //     console.log("Can access auth context");
+  //   }
+  // }, []);
 
   const {
     register,
@@ -83,7 +83,9 @@ const ReactFormTest2 = (): ReactElement => {
       // localStorage.setItem("persist", "true");
       // setPersist({"persist":true});
       console.log(`role: ${response?.data.role}`);
-      if (response?.data.role === "PENDING") {
+      console.log(`setup: ${response?.data.setup}`);
+      // if (response?.data.role === "PENDING") {
+      if (response?.data.setup === "PENDING") {
         navigate("/onboarding", { replace: true });
       } else {
         navigate(from, { replace: true });

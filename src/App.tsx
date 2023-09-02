@@ -54,6 +54,7 @@ const App = () => {
               <Route path="register-confirmation" element={<RegistrationConfirmation />} />
               <Route path="forgotpassword" element={<Register />} />
             </Route>
+            {/* <Route> */}
             <Route element={<PrivateRoute allowedRoles={[ROLES.user, ROLES.admin]} />}>
               <Route element={<Navigation />}>
                 <Route path="" element={<Home />} />

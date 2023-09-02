@@ -129,7 +129,7 @@ const PLANS = [
 //   );
 // }
 
-function SignupPlan3() {
+function CompleteSignup() {
   const { setAuth, auth } = useAuth();
   const navigate = useNavigate();
   const {
@@ -166,16 +166,11 @@ function SignupPlan3() {
           withCredentials: true,
         },
       );
-      console.log(`${setupResponse.data.user.user.userName}`);
-      console.log(`${setupResponse.data.accessToken}`);
-      console.log(`${setupResponse.data.user.user.roleAccess}`);
-      console.log(`${setupResponse.data.user.user.setup}`);
       setAuth({
-        user: setupResponse.data.user.user.userName,
-        accessToken: setupResponse.data.accessToken,
-
-        role: setupResponse.data.user.user.roleAccess,
-        setup: setupResponse.data.user.user.setup,
+        user: setupResponse.data.result.user,
+        accessToken: setupResponse.data.result.accessToken,
+        role: setupResponse.data.result.role,
+        setup: setupResponse.data.result.setup,
       });
       navigate("/", { replace: true });
       console.log(JSON.stringify(setupResponse.data));
@@ -263,4 +258,4 @@ function SignupPlan3() {
   );
 }
 
-export default SignupPlan3;
+export default CompleteSignup;

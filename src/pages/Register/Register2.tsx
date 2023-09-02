@@ -61,7 +61,7 @@ const Register2 = (): ReactElement => {
   return (
     <main className={styles["login-container"]}>
       <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
-        <h2>Login</h2>
+        <h2>Register</h2>
         {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
         <div>
           <label htmlFor="username">username</label>
