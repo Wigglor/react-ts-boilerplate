@@ -184,7 +184,7 @@ function CompleteSignup() {
   return (
     <main className={styles["onboarding"]}>
       <div className={styles["pricing-widget"]}>
-        {PLANS.map((plan) => (
+        {/* {PLANS.map((plan) => (
           <div key={plan.name} className={styles["plan"]}>
             <h2>{plan.name}</h2>
 
@@ -195,9 +195,9 @@ function CompleteSignup() {
               ))}
             </ul>
           </div>
-        ))}
+        ))} */}
 
-        {selectedPlan && (
+        {/* {selectedPlan && (
           <div className={styles["modal-overlay"]} onClick={closeModal}>
             <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
               <h2>{selectedPlan.name} Plan</h2>
@@ -205,9 +205,6 @@ function CompleteSignup() {
                 You have selected the {selectedPlan.name} Plan. Proceed with your choice or click
                 outside this box to cancel.
               </p>
-              {/* <Elements stripe={stripePromise}>
-                <StripeForm />
-              </Elements> */}
               {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <label htmlFor="workspace">Fill in Workspace Name</label>
@@ -237,13 +234,8 @@ function CompleteSignup() {
                     type="email"
                   />
                   {errors.email && <p>This field is required</p>}
-                  {/* 
-                <Controller
-                  name="card"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => <CardElement {...field} />}
-                /> */}
+         
+               
                   <button type="submit" disabled={loading}>
                     {loading ? "Signing Up" : "Sign Up"}
                   </button>
@@ -252,7 +244,59 @@ function CompleteSignup() {
               <button onClick={closeModal}>Close</button>
             </div>
           </div>
-        )}
+        )} */}
+
+        <div className={styles["modal-overlay"]} onClick={closeModal}>
+          <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+            <h2>PLease add account name</h2>
+
+            {/* <Elements stripe={stripePromise}>
+                <StripeForm />
+              </Elements> */}
+            {
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="workspace">Fill in Workspace Name</label>
+                <input
+                  id="workspace"
+                  type="text"
+                  placeholder="Account Name"
+                  {...register("workspace", {
+                    required: "required",
+                    minLength: {
+                      value: 5,
+                      message: "min length is 5",
+                    },
+                  })}
+                />
+                {errors.workspace && <p>This field is required</p>}
+                <label htmlFor="email">email</label>
+                <input
+                  id="email"
+                  {...register("email", {
+                    required: "required",
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: "Entered value does not match email format",
+                    },
+                  })}
+                  type="email"
+                />
+                {errors.email && <p>This field is required</p>}
+                {/* 
+                <Controller
+                  name="card"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => <CardElement {...field} />}
+                /> */}
+                <button type="submit" disabled={loading}>
+                  {loading ? "Signing Up" : "Sign Up"}
+                </button>
+              </form>
+            }
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
       </div>
     </main>
   );
