@@ -34,7 +34,7 @@ function CompleteSignup() {
         "/completesetup",
         JSON.stringify({
           name: data.workspace,
-          accountEmail: data.email,
+          // accountEmail: data.email,
         }),
         {
           withCredentials: true,

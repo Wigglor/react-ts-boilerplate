@@ -8,6 +8,7 @@ import PersistLogin from "./components/PersistLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
+import Billing from "./pages/Billing/Billing";
 import Home from "./pages/Home/Home";
 import Posts from "./pages/Posts/Posts";
 import ReactFormTest2 from "./pages/ReactFormTest2/ReactFormTest2";
@@ -60,6 +61,7 @@ const App = () => {
                 <Route path="" element={<Home />} />
                 <Route path="account" element={<Account />} />
                 <Route path="posts" element={<Posts />} />
+                <Route path="billing" element={<Billing />} />
                 {/* <Route element={<OnboardingRoute />}>
                   <Route path="onboardingg" element={<Onboarding />} />
                 </Route> */}
