@@ -1,0 +1,13 @@
+.onboarding {
+  margin-top: 47.7px;
+  height: 100%;
+  &-setup {
+    display: flex;
+    justify-content: center;
+    // flex-direction: column;
+    align-items: center;
+    height: 100%;
+    // justify-content: space-around;
+    padding: 20px 0;
+  }
+}
