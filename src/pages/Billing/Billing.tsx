@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import styles from "./Billing.module.scss";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -100,8 +101,10 @@ const StripeCheckoutForm = (): ReactElement => {
 };
 
 const Account: React.FC = () => (
-  <Elements stripe={stripePromise}>
-    <StripeCheckoutForm />
-  </Elements>
+  <main className={styles.Billing}>
+    <Elements stripe={stripePromise}>
+      <StripeCheckoutForm />
+    </Elements>
+  </main>
 );
 export default Account;
