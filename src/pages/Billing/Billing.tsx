@@ -1,8 +1,9 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
+import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-// import styles from "./Account.module.scss";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -22,84 +23,85 @@ interface User {
   };
 }
 
-const Account = (): ReactElement => {
+const stripePromise = loadStripe(
+  "pk_test_51NT1gBBs7XdR6397zh1APukpUUnisIK4PQrRkdOsPhSiwezXMmRgf59pWWCTQNC7rHV6xNRgP3ogueQrvmNCnLef00L3BD4aVr",
+);
+
+const StripeCheckoutForm = (): ReactElement => {
   const axiosPrivate = useAxiosPrivate();
-  const [user, setUser] = useState<User | undefined>(undefined);
   const navigate = useNavigate();
-  useEffect(() => {
-    // let isMounted = true;
-    const controller = new AbortController();
-    const getUser = async () => {
-      try {
-        const response: ApiResponse<User> = await axiosPrivate.post("/cognito/getuser", {
-          signal: controller.signal,
-          withCredentials: true,
-        });
-        // setUser(response.data.Username);
-        setUser(response.data);
-        // isMounted && setUser(response.data.result);
-      } catch (err) {
-        console.error(err);
-        navigate("/login", { state: { from: location }, replace: true });
-      }
-    };
+  const stripe = useStripe();
+  const elements = useElements();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
-    getUser();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!stripe || !elements) return;
 
-    return () => {
-      // isMounted = false;
-      controller.abort();
-    };
-  }, []);
+    const cardElement = elements.getElement(CardElement);
 
-  if (!user) {
-    return (
-      <div>
-        <p> loading account data....................................................</p>
-      </div>
-    );
-  }
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement!,
+      billing_details: {
+        name,
+        email,
+      },
+    });
 
+    if (error) {
+      console.log("[error]", error);
+    } else {
+      console.log("[PaymentMethod]", paymentMethod);
+    }
+  };
+
+  // const clientSecret ="testsecret"
+  // const appearance = {
+  //   theme: 'stripe',
+  // };
+  // const options = {
+  //   clientSecret,
+  //   appearance,
+  // };
   return (
-    <main>
-      <h1>Account</h1>
+    <form onSubmit={handleSubmit}>
       <div>
-        <div>
-          <div>
-            <div>
-              <p>
-                <b>Account</b>
-              </p>
-            </div>
-            <div>
-              <p>
-                <b>Username</b>
-              </p>
-
-              <p>{user?.result.Username}</p>
-            </div>
-            <div>
-              <p>
-                <b>email</b>
-              </p>
-              <p>{user?.result.UserAttributes[3].Value}</p>
-            </div>
-            <div>
-              <p>
-                <b>Role Access</b>
-              </p>
-            </div>
-            <div>
-              <p>
-                <b>Data</b>
-              </p>
-              <div>{JSON.stringify(user)}</div>
-            </div>
-          </div>
-        </div>
+        <label>Name:</label>
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
       </div>
-    </main>
+      <div>
+        <label>Email:</label>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+      </div>
+      <div>
+        <label>Card details:</label>
+        <CardElement />
+      </div>
+      <button type="submit" disabled={!stripe}>
+        Pay
+      </button>
+    </form>
   );
+
+  // return (
+  //   <main className={styles.Billing}>
+  //     <h1>Billing</h1>
+
+  //     <Elements  stripe={stripe}>
+  //     <form onSubmit={handleSubmit}>
+
+  //       <button disabled={!stripe}>Submit</button>
+  //     </form>
+  //       </Elements>
+  //   </main>
+  // );
 };
 
+const Account: React.FC = () => (
+  <Elements stripe={stripePromise}>
+    <StripeCheckoutForm />
+  </Elements>
+);
 export default Account;
