@@ -5,7 +5,15 @@
     color: green;
   }
   height: 100%;
-  // margin-left: 115.406px;
-  margin-left: 8rem;
-  margin-top: 47.7px;
+  // // margin-left: 115.406px;
+  // margin-left: 8rem;
+  // margin-top: 87.7px;
+
+  .stripe_element {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
 }

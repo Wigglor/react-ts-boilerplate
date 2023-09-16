@@ -8,7 +8,7 @@ import PersistLogin from "./components/PersistLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
-import Billing from "./pages/Billing/Billing";
+import Billing from "./pages/Billing/Billing2";
 import Home from "./pages/Home/Home";
 import Posts from "./pages/Posts/Posts";
 import ReactFormTest2 from "./pages/ReactFormTest2/ReactFormTest2";

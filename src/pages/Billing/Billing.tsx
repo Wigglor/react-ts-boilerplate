@@ -51,6 +51,14 @@ const StripeCheckoutForm = (): ReactElement => {
       },
     });
 
+    // const {error} = await stripe.confirmPayment({
+    //   //`Elements` instance that was used to create the Payment Element
+    //   elements,
+    //   confirmParams: {
+    //     return_url: "https://example.com/order/123/complete",
+    //   }
+    // });
+
     if (error) {
       console.log("[error]", error);
     } else {
@@ -78,6 +86,9 @@ const StripeCheckoutForm = (): ReactElement => {
       </div>
       <div>
         <label>Card details:</label>
+        {/* Payment succeeds - regular card: 4242424242424242 */}
+        {/* Payment requires authentication - SCA card: 4000002500003155 */}
+        {/* Payment is declined: 4000 0000 0000 9995 */}
         <CardElement />
       </div>
       <button type="submit" disabled={!stripe}>
