@@ -10,6 +10,7 @@ import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
 import Billing from "./pages/Billing/Billing2";
 import Home from "./pages/Home/Home";
+import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
 import ReactFormTest2 from "./pages/ReactFormTest2/ReactFormTest2";
 import Register from "./pages/Register/Register";
@@ -59,6 +60,7 @@ const App = () => {
             <Route element={<PrivateRoute allowedRoles={[ROLES.user, ROLES.admin]} />}>
               <Route element={<Navigation />}>
                 <Route path="" element={<Home />} />
+                <Route path="paymentstatus" element={<PaymentStatus />} />
                 <Route path="account" element={<Account />} />
                 <Route path="posts" element={<Posts />} />
                 <Route path="billing" element={<Billing />} />

@@ -1,8 +1,10 @@
 import { ReactElement, useState } from "react";
-// import { axiosPrivate } from "../../api/axios";
 // import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+// import axiosPrivate from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+// import { redirect } from "react-router-dom";
 import styles from "./Billing.module.scss";
 
 // const stripePromise = loadStripe(process.env.STRIPE_SECRET_KEY as string);
@@ -31,6 +33,7 @@ const Billing = (): ReactElement => {
       // },
     },
   };
+  console.log(`app url: ${window.location.origin}`);
 
   return (
     <main className={styles.Billing}>
@@ -46,6 +49,7 @@ const Billing = (): ReactElement => {
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const axiosPrivate = useAxiosPrivate();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -53,8 +57,22 @@ const CheckoutForm = () => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
+    try {
+      const response = await axiosPrivate.post(
+        "/billing",
+        JSON.stringify({ price: "price_1NlvxsBs7XdR63976skckphI" }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        },
+      );
+      console.log(`billing response: ${JSON.stringify(response)}`);
+    } catch (err: any) {
+      const errorMessage = err?.response.data.message;
+      setErrorMessage(errorMessage);
+    }
 
-    if (!stripe || !elements) {
+    /*if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
@@ -64,7 +82,7 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "https://example.com/order/123/complete",
+        return_url: `${window.location.origin}/paymentstatus`,
       },
     });
 
@@ -72,13 +90,15 @@ const CheckoutForm = () => {
       // This point will only be reached if there is an immediate error when
       // confirming the payment. Show error to your customer (for example, payment
       // details incomplete)
+      console.log(JSON.stringify(error));
 
       setErrorMessage(error.message as string);
     } else {
+      return redirect("/paymentstatus");
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
-    }
+    }*/
   };
 
   return (
@@ -86,7 +106,7 @@ const CheckoutForm = () => {
       <PaymentElement />
       {/* Payment succeeds - regular card: 4242424242424242 */}
       {/* Payment requires authentication - SCA card: 4000002500003155 */}
-      {/* Payment is declined: 4000 0000 0000 9995 */}
+      {/* Payment is declined: 4000000000009995 */}
       <button disabled={!stripe}>Submit</button>
       {/* Show error message to your customers */}
       {errorMessage && <div>{errorMessage}</div>}
