@@ -3,7 +3,6 @@ import { ReactElement, useState } from "react";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
 // import axiosPrivate from "../../api/axios";
-import { redirect } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Billing.module.scss";
 
@@ -103,7 +102,7 @@ const CheckoutForm = () => {
       setErrorMessage(errorMessage);
     }
 
-    if (!stripe || !elements) {
+    /*if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
@@ -129,7 +128,7 @@ const CheckoutForm = () => {
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
-    }
+    }*/
   };
 
   return (
