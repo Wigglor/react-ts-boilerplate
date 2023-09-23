@@ -8,7 +8,7 @@ import PersistLogin from "./components/PersistLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
-import Billing from "./pages/Billing/Billing3";
+import Billing from "./pages/Billing/Billing";
 import Home from "./pages/Home/Home";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
