@@ -1,15 +1,10 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
-import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { StripeElements, StripeError, loadStripe } from "@stripe/stripe-js";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Billing.module.scss";
-
-interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  data: T;
-}
 
 interface UserAttribute {
   Name: string;
@@ -32,39 +27,69 @@ interface ApiResponse<T> {
   message: string;
   data: T;
 }
+// response --> data --> prices{} --> data[]
+
+interface Prices_ {
+  data: PricesAttribute[];
+}
 
 interface PricesAttribute {
   id: string;
   currency: string;
   product: string;
   unit_amount_decimal: string;
+  unit_amount: number;
 }
 
 interface Price {
-  prices: PricesAttribute[];
+  prices: Prices_;
 }
+
+interface Options {
+  mode: string;
+  appearance: {
+    // theme: string;
+    theme: "flat" | "stripe" | "night" | undefined;
+  };
+}
+
+type StripeOptions = {
+  mode: string;
+  appearance: {
+    theme: string;
+  };
+};
 
 const Billing = (): ReactElement => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
-  // const stripe = useStripe();
-  // const elements = useElements();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const stripe = useStripe();
+  const elements: StripeElements | null = useElements();
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [loading, setLoading] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState<PricesAttribute | null>(null);
 
-  const [prices, setPrices] = useState<PricesAttribute[]>([]);
+  const handlePlanClick = (price: PricesAttribute) => {
+    setSelectedPrice(price);
+  };
+
+  const closeModal = () => {
+    setSelectedPrice(null);
+  };
+
+  const [prices, setPrices] = useState<Price>();
 
   useEffect(() => {
     const controller = new AbortController();
     // Define an async function
     const getPosts = async () => {
       try {
-        const response: ApiResponse<PricesAttribute[]> = await axiosPrivate.get("/prices", {
+        const response: ApiResponse<Price> = await axiosPrivate.get("/prices", {
           signal: controller.signal,
           withCredentials: true,
         });
         console.log(response);
-        console.log(response.data);
+        console.log(response.data.prices);
         console.log(prices);
 
         setPrices(response.data);
@@ -80,39 +105,117 @@ const Billing = (): ReactElement => {
     };
   }, []);
 
-  // const handleSubmit = async (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   if (!stripe || !elements) return;
+  const handleError = (error: StripeError) => {
+    setLoading(false);
+    setErrorMessage(error.message);
+  };
 
-  //   const cardElement = elements.getElement(CardElement);
+  const handleSubmit = async (event: React.FormEvent) => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
+    event.preventDefault();
 
-  //   const { error, paymentMethod } = await stripe.createPaymentMethod({
-  //     type: "card",
-  //     card: cardElement!,
-  //     billing_details: {
-  //       name,
-  //       email,
-  //     },
-  //   });
+    if (!stripe) {
+      // Stripe.js hasn't yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
 
-  //   if (error) {
-  //     console.log("[error]", error);
-  //   } else {
-  //     console.log("[PaymentMethod]", paymentMethod);
-  //   }
-  // };
+    setLoading(true);
 
+    // Trigger form validation and wallet collection
+
+    // const { error: submitError } = await elements.submit();
+    // if (submitError) {
+    //   handleError(submitError);
+    //   return;
+    // }
+
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet. Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+    // call billing
+    const res = await fetch("/billing", {
+      method: "POST",
+    });
+    const { type, clientSecret } = await res.json();
+    const confirmIntent = type === "setup" ? stripe.confirmSetup : stripe.confirmPayment;
+
+    // Confirm the Intent using the details collected by the Payment Element
+    const { error } = await confirmIntent({
+      elements,
+      clientSecret,
+      confirmParams: {
+        return_url: "https://example.com/order/123/complete",
+      },
+    });
+
+    if (error) {
+      // This point is only reached if there's an immediate error when confirming the Intent.
+      // Show the error to your customer (for example, "payment details incomplete").
+      handleError(error);
+    } else {
+      // Your customer is redirected to your `return_url`. For some payment
+      // methods like iDEAL, your customer is redirected to an intermediate
+      // site first to authorize the payment, then redirected to the `return_url`.
+    }
+  };
   return (
-    <main className={styles.Billing}>
-      {/* {prices &&
-        prices.map((price) => (
-          <div key={price.id} className={styles["plan"]}>
-            <h2>{price.product}</h2>
-            <p>{price.unit_amount_decimal}</p>
+    <main className={styles["onboarding"]}>
+      <div className={styles["pricing-widget"]}>
+        {prices &&
+          prices.prices?.data.map((price) => (
+            <div key={price.id} className={styles["plan"]}>
+              <h2>Tier {price.unit_amount_decimal}</h2>
+              <p>
+                Price: {price.unit_amount_decimal} {price.currency}
+              </p>
 
-            <button> Start {price.product} Plan</button>
+              <button onClick={() => handlePlanClick(price)}> Start {price.product} Plan</button>
+            </div>
+          ))}
+
+        {selectedPrice && (
+          <div className={styles["modal-overlay"]} onClick={closeModal}>
+            <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+              <h2>{selectedPrice.product} Plan</h2>
+              <p>
+                You have selected the {selectedPrice.product} Plan. Proceed with your choice or
+                click outside this box to cancel.
+              </p>
+              {/* Insert form component here */}
+
+              {/* <Elements stripe={stripePromise} options={options}> */}
+              <Elements
+                stripe={stripePromise}
+                options={{
+                  mode: "subscription",
+                  amount: selectedPrice.unit_amount,
+                  currency: selectedPrice.currency,
+                  appearance: {
+                    theme: "flat" as const,
+                  },
+                }}
+              >
+                <form onSubmit={handleSubmit}>
+                  <PaymentElement />
+                  <button type="submit" disabled={!stripe || !elements}>
+                    Submit
+                  </button>
+                  {/* {!stripe || !elements ? (
+                    <p>Loading payment system...</p>
+                  ) : (
+                    <button type="submit">Submit Payment</button>
+                  )} */}
+                </form>
+              </Elements>
+              <button onClick={closeModal}>Close</button>
+            </div>
           </div>
-        ))} */}
+        )}
+      </div>
     </main>
     // <form onSubmit={handleSubmit}>
     //   <div>
