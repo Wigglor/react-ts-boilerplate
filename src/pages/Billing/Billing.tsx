@@ -53,6 +53,11 @@ interface Options {
   };
 }
 
+interface Billing {
+  type: string;
+  clientSecret: string;
+}
+
 type StripeOptions = {
   mode: string;
   appearance: {
@@ -110,7 +115,7 @@ const Billing = (): ReactElement => {
     setErrorMessage(error.message);
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent, priceId: string) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
@@ -136,11 +141,18 @@ const Billing = (): ReactElement => {
       return;
     }
 
-    // call billing
-    const res = await fetch("/billing", {
-      method: "POST",
-    });
-    const { type, clientSecret } = await res.json();
+    const billingResponse: ApiResponse<Billing> = await axiosPrivate.post(
+      "/billingtest",
+      JSON.stringify({
+        price: priceId,
+        // accountEmail: data.email,
+      }),
+      {
+        withCredentials: true,
+      },
+    );
+
+    const { type, clientSecret } = await billingResponse.data;
     const confirmIntent = type === "setup" ? stripe.confirmSetup : stripe.confirmPayment;
 
     // Confirm the Intent using the details collected by the Payment Element
@@ -148,7 +160,7 @@ const Billing = (): ReactElement => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "https://example.com/order/123/complete",
+        return_url: `${window.location.origin}/paymentstatus`,
       },
     });
 
@@ -199,7 +211,7 @@ const Billing = (): ReactElement => {
                   },
                 }}
               >
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}>
                   <PaymentElement />
                   <button type="submit" disabled={!stripe || !elements}>
                     Submit
