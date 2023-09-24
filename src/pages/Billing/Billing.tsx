@@ -65,7 +65,7 @@ type StripeOptions = {
   };
 };
 
-const Billing = (): ReactElement => {
+const CheckoutForm = (): ReactElement => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const stripe = useStripe();
@@ -93,9 +93,6 @@ const Billing = (): ReactElement => {
           signal: controller.signal,
           withCredentials: true,
         });
-        console.log(response);
-        console.log(response.data.prices);
-        console.log(prices);
 
         setPrices(response.data);
       } catch (err) {
@@ -192,7 +189,7 @@ const Billing = (): ReactElement => {
         {selectedPrice && (
           <div className={styles["modal-overlay"]} onClick={closeModal}>
             <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
-              <h2>{selectedPrice.product} Plan</h2>
+              <h2>Tier {selectedPrice.unit_amount_decimal}</h2>
               <p>
                 You have selected the {selectedPrice.product} Plan. Proceed with your choice or
                 click outside this box to cancel.
@@ -249,6 +246,32 @@ const Billing = (): ReactElement => {
     //     Pay
     //   </button>
     // </form>
+  );
+};
+
+const Billing = (): ReactElement => {
+  const [options, setOptions] = useState<Options | undefined>(undefined);
+
+  return (
+    <main className={styles.Billing}>
+      <div className={styles.stripe_element}>
+        <Elements
+          stripe={stripePromise}
+          options={{}}
+          // options={{
+          //   mode: "subscription",
+          //   amount: 700,
+          //   currency: "eur",
+          //   appearance: {
+          //     theme: "flat" as const,
+          //   },
+          // }}
+        >
+          {/* <CheckoutForm setOptions={setOptions} /> */}
+          <CheckoutForm />
+        </Elements>
+      </div>
+    </main>
   );
 };
 
