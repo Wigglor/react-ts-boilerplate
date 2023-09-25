@@ -138,6 +138,13 @@ const CheckoutForm = (): ReactElement => {
       return;
     }
 
+    const result = await elements.submit();
+
+    if (result.error) {
+      console.error(result.error);
+      return;
+    }
+
     const billingResponse: ApiResponse<Billing> = await axiosPrivate.post(
       "/billingtest",
       JSON.stringify({
@@ -148,6 +155,7 @@ const CheckoutForm = (): ReactElement => {
         withCredentials: true,
       },
     );
+    console.log(JSON.stringify(billingResponse));
 
     const { type, clientSecret } = await billingResponse.data;
     const confirmIntent = type === "setup" ? stripe.confirmSetup : stripe.confirmPayment;
@@ -197,7 +205,7 @@ const CheckoutForm = (): ReactElement => {
               {/* Insert form component here */}
 
               {/* <Elements stripe={stripePromise} options={options}> */}
-              <Elements
+              {/* <Elements
                 stripe={stripePromise}
                 options={{
                   mode: "subscription",
@@ -206,20 +214,22 @@ const CheckoutForm = (): ReactElement => {
                   appearance: {
                     theme: "flat" as const,
                   },
+                  
                 }}
-              >
-                <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}>
-                  <PaymentElement />
-                  <button type="submit" disabled={!stripe || !elements}>
-                    Submit
-                  </button>
-                  {/* {!stripe || !elements ? (
+              
+              > */}
+              <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}>
+                <PaymentElement />
+                <button type="submit" disabled={!stripe || !elements}>
+                  Submit
+                </button>
+                {/* {!stripe || !elements ? (
                     <p>Loading payment system...</p>
                   ) : (
                     <button type="submit">Submit Payment</button>
                   )} */}
-                </form>
-              </Elements>
+              </form>
+              {/* </Elements> */}
               <button onClick={closeModal}>Close</button>
             </div>
           </div>
@@ -257,15 +267,15 @@ const Billing = (): ReactElement => {
       <div className={styles.stripe_element}>
         <Elements
           stripe={stripePromise}
-          options={{}}
-          // options={{
-          //   mode: "subscription",
-          //   amount: 700,
-          //   currency: "eur",
-          //   appearance: {
-          //     theme: "flat" as const,
-          //   },
-          // }}
+          // options={{}}
+          options={{
+            mode: "subscription",
+            amount: 700,
+            currency: "eur",
+            appearance: {
+              theme: "flat" as const,
+            },
+          }}
         >
           {/* <CheckoutForm setOptions={setOptions} /> */}
           <CheckoutForm />
