@@ -47,6 +47,8 @@ interface Price {
 
 interface Options {
   mode: string;
+  amount: number;
+  currency: string;
   appearance: {
     // theme: string;
     theme: "flat" | "stripe" | "night" | undefined;
@@ -58,6 +60,15 @@ interface Billing {
   clientSecret: string;
 }
 
+interface TEST {
+  mode: string;
+  amount: number;
+  currency: string;
+  appearance: {
+    theme: string;
+  };
+}
+
 type StripeOptions = {
   mode: string;
   appearance: {
@@ -65,7 +76,19 @@ type StripeOptions = {
   };
 };
 
-const CheckoutForm = (): ReactElement => {
+type OptionsParams = {
+  onOptionsChange: (options: Options) => void;
+};
+
+type Test = {
+  // setTest: (setTest: string) => void;
+  setTest: (setTest: TEST) => void;
+};
+
+const CheckoutForm = ({
+  setTest,
+}: Test): // { onOptionsChange }: OptionsParams
+ReactElement => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const stripe = useStripe();
@@ -76,6 +99,24 @@ const CheckoutForm = (): ReactElement => {
 
   const handlePlanClick = (price: PricesAttribute) => {
     setSelectedPrice(price);
+    // setTest("setting test");
+    setTest({
+      mode: "subscription",
+      amount: price.unit_amount,
+      currency: price.currency,
+      appearance: {
+        theme: "flat" as const,
+      },
+    });
+
+    // onOptionsChange({
+    //   mode: "subscription",
+    //   amount: selectedPrice!.unit_amount,
+    //   currency: selectedPrice!.currency,
+    //   appearance: {
+    //     theme: "flat" as const,
+    //   },
+    // });
   };
 
   const closeModal = () => {
@@ -124,14 +165,6 @@ const CheckoutForm = (): ReactElement => {
     }
 
     setLoading(true);
-
-    // Trigger form validation and wallet collection
-
-    // const { error: submitError } = await elements.submit();
-    // if (submitError) {
-    //   handleError(submitError);
-    //   return;
-    // }
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable form submission until Stripe.js has loaded.
@@ -214,9 +247,7 @@ const CheckoutForm = (): ReactElement => {
                   appearance: {
                     theme: "flat" as const,
                   },
-                  
                 }}
-              
               > */}
               <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}>
                 <PaymentElement />
@@ -261,6 +292,14 @@ const CheckoutForm = (): ReactElement => {
 
 const Billing = (): ReactElement => {
   const [options, setOptions] = useState<Options | undefined>(undefined);
+  // const [test, setTest] = useState<string | null>(null);
+  const [test, setTest] = useState<TEST | null>(null);
+
+  const handleOptionsChange = (newOptions: Options) => {
+    setOptions(newOptions);
+  };
+  console.log("Wrapper call");
+  console.log(JSON.stringify(test));
 
   return (
     <main className={styles.Billing}>
@@ -277,8 +316,8 @@ const Billing = (): ReactElement => {
             },
           }}
         >
-          {/* <CheckoutForm setOptions={setOptions} /> */}
-          <CheckoutForm />
+          <CheckoutForm setTest={setTest} />
+          {/* <CheckoutForm onOptionsChange={handleOptionsChange} /> */}
         </Elements>
       </div>
     </main>
