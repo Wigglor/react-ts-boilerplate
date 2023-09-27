@@ -99,7 +99,6 @@ ReactElement => {
 
   const handlePlanClick = (price: PricesAttribute) => {
     setSelectedPrice(price);
-    // setTest("setting test");
     setTest({
       mode: "subscription",
       amount: price.unit_amount,
@@ -108,15 +107,6 @@ ReactElement => {
         theme: "flat" as const,
       },
     });
-
-    // onOptionsChange({
-    //   mode: "subscription",
-    //   amount: selectedPrice!.unit_amount,
-    //   currency: selectedPrice!.currency,
-    //   appearance: {
-    //     theme: "flat" as const,
-    //   },
-    // });
   };
 
   const closeModal = () => {
@@ -267,26 +257,10 @@ ReactElement => {
         )}
       </div>
     </main>
-    // <form onSubmit={handleSubmit}>
-    //   <div>
-    //     <label>Name:</label>
-    //     <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-    //   </div>
-    //   <div>
-    //     <label>Email:</label>
-    //     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-    //   </div>
-    //   <div>
-    //     <label>Card details:</label>
+
     //     {/* Payment succeeds - regular card: 4242424242424242 */}
     //     {/* Payment requires authentication - SCA card: 4000002500003155 */}
     //     {/* Payment is declined: 4000 0000 0000 9995 */}
-    //     <CardElement />
-    //   </div>
-    //   <button type="submit" disabled={!stripe}>
-    //     Pay
-    //   </button>
-    // </form>
   );
 };
 
@@ -306,13 +280,12 @@ const Billing = (): ReactElement => {
       <div className={styles.stripe_element}>
         <Elements
           stripe={stripePromise}
-          // options={{}}
           options={{
             mode: "subscription",
-            amount: 700,
+            amount: 0,
             currency: "eur",
             appearance: {
-              theme: "flat" as const,
+              theme: "flat",
             },
           }}
         >
