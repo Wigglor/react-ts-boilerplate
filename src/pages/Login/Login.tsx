@@ -93,6 +93,7 @@ const Login = (): ReactElement => {
         role: response?.data.user.roleAccess,
         setup: response?.data.user.setup,
         currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
+        plan: response?.data.user.memberships[0].company.account.plan.name,
       });
       // setPersist(true);
       // const persistState = localStorage.setItem("persist", JSON.stringify(true));

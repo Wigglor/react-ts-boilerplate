@@ -58,44 +58,34 @@ const ReactFormTest2 = (): ReactElement => {
           withCredentials: true,
         },
       );
-
+      console.log(JSON.stringify(response));
       const accessToken = response?.data.accessToken;
-      // let accountComplete = true;
-      // if (response?.data.hasAccount === false) {
-      //   accountComplete = false;
-      //   console.log(`has account: ${response?.data.hasAccount}`);
-      // }
+      console.log(JSON.stringify(accessToken));
+      console.log(
+        // `currentPeriodEnds: ${response?.data.user.memberships[0].company.account.currentPeriodEnds}`,
+        `currentPeriodEnds: ${JSON.stringify(response?.data.user.memberships[0])}`,
+      );
+      // console.log(`setAuth 1: ${data.username}`);
+      // console.log(`setAuth 2: ${accessToken}`);
+      // console.log(`setAuth 3: ${response?.data.role}`);
+      // console.log(`setAuth 4: ${response?.data.setup}`);
       setAuth({
         user: data.username,
         accessToken: accessToken,
-        // accountComplete: accountComplete,
-        // role: response?.data.user.roleAccess,
         role: response?.data.role,
         setup: response?.data.setup,
         currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
+        plan: response?.data.user.memberships[0].company.account.plan.name,
       });
-      console.log(`setAuth 1: ${data.username}`);
-      console.log(`setAuth 2: ${accessToken}`);
-      console.log(`setAuth 3: ${response?.data.role}`);
-      console.log(`setAuth 4: ${response?.data.setup}`);
-      // const isLoggedIn = true;
-      // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-      // localStorage.setItem("isLoggedIn", "true");
-      // localStorage.setItem("persist", "true");
-      // setPersist({"persist":true});
+
       console.log(`role: ${response?.data.role}`);
       console.log(`setup: ${response?.data.setup}`);
-      // if (response?.data.role === "PENDING") {
       if (response?.data.setup === "PENDING") {
         navigate("/onboarding", { replace: true });
       } else {
         navigate(from, { replace: true });
       }
     } catch (err: any) {
-      // console.log(err);
-      // console.log(err.response);
-      // console.log(err.response.data.message);
-
       const errorMessage = err.response.data.message;
       setErrMsg(errorMessage);
     }

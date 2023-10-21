@@ -13,6 +13,7 @@ const useLogout = () => {
       role: "",
       setup: "",
       currentPeriodEnds: null,
+      plan: "",
     });
     // localStorage.removeItem("isLoggedIn");
     // setPersist({ persist: false });

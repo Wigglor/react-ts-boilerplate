@@ -173,6 +173,7 @@ function CompleteSignup() {
         setup: setupResponse.data.result.setup,
         currentPeriodEnds:
           setupResponse?.data.user.memberships[0].company.account.currentPeriodEnds,
+        plan: setupResponse?.data.user.memberships[0].company.account.plan.name,
       });
       navigate("/", { replace: true });
       console.log(JSON.stringify(setupResponse.data));

@@ -9,6 +9,7 @@ interface Auth {
   role: string;
   setup: string;
   currentPeriodEnds: Date | null;
+  plan: string;
 }
 
 interface Persist {
@@ -28,6 +29,7 @@ const INITIAL_STATE: Auth = {
   role: "",
   setup: "",
   currentPeriodEnds: null,
+  plan: "",
 };
 
 export const AuthContext = createContext<AuthContextType>({

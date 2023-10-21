@@ -56,6 +56,7 @@ const LoginForm = (): ReactElement => {
         role: response?.data.user.roleAccess,
         setup: response?.data.user.setup,
         currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
+        plan: response?.data.user.memberships[0].company.account.plan.name,
       });
       // const isLoggedIn = true;
       // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
