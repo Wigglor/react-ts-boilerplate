@@ -12,6 +12,7 @@ import Billing from "./pages/Billing/Billing";
 import Home from "./pages/Home/Home";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
+import Premium from "./pages/Premium/Premium";
 import ReactFormTest2 from "./pages/ReactFormTest2/ReactFormTest2";
 import Register2 from "./pages/Register/Register2";
 import RegistrationConfirmation from "./pages/RegistrationConfirmation/RegistrationConfirmation";
@@ -63,6 +64,7 @@ const App = () => {
                 <Route path="account" element={<Account />} />
                 <Route path="posts" element={<Posts />} />
                 <Route path="billing" element={<Billing />} />
+                <Route path="premium" element={<Premium />} />
                 {/* <Route element={<OnboardingRoute />}>
                   <Route path="onboardingg" element={<Onboarding />} />
                 </Route> */}

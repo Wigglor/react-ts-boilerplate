@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { AiOutlineExport } from "react-icons/ai";
 import { BsFileEarmarkSpreadsheet, BsFillFileEarmarkPostFill } from "react-icons/bs";
-import { MdManageAccounts, MdPayment } from "react-icons/md";
+import { MdAttachMoney, MdManageAccounts, MdPayment } from "react-icons/md";
 import { SlGraph } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import styles from "./SideNav.module.scss";
@@ -41,6 +41,14 @@ const SideNav = (): ReactElement => {
                 <Link to="/posts">
                   <BsFillFileEarmarkPostFill />
                   <span>Posts</span>
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div>
+                <Link to="/premium">
+                  <MdAttachMoney />
+                  <span>Premium</span>
                 </Link>
               </div>
             </li>
