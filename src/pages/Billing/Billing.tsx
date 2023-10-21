@@ -195,6 +195,8 @@ ReactElement => {
     if (error) {
       // This point is only reached if there's an immediate error when confirming the Intent.
       // Show the error to your customer (for example, "payment details incomplete").
+      console.log("payment error...");
+      console.log(JSON.stringify(error));
       handleError(error);
     } else {
       // Your customer is redirected to your `return_url`. For some payment
@@ -260,7 +262,7 @@ ReactElement => {
 
     //     {/* Payment succeeds - regular card: 4242424242424242 */}
     //     {/* Payment requires authentication - SCA card: 4000002500003155 */}
-    //     {/* Payment is declined: 4000 0000 0000 9995 */}
+    //     {/* Payment is declined: 4000000000009995 */}
   );
 };
 

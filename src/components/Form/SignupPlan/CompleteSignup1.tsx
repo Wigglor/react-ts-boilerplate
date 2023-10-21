@@ -171,6 +171,8 @@ function CompleteSignup() {
         accessToken: setupResponse.data.result.accessToken,
         role: setupResponse.data.result.role,
         setup: setupResponse.data.result.setup,
+        currentPeriodEnds:
+          setupResponse?.data.user.memberships[0].company.account.currentPeriodEnds,
       });
       navigate("/", { replace: true });
       console.log(JSON.stringify(setupResponse.data));

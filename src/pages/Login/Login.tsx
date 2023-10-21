@@ -92,6 +92,7 @@ const Login = (): ReactElement => {
         // accountComplete: false,
         role: response?.data.user.roleAccess,
         setup: response?.data.user.setup,
+        currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
       });
       // setPersist(true);
       // const persistState = localStorage.setItem("persist", JSON.stringify(true));

@@ -8,6 +8,7 @@ interface Auth {
   accessToken: string;
   role: string;
   setup: string;
+  currentPeriodEnds: Date | null;
 }
 
 interface Persist {
@@ -26,6 +27,7 @@ const INITIAL_STATE: Auth = {
   accessToken: "",
   role: "",
   setup: "",
+  currentPeriodEnds: null,
 };
 
 export const AuthContext = createContext<AuthContextType>({

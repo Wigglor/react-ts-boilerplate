@@ -13,7 +13,6 @@ import Home from "./pages/Home/Home";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
 import ReactFormTest2 from "./pages/ReactFormTest2/ReactFormTest2";
-import Register from "./pages/Register/Register";
 import Register2 from "./pages/Register/Register2";
 import RegistrationConfirmation from "./pages/RegistrationConfirmation/RegistrationConfirmation";
 import Onboarding from "./pages/Signup/Onboarding";
@@ -54,7 +53,7 @@ const App = () => {
               <Route path="login" element={<ReactFormTest2 />} />
               <Route path="register" element={<Register2 />} />
               <Route path="register-confirmation" element={<RegistrationConfirmation />} />
-              <Route path="forgotpassword" element={<Register />} />
+              {/* <Route path="forgotpassword" element={<Register />} /> */}
             </Route>
             {/* <Route> */}
             <Route element={<PrivateRoute allowedRoles={[ROLES.user, ROLES.admin]} />}>

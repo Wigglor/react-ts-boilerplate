@@ -72,6 +72,7 @@ const ReactFormTest2 = (): ReactElement => {
         // role: response?.data.user.roleAccess,
         role: response?.data.role,
         setup: response?.data.setup,
+        currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
       });
       console.log(`setAuth 1: ${data.username}`);
       console.log(`setAuth 2: ${accessToken}`);
