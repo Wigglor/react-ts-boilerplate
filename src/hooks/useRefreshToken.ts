@@ -10,7 +10,6 @@ const useRefreshToken = () => {
       const response = await axios.post("/refreshtoken", null, {
         withCredentials: true,
       });
-      console.log(`refreshtoken response: ${JSON.stringify(response.data)}`);
 
       // setAuth({
       //   user: response.data.user,
@@ -20,13 +19,8 @@ const useRefreshToken = () => {
       // });
 
       // I only think prev is available when accesstoken expires
-      console.log(`auth before prev: ${JSON.stringify(auth)}`);
+      console.log("Hitting refresh function");
       setAuth((prev) => {
-        console.log(
-          `prevoius state: ${JSON.stringify(prev)} and new accesstoken: ${
-            response.data.accessToken
-          }`,
-        );
         return {
           ...prev,
           user: response.data.user,

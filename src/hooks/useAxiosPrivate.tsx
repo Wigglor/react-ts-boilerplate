@@ -30,6 +30,7 @@ const useAxiosPrivate = () => {
         const prevRequest = error?.config;
         // if (error?.response?.status === 401 && !prevRequest?.sent) {
         if (!error?.response?.status.toString().startsWith("2") && !prevRequest?.sent) {
+          console.log(JSON.stringify(error));
           console.log("starting with something other than 2");
           prevRequest.sent = true;
           const newAccessToken = await refresh();

@@ -19,6 +19,7 @@ const ReactFormTest2 = (): ReactElement => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  console.log("hitting login route after signing out.....");
 
   // useEffect(() => {
   //   // const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -58,17 +59,8 @@ const ReactFormTest2 = (): ReactElement => {
           withCredentials: true,
         },
       );
-      console.log(JSON.stringify(response));
+
       const accessToken = response?.data.accessToken;
-      console.log(JSON.stringify(accessToken));
-      console.log(
-        // `currentPeriodEnds: ${response?.data.user.memberships[0].company.account.currentPeriodEnds}`,
-        `currentPeriodEnds: ${JSON.stringify(response?.data.user.memberships[0])}`,
-      );
-      // console.log(`setAuth 1: ${data.username}`);
-      // console.log(`setAuth 2: ${accessToken}`);
-      // console.log(`setAuth 3: ${response?.data.role}`);
-      // console.log(`setAuth 4: ${response?.data.setup}`);
       setAuth({
         user: data.username,
         accessToken: accessToken,
@@ -78,8 +70,6 @@ const ReactFormTest2 = (): ReactElement => {
         plan: response?.data.user.memberships[0].company.account.plan.name,
       });
 
-      console.log(`role: ${response?.data.role}`);
-      console.log(`setup: ${response?.data.setup}`);
       if (response?.data.setup === "PENDING") {
         navigate("/onboarding", { replace: true });
       } else {

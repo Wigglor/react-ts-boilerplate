@@ -7,6 +7,7 @@ interface ApiResponse {
 }
 
 const Home = (): ReactElement => {
+  console.log("Hitting home endpoint");
   /*const [data, setData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {

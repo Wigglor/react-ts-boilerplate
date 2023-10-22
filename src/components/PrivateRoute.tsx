@@ -10,13 +10,11 @@ const PrivateRoute = ({ allowedRoles }: RequireAuthProps) => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  console.log(JSON.stringify(auth));
-  console.log("restricted route...");
-  console.log(auth.role);
 
   //   return auth?.accountComplete ? (
   // return auth?.role ? <Outlet /> : <Navigate to="/onboarding" state={{ from }} replace />;
   // return auth?.user ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
+  console.log("Private route");
   return allowedRoles?.includes(auth?.role as string) && auth?.user ? (
     <Outlet />
   ) : auth?.setup === "PENDING" ? (

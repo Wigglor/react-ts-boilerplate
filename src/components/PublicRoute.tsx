@@ -8,8 +8,8 @@ type RequireAuthProps = {
 const PublicRoute = () => {
   const { auth } = useAuth();
   const location = useLocation();
-  console.log(`PublicRoute auth: ${JSON.stringify(auth)}`);
-  // console.log(`Allowed Roles: ${JSON.stringify(allowedRoles)}`);
+
+  console.log(`Navigating public route: ${auth.user}`);
   // return <Outlet />;
   return !auth?.user ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
 };

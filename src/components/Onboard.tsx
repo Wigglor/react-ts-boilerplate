@@ -8,9 +8,6 @@ const Onboard = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  console.log(JSON.stringify(auth));
-  console.log("restricted route...");
-  console.log(auth.role);
 
   return <Outlet />;
   //   return !auth?.accountComplete ? <Outlet /> : <Navigate to="/login" state={{ from }} replace />;

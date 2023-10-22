@@ -1,8 +1,7 @@
-import { ReactElement, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import { axiosPrivate } from "../../api/axios";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeElements, StripeError, loadStripe } from "@stripe/stripe-js";
+import { ReactElement, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Billing.module.scss";
 
@@ -50,7 +49,6 @@ interface Options {
   amount: number;
   currency: string;
   appearance: {
-    // theme: string;
     theme: "flat" | "stripe" | "night" | undefined;
   };
 }
@@ -81,7 +79,6 @@ type OptionsParams = {
 };
 
 type Test = {
-  // setTest: (setTest: string) => void;
   setTest: (setTest: TEST) => void;
 };
 
@@ -117,7 +114,7 @@ ReactElement => {
 
   useEffect(() => {
     const controller = new AbortController();
-    // Define an async function
+
     const getPosts = async () => {
       try {
         const response: ApiResponse<Price> = await axiosPrivate.get("/prices", {
@@ -127,7 +124,6 @@ ReactElement => {
 
         setPrices(response.data);
       } catch (err) {
-        console.error(err);
         throw Error();
       }
     };
@@ -172,7 +168,6 @@ ReactElement => {
       "/billingtest",
       JSON.stringify({
         price: priceId,
-        // accountEmail: data.email,
       }),
       {
         withCredentials: true,
@@ -246,13 +241,7 @@ ReactElement => {
                 <button type="submit" disabled={!stripe || !elements}>
                   Submit
                 </button>
-                {/* {!stripe || !elements ? (
-                    <p>Loading payment system...</p>
-                  ) : (
-                    <button type="submit">Submit Payment</button>
-                  )} */}
               </form>
-              {/* </Elements> */}
               <button onClick={closeModal}>Close</button>
             </div>
           </div>
@@ -268,14 +257,11 @@ ReactElement => {
 
 const Billing = (): ReactElement => {
   const [options, setOptions] = useState<Options | undefined>(undefined);
-  // const [test, setTest] = useState<string | null>(null);
   const [test, setTest] = useState<TEST | null>(null);
 
   const handleOptionsChange = (newOptions: Options) => {
     setOptions(newOptions);
   };
-  console.log("Wrapper call");
-  console.log(JSON.stringify(test));
 
   return (
     <main className={styles.Billing}>

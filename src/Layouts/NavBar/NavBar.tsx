@@ -1,12 +1,14 @@
 import { ReactElement } from "react";
 import { MdManageAccounts } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogOut";
 import styles from "./NavBar.module.scss";
 
 const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
+  const { setAuth } = useAuth();
 
   const signOut = async () => {
     // localStorage.removeItem("isLoggedIn");
