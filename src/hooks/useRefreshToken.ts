@@ -20,6 +20,7 @@ const useRefreshToken = () => {
       // });
 
       // I only think prev is available when accesstoken expires
+      console.log(`auth before prev: ${JSON.stringify(auth)}`);
       setAuth((prev) => {
         console.log(
           `prevoius state: ${JSON.stringify(prev)} and new accesstoken: ${
@@ -32,6 +33,8 @@ const useRefreshToken = () => {
           accessToken: response.data.accessToken,
           role: response.data.role,
           setup: response.data.setup,
+          currentPeriodEnds: response.data.currentPeriodEnds,
+          plan: response.data.plan,
         };
         // return {
         //   ...prev,

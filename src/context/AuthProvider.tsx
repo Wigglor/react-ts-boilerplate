@@ -47,10 +47,6 @@ interface IAuthProviderProps {
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [auth, setAuth] = useState<Auth>(INITIAL_STATE);
-  // const [persist, setPersist] = useState(
-  //   JSON.parse(localStorage.getItem("persist") as string) || false,
-  // );
-  console.log(`AUTHING - AuthProvider: ..........${JSON.stringify(auth)}`);
   return (
     <AuthContext.Provider value={{ auth, setAuth /*persist, setPersist*/ }}>
       {children}
