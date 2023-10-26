@@ -6,7 +6,7 @@ import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import styles from "./Register.module.scss";
 
-const LOGIN_URL = "/signup";
+const SIGNUP_URL = "/signup";
 
 type FormData = {
   username: string;
@@ -33,7 +33,7 @@ const Register2 = (): ReactElement => {
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     try {
       const response = await axios.post(
-        LOGIN_URL,
+        SIGNUP_URL,
         JSON.stringify({
           username: data.username,
           password: data.password,
