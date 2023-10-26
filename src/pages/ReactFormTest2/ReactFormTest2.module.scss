@@ -49,6 +49,15 @@
         color: #333;
       }
     }
+    .forgotpassword-link {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &__text {
+        color: #3f73c1;
+      }
+    }
   }
 
   //   &-error {
