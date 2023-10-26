@@ -16,6 +16,7 @@ import Premium from "./pages/Premium/Premium";
 import ReactFormTest2 from "./pages/ReactFormTest2/ReactFormTest2";
 import Register2 from "./pages/Register/Register2";
 import RegistrationConfirmation from "./pages/RegistrationConfirmation/RegistrationConfirmation";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 
@@ -53,6 +54,7 @@ const App = () => {
             <Route element={<PublicRoute />}>
               <Route path="login" element={<ReactFormTest2 />} />
               <Route path="register" element={<Register2 />} />
+              <Route path="reset" element={<ResetPassword />} />
               <Route path="register-confirmation" element={<RegistrationConfirmation />} />
               {/* <Route path="forgotpassword" element={<Register />} /> */}
             </Route>
