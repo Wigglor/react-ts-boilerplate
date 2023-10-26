@@ -139,6 +139,11 @@ const ReactFormTest2 = (): ReactElement => {
             Register
           </Link>
         </div>
+        <div className={styles["forgotpassword-link"]}>
+          <Link className={styles["forgotpassword-link__text"]} to="/register">
+            Forgot your password?
+          </Link>
+        </div>
       </form>
     </main>
   );
