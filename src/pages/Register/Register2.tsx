@@ -64,7 +64,7 @@ const Register2 = (): ReactElement => {
         <h2>Register</h2>
         {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
         <div>
-          <label htmlFor="username">username</label>
+          {/* <label htmlFor="username">username</label>
 
           <input
             id="username"
@@ -80,6 +80,24 @@ const Register2 = (): ReactElement => {
           {errors.username && (
             <span className={styles["error-validation"]} role="alert">
               *{errors.username.message}
+            </span>
+          )} */}
+
+          <label htmlFor="email">email</label>
+          <input
+            id="email"
+            {...register("email", {
+              required: "required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Entered value does not match email format",
+              },
+            })}
+            type="email"
+          />
+          {errors.email && (
+            <span className={styles["error-validation"]} role="alert">
+              {errors.email.message}
             </span>
           )}
           <label htmlFor="password">password</label>
@@ -99,24 +117,6 @@ const Register2 = (): ReactElement => {
               {errors.password.message}
             </span>
           )}
-          <label htmlFor="email">email</label>
-          <input
-            id="email"
-            {...register("email", {
-              required: "required",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Entered value does not match email format",
-              },
-            })}
-            type="email"
-          />
-          {errors.email && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.email.message}
-            </span>
-          )}
-
           <label htmlFor="firstName">First Name</label>
           <input
             id="firstName"
