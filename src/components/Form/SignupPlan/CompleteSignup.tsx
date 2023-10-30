@@ -46,7 +46,7 @@ function CompleteSignup() {
         role: setupResponse.data.result.role,
         setup: setupResponse.data.result.setup,
         currentPeriodEnds:
-          setupResponse?.data.user.memberships[0].company.account.currentPeriodEnds,
+          setupResponse?.data.user.memberships[0]?.company.account.currentPeriodEnds,
         plan: "",
       });
       navigate("/", { replace: true });

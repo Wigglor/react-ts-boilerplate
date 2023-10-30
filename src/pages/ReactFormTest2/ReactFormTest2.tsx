@@ -8,7 +8,8 @@ import styles from "./ReactFormTest2.module.scss";
 const LOGIN_URL = "/signin";
 
 type LoginFormValues = {
-  username: string;
+  // username: string;
+  email: string;
   password: string;
 };
 
@@ -53,7 +54,8 @@ const ReactFormTest2 = (): ReactElement => {
     try {
       const response = await axios.post(
         LOGIN_URL,
-        JSON.stringify({ username: data.username, password: data.password }),
+        // JSON.stringify({ username: data.username, password: data.password }),
+        JSON.stringify({ email: data.email, password: data.password }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -61,15 +63,25 @@ const ReactFormTest2 = (): ReactElement => {
       );
 
       const accessToken = response?.data.accessToken;
+      // console.log(
+      //   JSON.stringify(response?.data.user.memberships[0]?.company?.account.currentPeriodEnds),
+      // );
+      // console.log(JSON.stringify(response.data));
+      console.log(JSON.stringify(response));
+      console.log(JSON.stringify(response.data));
       setAuth({
-        user: data.username,
+        user: data.email,
         accessToken: accessToken,
         role: response?.data.role,
         setup: response?.data.setup,
-        currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
-        plan: response?.data.user.memberships[0].company.account.plan.name,
+        // currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
+        currentPeriodEnds: response?.data.user.memberships[0]?.company?.account.currentPeriodEnds,
+        // plan: response?.data.user.memberships[0].company.account.plan.name,
+        plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
-
+      // console.log(
+      //   JSON.stringify(response?.data.user.memberships[0].company?.account.currentPeriodEnds),
+      // );
       if (response?.data.setup === "PENDING") {
         navigate("/onboarding", { replace: true });
       } else {
@@ -92,9 +104,25 @@ const ReactFormTest2 = (): ReactElement => {
         <h2>Login</h2>
         {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
         <div>
-          <label htmlFor="username">username</label>
+          <label htmlFor="email">email</label>
 
           <input
+            id="email"
+            {...register("email", {
+              required: "required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Entered value does not match email format",
+              },
+            })}
+            type="email"
+          />
+          {errors.email && (
+            <span className={styles["error-validation"]} role="alert">
+              *{errors.email.message}
+            </span>
+          )}
+          {/* <input
             id="username"
             {...register("username", {
               required: "required",
@@ -109,7 +137,7 @@ const ReactFormTest2 = (): ReactElement => {
             <span className={styles["error-validation"]} role="alert">
               *{errors.username.message}
             </span>
-          )}
+          )} */}
           <label htmlFor="password">password</label>
           <input
             id="password"
