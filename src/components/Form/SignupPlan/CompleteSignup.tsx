@@ -45,8 +45,9 @@ function CompleteSignup() {
         accessToken: setupResponse.data.result.accessToken,
         role: setupResponse.data.result.role,
         setup: setupResponse.data.result.setup,
-        currentPeriodEnds:
-          setupResponse?.data.user.memberships[0]?.company.account.currentPeriodEnds,
+        // currentPeriodEnds:
+        //   setupResponse?.data.user.memberships[0]?.company.account.currentPeriodEnds,
+        currentPeriodEnds: new Date(),
         plan: "",
       });
       navigate("/", { replace: true });

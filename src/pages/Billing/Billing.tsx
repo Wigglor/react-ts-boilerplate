@@ -2,6 +2,7 @@ import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-
 import { StripeElements, StripeError, loadStripe } from "@stripe/stripe-js";
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Billing.module.scss";
 
@@ -86,6 +87,7 @@ const CheckoutForm = ({
   setTest,
 }: Test): // { onOptionsChange }: OptionsParams
 ReactElement => {
+  const { setAuth, auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const stripe = useStripe();
@@ -115,7 +117,7 @@ ReactElement => {
   useEffect(() => {
     const controller = new AbortController();
 
-    const getPosts = async () => {
+    const getPrices = async () => {
       try {
         const response: ApiResponse<Price> = await axiosPrivate.get("/prices", {
           signal: controller.signal,
@@ -127,8 +129,10 @@ ReactElement => {
         throw Error();
       }
     };
-
-    getPosts();
+    if (auth.plan === undefined) {
+      console.log(`price plan is: ${auth.plan}`);
+      getPrices();
+    }
     return () => {
       controller.abort();
     };
