@@ -94,6 +94,7 @@ ReactElement => {
   const elements: StripeElements | null = useElements();
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+  const [paidPlan, setPaidPlan] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState<PricesAttribute | null>(null);
 
   const handlePlanClick = (price: PricesAttribute) => {
@@ -129,10 +130,11 @@ ReactElement => {
         throw Error();
       }
     };
-    if (auth.plan === undefined) {
+    if (auth.plan !== undefined) {
       console.log(`price plan is: ${auth.plan}`);
-      getPrices();
+      setPaidPlan(true);
     }
+    getPrices();
     return () => {
       controller.abort();
     };
@@ -206,7 +208,10 @@ ReactElement => {
   return (
     <main className={styles["onboarding"]}>
       <div className={styles["pricing-widget"]}>
-        {prices &&
+        {paidPlan ? (
+          <h1>hej</h1>
+        ) : (
+          prices &&
           prices.prices?.data.map((price) => (
             <div key={price.id} className={styles["plan"]}>
               <h2>Tier {price.unit_amount_decimal}</h2>
@@ -216,7 +221,8 @@ ReactElement => {
 
               <button onClick={() => handlePlanClick(price)}> Start {price.product} Plan</button>
             </div>
-          ))}
+          ))
+        )}
 
         {selectedPrice && (
           <div className={styles["modal-overlay"]} onClick={closeModal}>
