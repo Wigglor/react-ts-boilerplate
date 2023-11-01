@@ -39,6 +39,7 @@ interface PricesAttribute {
   product: string;
   unit_amount_decimal: string;
   unit_amount: number;
+  lookup_key: string;
 }
 
 interface Price {
@@ -208,28 +209,54 @@ ReactElement => {
   return (
     <main className={styles["onboarding"]}>
       <div className={styles["pricing-widget"]}>
-        {paidPlan ? (
-          <h1>hej</h1>
-        ) : (
-          prices &&
-          prices.prices?.data.map((price) => (
-            <div key={price.id} className={styles["plan"]}>
-              <h2>Tier {price.unit_amount_decimal}</h2>
-              <p>
-                Price: {price.unit_amount_decimal} {price.currency}
-              </p>
+        {paidPlan
+          ? // <>
+            //   <h1>hej</h1>
+            //   <p>{JSON.stringify(prices)}</p>
+            // </>
+            prices &&
+            prices.prices?.data.map((price) =>
+              price.lookup_key === auth.plan ? (
+                <div key={price.id} className={styles["plan"]}>
+                  <h2>{price.lookup_key}</h2>
+                  <p>
+                    <b>Current Plan</b>
+                  </p>
 
-              <button onClick={() => handlePlanClick(price)}> Start {price.product} Plan</button>
-            </div>
-          ))
-        )}
+                  {/* <button onClick={() => handlePlanClick(price)}> Start {price.lookup_key} </button> */}
+                </div>
+              ) : (
+                <div key={price.id} className={styles["plan"]}>
+                  <h2>{price.lookup_key}</h2>
+                  <p>
+                    Price: {price.unit_amount_decimal} {price.currency}
+                  </p>
+
+                  <button onClick={() => handlePlanClick(price)}>
+                    {" "}
+                    Upgrade to {price.lookup_key}{" "}
+                  </button>
+                </div>
+              ),
+            )
+          : prices &&
+            prices.prices?.data.map((price) => (
+              <div key={price.id} className={styles["plan"]}>
+                <h2>{price.lookup_key}</h2>
+                <p>
+                  Price: {price.unit_amount_decimal} {price.currency}
+                </p>
+
+                <button onClick={() => handlePlanClick(price)}> Start {price.lookup_key} </button>
+              </div>
+            ))}
 
         {selectedPrice && (
           <div className={styles["modal-overlay"]} onClick={closeModal}>
             <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
               <h2>Tier {selectedPrice.unit_amount_decimal}</h2>
               <p>
-                You have selected the {selectedPrice.product} Plan. Proceed with your choice or
+                You have selected the {selectedPrice.lookup_key} Plan. Proceed with your choice or
                 click outside this box to cancel.
               </p>
               {/* Insert form component here */}
