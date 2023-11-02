@@ -96,10 +96,15 @@ ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
   const [paidPlan, setPaidPlan] = useState(false);
+  const [upgradePlan, setUpgradePlan] = useState<PricesAttribute | null>(null);
   const [selectedPrice, setSelectedPrice] = useState<PricesAttribute | null>(null);
 
   const handlePlanClick = (price: PricesAttribute) => {
-    setSelectedPrice(price);
+    if (paidPlan !== true) {
+      setSelectedPrice(price);
+    }
+    setUpgradePlan(price);
+    console.log(`paidPlan: ${paidPlan}`);
     setTest({
       mode: "subscription",
       amount: price.unit_amount,
@@ -112,6 +117,9 @@ ReactElement => {
 
   const closeModal = () => {
     setSelectedPrice(null);
+  };
+  const closeUpgradeModal = () => {
+    setUpgradePlan(null);
   };
 
   const [prices, setPrices] = useState<Price>();
@@ -251,6 +259,17 @@ ReactElement => {
               </div>
             ))}
 
+        {upgradePlan && (
+          <div className={styles["modal-overlay"]} onClick={closeUpgradeModal}>
+            <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+              <h2>Tier {upgradePlan.unit_amount_decimal}</h2>
+              <p>
+                You have selected the {upgradePlan.lookup_key} Plan. Proceed with your choice or
+                click outside this box to cancel.
+              </p>
+            </div>
+          </div>
+        )}
         {selectedPrice && (
           <div className={styles["modal-overlay"]} onClick={closeModal}>
             <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
