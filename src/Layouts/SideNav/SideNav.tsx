@@ -62,6 +62,14 @@ const SideNav = (): ReactElement => {
             </li>
             <li>
               <div>
+                <Link to="/organization">
+                  <MdManageAccounts />
+                  <span>Organization</span>
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div>
                 <Link to="/billing">
                   <MdPayment />
                   <span>Billing</span>

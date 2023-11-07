@@ -100,6 +100,7 @@ ReactElement => {
   const [selectedPrice, setSelectedPrice] = useState<PricesAttribute | null>(null);
 
   const handlePlanClick = (price: PricesAttribute) => {
+    console.log(JSON.stringify(price));
     if (paidPlan !== true) {
       setSelectedPrice(price);
     }

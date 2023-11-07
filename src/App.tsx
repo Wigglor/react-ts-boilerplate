@@ -10,6 +10,7 @@ import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
 import Billing from "./pages/Billing/Billing";
 import Home from "./pages/Home/Home";
+import Organization from "./pages/Organization/Organization";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
 import Premium from "./pages/Premium/Premium";
@@ -64,6 +65,7 @@ const App = () => {
                 <Route path="" element={<Home />} />
                 <Route path="paymentstatus" element={<PaymentStatus />} />
                 <Route path="account" element={<Account />} />
+                <Route path="organization" element={<Organization />} />
                 <Route path="posts" element={<Posts />} />
                 <Route path="billing" element={<Billing />} />
                 <Route path="premium" element={<Premium />} />

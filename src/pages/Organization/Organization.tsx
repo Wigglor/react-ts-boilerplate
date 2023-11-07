@@ -1,8 +1,8 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import styles from "./Account.module.scss";
+import styles from "./Organization.module.scss";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -22,11 +22,11 @@ interface User {
   };
 }
 
-const Account = (): ReactElement => {
+const Organization = (): ReactElement => {
   const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
   const navigate = useNavigate();
-  useEffect(() => {
+  /* useEffect(() => {
     // let isMounted = true;
     const controller = new AbortController();
     const getUser = async () => {
@@ -58,48 +58,19 @@ const Account = (): ReactElement => {
         <p> loading account data....................................................</p>
       </div>
     );
-  }
+  }*/
 
   return (
     <main className={styles.Account}>
-      <h1>Account</h1>
+      {/* <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}> */}
       <div className={styles.info}>
-        <div>
-          <div>
-            <div>
-              <p>
-                <b>Account</b>
-              </p>
-            </div>
-            <div>
-              <p>
-                <b>Username</b>
-              </p>
-
-              <p>{user?.result.Username}</p>
-            </div>
-            <div>
-              <p>
-                <b>email</b>
-              </p>
-              {/* <p>{user?.result.UserAttributes[3].Value}</p> */}
-            </div>
-            <div>
-              <p>
-                <b>Role Access</b>
-              </p>
-            </div>
-            <div>
-              <p>
-                <b>Data</b>
-              </p>
-              <div>{JSON.stringify(user)}</div>
-            </div>
-          </div>
-        </div>
+        <form>
+          <button type="submit">Submit</button>
+        </form>
+        <button>Close</button>
       </div>
     </main>
   );
 };
 
-export default Account;
+export default Organization;
