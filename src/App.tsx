@@ -10,6 +10,7 @@ import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
 import Billing from "./pages/Billing/Billing";
 import Home from "./pages/Home/Home";
+import Invite from "./pages/Invite/Invite";
 import Organization from "./pages/Organization/Organization";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
@@ -55,6 +56,7 @@ const App = () => {
             <Route element={<PublicRoute />}>
               <Route path="login" element={<ReactFormTest2 />} />
               <Route path="register" element={<Register2 />} />
+              <Route path="invite" element={<Invite />} />
               <Route path="reset" element={<ResetPassword />} />
               <Route path="register-confirmation" element={<RegistrationConfirmation />} />
               {/* <Route path="forgotpassword" element={<Register />} /> */}
