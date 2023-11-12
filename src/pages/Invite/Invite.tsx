@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import styles from "./Invite.module.scss";
 
-const SIGNUP_URL = "/signup";
+const COMPLETE_INVITE_URL = "/complete-invite";
 
 type FormData = {
   username: string;
   email: string;
-  password: string;
+  tempPassword: string;
+  newPassword: string;
   firstName: string;
   lastName: string;
 };
@@ -28,18 +29,19 @@ const Invite = (): ReactElement => {
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
   const from = location.state?.from?.pathname || "/";
-  const { email, code } = useParams();
-  console.log(`params from url:${email} & ${code}`);
-  console.log(JSON.stringify(useParams()));
-  console.log(window.location.pathname);
+
+  const code = searchParams.get("code");
+  const email = searchParams.get("email") as string;
+
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     try {
       const response = await axios.post(
-        SIGNUP_URL,
+        COMPLETE_INVITE_URL,
         JSON.stringify({
-          username: data.username,
-          password: data.password,
+          password: data.tempPassword,
+          newpassword: data.newPassword,
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,
@@ -50,7 +52,7 @@ const Invite = (): ReactElement => {
         },
       );
       if (response.status === 201) {
-        navigate("/register-confirmation", { replace: true });
+        navigate("/", { replace: true });
       } else {
         console.log(response);
       }
@@ -105,10 +107,10 @@ const Invite = (): ReactElement => {
               {errors.email.message}
             </span>
           )}
-          <label htmlFor="password">password</label>
+          <label htmlFor="tempPassword">Temporary Password</label>
           <input
-            id="password"
-            {...register("password", {
+            id="tempPassword"
+            {...register("tempPassword", {
               required: "required",
               minLength: {
                 value: 5,
@@ -117,9 +119,26 @@ const Invite = (): ReactElement => {
             })}
             type="password"
           />
-          {errors.password && (
+          {errors.tempPassword && (
             <span className={styles["error-validation"]} role="alert">
-              {errors.password.message}
+              {errors.tempPassword.message}
+            </span>
+          )}
+          <label htmlFor="newPassword">New Password</label>
+          <input
+            id="newPassword"
+            {...register("newPassword", {
+              required: "required",
+              minLength: {
+                value: 5,
+                message: "min length is 5",
+              },
+            })}
+            type="password"
+          />
+          {errors.newPassword && (
+            <span className={styles["error-validation"]} role="alert">
+              {errors.newPassword.message}
             </span>
           )}
           <label htmlFor="firstName">First Name</label>
@@ -158,16 +177,8 @@ const Invite = (): ReactElement => {
           )}
         </div>
         <button type="submit" className={styles["login-button"]}>
-          Register
+          Signup
         </button>
-        <div className={styles.or}>
-          <p>Or</p>
-        </div>
-        <div className={styles["login-link"]}>
-          <Link className={styles["login-link__text"]} to="/login">
-            Login
-          </Link>
-        </div>
       </form>
     </main>
   );
