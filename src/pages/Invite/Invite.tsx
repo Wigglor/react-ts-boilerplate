@@ -52,7 +52,7 @@ const Invite = (): ReactElement => {
         },
       );
       if (response.status === 201) {
-        navigate("/", { replace: true });
+        navigate("/login", { replace: true });
       } else {
         console.log(response);
       }
