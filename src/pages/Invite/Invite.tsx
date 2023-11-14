@@ -19,6 +19,7 @@ type FormData = {
 
 const Invite = (): ReactElement => {
   const {
+    setValue,
     register,
     handleSubmit,
     control,
@@ -40,8 +41,8 @@ const Invite = (): ReactElement => {
       const response = await axios.post(
         COMPLETE_INVITE_URL,
         JSON.stringify({
-          password: data.tempPassword,
-          newpassword: data.newPassword,
+          tempPassword: data.tempPassword,
+          newPassword: data.newPassword,
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,
@@ -91,7 +92,9 @@ const Invite = (): ReactElement => {
           <label htmlFor="email">email</label>
           <input
             id="email"
+            value={email}
             {...register("email", {
+              //   value: email,
               disabled: true,
               required: "required",
               pattern: {
@@ -99,7 +102,7 @@ const Invite = (): ReactElement => {
                 message: "Entered value does not match email format",
               },
             })}
-            placeholder={email}
+            // placeholder={email}
             type="email"
           />
           {errors.email && (
@@ -147,8 +150,8 @@ const Invite = (): ReactElement => {
             {...register("firstName", {
               required: "required",
               minLength: {
-                value: 5,
-                message: "min length is 5",
+                value: 1,
+                message: "min length is 1",
               },
             })}
             type="text"
@@ -164,8 +167,8 @@ const Invite = (): ReactElement => {
             {...register("lastName", {
               required: "required",
               minLength: {
-                value: 5,
-                message: "min length is 5",
+                value: 1,
+                message: "min length is 1",
               },
             })}
             type="text"
@@ -176,7 +179,11 @@ const Invite = (): ReactElement => {
             </span>
           )}
         </div>
-        <button type="submit" className={styles["login-button"]}>
+        <button
+          type="submit"
+          className={styles["login-button"]}
+          onClick={() => setValue("email", email)}
+        >
           Signup
         </button>
       </form>
