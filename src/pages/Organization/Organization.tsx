@@ -1,6 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Organization.module.scss";
@@ -87,7 +86,10 @@ const Organization = (): ReactElement => {
   } = useForm<FormData>();
   const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
-  const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [updateUsers, setUpdateUsers] = useState(false);
+
   useEffect(() => {
     // let isMounted = true;
     const controller = new AbortController();
@@ -103,7 +105,6 @@ const Organization = (): ReactElement => {
         // isMounted && setUser(response.data.result);
       } catch (err) {
         console.error(err);
-        navigate("/login", { state: { from: location }, replace: true });
       }
     };
 
@@ -113,19 +114,27 @@ const Organization = (): ReactElement => {
       // isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [updateUsers]);
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     // event.preventDefault();
-    const inviteResponse: ApiResponse<Invite> = await axiosPrivate.post(
-      "/inviteuser",
-      JSON.stringify({
-        email: data.email,
-      }),
-      {
-        withCredentials: true,
-      },
-    );
+    try {
+      const inviteResponse: ApiResponse<Invite> = await axiosPrivate.post(
+        "/inviteuser",
+        JSON.stringify({
+          email: data.email,
+        }),
+        {
+          withCredentials: true,
+        },
+      );
+      setUpdateUsers((prev) => !prev);
+      reset();
+      setSuccessMessage("Invite sent!");
+    } catch (err) {
+      console.error(err);
+      // setErrorMessage(err)
+    }
   };
 
   if (!user) {
@@ -139,6 +148,12 @@ const Organization = (): ReactElement => {
   return (
     <main className={styles.Account}>
       {/* <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}> */}
+      {/* {successMessage && <p className="success">{successMessage}</p>}
+      {errorMessage && <p className="error">{errorMessage}</p>} */}
+      {/* {<p className={styles["Account-success"]}>Invite sent</p>}
+      {<p className={styles["Account-error"]}>Error occurred with the invite</p>} */}
+      {successMessage && <p className={styles["Account-success"]}>{successMessage}</p>}
+      {errorMessage && <p className={styles["Account-error"]}>{errorMessage}</p>}
       <div className={styles.info}>
         <div>
           <ul>
@@ -148,6 +163,7 @@ const Organization = (): ReactElement => {
               ))}
           </ul>
         </div>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="email">email</label>
           <input
@@ -170,6 +186,7 @@ const Organization = (): ReactElement => {
           )}
           <button type="submit">Submit</button>
         </form>
+
         {/* <button>Close</button> */}
       </div>
     </main>
