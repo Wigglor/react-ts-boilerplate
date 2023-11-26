@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
 import Billing from "./pages/Billing/Billing";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
 import Invite from "./pages/Invite/Invite";
 import Organization from "./pages/Organization/Organization";
@@ -57,6 +58,7 @@ const App = () => {
               <Route path="login" element={<ReactFormTest2 />} />
               <Route path="register" element={<Register2 />} />
               <Route path="invite" element={<Invite />} />
+              <Route path="forgot-password" element={<ForgotPassword />} />
               <Route path="reset" element={<ResetPassword />} />
               <Route path="register-confirmation" element={<RegistrationConfirmation />} />
               {/* <Route path="forgotpassword" element={<Register />} /> */}

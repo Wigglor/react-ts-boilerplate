@@ -3,14 +3,11 @@ import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import useAuth from "../../hooks/useAuth";
 import styles from "./ResetPassword.module.scss";
 
-const RESET_URL = "/forgotpassword";
+const RESET_URL = "/resetpassword";
 
 type FormData = {
-  // username: string;
-  // email: string;
   password: string;
   confirmPassword: string;
   firstName: string;
@@ -22,11 +19,10 @@ const ResetPassword = (): ReactElement => {
     register,
     handleSubmit,
     watch,
-    control,
-    reset,
+    // control,
+    // reset,
     formState: { errors },
   } = useForm<FormData>();
-  const { setAuth, auth } = useAuth();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -48,7 +44,6 @@ const ResetPassword = (): ReactElement => {
           confirmationCode: code,
           password: data.password,
           confirmPassword: data.confirmPassword,
-          // email: data.email,
         }),
         {
           headers: { "Content-Type": "application/json" },

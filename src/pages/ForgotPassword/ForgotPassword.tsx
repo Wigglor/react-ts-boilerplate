@@ -6,7 +6,7 @@ import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import styles from "./ForgotPassword.module.scss";
 
-const RESET_URL = "/forgotpassword";
+const FORGOT_URL = "/forgotpassword";
 
 type FormData = {
   username: string;
@@ -33,7 +33,7 @@ const ForgotPassword = (): ReactElement => {
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     try {
       const response = await axios.post(
-        RESET_URL,
+        FORGOT_URL,
         JSON.stringify({
           username: data.username,
           password: data.password,

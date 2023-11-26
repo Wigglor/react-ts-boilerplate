@@ -10,11 +10,14 @@
   margin-top: 47.7px;
   // background-color: bisque;
   // background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     // width: 50%;
     margin-left: 30%;
