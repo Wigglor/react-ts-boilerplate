@@ -26,6 +26,7 @@ interface MembershipsAttribute {
   accountEmail: string;
   companyId: string;
   userId: string;
+  user: UserInvite;
 }
 
 interface User {
@@ -156,7 +157,12 @@ const Organization = (): ReactElement => {
           <ul>
             {user &&
               user.result.memberships.map((membership) => (
-                <li key={membership.id}>{membership.accountEmail}</li>
+                <li key={membership.id}>
+                  <div>
+                    <p>{membership.accountEmail}</p>
+                    <p>status: {membership.user.verificationStatus}</p>
+                  </div>
+                </li>
               ))}
           </ul>
         </div>
