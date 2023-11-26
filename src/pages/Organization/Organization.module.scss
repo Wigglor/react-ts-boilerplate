@@ -8,11 +8,20 @@
   // margin-left: 115.406px;
   margin-left: 8rem;
   margin-top: 47.7px;
+
+  &-success {
+    padding: 1rem;
+    background-color: rgb(5, 167, 5);
+  }
+  &-error {
+    padding: 1rem;
+    background-color: rgb(167, 32, 5);
+  }
   // background-color: bisque;
   // background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 
   .info {
     // display: flex;
