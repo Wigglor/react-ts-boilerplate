@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 // import { axiosPrivate } from "../../api/axios";
+import { AxiosError } from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styles from "./Organization.module.scss";
 
@@ -132,8 +133,9 @@ const Organization = (): ReactElement => {
       reset();
       setSuccessMessage("Invite sent!");
     } catch (err) {
-      console.error(err);
-      // setErrorMessage(err)
+      if (err instanceof AxiosError) {
+        setErrorMessage(err.response?.data.message);
+      }
     }
   };
 
@@ -147,11 +149,6 @@ const Organization = (): ReactElement => {
 
   return (
     <main className={styles.Account}>
-      {/* <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}> */}
-      {/* {successMessage && <p className="success">{successMessage}</p>}
-      {errorMessage && <p className="error">{errorMessage}</p>} */}
-      {/* {<p className={styles["Account-success"]}>Invite sent</p>}
-      {<p className={styles["Account-error"]}>Error occurred with the invite</p>} */}
       {successMessage && <p className={styles["Account-success"]}>{successMessage}</p>}
       {errorMessage && <p className={styles["Account-error"]}>{errorMessage}</p>}
       <div className={styles.info}>
@@ -169,14 +166,12 @@ const Organization = (): ReactElement => {
           <input
             id="email"
             {...register("email", {
-              //   value: email,
               required: "required",
               pattern: {
                 value: /\S+@\S+\.\S+/,
                 message: "Entered value does not match email format",
               },
             })}
-            // placeholder={email}
             type="email"
           />
           {errors.email && (
@@ -186,8 +181,6 @@ const Organization = (): ReactElement => {
           )}
           <button type="submit">Submit</button>
         </form>
-
-        {/* <button>Close</button> */}
       </div>
     </main>
   );
