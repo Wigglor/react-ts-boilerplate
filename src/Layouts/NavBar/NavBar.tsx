@@ -48,6 +48,17 @@ const NavBar = (): ReactElement => {
           </ul>
 
           <div>
+            <label>
+              workspace
+              <select name="selectedFruit">
+                <option value="apple">Apple</option>
+                <option value="banana">Banana</option>
+                <option value="orange">Orange</option>
+              </select>
+            </label>
+          </div>
+
+          <div>
             <Link to="/account">
               <MdManageAccounts />
             </Link>
