@@ -97,6 +97,8 @@ const Login = (): ReactElement => {
       });
       // setPersist(true);
       // const persistState = localStorage.setItem("persist", JSON.stringify(true));
+      console.log(response?.data.user.memberships[0].company.name);
+      localStorage.setItem("workSpace", response?.data.user.memberships[0].company.name);
       setUser("");
       setPwd("");
       // const isLoggedIn = true;

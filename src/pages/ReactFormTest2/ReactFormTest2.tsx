@@ -79,6 +79,8 @@ const ReactFormTest2 = (): ReactElement => {
         // plan: response?.data.user.memberships[0].company.account.plan.name,
         plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
+      console.log(response?.data.user.memberships[0].company.name);
+      localStorage.setItem("workSpace", response?.data.user.memberships[0].company.name);
       // console.log(
       //   JSON.stringify(response?.data.user.memberships[0].company?.account.currentPeriodEnds),
       // );

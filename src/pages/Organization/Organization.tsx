@@ -152,6 +152,7 @@ const Organization = (): ReactElement => {
     <main className={styles.Account}>
       {successMessage && <p className={styles["Account-success"]}>{successMessage}</p>}
       {errorMessage && <p className={styles["Account-error"]}>{errorMessage}</p>}
+      <div></div>
       <div className={styles.info}>
         <div>
           <ul>
