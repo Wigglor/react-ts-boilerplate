@@ -5,16 +5,22 @@ import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogOut";
 import styles from "./NavBar.module.scss";
 
+type Workspace = {
+  name: string;
+  id: string;
+};
+
 const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
   const { setAuth } = useAuth();
   const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
-  const workSpace = localStorage.getItem("workSpace") as string;
-  const workSpaces: string[] = (localStorage.getItem("workSpaces") as string).split(",");
+  const workSpace = localStorage.getItem("workSpace");
+  // const workSpaces: string[] = (localStorage.getItem("workSpaces") as string).split(",");
+  const workSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
   console.log(workSpaces);
   useEffect(() => {
-    const defaultWorkspace = workSpaces.find((wp) => wp === workSpace);
+    const defaultWorkspace = workSpaces.find((wp: Workspace) => wp.name === workSpace);
     if (defaultWorkspace) {
       setSelectedWorkspace(selectedWorkspace);
     }
@@ -25,10 +31,7 @@ const NavBar = (): ReactElement => {
   };
 
   const signOut = async () => {
-    // localStorage.removeItem("isLoggedIn");
-    // localStorage.removeItem("persist");
     await logout();
-    // navigate('/linkpage');
   };
   return (
     <>
@@ -65,9 +68,9 @@ const NavBar = (): ReactElement => {
             <label>
               workspace
               <select value={selectedWorkspace} onChange={handleChange}>
-                {workSpaces.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
+                {workSpaces.map((item: Workspace) => (
+                  <option key={item.id} value={item.name}>
+                    {item.name}
                   </option>
                 ))}
               </select>

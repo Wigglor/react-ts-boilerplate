@@ -16,6 +16,7 @@ type LoginFormValues = {
 interface Item {
   company: {
     name: string;
+    id: string;
   };
 }
 
@@ -86,8 +87,16 @@ const ReactFormTest2 = (): ReactElement => {
         plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
       console.log(response?.data.user.memberships[0].company.name);
-      localStorage.setItem("workSpace", response?.data.user.memberships[0].company.name);
-      const extractedIds = response?.data.user.memberships.map((item: Item) => item.company.name); // extend this and return obj with company id etc as well
+      localStorage.setItem(
+        "workSpace",
+        JSON.stringify({
+          name: response?.data.user.memberships[0].company.name,
+          id: response?.data.user.memberships[0].company.id,
+        }),
+      );
+      const extractedIds = response?.data.user.memberships.map((item: Item) => {
+        return { name: item.company.name, id: item.company.id };
+      }); // extend this and return obj with company id etc as well
       localStorage.setItem("workSpaces", JSON.stringify(extractedIds));
       console.log(JSON.stringify(extractedIds));
       // localStorage.setItem("workSpaces", response?.data.user.memberships[0].company.name);
