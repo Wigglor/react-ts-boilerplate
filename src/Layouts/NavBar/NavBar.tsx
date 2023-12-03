@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { MdManageAccounts } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -9,6 +9,20 @@ const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
   const { setAuth } = useAuth();
+  const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
+  const workSpace = localStorage.getItem("workSpace") as string;
+  const workSpaces: string[] = (localStorage.getItem("workSpaces") as string).split(",");
+  console.log(workSpaces);
+  useEffect(() => {
+    const defaultWorkspace = workSpaces.find((wp) => wp === workSpace);
+    if (defaultWorkspace) {
+      setSelectedWorkspace(selectedWorkspace);
+    }
+  }, []);
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedWorkspace(event.target.value);
+  };
 
   const signOut = async () => {
     // localStorage.removeItem("isLoggedIn");
@@ -50,11 +64,26 @@ const NavBar = (): ReactElement => {
           <div>
             <label>
               workspace
-              <select name="selectedFruit">
-                <option value="apple">Apple</option>
+              <select value={selectedWorkspace} onChange={handleChange}>
+                {workSpaces.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+              {/* <select name="selectedFruit">
+                {workSpaces.map(wp=>{
+                  (wp === workSpace)
+                  
+                  
+                <option key={wp} value={wp}>{wp}</option>  
+                
+                
+                })}
+                <option value={workSpace}>{workSpace}</option>
                 <option value="banana">Banana</option>
                 <option value="orange">Orange</option>
-              </select>
+              </select> */}
             </label>
           </div>
 

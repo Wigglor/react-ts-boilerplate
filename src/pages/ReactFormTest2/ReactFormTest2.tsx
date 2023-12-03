@@ -13,6 +13,12 @@ type LoginFormValues = {
   password: string;
 };
 
+interface Item {
+  company: {
+    name: string;
+  };
+}
+
 const ReactFormTest2 = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
   const { setAuth, auth } = useAuth();
@@ -81,6 +87,10 @@ const ReactFormTest2 = (): ReactElement => {
       });
       console.log(response?.data.user.memberships[0].company.name);
       localStorage.setItem("workSpace", response?.data.user.memberships[0].company.name);
+      const extractedIds = response?.data.user.memberships.map((item: Item) => item.company.name); // extend this and return obj with company id etc as well
+      localStorage.setItem("workSpaces", JSON.stringify(extractedIds));
+      console.log(JSON.stringify(extractedIds));
+      // localStorage.setItem("workSpaces", response?.data.user.memberships[0].company.name);
       // console.log(
       //   JSON.stringify(response?.data.user.memberships[0].company?.account.currentPeriodEnds),
       // );
