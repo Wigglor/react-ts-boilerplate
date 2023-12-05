@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { ReactNode, createContext, useState } from "react";
 
 type WorkSpaces = {
@@ -25,14 +26,18 @@ const INITIAL_STATE: WorkSpaces = {
   selectedWorkSpace: "",
 };
 
-export const WorkSPaceContext = createContext<WorkspaceContextType | null>(null);
+// export const WorkSPaceContext = createContext<WorkspaceContextType | null>(null);
+export const WorkSpacesContext = createContext<WorkspaceContextType>({
+  workSpaces: INITIAL_STATE,
+  setWorkSpaces: () => {},
+});
 
-export const ThemeProvider = ({ children }: WorkSpaceProviderProps) => {
+export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
   const [workSpaces, setWorkSpaces] = useState<WorkSpaces>(INITIAL_STATE);
 
   return (
-    <WorkSPaceContext.Provider value={{ workSpaces, setWorkSpaces }}>
+    <WorkSpacesContext.Provider value={{ workSpaces, setWorkSpaces }}>
       {children}
-    </WorkSPaceContext.Provider>
+    </WorkSpacesContext.Provider>
   );
 };
