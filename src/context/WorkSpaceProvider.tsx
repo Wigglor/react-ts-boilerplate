@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { ReactNode, createContext, useState } from "react";
 
+/*
+
+Implement fetching from localstorage
+Set initial values from localstorage when logging in???
+
+*/
+
 type WorkSpaces = {
   availableWorkSpaces: {
     name: string;
