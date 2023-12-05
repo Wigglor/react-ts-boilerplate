@@ -97,10 +97,17 @@ const Organization = (): ReactElement => {
     const controller = new AbortController();
     const getUser = async () => {
       try {
-        const response: ApiResponse<User> = await axiosPrivate.post("/subscription/users", {
-          signal: controller.signal,
-          withCredentials: true,
-        });
+        const response: ApiResponse<User> = await axiosPrivate.post(
+          "/subscription/users",
+          JSON.stringify({
+            workSpaceId: JSON.parse(localStorage.getItem("workSpace") as string)["id"],
+            // accountEmail: data.email,
+          }),
+          {
+            signal: controller.signal,
+            withCredentials: true,
+          },
+        );
         console.log(JSON.stringify(response.data.result));
         // setUser(response.data.Username);
         setUser(response.data);
