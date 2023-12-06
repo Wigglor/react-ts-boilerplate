@@ -4,6 +4,7 @@ import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 // import { store } from "./store/store";
 import { AuthProvider } from "./context/AuthProvider";
+import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 import "./styles/globals.scss";
 
 const rootElement = document.getElementById("root");
@@ -13,7 +14,9 @@ root.render(
   // <React.StrictMode>
   <BrowserRouter>
     <AuthProvider>
-      <App />
+      <WorkSpacesProvider>
+        <App />
+      </WorkSpacesProvider>
     </AuthProvider>
   </BrowserRouter>,
 
