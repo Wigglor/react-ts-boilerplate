@@ -3,6 +3,7 @@ import { MdManageAccounts } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogOut";
+import useWorkSpaces from "../../hooks/useWorkSpaces";
 import styles from "./NavBar.module.scss";
 
 type Workspace = {
@@ -14,17 +15,22 @@ const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
   const { setAuth } = useAuth();
+  const { workSpaces } = useWorkSpaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
-  const workSpace = localStorage.getItem("workSpace");
-  // const workSpaces: string[] = (localStorage.getItem("workSpaces") as string).split(",");
-  const workSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
-  console.log(workSpaces);
+  // const workSpace = localStorage.getItem("workSpace");
+  const workSpace = workSpaces.selectedWorkSpace.name;
+  // const workSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
   useEffect(() => {
-    const defaultWorkspace = workSpaces.find((wp: Workspace) => wp.name === workSpace);
+    /*const defaultWorkspace = workSpaces.availableWorkSpaces.find(
+      (wp: Workspace) => wp.name === workSpace,
+    );
     if (defaultWorkspace) {
       setSelectedWorkspace(selectedWorkspace);
-    }
-  }, []);
+    }*/
+    console.log(workSpace);
+    console.log(JSON.stringify(workSpaces));
+    setSelectedWorkspace(workSpace);
+  }, [selectedWorkspace]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedWorkspace(event.target.value);
@@ -68,25 +74,12 @@ const NavBar = (): ReactElement => {
             <label>
               workspace
               <select value={selectedWorkspace} onChange={handleChange}>
-                {workSpaces.map((item: Workspace) => (
+                {workSpaces.availableWorkSpaces.map((item: Workspace) => (
                   <option key={item.id} value={item.name}>
                     {item.name}
                   </option>
                 ))}
               </select>
-              {/* <select name="selectedFruit">
-                {workSpaces.map(wp=>{
-                  (wp === workSpace)
-                  
-                  
-                <option key={wp} value={wp}>{wp}</option>  
-                
-                
-                })}
-                <option value={workSpace}>{workSpace}</option>
-                <option value="banana">Banana</option>
-                <option value="orange">Orange</option>
-              </select> */}
             </label>
           </div>
 

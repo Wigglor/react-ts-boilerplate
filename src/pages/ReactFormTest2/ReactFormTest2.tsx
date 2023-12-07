@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
+import useWorkSpaces from "../../hooks/useWorkSpaces";
 import styles from "./ReactFormTest2.module.scss";
 
 const LOGIN_URL = "/signin";
@@ -23,6 +24,7 @@ interface Item {
 const ReactFormTest2 = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
   const { setAuth, auth } = useAuth();
+  const { setWorkSpaces } = useWorkSpaces();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -70,10 +72,6 @@ const ReactFormTest2 = (): ReactElement => {
       );
 
       const accessToken = response?.data.accessToken;
-      // console.log(
-      //   JSON.stringify(response?.data.user.memberships[0]?.company?.account.currentPeriodEnds),
-      // );
-      // console.log(JSON.stringify(response.data));
       console.log(JSON.stringify(response));
       console.log(JSON.stringify(response.data));
       setAuth({
@@ -86,19 +84,20 @@ const ReactFormTest2 = (): ReactElement => {
         // plan: response?.data.user.memberships[0].company.account.plan.name,
         plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
-      console.log(response?.data.user.memberships[0].company.name);
-      localStorage.setItem(
-        "workSpace",
-        JSON.stringify({
-          name: response?.data.user.memberships[0].company.name,
-          id: response?.data.user.memberships[0].company.id,
-        }),
-      );
-      const extractedIds = response?.data.user.memberships.map((item: Item) => {
+
+      const workSpaces = response?.data.user.memberships.map((item: Item) => {
         return { name: item.company.name, id: item.company.id };
       }); // extend this and return obj with company id etc as well
-      localStorage.setItem("workSpaces", JSON.stringify(extractedIds));
-      console.log(JSON.stringify(extractedIds));
+      // localStorage.setItem("workSpaces", JSON.stringify(workSpaces));
+
+      setWorkSpaces({
+        availableWorkSpaces: workSpaces,
+        selectedWorkSpace: {
+          name: response?.data.user.memberships[0].company.name,
+          id: response?.data.user.memberships[0].company.id,
+        },
+      });
+
       // localStorage.setItem("workSpaces", response?.data.user.memberships[0].company.name);
       // console.log(
       //   JSON.stringify(response?.data.user.memberships[0].company?.account.currentPeriodEnds),

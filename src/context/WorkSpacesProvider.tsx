@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 
 /*
 
@@ -46,7 +46,7 @@ export const WorkSpacesContext = createContext<WorkspaceContextType>({
 
 export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
   const [workSpaces, setWorkSpaces] = useState<WorkSpaces>(INITIAL_STATE);
-  /*const [workSpaces, setWorkSpaces] = useState(() => {
+  /* const [workSpaces2, setWorkSpaces2] = useState(() => {
     // Get initial value from localStorage or set a default
     const LsWorkSpace = JSON.parse(localStorage.getItem("workSpace") as string);
     const LsWorkSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
@@ -54,10 +54,16 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
       availableWorkSpaces: LsWorkSpaces,
       selectedWorkSpace: LsWorkSpace,
     };
-    // setWorkSpaces(wps);
-    const saved = localStorage.getItem('myValue');
-    return saved !== null ? saved : 'default value';
+    return wps !== null ? wps : INITIAL_STATE;
   });*/
+
+  useEffect(() => {
+    // Update localStorage when myValue changes
+    // localStorage.setItem('myValue', JSON.stringify(myValue));
+    console.log("Setting local storage from useEffect");
+    localStorage.setItem("workSpaces", JSON.stringify(workSpaces.availableWorkSpaces));
+    localStorage.setItem("workSpace", JSON.stringify(workSpaces.selectedWorkSpace));
+  }, [workSpaces]);
 
   /*const LsWorkSpace = JSON.parse(localStorage.getItem("workSpace") as string);
   const LsWorkSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
