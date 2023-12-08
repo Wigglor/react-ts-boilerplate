@@ -27,8 +27,7 @@ const NavBar = (): ReactElement => {
     if (defaultWorkspace) {
       setSelectedWorkspace(selectedWorkspace);
     }*/
-    console.log(workSpace);
-    console.log(JSON.stringify(workSpaces));
+
     setSelectedWorkspace(workSpace);
   }, [selectedWorkspace]);
 

@@ -14,7 +14,7 @@ const PrivateRoute = ({ allowedRoles }: RequireAuthProps) => {
   //   return auth?.accountComplete ? (
   // return auth?.role ? <Outlet /> : <Navigate to="/onboarding" state={{ from }} replace />;
   // return auth?.user ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
-  console.log("Private route");
+
   return allowedRoles?.includes(auth?.role as string) && auth?.user ? (
     <Outlet />
   ) : auth?.setup === "PENDING" ? (

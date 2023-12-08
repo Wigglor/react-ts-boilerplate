@@ -108,7 +108,6 @@ const Organization = (): ReactElement => {
             withCredentials: true,
           },
         );
-        console.log(JSON.stringify(response.data.result));
         // setUser(response.data.Username);
         setUser(response.data);
         // isMounted && setUser(response.data.result);

@@ -29,7 +29,6 @@ const ReactFormTest2 = (): ReactElement => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log("hitting login route after signing out.....");
 
   // useEffect(() => {
   //   // const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -72,8 +71,8 @@ const ReactFormTest2 = (): ReactElement => {
       );
 
       const accessToken = response?.data.accessToken;
-      console.log(JSON.stringify(response));
-      console.log(JSON.stringify(response.data));
+      // console.log(JSON.stringify(response));
+      // console.log(JSON.stringify(response.data));
       setAuth({
         user: data.email,
         accessToken: accessToken,

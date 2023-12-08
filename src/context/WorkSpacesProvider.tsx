@@ -58,10 +58,9 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
     console.log(JSON.stringify(wps));
     return wps !== null ? wps : INITIAL_STATE;
   });
+  console.log(workSpaces);
 
   useEffect(() => {
-    // Update localStorage when myValue changes
-    // localStorage.setItem('myValue', JSON.stringify(myValue));
     console.log("Setting local storage from useEffect");
     console.log(JSON.parse(localStorage.getItem("workSpace") as string));
     console.log(JSON.stringify(workSpaces));

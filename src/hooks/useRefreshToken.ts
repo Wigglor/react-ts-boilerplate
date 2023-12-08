@@ -19,7 +19,7 @@ const useRefreshToken = () => {
       // });
 
       // I only think prev is available when accesstoken expires
-      console.log("Hitting refresh function");
+
       setAuth((prev) => {
         return {
           ...prev,
