@@ -45,6 +45,7 @@ export const WorkSpacesContext = createContext<WorkspaceContextType>({
 });
 
 export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
+  console.log("triggering WorkSpacesProvider...");
   // const [workSpaces, setWorkSpaces] = useState<WorkSpaces>(INITIAL_STATE);
   const [workSpaces, setWorkSpaces] = useState(() => {
     // Get initial value from localStorage or set a default
