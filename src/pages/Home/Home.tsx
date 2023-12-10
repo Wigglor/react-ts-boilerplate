@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 // import axios from "axios";
 import styles from "./Home.module.scss";
 
@@ -7,7 +7,11 @@ interface ApiResponse {
 }
 
 const Home = (): ReactElement => {
-  console.log("Hitting home endpoint");
+  const [testData, setTestData] = useState<string>(() => {
+    const testData = "test string";
+    console.log(`setting testData: ${testData}`);
+    return testData;
+  });
   /*const [data, setData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {

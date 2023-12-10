@@ -47,8 +47,12 @@ export const WorkSpacesContext = createContext<WorkspaceContextType>({
 export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
   console.log("triggering WorkSpacesProvider...");
   // const [workSpaces, setWorkSpaces] = useState<WorkSpaces>(INITIAL_STATE);
+
   const [workSpaces, setWorkSpaces] = useState(() => {
     // Get initial value from localStorage or set a default
+    console.log("--------------------------------------");
+    console.log(JSON.stringify(workSpaces));
+    console.log("--------------------------------------");
     console.log("calling useState for workSpaces");
     const LsWorkSpace = JSON.parse(localStorage.getItem("workSpace") as string);
     const LsWorkSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
@@ -59,44 +63,13 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
     console.log(JSON.stringify(wps));
     return wps !== null ? wps : INITIAL_STATE;
   });
-  console.log(workSpaces);
 
   useEffect(() => {
     console.log("Setting local storage from useEffect");
-    console.log(JSON.parse(localStorage.getItem("workSpace") as string));
-    console.log(JSON.stringify(workSpaces));
+
     localStorage.setItem("workSpaces", JSON.stringify(workSpaces.availableWorkSpaces));
     localStorage.setItem("workSpace", JSON.stringify(workSpaces.selectedWorkSpace));
   }, [workSpaces]);
-
-  /*const LsWorkSpace = JSON.parse(localStorage.getItem("workSpace") as string);
-  const LsWorkSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
-  const wps: WorkSpaces = {
-    availableWorkSpaces: LsWorkSpaces,
-    selectedWorkSpace: LsWorkSpace,
-  };
-  setWorkSpaces(wps);
-  console.log(LsWorkSpace);
-  console.log(LsWorkSpaces);
-  console.log(workSpaces);*/
-
-  /*const [myValue, setMyValue] = useState<WorkSpaces>(() => {
-    const LsWorkSpace = JSON.parse(localStorage.getItem("workSpace") as string);
-    const LsWorkSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
-
-    const saved = {
-      availableWorkSpaces: LsWorkSpaces,
-      selectedWorkSpace: LsWorkSpace,
-    };
-    // return saved !== null ? JSON.parse(saved) : INITIAL_STATE;
-    return saved;
-  });
-
-  useEffect(() => {
-    // Update localStorage when myValue changes
-    // localStorage.setItem('myValue', JSON.stringify(myValue));
-    console.log(myValue);
-  }, [myValue]);*/
 
   return (
     <WorkSpacesContext.Provider value={{ workSpaces, setWorkSpaces }}>

@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 // import { axiosPrivate } from "../../api/axios";
 import { AxiosError } from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useWorkSpaces from "../../hooks/useWorkSpaces";
 import styles from "./Organization.module.scss";
 
 interface ApiResponse<T> {
@@ -88,9 +89,15 @@ const Organization = (): ReactElement => {
   } = useForm<FormData>();
   const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
+  // const [user, setUser] = useState<User>(() => {
+  //   const usr: User = user;
+  //   console.log("setting user...");
+  //   return usr;
+  // });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
+  const { workSpaces, setWorkSpaces } = useWorkSpaces();
 
   useEffect(() => {
     // let isMounted = true;
@@ -100,7 +107,8 @@ const Organization = (): ReactElement => {
         const response: ApiResponse<User> = await axiosPrivate.post(
           "/subscription/users",
           JSON.stringify({
-            workSpaceId: JSON.parse(localStorage.getItem("workSpace") as string)["id"],
+            // workSpaceId: JSON.parse(localStorage.getItem("workSpace") as string)["id"],
+            workSpaceId: workSpaces.selectedWorkSpace.id,
             // accountEmail: data.email,
           }),
           {
@@ -122,7 +130,7 @@ const Organization = (): ReactElement => {
       // isMounted = false;
       controller.abort();
     };
-  }, [updateUsers]);
+  }, [updateUsers, workSpaces]);
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     // event.preventDefault();

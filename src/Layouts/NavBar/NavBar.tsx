@@ -1,7 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import { MdManageAccounts } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
 import styles from "./NavBar.module.scss";
@@ -14,8 +13,7 @@ type Workspace = {
 const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
-  const { setAuth } = useAuth();
-  const { workSpaces } = useWorkSpaces();
+  const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
   // const workSpace = localStorage.getItem("workSpace");
   const workSpace = workSpaces.selectedWorkSpace.name;
@@ -32,7 +30,16 @@ const NavBar = (): ReactElement => {
   }, [selectedWorkspace]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(event.target.value);
+    const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+      (wp: Workspace) => wp.name === event.target.value,
+    );
+    console.log(workSpaces.availableWorkSpaces[1]);
+    console.log(selectedWorkSpace_);
     setSelectedWorkspace(event.target.value);
+    setWorkSpaces((prevState) => {
+      return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    });
   };
 
   const signOut = async () => {
@@ -44,7 +51,6 @@ const NavBar = (): ReactElement => {
         <nav className={styles.navbar}>
           <ul>
             <li>
-              {/* <a href="/">Home</a> */}
               <Link to="/">Home</Link>
             </li>
             <li>
