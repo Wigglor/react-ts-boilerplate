@@ -89,17 +89,13 @@ const Organization = (): ReactElement => {
   } = useForm<FormData>();
   const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
-  // const [user, setUser] = useState<User>(() => {
-  //   const usr: User = user;
-  //   console.log("setting user...");
-  //   return usr;
-  // });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
 
   useEffect(() => {
+    console.log(`selectedWorkSpace: ${workSpaces.selectedWorkSpace.id}`);
     // let isMounted = true;
     const controller = new AbortController();
     const getUser = async () => {
@@ -139,6 +135,7 @@ const Organization = (): ReactElement => {
         "/inviteuser",
         JSON.stringify({
           email: data.email,
+          companyId: workSpaces.selectedWorkSpace.id,
         }),
         {
           withCredentials: true,

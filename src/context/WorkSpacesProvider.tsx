@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { ReactNode, createContext, useEffect, useState } from "react";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 /*
 
@@ -7,6 +8,21 @@ Implement fetching from localstorage
 Set initial values from localstorage when logging in???
 
 */
+
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
+
+type WorkSpaceResponse = {
+  memberships: {
+    company: {
+      id: string;
+      name: string;
+    };
+  }[];
+};
 
 type WorkSpaces = {
   availableWorkSpaces: {
@@ -45,17 +61,45 @@ export const WorkSpacesContext = createContext<WorkspaceContextType>({
 });
 
 export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
+  const axiosPrivate = useAxiosPrivate();
   console.log("triggering WorkSpacesProvider...");
   // const [workSpaces, setWorkSpaces] = useState<WorkSpaces>(INITIAL_STATE);
 
   const [workSpaces, setWorkSpaces] = useState(() => {
+    const fetchWorkSpaces = async () => {
+      try {
+        const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
+          "/subscription/workspaces",
+          {
+            withCredentials: true,
+          },
+        );
+        const availableWorkSpaces = response.data.memberships.map((wp) => {
+          return { name: wp.company.name, id: wp.company.id };
+        });
+        console.log(JSON.stringify(availableWorkSpaces));
+        // setWorkSpaces({
+        //   availableWorkSpaces: availableWorkSpaces,
+        //   selectedWorkSpace: {
+        //     name: response?.data.user.memberships[0].company.name,
+        //     id: response?.data.user.memberships[0].company.id,
+        //   },
+        // });
+      } catch (err) {
+        console.error(err);
+      }
+    };
     // Get initial value from localStorage or set a default
     console.log("calling useState for workSpaces");
-    const LsWorkSpace = JSON.parse(localStorage.getItem("workSpace") as string);
-    const LsWorkSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
+    const LsWorkSpace = localStorage.getItem("workSpace") as string;
+    const LsWorkSpaces = localStorage.getItem("workSpaces") as string;
+    if (!LsWorkSpace || !LsWorkSpaces) {
+      console.log(`missing workspace:`);
+      fetchWorkSpaces();
+    }
     const wps: WorkSpaces = {
-      availableWorkSpaces: LsWorkSpaces,
-      selectedWorkSpace: LsWorkSpace,
+      availableWorkSpaces: JSON.parse(LsWorkSpaces),
+      selectedWorkSpace: JSON.parse(LsWorkSpace),
     };
     console.log(JSON.stringify(wps));
     return wps !== null ? wps : INITIAL_STATE;
