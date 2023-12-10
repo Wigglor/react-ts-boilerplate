@@ -23,33 +23,12 @@ interface Item {
 
 const ReactFormTest2 = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
-  const { setAuth, auth } = useAuth();
+  const { setAuth } = useAuth();
   const { setWorkSpaces } = useWorkSpaces();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
-  // useEffect(() => {
-  //   // const isLoggedIn = localStorage.getItem("isLoggedIn");
-  //   console.log(`checking auth: ${JSON.stringify(auth)}`);
-  //   // console.log(`checking login: ${isLoggedIn}`);
-  //   // if (isLoggedIn) {
-  //   //   console.log("login status: SISISI!");
-  //   //   // Redirect to the homepage
-  //   //   navigate("/"); // Replace '/homepage' with the actual route of your homepage
-  //   // } else {
-  //   //   console.log("login status: NONONO!");
-  //   // }
-  //   // try {
-  //   //   navigate("/");
-  //   // } catch (error) {
-  //   //   console.log("unable to login");
-  //   // }
-  //   if (auth.accessToken) {
-  //     console.log("Can access auth context");
-  //   }
-  // }, []);
 
   const {
     register,
@@ -62,7 +41,6 @@ const ReactFormTest2 = (): ReactElement => {
     try {
       const response = await axios.post(
         LOGIN_URL,
-        // JSON.stringify({ username: data.username, password: data.password }),
         JSON.stringify({ email: data.email, password: data.password }),
         {
           headers: { "Content-Type": "application/json" },
@@ -71,23 +49,18 @@ const ReactFormTest2 = (): ReactElement => {
       );
 
       const accessToken = response?.data.accessToken;
-      // console.log(JSON.stringify(response));
-      // console.log(JSON.stringify(response.data));
       setAuth({
         user: data.email,
         accessToken: accessToken,
         role: response?.data.role,
         setup: response?.data.setup,
-        // currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
         currentPeriodEnds: response?.data.user.memberships[0]?.company?.account.currentPeriodEnds,
-        // plan: response?.data.user.memberships[0].company.account.plan.name,
         plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
 
       const workSpaces = response?.data.user.memberships.map((item: Item) => {
         return { name: item.company.name, id: item.company.id };
       }); // extend this and return obj with company id etc as well
-      // localStorage.setItem("workSpaces", JSON.stringify(workSpaces));
 
       setWorkSpaces({
         availableWorkSpaces: workSpaces,
@@ -97,10 +70,6 @@ const ReactFormTest2 = (): ReactElement => {
         },
       });
 
-      // localStorage.setItem("workSpaces", response?.data.user.memberships[0].company.name);
-      // console.log(
-      //   JSON.stringify(response?.data.user.memberships[0].company?.account.currentPeriodEnds),
-      // );
       if (response?.data.setup === "PENDING") {
         navigate("/onboarding", { replace: true });
       } else {
@@ -112,10 +81,6 @@ const ReactFormTest2 = (): ReactElement => {
     }
     reset();
   };
-
-  // useEffect(() => {
-  //   localStorage.setItem("persist", persist);
-  // }, []);
 
   return (
     <main className={styles["login-container"]}>

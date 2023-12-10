@@ -47,11 +47,11 @@ interface IAuthProviderProps {
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [auth, setAuth] = useState<Auth>(INITIAL_STATE);
-  // const [testData, setTestData] = useState<string>(() => {
-  //   const testData = "test string";
-  //   console.log(`setting testData for authprovider: ${testData}`);
-  //   return testData;
-  // });
+  const [testData, setTestData] = useState<string>(() => {
+    const testData = "test string";
+    console.log(`setting testData for authprovider: ${testData}`);
+    return testData;
+  });
   return (
     <AuthContext.Provider value={{ auth, setAuth /*persist, setPersist*/ }}>
       {children}

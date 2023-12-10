@@ -50,9 +50,6 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
 
   const [workSpaces, setWorkSpaces] = useState(() => {
     // Get initial value from localStorage or set a default
-    console.log("--------------------------------------");
-    console.log(JSON.stringify(workSpaces));
-    console.log("--------------------------------------");
     console.log("calling useState for workSpaces");
     const LsWorkSpace = JSON.parse(localStorage.getItem("workSpace") as string);
     const LsWorkSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
@@ -66,7 +63,6 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
 
   useEffect(() => {
     console.log("Setting local storage from useEffect");
-
     localStorage.setItem("workSpaces", JSON.stringify(workSpaces.availableWorkSpaces));
     localStorage.setItem("workSpace", JSON.stringify(workSpaces.selectedWorkSpace));
   }, [workSpaces]);
