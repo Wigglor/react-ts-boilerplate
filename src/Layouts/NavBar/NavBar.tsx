@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { MdManageAccounts } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
 import styles from "./NavBar.module.scss";
@@ -10,12 +11,55 @@ type Workspace = {
   id: string;
 };
 
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
+
+type WorkSpaceResponse = {
+  memberships: {
+    company: {
+      id: string;
+      name: string;
+    };
+  }[];
+};
+
 const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
+  const axiosPrivate = useAxiosPrivate();
+  const fetchWorkSpaces = async () => {
+    try {
+      const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
+        "/subscription/workspaces",
+        {
+          withCredentials: true,
+        },
+      );
+
+      const availableWorkSpaces = response.data.memberships.map((wp) => {
+        return { name: wp.company.name, id: wp.company.id };
+      });
+      console.log(JSON.stringify(response));
+      // setWorkSpaces({
+      //   availableWorkSpaces: availableWorkSpaces,
+      //   selectedWorkSpace: {
+      //     name: response?.data.memberships[0].company.name,
+      //     id: response?.data.memberships[0].company.id,
+      //   },
+      // });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   // const workSpace = localStorage.getItem("workSpace");
+  /*if (workSpaces.selectedWorkSpace === null) {
+    fetchWorkSpaces();
+  }*/
   const workSpace = workSpaces.selectedWorkSpace.name;
   // const workSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
   useEffect(() => {
@@ -25,7 +69,7 @@ const NavBar = (): ReactElement => {
     if (defaultWorkspace) {
       setSelectedWorkspace(selectedWorkspace);
     }*/
-
+    // fetchWorkSpaces();
     setSelectedWorkspace(workSpace);
   }, [selectedWorkspace]);
 

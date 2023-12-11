@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { ReactNode, createContext, useEffect, useState } from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAuth from "../hooks/useAuth";
+// import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 /*
 
@@ -61,17 +62,22 @@ export const WorkSpacesContext = createContext<WorkspaceContextType>({
 });
 
 export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
-  const axiosPrivate = useAxiosPrivate();
+  const { auth } = useAuth();
+  // const axiosPrivate = useAxiosPrivate();
   console.log("triggering WorkSpacesProvider...");
+  console.log(JSON.stringify(auth));
   // const [workSpaces, setWorkSpaces] = useState<WorkSpaces>(INITIAL_STATE);
 
   const [workSpaces, setWorkSpaces] = useState(() => {
-    const fetchWorkSpaces = async () => {
+    /*const fetchWorkSpaces = async () => {
       try {
         const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
           "/subscription/workspaces",
           {
-            withCredentials: true,
+            // withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${auth?.accessToken}`,
+            },
           },
         );
         const availableWorkSpaces = response.data.memberships.map((wp) => {
@@ -88,15 +94,16 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
       } catch (err) {
         console.error(err);
       }
-    };
+    };*/
     // Get initial value from localStorage or set a default
     console.log("calling useState for workSpaces");
     const LsWorkSpace = localStorage.getItem("workSpace") as string;
     const LsWorkSpaces = localStorage.getItem("workSpaces") as string;
-    if (!LsWorkSpace || !LsWorkSpaces) {
-      console.log(`missing workspace:`);
-      fetchWorkSpaces();
-    }
+    // if (!LsWorkSpace || !LsWorkSpaces) {
+    //   console.log(`missing workspace:`);
+
+    //   fetchWorkSpaces();
+    // }
     const wps: WorkSpaces = {
       availableWorkSpaces: JSON.parse(LsWorkSpaces),
       selectedWorkSpace: JSON.parse(LsWorkSpace),
