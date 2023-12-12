@@ -18,12 +18,14 @@ interface ApiResponse<T> {
 }
 
 type WorkSpaceResponse = {
-  memberships: {
-    company: {
-      id: string;
-      name: string;
-    };
-  }[];
+  userWithCompany: {
+    memberships: {
+      company: {
+        id: string;
+        name: string;
+      };
+    }[];
+  };
 };
 
 const NavBar = (): ReactElement => {
@@ -41,17 +43,12 @@ const NavBar = (): ReactElement => {
         },
       );
 
-      const availableWorkSpaces = response.data.memberships.map((wp) => {
+      const availableWorkSpaces = response.data.userWithCompany.memberships.map((wp) => {
         return { name: wp.company.name, id: wp.company.id };
       });
       console.log(JSON.stringify(response));
-      // setWorkSpaces({
-      //   availableWorkSpaces: availableWorkSpaces,
-      //   selectedWorkSpace: {
-      //     name: response?.data.memberships[0].company.name,
-      //     id: response?.data.memberships[0].company.id,
-      //   },
-      // });
+      console.log(JSON.stringify(availableWorkSpaces));
+      return availableWorkSpaces;
     } catch (err) {
       console.error(err);
     }
@@ -60,8 +57,7 @@ const NavBar = (): ReactElement => {
   /*if (workSpaces.selectedWorkSpace === null) {
     fetchWorkSpaces();
   }*/
-  const workSpace = workSpaces.selectedWorkSpace.name;
-  // const workSpaces = JSON.parse(localStorage.getItem("workSpaces") as string);
+
   useEffect(() => {
     /*const defaultWorkspace = workSpaces.availableWorkSpaces.find(
       (wp: Workspace) => wp.name === workSpace,
@@ -69,7 +65,31 @@ const NavBar = (): ReactElement => {
     if (defaultWorkspace) {
       setSelectedWorkspace(selectedWorkspace);
     }*/
-    // fetchWorkSpaces();
+    const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    console.log("NavBar useEffect");
+    console.log(workSpace);
+    if (workSpace === undefined) {
+      const fetchData = async () => {
+        try {
+          const result = await fetchWorkSpaces();
+          console.log(JSON.stringify(result));
+          setWorkSpaces({
+            availableWorkSpaces: result!,
+            selectedWorkSpace: {
+              name: result![0].name,
+              id: result![0].id,
+            },
+          });
+          return;
+        } catch (error) {
+          console.error("Error fetching workspaces:", error);
+          // Handle errors appropriately, maybe set an error state
+        }
+      };
+
+      fetchData();
+    }
+
     setSelectedWorkspace(workSpace);
   }, [selectedWorkspace]);
 
@@ -120,7 +140,7 @@ const NavBar = (): ReactElement => {
           </ul>
 
           <div>
-            <label>
+            {/* <label>
               workspace
               <select value={selectedWorkspace} onChange={handleChange}>
                 {workSpaces.availableWorkSpaces.map((item: Workspace) => (
@@ -129,7 +149,7 @@ const NavBar = (): ReactElement => {
                   </option>
                 ))}
               </select>
-            </label>
+            </label> */}
           </div>
 
           <div>
