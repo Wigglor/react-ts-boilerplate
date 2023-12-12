@@ -34,6 +34,7 @@ const NavBar = (): ReactElement => {
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
+  console.log(JSON.stringify(workSpaces));
   const fetchWorkSpaces = async () => {
     try {
       const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
@@ -46,25 +47,13 @@ const NavBar = (): ReactElement => {
       const availableWorkSpaces = response.data.userWithCompany.memberships.map((wp) => {
         return { name: wp.company.name, id: wp.company.id };
       });
-      console.log(JSON.stringify(response));
-      console.log(JSON.stringify(availableWorkSpaces));
       return availableWorkSpaces;
     } catch (err) {
       console.error(err);
     }
   };
-  // const workSpace = localStorage.getItem("workSpace");
-  /*if (workSpaces.selectedWorkSpace === null) {
-    fetchWorkSpaces();
-  }*/
 
   useEffect(() => {
-    /*const defaultWorkspace = workSpaces.availableWorkSpaces.find(
-      (wp: Workspace) => wp.name === workSpace,
-    );
-    if (defaultWorkspace) {
-      setSelectedWorkspace(selectedWorkspace);
-    }*/
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
     console.log("NavBar useEffect");
     console.log(workSpace);
@@ -98,8 +87,6 @@ const NavBar = (): ReactElement => {
     const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
       (wp: Workspace) => wp.name === event.target.value,
     );
-    console.log(workSpaces.availableWorkSpaces[1]);
-    console.log(selectedWorkSpace_);
     setSelectedWorkspace(event.target.value);
     setWorkSpaces((prevState) => {
       return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
@@ -140,16 +127,20 @@ const NavBar = (): ReactElement => {
           </ul>
 
           <div>
-            {/* <label>
+            <label>
               workspace
               <select value={selectedWorkspace} onChange={handleChange}>
-                {workSpaces.availableWorkSpaces.map((item: Workspace) => (
-                  <option key={item.id} value={item.name}>
-                    {item.name}
-                  </option>
-                ))}
+                {workSpaces.selectedWorkSpace ? (
+                  workSpaces.availableWorkSpaces.map((item: Workspace) => (
+                    <option key={item.id} value={item.name}>
+                      {item.name}
+                    </option>
+                  ))
+                ) : (
+                  <p>placeholder</p>
+                )}
               </select>
-            </label> */}
+            </label>
           </div>
 
           <div>
