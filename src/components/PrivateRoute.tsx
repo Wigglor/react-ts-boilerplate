@@ -1,4 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { WorkSpacesProvider } from "../context/WorkSpacesProvider";
 import useAuth from "../hooks/useAuth";
 
 type RequireAuthProps = {
@@ -16,7 +17,9 @@ const PrivateRoute = ({ allowedRoles }: RequireAuthProps) => {
   // return auth?.user ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
 
   return allowedRoles?.includes(auth?.role as string) && auth?.user ? (
-    <Outlet />
+    <WorkSpacesProvider>
+      <Outlet />
+    </WorkSpacesProvider>
   ) : auth?.setup === "PENDING" ? (
     <Navigate to="/onboarding" state={{ from: location }} replace />
   ) : (

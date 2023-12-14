@@ -34,8 +34,8 @@ const NavBar = (): ReactElement => {
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
-  console.log(JSON.stringify(workSpaces));
-  const fetchWorkSpaces = async () => {
+  // console.log(JSON.stringify(workSpaces));
+  /*const fetchWorkSpaces = async () => {
     try {
       const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
         "/subscription/workspaces",
@@ -51,17 +51,18 @@ const NavBar = (): ReactElement => {
     } catch (err) {
       console.error(err);
     }
-  };
+  };*/
 
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
-    console.log("NavBar useEffect");
-    console.log(workSpace);
-    if (workSpace === undefined) {
+    // console.log("NavBar useEffect");
+    // console.log(workSpace);
+    /*if (workSpace === undefined) {
       const fetchData = async () => {
         try {
           const result = await fetchWorkSpaces();
-          console.log(JSON.stringify(result));
+          // console.log(JSON.stringify(result));
+          console.log("fetching workspaces...");
           setWorkSpaces({
             availableWorkSpaces: result!,
             selectedWorkSpace: {
@@ -77,7 +78,7 @@ const NavBar = (): ReactElement => {
       };
 
       fetchData();
-    }
+    }*/
 
     setSelectedWorkspace(workSpace);
   }, [selectedWorkspace]);
@@ -137,7 +138,7 @@ const NavBar = (): ReactElement => {
                     </option>
                   ))
                 ) : (
-                  <p>placeholder</p>
+                  <></>
                 )}
               </select>
             </label>

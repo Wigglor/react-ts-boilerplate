@@ -9,7 +9,6 @@ interface ApiResponse {
 const Home = (): ReactElement => {
   const [testData, setTestData] = useState<string>(() => {
     const testData = "test string";
-    console.log(`setting testData: ${testData}`);
     return testData;
   });
   /*const [data, setData] = useState<ApiResponse | null>(null);

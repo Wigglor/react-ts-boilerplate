@@ -44,6 +44,10 @@ const App = () => {
           </Route>
 
           <Route element={<PersistLogin />}>
+            {/* ---------------------------------------------------------- */}
+            {/* PLACE WorkSpacesProvider here */}
+            {/* <WorkSpacesProvider> */}
+            {/* ---------------------------------------------------------- */}
             {/* <Route element={<RequireAuth allowedRoles={[ROLES.pending]} />}> 
                 <Route path="onboarding" element={<Onboarding />} />
               </Route> */}
@@ -79,6 +83,7 @@ const App = () => {
               </Route>
             </Route>
             {/* </Route> */}
+            {/* </WorkSpacesProvider> */}
           </Route>
         </Route>
       </Routes>
