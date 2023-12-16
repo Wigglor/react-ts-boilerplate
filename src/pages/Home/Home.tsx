@@ -32,6 +32,7 @@ const Home = (): ReactElement => {
   return (
     <main className={styles.Home}>
       <h1>Home Page </h1>
+      <p className="p-4 m-5 bg-blue-500 text-white rounded">test style</p>
       {/* {data ? <div>{data.message}</div> : <div>Loading...</div>} */}
     </main>
   );
