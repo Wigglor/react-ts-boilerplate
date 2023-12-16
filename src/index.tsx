@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 // import { store } from "./store/store";
 import { AuthProvider } from "./context/AuthProvider";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
+import "./style.css";
 import "./styles/globals.scss";
 
 const rootElement = document.getElementById("root");
