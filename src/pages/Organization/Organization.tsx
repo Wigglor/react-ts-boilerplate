@@ -116,6 +116,7 @@ const Organization = (): ReactElement => {
         setUser(response.data);
         // isMounted && setUser(response.data.result);
       } catch (err) {
+        console.log("error in organization");
         console.error(err);
       }
     };
