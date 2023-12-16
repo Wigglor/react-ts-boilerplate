@@ -72,49 +72,66 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
 
   const [workSpaces, setWorkSpaces] = useState(() => {
     const fetchWorkSpaces = async () => {
-      try {
-        const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
-          "/subscription/workspaces",
-          {
-            // withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${auth?.accessToken}`,
-            },
-          },
-        );
-        console.log(JSON.stringify(response));
-        const availableWorkSpaces = response.data.userWithCompany.memberships.map((wp) => {
-          return { name: wp.company.name, id: wp.company.id };
-        });
-        wps = {
-          availableWorkSpaces: availableWorkSpaces,
-          selectedWorkSpace: {
-            name: availableWorkSpaces[0].name,
-            id: availableWorkSpaces[0].id,
-          },
-        };
-        // console.log(JSON.stringify(availableWorkSpaces));
+      // try {
+      //   const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
+      //     "/subscription/workspaces",
+      //     {
+      //       // withCredentials: true,
+      //       headers: {
+      //         Authorization: `Bearer ${auth?.accessToken}`,
+      //       },
+      //     },
+      //   );
+      //   console.log(JSON.stringify(response));
+      //   const availableWorkSpaces = response.data.userWithCompany.memberships.map((wp) => {
+      //     return { name: wp.company.name, id: wp.company.id };
+      //   });
+      //   wps = {
+      //     availableWorkSpaces: availableWorkSpaces,
+      //     selectedWorkSpace: {
+      //       name: availableWorkSpaces[0].name,
+      //       id: availableWorkSpaces[0].id,
+      //     },
+      //   };
+      //   // console.log(JSON.stringify(availableWorkSpaces));
 
-        // setWorkSpaces({
-        //   availableWorkSpaces: availableWorkSpaces,
-        //   selectedWorkSpace: {
-        //     name: availableWorkSpaces[0].name,
-        //     id: availableWorkSpaces[0].id,
-        //   },
-        // });
-        return availableWorkSpaces;
-      } catch (err) {
-        console.error(err);
-      }
+      //   // setWorkSpaces({
+      //   //   availableWorkSpaces: availableWorkSpaces,
+      //   //   selectedWorkSpace: {
+      //   //     name: availableWorkSpaces[0].name,
+      //   //     id: availableWorkSpaces[0].id,
+      //   //   },
+      //   // });
+      //   return availableWorkSpaces;
+      // } catch (err) {
+      //   console.error(err);
+      // }
+      // return "fetched wps";
+      return {
+        availableWorkSpaces: [
+          { name: "novaxot181 - wp", id: "302db235-365a-4bf6-a6f0-2974e031c999" },
+          { name: "novaxot181 - wp 2", id: "a582e6be-3a29-48b9-abd3-be67c7ded649" },
+        ],
+        selectedWorkSpace: { name: "novaxot181 - wp", id: "302db235-365a-4bf6-a6f0-2974e031c999" },
+      };
     };
     const LsWorkSpace = localStorage.getItem("workSpace") as string;
     const LsWorkSpaces = localStorage.getItem("workSpaces") as string;
     if (!LsWorkSpace || !LsWorkSpaces) {
       //  fetchWorkSpaces();
+      (async () => {
+        const result = await fetchWorkSpaces();
+        const wps: WorkSpaces = {
+          availableWorkSpaces: result.availableWorkSpaces,
+          selectedWorkSpace: result.selectedWorkSpace,
+        };
+        console.log(result);
+        return wps !== null ? wps : INITIAL_STATE;
+      })();
     }
 
     console.log(typeof LsWorkSpaces);
-    let wps: WorkSpaces = {
+    const wps: WorkSpaces = {
       availableWorkSpaces:
         // LsWorkSpaces !== "" ? JSON.parse(LsWorkSpaces) : INITIAL_STATE.availableWorkSpaces,
         JSON.parse(LsWorkSpaces),
@@ -127,9 +144,16 @@ export const WorkSpacesProvider = ({ children }: WorkSpaceProviderProps) => {
   });
 
   useEffect(() => {
-    // console.log("Setting local storage from useEffect");
+    const handleStorage = () => {
+      // Place for a function responsible for
+      // pulling and displaying local storage data
+      // return "handleStorage"
+    };
+    console.log("Setting local storage from useEffect");
     localStorage.setItem("workSpaces", JSON.stringify(workSpaces.availableWorkSpaces));
     localStorage.setItem("workSpace", JSON.stringify(workSpaces.selectedWorkSpace));
+    // window.addEventListener("storage", handleStorage);
+    // return () => window.removeEventListener("storage", handleStorage);
   }, [workSpaces]);
 
   return (
