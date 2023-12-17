@@ -105,11 +105,11 @@ const NavBar = (): ReactElement => {
             </label>
           </div>
 
-          <div>
+          <div className="relative group">
             <Link to="/account">
               <MdManageAccounts />
             </Link>
-            <ul className="hidden">
+            <ul className="hidden bg-orange-400 absolute w-48 top-3/4 group-hover:block  transform -translate-x-1/2">
               <li>
                 <p>signed in as</p>
                 <p>
