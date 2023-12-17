@@ -7,7 +7,7 @@ import { AuthProvider } from "./context/AuthProvider";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
 import "./style.css";
-import "./styles/globals.scss";
+// import "./styles/globals.scss";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Failed to find the root element");

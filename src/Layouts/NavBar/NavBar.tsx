@@ -4,7 +4,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
-import styles from "./NavBar.module.scss";
+// import styles from "./NavBar.module.scss";
 
 type Workspace = {
   name: string;
@@ -34,52 +34,9 @@ const NavBar = (): ReactElement => {
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
-  // console.log(JSON.stringify(workSpaces));
-  /*const fetchWorkSpaces = async () => {
-    try {
-      const response: ApiResponse<WorkSpaceResponse> = await axiosPrivate.get(
-        "/subscription/workspaces",
-        {
-          withCredentials: true,
-        },
-      );
-
-      const availableWorkSpaces = response.data.userWithCompany.memberships.map((wp) => {
-        return { name: wp.company.name, id: wp.company.id };
-      });
-      return availableWorkSpaces;
-    } catch (err) {
-      console.error(err);
-    }
-  };*/
 
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
-    // console.log("NavBar useEffect");
-    // console.log(workSpace);
-    /*if (workSpace === undefined) {
-      const fetchData = async () => {
-        try {
-          const result = await fetchWorkSpaces();
-          // console.log(JSON.stringify(result));
-          console.log("fetching workspaces...");
-          setWorkSpaces({
-            availableWorkSpaces: result!,
-            selectedWorkSpace: {
-              name: result![0].name,
-              id: result![0].id,
-            },
-          });
-          return;
-        } catch (error) {
-          console.error("Error fetching workspaces:", error);
-          // Handle errors appropriately, maybe set an error state
-        }
-      };
-
-      fetchData();
-    }*/
-
     setSelectedWorkspace(workSpace);
   }, [selectedWorkspace]);
 
@@ -99,21 +56,25 @@ const NavBar = (): ReactElement => {
   };
   return (
     <>
-      <header className={styles.header}>
-        <nav className={styles.navbar}>
-          <ul>
-            <li>
+      {/* <header className={styles.header}> */}
+      <header className="bg-slate-500 fixed top-0 left-0 right-0 z-10">
+        {/* <nav className={styles.navbar}> */}
+        <nav className="flex items-center justify-between p-4">
+          <ul className="flex">
+            <li className="p-2">
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li className="p-2">
               <Link to="/about">About</Link>
             </li>
-            <li>
+            <li className="p-2">
               <Link to="/contact">Contact</Link>
             </li>
-            <li className={styles.dropdown}>
+            {/* <li className={styles.dropdown}> */}
+            <li className="p-2">
               <a href="#">Services</a>
-              <ul className={styles["dropdown-menu"]}>
+              {/* <ul className={styles["dropdown-menu"]}> */}
+              <ul className="hidden">
                 <li>
                   <a href="#">Service 1</a>
                 </li>
@@ -148,7 +109,7 @@ const NavBar = (): ReactElement => {
             <Link to="/account">
               <MdManageAccounts />
             </Link>
-            <ul>
+            <ul className="hidden">
               <li>
                 <p>signed in as</p>
                 <p>

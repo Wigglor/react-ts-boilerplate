@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.scss";
+// import "./App.scss";
 import NavBar from "./Layouts/NavBar/NavBar";
 import Navigation from "./Layouts/Navigation/Navigation";
 import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
-import "./style.css";
+// import "./style.css";
 // import RequireAuth from "./components/requireAuth";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";

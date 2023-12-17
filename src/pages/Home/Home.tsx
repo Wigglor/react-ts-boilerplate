@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 // import axios from "axios";
-import styles from "./Home.module.scss";
+// import styles from "./Home.module.scss";
 
 interface ApiResponse {
   message: string;
@@ -30,9 +30,12 @@ const Home = (): ReactElement => {
   }, []);*/
 
   return (
-    <main className={styles.Home}>
+    // <main className={styles.Home}>
+    <main className="bg-red-600 ml-[12%] mt-20">
       <h1>Home Page </h1>
-      <p className="p-4 m-5 bg-blue-500 text-white rounded">test style</p>
+      <p className="bg-blue-500 text-white rounded">
+        test style test style test style test style test style test style
+      </p>
       {/* {data ? <div>{data.message}</div> : <div>Loading...</div>} */}
     </main>
   );
