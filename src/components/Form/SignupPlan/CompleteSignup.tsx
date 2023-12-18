@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { axiosPrivate } from "../../../api/axios";
 import useAuth from "../../../hooks/useAuth";
+import useWorkSpaces from "../../../hooks/useWorkSpaces";
 import styles from "./CompleteSignup.module.scss";
 
 const stripePromise = loadStripe("your_publishable_key_here");
@@ -17,6 +18,7 @@ type FormData = {
 
 function CompleteSignup() {
   const { setAuth, auth } = useAuth();
+  const { setWorkSpaces } = useWorkSpaces();
   const navigate = useNavigate();
   const {
     register,
@@ -49,6 +51,18 @@ function CompleteSignup() {
         //   setupResponse?.data.user.memberships[0]?.company.account.currentPeriodEnds,
         currentPeriodEnds: new Date(),
         plan: "",
+      });
+      setWorkSpaces({
+        availableWorkSpaces: [
+          {
+            name: setupResponse.data.result.company.name,
+            id: setupResponse.data.result.company.id,
+          },
+        ],
+        selectedWorkSpace: {
+          name: setupResponse.data.result.company.name,
+          id: setupResponse.data.result.company.id,
+        },
       });
       navigate("/", { replace: true });
       console.log(JSON.stringify(setupResponse.data));

@@ -88,22 +88,24 @@ const NavBar = (): ReactElement => {
             </li>
           </ul>
 
-          <div>
-            <label>
-              workspace
-              <select value={selectedWorkspace} onChange={handleChange}>
-                {workSpaces.selectedWorkSpace ? (
-                  workSpaces.availableWorkSpaces.map((item: Workspace) => (
-                    <option key={item.id} value={item.name}>
-                      {item.name}
-                    </option>
-                  ))
-                ) : (
-                  <></>
-                )}
-              </select>
-            </label>
-          </div>
+          {workSpaces.selectedWorkSpace.id.length > 0 && (
+            <div>
+              <label>
+                workspace
+                <select value={selectedWorkspace} onChange={handleChange}>
+                  {workSpaces.selectedWorkSpace ? (
+                    workSpaces.availableWorkSpaces.map((item: Workspace) => (
+                      <option key={item.id} value={item.name}>
+                        {item.name}
+                      </option>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </select>
+              </label>
+            </div>
+          )}
 
           <div className="relative group">
             <Link to="/account">
