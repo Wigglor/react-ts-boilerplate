@@ -1,3 +1,4 @@
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -83,30 +84,31 @@ const ReactFormTest2 = (): ReactElement => {
   };
 
   return (
-    <main className={styles["login-container"]}>
-      <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
-        <h2>Login</h2>
-        {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
-        <div>
-          <label htmlFor="email">email</label>
+    <GoogleOAuthProvider clientId="<your_client_id>">
+      <main className={styles["login-container"]}>
+        <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
+          <h2>Login</h2>
+          {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
+          <div>
+            <label htmlFor="email">email</label>
 
-          <input
-            id="email"
-            {...register("email", {
-              required: "required",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Entered value does not match email format",
-              },
-            })}
-            type="email"
-          />
-          {errors.email && (
-            <span className={styles["error-validation"]} role="alert">
-              *{errors.email.message}
-            </span>
-          )}
-          {/* <input
+            <input
+              id="email"
+              {...register("email", {
+                required: "required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              })}
+              type="email"
+            />
+            {errors.email && (
+              <span className={styles["error-validation"]} role="alert">
+                *{errors.email.message}
+              </span>
+            )}
+            {/* <input
             id="username"
             {...register("username", {
               required: "required",
@@ -122,42 +124,52 @@ const ReactFormTest2 = (): ReactElement => {
               *{errors.username.message}
             </span>
           )} */}
-          <label htmlFor="password">password</label>
-          <input
-            id="password"
-            {...register("password", {
-              required: "required",
-              minLength: {
-                value: 5,
-                message: "min length is 5",
-              },
-            })}
-            type="password"
+            <label htmlFor="password">password</label>
+            <input
+              id="password"
+              {...register("password", {
+                required: "required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
+              })}
+              type="password"
+            />
+            {errors.password && (
+              <span className={styles["error-validation"]} role="alert">
+                {errors.password.message}
+              </span>
+            )}
+          </div>
+          <button type="submit" className={styles["login-button"]}>
+            Login
+          </button>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
           />
-          {errors.password && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
-        <button type="submit" className={styles["login-button"]}>
-          Login
-        </button>
-        <div className={styles.or}>
-          <p>Or</p>
-        </div>
-        <div className={styles["register-link"]}>
-          <Link className={styles["register-link__text"]} to="/register">
-            Register
-          </Link>
-        </div>
-        <div className={styles["forgotpassword-link"]}>
-          <Link className={styles["forgotpassword-link__text"]} to="/forgot-password">
-            Forgot your password?
-          </Link>
-        </div>
-      </form>
-    </main>
+          ;
+          <div className={styles.or}>
+            <p>Or</p>
+          </div>
+          <div className={styles["register-link"]}>
+            <Link className={styles["register-link__text"]} to="/register">
+              Register
+            </Link>
+          </div>
+          <div className={styles["forgotpassword-link"]}>
+            <Link className={styles["forgotpassword-link__text"]} to="/forgot-password">
+              Forgot your password?
+            </Link>
+          </div>
+        </form>
+      </main>
+    </GoogleOAuthProvider>
   );
 };
 
