@@ -1,5 +1,6 @@
 import App from "./App";
 // import reportWebVitals from "./reportWebVitals";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 // import { store } from "./store/store";
@@ -15,11 +16,13 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
-    <AuthProvider>
-      {/* <WorkSpacesProvider> */}
-      <App />
-      {/* </WorkSpacesProvider> */}
-    </AuthProvider>
+    <GoogleOAuthProvider clientId="523632201518-emi1ioba9vvudkc2u8on28gph5cc2cu0.apps.googleusercontent.com">
+      <AuthProvider>
+        {/* <WorkSpacesProvider> */}
+        <App />
+        {/* </WorkSpacesProvider> */}
+      </AuthProvider>
+    </GoogleOAuthProvider>
   </BrowserRouter>,
 
   // </React.StrictMode>,
