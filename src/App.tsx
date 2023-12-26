@@ -22,6 +22,7 @@ import Register2 from "./pages/Register/Register2";
 import RegistrationConfirmation from "./pages/RegistrationConfirmation/RegistrationConfirmation";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
+import SocialCallback from "./pages/SocialCallback/SocialCallback";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 
 const App = () => {
@@ -62,6 +63,7 @@ const App = () => {
             <Route element={<PublicRoute />}>
               <Route path="login" element={<ReactFormTest2 />} />
               <Route path="register" element={<Register2 />} />
+              <Route path="socialcallback" element={<SocialCallback />} />
               <Route path="invite" element={<Invite />} />
               <Route path="forgot-password" element={<ForgotPassword />} />
               <Route path="reset" element={<ResetPassword />} />
