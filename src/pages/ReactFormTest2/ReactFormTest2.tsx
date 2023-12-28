@@ -56,7 +56,7 @@ const ReactFormTest2 = (): ReactElement => {
 
   const getAwsCredentials = async (googleToken: string) => {
     const AwsBody = new URLSearchParams({
-      // grant_type: "authorization_code",
+      grant_type: "authorization_code",
       client_id: "3drrlf4iharl544lebn61viqdm",
       redirect_uri: "http://localhost:8080/socialcallback",
       code: googleToken,
@@ -64,13 +64,16 @@ const ReactFormTest2 = (): ReactElement => {
     console.log(AwsBody.toString());
     try {
       const response = await axios.post(
-        "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/token",
-        AwsBody.toString(),
+        // "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/token",
+        "/social-token",
+        // AwsBody.toString(),
+        // AwsBody,
+        googleToken,
         // JSON.stringify(AwsBody),
-        {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          // withCredentials: true,
-        },
+        // {
+        //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        //   // withCredentials: true,
+        // },
       );
       console.log(response);
     } catch (err) {
@@ -81,7 +84,7 @@ const ReactFormTest2 = (): ReactElement => {
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       console.log(codeResponse);
-      // getAwsCredentials(codeResponse.code);
+      getAwsCredentials(codeResponse.code);
     },
     flow: "auth-code",
   });
