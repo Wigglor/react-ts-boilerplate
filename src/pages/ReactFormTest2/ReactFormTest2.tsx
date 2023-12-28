@@ -1,3 +1,4 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -52,6 +53,38 @@ const ReactFormTest2 = (): ReactElement => {
     // "https://test-2023-12.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&response_type=code&client_id=4drb1mir2pvtr2auf1b7puj449&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=email+openid+profile+aws.cognito.signin.user.admin";
     window.location.href = cognitoAuthUrl;
   };
+
+  const getAwsCredentials = async (googleToken: string) => {
+    const AwsBody = new URLSearchParams({
+      // grant_type: "authorization_code",
+      client_id: "3drrlf4iharl544lebn61viqdm",
+      redirect_uri: "http://localhost:8080/socialcallback",
+      code: googleToken,
+    });
+    console.log(AwsBody.toString());
+    try {
+      const response = await axios.post(
+        "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/token",
+        AwsBody.toString(),
+        // JSON.stringify(AwsBody),
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          // withCredentials: true,
+        },
+      );
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      console.log(codeResponse);
+      // getAwsCredentials(codeResponse.code);
+    },
+    flow: "auth-code",
+  });
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data: LoginFormValues) => {
     try {
@@ -174,6 +207,7 @@ const ReactFormTest2 = (): ReactElement => {
         />
         ; */}
         <button onClick={handleGoogleLogin}>Login with Google</button>
+        <button onClick={() => login()}>Sign in with Google 🚀</button>;
         <div className={styles.or}>
           <p>Or</p>
         </div>
