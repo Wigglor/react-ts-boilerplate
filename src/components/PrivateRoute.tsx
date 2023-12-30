@@ -9,6 +9,7 @@ type RequireAuthProps = {
 const PrivateRoute = ({ allowedRoles }: RequireAuthProps) => {
   const { auth } = useAuth();
   const location = useLocation();
+  console.log("PrivateRoute");
 
   const from = location.state?.from?.pathname || "/";
 

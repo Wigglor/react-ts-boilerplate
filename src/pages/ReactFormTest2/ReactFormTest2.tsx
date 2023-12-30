@@ -1,4 +1,3 @@
-import { useGoogleLogin } from "@react-oauth/google";
 import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -48,13 +47,13 @@ const ReactFormTest2 = (): ReactElement => {
   const handleGoogleLogin = () => {
     // const cognitoAuthUrl = `https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/authorize?response_type=code&client_id=3drrlf4iharl544lebn61viqdm&identity_provider=Google&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=openid+profile+aws.cognito.signin.user.admin`;
     const cognitoAuthUrl =
-      "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&response_type=code&client_id=3drrlf4iharl544lebn61viqdm&redirect_uri=http://localhost:8080/socialcallback&state=STATEscope=email+openid+profile+aws.cognito.signin.user.admin&prompt=login";
+      "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&prompt=select_account&response_type=code&client_id=3drrlf4iharl544lebn61viqdm&redirect_uri=http://localhost:8080/socialcallback&state=STATEscope=email+openid+profile+aws.cognito.signin.user.admin&prompt=login";
     // "https://test-2023-10.auth.eu-north-1.amazoncognito.com/login?response_type=code&client_id=3drrlf4iharl544lebn61viqdm&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=openid+profile+aws.cognito.signin.user.admin";
     // "https://test-2023-12.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&response_type=code&client_id=4drb1mir2pvtr2auf1b7puj449&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=email+openid+profile+aws.cognito.signin.user.admin";
     window.location.href = cognitoAuthUrl;
   };
 
-  const getAwsCredentials = async (googleToken: string) => {
+  /*const getAwsCredentials = async (googleToken: string) => {
     const AwsBody = new URLSearchParams({
       grant_type: "authorization_code",
       client_id: "3drrlf4iharl544lebn61viqdm",
@@ -87,7 +86,7 @@ const ReactFormTest2 = (): ReactElement => {
       getAwsCredentials(codeResponse.code);
     },
     flow: "auth-code",
-  });
+  });*/
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data: LoginFormValues) => {
     try {
@@ -109,7 +108,7 @@ const ReactFormTest2 = (): ReactElement => {
         currentPeriodEnds: response?.data.user.memberships[0]?.company?.account.currentPeriodEnds,
         plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
-
+      console.log("setting auth.....................................................");
       const workSpaces = response?.data.user.memberships.map((item: Item) => {
         return { name: item.company.name, id: item.company.id };
       }); // extend this and return obj with company id etc as well
@@ -122,10 +121,13 @@ const ReactFormTest2 = (): ReactElement => {
         },
       });
 
+      console.log("setting workspace.....................................................");
+
       if (response?.data.setup === "PENDING") {
         navigate("/onboarding", { replace: true });
       } else {
         navigate(from, { replace: true });
+        // navigate("/organization", { replace: true });
       }
     } catch (err: any) {
       const errorMessage = err.response.data.message;
