@@ -6,6 +6,8 @@ import useAuth from "../../hooks/useAuth";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
 import styles from "./ReactFormTest2.module.scss";
 
+// import { useGoogleLogin } from "@react-oauth/google";
+
 const LOGIN_URL = "/signin";
 
 type LoginFormValues = {
@@ -47,46 +49,46 @@ const ReactFormTest2 = (): ReactElement => {
   const handleGoogleLogin = () => {
     // const cognitoAuthUrl = `https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/authorize?response_type=code&client_id=3drrlf4iharl544lebn61viqdm&identity_provider=Google&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=openid+profile+aws.cognito.signin.user.admin`;
     const cognitoAuthUrl =
-      "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&prompt=select_account&response_type=code&client_id=3drrlf4iharl544lebn61viqdm&redirect_uri=http://localhost:8080/socialcallback&state=STATEscope=email+openid+profile+aws.cognito.signin.user.admin&prompt=login";
+      "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&response_type=code&client_id=3drrlf4iharl544lebn61viqdm&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=email+openid+profile+aws.cognito.signin.user.admin";
     // "https://test-2023-10.auth.eu-north-1.amazoncognito.com/login?response_type=code&client_id=3drrlf4iharl544lebn61viqdm&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=openid+profile+aws.cognito.signin.user.admin";
     // "https://test-2023-12.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&response_type=code&client_id=4drb1mir2pvtr2auf1b7puj449&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=email+openid+profile+aws.cognito.signin.user.admin";
     window.location.href = cognitoAuthUrl;
   };
 
-  /*const getAwsCredentials = async (googleToken: string) => {
-    const AwsBody = new URLSearchParams({
-      grant_type: "authorization_code",
-      client_id: "3drrlf4iharl544lebn61viqdm",
-      redirect_uri: "http://localhost:8080/socialcallback",
-      code: googleToken,
-    });
-    console.log(AwsBody.toString());
-    try {
-      const response = await axios.post(
-        // "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/token",
-        "/social-token",
-        // AwsBody.toString(),
-        // AwsBody,
-        { googleToken: googleToken },
-        // JSON.stringify(AwsBody),
-        // {
-        //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        //   // withCredentials: true,
-        // },
-      );
-      console.log(response);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const getAwsCredentials = async (googleToken: string) => {
+  //   const AwsBody = new URLSearchParams({
+  //     grant_type: "authorization_code",
+  //     client_id: "3drrlf4iharl544lebn61viqdm",
+  //     redirect_uri: "http://localhost:8080/socialcallback",
+  //     code: googleToken,
+  //   });
+  //   console.log(AwsBody.toString());
+  //   try {
+  //     const response = await axios.post(
+  //       // "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/token",
+  //       "/social-token",
+  //       // AwsBody.toString(),
+  //       // AwsBody,
+  //       { googleToken: googleToken },
+  //       // JSON.stringify(AwsBody),
+  //       // {
+  //       //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //       //   // withCredentials: true,
+  //       // },
+  //     );
+  //     console.log(response);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      console.log(codeResponse);
-      getAwsCredentials(codeResponse.code);
-    },
-    flow: "auth-code",
-  });*/
+  // const login = useGoogleLogin({
+  //   onSuccess: (codeResponse) => {
+  //     console.log(codeResponse);
+  //     // getAwsCredentials(codeResponse.code);
+  //   },
+  //   // flow: "auth-code",
+  // });
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data: LoginFormValues) => {
     try {
@@ -211,7 +213,7 @@ const ReactFormTest2 = (): ReactElement => {
           useOneTap
         />
         ; */}
-        <button onClick={handleGoogleLogin}>Login with Google</button>
+        {/* <button onClick={handleGoogleLogin}>Login with Google</button> */}
         {/* <button onClick={() => login()}>Sign in with Google 🚀</button>; */}
         <div className={styles.or}>
           <p>Or</p>
@@ -227,6 +229,8 @@ const ReactFormTest2 = (): ReactElement => {
           </Link>
         </div>
       </form>
+
+      <button onClick={handleGoogleLogin}>Login with Google</button>
     </main>
     // </GoogleOAuthProvider>
   );
