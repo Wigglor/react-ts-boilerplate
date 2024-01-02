@@ -113,6 +113,7 @@ const Organization = (): ReactElement => {
           },
         );
         // setUser(response.data.Username);
+        // console.log(JSON.stringify(response.data.memberships));
         setUser(response.data);
         // isMounted && setUser(response.data.result);
       } catch (err) {
@@ -173,7 +174,8 @@ const Organization = (): ReactElement => {
                 <li key={membership.id}>
                   <div>
                     <p>{membership.accountEmail}</p>
-                    <p>status: {membership.user.verificationStatus}</p>
+                    {/* <p>status: {membership.user.verificationStatus}</p> */}
+                    <p>acc email: {membership.accountEmail}</p>
                   </div>
                 </li>
               ))}

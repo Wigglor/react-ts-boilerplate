@@ -38,6 +38,7 @@ const NavBar = (): ReactElement => {
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
     setSelectedWorkspace(workSpace);
+    console.log(JSON.stringify(`selectedWorkspace: ${selectedWorkspace}`));
   }, [selectedWorkspace]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -49,6 +50,8 @@ const NavBar = (): ReactElement => {
     setWorkSpaces((prevState) => {
       return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
     });
+    console.log(`setSelectedWorkspace: ${selectedWorkspace}`);
+    console.log(`workSpaces: ${JSON.stringify(workSpaces.selectedWorkSpace)}`);
   };
 
   const signOut = async () => {

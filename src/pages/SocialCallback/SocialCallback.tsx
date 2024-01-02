@@ -30,6 +30,10 @@ const SocialCallback = (): ReactElement => {
           // AwsBody.toString(),
           // AwsBody,
           { googleToken: code },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          },
           // JSON.stringify(AwsBody),
           // {
           //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
