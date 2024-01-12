@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 // import "./App.scss";
 import NavBar from "./Layouts/NavBar/NavBar";
 import Navigation from "./Layouts/Navigation/Navigation";
@@ -6,6 +7,8 @@ import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
 // import "./style.css";
 // import RequireAuth from "./components/requireAuth";
+import "preline/preline";
+import { IStaticMethods } from "preline/preline";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
@@ -24,8 +27,19 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
 import SocialCallback from "./pages/SocialCallback/SocialCallback";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
 
 const App = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.HSStaticMethods.autoInit();
+  }, [location.pathname]);
+
   const ROLES = {
     pending: "PENDING",
     user: "USER",

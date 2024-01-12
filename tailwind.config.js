@@ -2,6 +2,8 @@
 // export const content = ["./dist/*.html"];
 export const content = ["./src/**/*.{js,jsx,ts,tsx}"];
 export const theme = {
+  content: ["./node_modules/preline/preline.js"],
+  plugins: [require("preline/plugin")],
   // screens: {
   //   sm: "480px",
   //   md: "768px",

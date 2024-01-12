@@ -32,14 +32,20 @@ const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
-  const [selectedWorkspace, setSelectedWorkspace] = useState<string>("");
+  const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
+
+  /*useEffect(() => {
+    const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    setSelectedWorkspace(workSpace);
+    console.log(JSON.stringify(`selectedWorkspace: ${selectedWorkspace}`));
+  }, [selectedWorkspace]);*/
 
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
     setSelectedWorkspace(workSpace);
-    console.log(JSON.stringify(`selectedWorkspace: ${selectedWorkspace}`));
-  }, [selectedWorkspace]);
+    console.log(JSON.stringify(`selectedWorkspace: ${stateSelectedWorkspace}`));
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(event.target.value);
@@ -50,7 +56,7 @@ const NavBar = (): ReactElement => {
     setWorkSpaces((prevState) => {
       return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
     });
-    console.log(`setSelectedWorkspace: ${selectedWorkspace}`);
+    console.log(`setSelectedWorkspace: ${stateSelectedWorkspace}`);
     console.log(`workSpaces: ${JSON.stringify(workSpaces.selectedWorkSpace)}`);
   };
 
@@ -95,7 +101,11 @@ const NavBar = (): ReactElement => {
             <div>
               <label>
                 workspace
-                <select value={selectedWorkspace} onChange={handleChange}>
+                <select
+                  value={stateSelectedWorkspace}
+                  onChange={handleChange}
+                  className="py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                >
                   {workSpaces.selectedWorkSpace ? (
                     workSpaces.availableWorkSpaces.map((item: Workspace) => (
                       <option key={item.id} value={item.name}>

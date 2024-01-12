@@ -36,6 +36,7 @@ const Home = (): ReactElement => {
       <p className="bg-blue-500 text-white rounded">
         test style test style test style test style test style test style
       </p>
+
       {/* {data ? <div>{data.message}</div> : <div>Loading...</div>} */}
     </main>
   );
