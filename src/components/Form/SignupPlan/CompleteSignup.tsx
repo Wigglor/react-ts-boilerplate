@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { axiosPrivate } from "../../../api/axios";
 import useAuth from "../../../hooks/useAuth";
 import useWorkSpaces from "../../../hooks/useWorkSpaces";
-import styles from "./CompleteSignup.module.scss";
 
 const stripePromise = loadStripe("your_publishable_key_here");
 
@@ -74,10 +73,10 @@ function CompleteSignup() {
   };
 
   return (
-    <main className={styles["onboarding"]}>
-      <div className={styles["onboarding-setup"]}>
+    <main>
+      <div>
         {
-          <form onSubmit={handleSubmit(onSubmit)} className={styles["onboarding-setup__form"]}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="workspace">Please name your account</label>
             <input
               id="workspace"
@@ -100,6 +99,32 @@ function CompleteSignup() {
         }
       </div>
     </main>
+    // <main className={styles["onboarding"]}>
+    //   <div className={styles["onboarding-setup"]}>
+    //     {
+    //       <form onSubmit={handleSubmit(onSubmit)} className={styles["onboarding-setup__form"]}>
+    //         <label htmlFor="workspace">Please name your account</label>
+    //         <input
+    //           id="workspace"
+    //           type="text"
+    //           placeholder="Account Name"
+    //           {...register("workspace", {
+    //             required: "required",
+    //             minLength: {
+    //               value: 5,
+    //               message: "min length is 5",
+    //             },
+    //           })}
+    //         />
+    //         {errors.workspace && <p>This field is required</p>}
+
+    //         <button type="submit" disabled={loading}>
+    //           {loading ? "Signing Up" : "Continue"}
+    //         </button>
+    //       </form>
+    //     }
+    //   </div>
+    // </main>
   );
 }
 

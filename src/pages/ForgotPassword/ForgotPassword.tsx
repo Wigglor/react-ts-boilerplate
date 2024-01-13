@@ -4,7 +4,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
-import styles from "./ForgotPassword.module.scss";
 
 const FORGOT_URL = "/forgotpassword";
 
@@ -57,10 +56,10 @@ const ForgotPassword = (): ReactElement => {
   };
 
   return (
-    <main className={styles["login-container"]}>
-      <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
+    <main>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Reset Password</h2>
-        {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
+        {errMsg && <div>{errMsg}</div>}
         <div>
           <label htmlFor="email">email</label>
           <input
@@ -74,17 +73,39 @@ const ForgotPassword = (): ReactElement => {
             })}
             type="email"
           />
-          {errors.email && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.email.message}
-            </span>
-          )}
+          {errors.email && <span role="alert">{errors.email.message}</span>}
         </div>
-        <button type="submit" className={styles["login-button"]}>
-          Send Reset Email
-        </button>
+        <button type="submit">Send Reset Email</button>
       </form>
     </main>
+    // <main className={styles["login-container"]}>
+    //   <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
+    //     <h2>Reset Password</h2>
+    //     {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
+    //     <div>
+    //       <label htmlFor="email">email</label>
+    //       <input
+    //         id="email"
+    //         {...register("email", {
+    //           required: "required",
+    //           pattern: {
+    //             value: /\S+@\S+\.\S+/,
+    //             message: "Entered value does not match email format",
+    //           },
+    //         })}
+    //         type="email"
+    //       />
+    //       {errors.email && (
+    //         <span className={styles["error-validation"]} role="alert">
+    //           {errors.email.message}
+    //         </span>
+    //       )}
+    //     </div>
+    //     <button type="submit" className={styles["login-button"]}>
+    //       Send Reset Email
+    //     </button>
+    //   </form>
+    // </main>
   );
 };
 

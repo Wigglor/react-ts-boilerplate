@@ -30,15 +30,19 @@ const Home = (): ReactElement => {
   }, []);*/
 
   return (
-    // <main className={styles.Home}>
-    <main className="bg-red-600 ml-[12%] mt-20">
+    <main>
       <h1>Home Page </h1>
-      <p className="bg-blue-500 text-white rounded">
-        test style test style test style test style test style test style
-      </p>
-
-      {/* {data ? <div>{data.message}</div> : <div>Loading...</div>} */}
+      <p>test style test style test style test style test style test style</p>
     </main>
+    // <main className={styles.Home}>
+    // <main className="bg-red-600 ml-[12%] mt-20">
+    //   <h1>Home Page </h1>
+    //   <p className="bg-blue-500 text-white rounded">
+    //     test style test style test style test style test style test style
+    //   </p>
+
+    //   {/* {data ? <div>{data.message}</div> : <div>Loading...</div>} */}
+    // </main>
   );
 };
 

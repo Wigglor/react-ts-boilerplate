@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import styles from "./Premium.module.scss";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -32,19 +31,30 @@ const Premium = (): ReactElement => {
   if (["PLAN2", "PLAN3"].includes(auth?.plan as string)) {
     return (
       <>
-        <main className={styles.Premium}>
+        <main>
           <h1>Premium</h1>
           <p>You have access to this functionality</p>
         </main>
       </>
+      // <>
+      //   <main className={styles.Premium}>
+      //     <h1>Premium</h1>
+      //     <p>You have access to this functionality</p>
+      //   </main>
+      // </>
     );
   } else {
     return (
       <>
-        <main className={styles.Premium}>
+        <main>
           <h1>Premium</h1>
         </main>
       </>
+      // <>
+      //   <main className={styles.Premium}>
+      //     <h1>Premium</h1>
+      //   </main>
+      // </>
     );
   }
 };

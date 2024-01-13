@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
-import styles from "./ReactFormTest2.module.scss";
 
 // import { useGoogleLogin } from "@react-oauth/google";
 
@@ -137,13 +136,12 @@ const ReactFormTest2 = (): ReactElement => {
     }
     reset();
   };
-
   return (
     // <GoogleOAuthProvider clientId="523632201518-emi1ioba9vvudkc2u8on28gph5cc2cu0.apps.googleusercontent.com">
-    <main className={styles["login-container"]}>
-      <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
+    <main>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Login</h2>
-        {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
+        {errMsg && <div>{errMsg}</div>}
         <div>
           <label htmlFor="email">email</label>
 
@@ -158,11 +156,7 @@ const ReactFormTest2 = (): ReactElement => {
             })}
             type="email"
           />
-          {errors.email && (
-            <span className={styles["error-validation"]} role="alert">
-              *{errors.email.message}
-            </span>
-          )}
+          {errors.email && <span role="alert">*{errors.email.message}</span>}
           {/* <input
             id="username"
             {...register("username", {
@@ -191,15 +185,9 @@ const ReactFormTest2 = (): ReactElement => {
             })}
             type="password"
           />
-          {errors.password && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.password.message}
-            </span>
-          )}
+          {errors.password && <span role="alert">{errors.password.message}</span>}
         </div>
-        <button type="submit" className={styles["login-button"]}>
-          Login
-        </button>
+        <button type="submit">Login</button>
         {/* <GoogleLogin
           onSuccess={(credentialResponse) => {
             console.log(credentialResponse);
@@ -215,18 +203,14 @@ const ReactFormTest2 = (): ReactElement => {
         ; */}
         {/* <button onClick={handleGoogleLogin}>Login with Google</button> */}
         {/* <button onClick={() => login()}>Sign in with Google 🚀</button>; */}
-        <div className={styles.or}>
+        <div>
           <p>Or</p>
         </div>
-        <div className={styles["register-link"]}>
-          <Link className={styles["register-link__text"]} to="/register">
-            Register
-          </Link>
+        <div>
+          <Link to="/register">Register</Link>
         </div>
-        <div className={styles["forgotpassword-link"]}>
-          <Link className={styles["forgotpassword-link__text"]} to="/forgot-password">
-            Forgot your password?
-          </Link>
+        <div>
+          <Link to="/forgot-password">Forgot your password?</Link>
         </div>
       </form>
 
@@ -235,5 +219,103 @@ const ReactFormTest2 = (): ReactElement => {
     // </GoogleOAuthProvider>
   );
 };
+
+//   return (
+//     // <GoogleOAuthProvider clientId="523632201518-emi1ioba9vvudkc2u8on28gph5cc2cu0.apps.googleusercontent.com">
+//     <main className={styles["login-container"]}>
+//       <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
+//         <h2>Login</h2>
+//         {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
+//         <div>
+//           <label htmlFor="email">email</label>
+
+//           <input
+//             id="email"
+//             {...register("email", {
+//               required: "required",
+//               pattern: {
+//                 value: /\S+@\S+\.\S+/,
+//                 message: "Entered value does not match email format",
+//               },
+//             })}
+//             type="email"
+//           />
+//           {errors.email && (
+//             <span className={styles["error-validation"]} role="alert">
+//               *{errors.email.message}
+//             </span>
+//           )}
+//           {/* <input
+//             id="username"
+//             {...register("username", {
+//               required: "required",
+//               minLength: {
+//                 value: 5,
+//                 message: "min length is 5",
+//               },
+//             })}
+//             type="text"
+//           />
+//           {errors.username && (
+//             <span className={styles["error-validation"]} role="alert">
+//               *{errors.username.message}
+//             </span>
+//           )} */}
+//           <label htmlFor="password">password</label>
+//           <input
+//             id="password"
+//             {...register("password", {
+//               required: "required",
+//               minLength: {
+//                 value: 5,
+//                 message: "min length is 5",
+//               },
+//             })}
+//             type="password"
+//           />
+//           {errors.password && (
+//             <span className={styles["error-validation"]} role="alert">
+//               {errors.password.message}
+//             </span>
+//           )}
+//         </div>
+//         <button type="submit" className={styles["login-button"]}>
+//           Login
+//         </button>
+//         {/* <GoogleLogin
+//           onSuccess={(credentialResponse) => {
+//             console.log(credentialResponse);
+//             console.log(credentialResponse);
+
+//             // setGoogleUser(credentialResponse);
+//           }}
+//           onError={() => {
+//             console.log("Login Failed");
+//           }}
+//           useOneTap
+//         />
+//         ; */}
+//         {/* <button onClick={handleGoogleLogin}>Login with Google</button> */}
+//         {/* <button onClick={() => login()}>Sign in with Google 🚀</button>; */}
+//         <div className={styles.or}>
+//           <p>Or</p>
+//         </div>
+//         <div className={styles["register-link"]}>
+//           <Link className={styles["register-link__text"]} to="/register">
+//             Register
+//           </Link>
+//         </div>
+//         <div className={styles["forgotpassword-link"]}>
+//           <Link className={styles["forgotpassword-link__text"]} to="/forgot-password">
+//             Forgot your password?
+//           </Link>
+//         </div>
+//       </form>
+
+//       <button onClick={handleGoogleLogin}>Login with Google</button>
+//     </main>
+//     // </GoogleOAuthProvider>
+//   );
+// };
 
 export default ReactFormTest2;

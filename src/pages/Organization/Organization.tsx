@@ -4,7 +4,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
-import styles from "./Organization.module.scss";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -162,11 +161,11 @@ const Organization = (): ReactElement => {
   }
 
   return (
-    <main className={styles.Account}>
-      {successMessage && <p className={styles["Account-success"]}>{successMessage}</p>}
-      {errorMessage && <p className={styles["Account-error"]}>{errorMessage}</p>}
+    <main>
+      {successMessage && <p>{successMessage}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
       <div></div>
-      <div className={styles.info}>
+      <div>
         <div>
           <ul>
             {user &&
@@ -195,15 +194,53 @@ const Organization = (): ReactElement => {
             })}
             type="email"
           />
-          {errors.email && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.email.message}
-            </span>
-          )}
+          {errors.email && <span role="alert">{errors.email.message}</span>}
           <button type="submit">Submit</button>
         </form>
       </div>
     </main>
+    // <main className={styles.Account}>
+    //   {successMessage && <p className={styles["Account-success"]}>{successMessage}</p>}
+    //   {errorMessage && <p className={styles["Account-error"]}>{errorMessage}</p>}
+    //   <div></div>
+    //   <div className={styles.info}>
+    //     <div>
+    //       <ul>
+    //         {user &&
+    //           user.result.memberships.map((membership) => (
+    //             <li key={membership.id}>
+    //               <div>
+    //                 <p>{membership.accountEmail}</p>
+    //                 {/* <p>status: {membership.user.verificationStatus}</p> */}
+    //                 <p>acc email: {membership.accountEmail}</p>
+    //               </div>
+    //             </li>
+    //           ))}
+    //       </ul>
+    //     </div>
+
+    //     <form onSubmit={handleSubmit(onSubmit)}>
+    //       <label htmlFor="email">email</label>
+    //       <input
+    //         id="email"
+    //         {...register("email", {
+    //           required: "required",
+    //           pattern: {
+    //             value: /\S+@\S+\.\S+/,
+    //             message: "Entered value does not match email format",
+    //           },
+    //         })}
+    //         type="email"
+    //       />
+    //       {errors.email && (
+    //         <span className={styles["error-validation"]} role="alert">
+    //           {errors.email.message}
+    //         </span>
+    //       )}
+    //       <button type="submit">Submit</button>
+    //     </form>
+    //   </div>
+    // </main>
   );
 };
 

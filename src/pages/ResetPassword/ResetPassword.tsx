@@ -3,7 +3,6 @@ import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import styles from "./ResetPassword.module.scss";
 
 const RESET_URL = "/resetpassword";
 
@@ -64,11 +63,11 @@ const ResetPassword = (): ReactElement => {
   };
 
   return (
-    <main className={styles["reset-container"]}>
-      <form className={styles["reset-form"]} onSubmit={handleSubmit(onSubmit)}>
+    <main>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Reset Password</h2>
-        {errMsg && <div className={styles["reset-error"]}>{errMsg}</div>}
-        {successMsg && <div className={styles["reset-success"]}>{successMsg}</div>}
+        {errMsg && <div>{errMsg}</div>}
+        {successMsg && <div>{successMsg}</div>}
         <div>
           <label htmlFor="password">password</label>
           <input
@@ -82,11 +81,7 @@ const ResetPassword = (): ReactElement => {
             })}
             type="password"
           />
-          {errors.password && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.password.message}
-            </span>
-          )}
+          {errors.password && <span role="alert">{errors.password.message}</span>}
 
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
@@ -101,17 +96,59 @@ const ResetPassword = (): ReactElement => {
             })}
             type="password"
           />
-          {errors.confirmPassword && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.confirmPassword.message}
-            </span>
-          )}
+          {errors.confirmPassword && <span role="alert">{errors.confirmPassword.message}</span>}
         </div>
-        <button type="submit" className={styles["login-button"]}>
-          Reset Password
-        </button>
+        <button type="submit">Reset Password</button>
       </form>
     </main>
+    // <main className={styles["reset-container"]}>
+    //   <form className={styles["reset-form"]} onSubmit={handleSubmit(onSubmit)}>
+    //     <h2>Reset Password</h2>
+    //     {errMsg && <div className={styles["reset-error"]}>{errMsg}</div>}
+    //     {successMsg && <div className={styles["reset-success"]}>{successMsg}</div>}
+    //     <div>
+    //       <label htmlFor="password">password</label>
+    //       <input
+    //         id="password"
+    //         {...register("password", {
+    //           required: "required",
+    //           minLength: {
+    //             value: 5,
+    //             message: "min length is 5",
+    //           },
+    //         })}
+    //         type="password"
+    //       />
+    //       {errors.password && (
+    //         <span className={styles["error-validation"]} role="alert">
+    //           {errors.password.message}
+    //         </span>
+    //       )}
+
+    //       <label htmlFor="confirmPassword">Confirm Password</label>
+    //       <input
+    //         id="confirmPassword"
+    //         {...register("confirmPassword", {
+    //           validate: (value) => value === password || "The passwords do not match",
+    //           required: "required",
+    //           minLength: {
+    //             value: 5,
+    //             message: "min length is 5",
+    //           },
+    //         })}
+    //         type="password"
+    //       />
+    //       {errors.confirmPassword && (
+    //         <span className={styles["error-validation"]} role="alert">
+    //           {errors.confirmPassword.message}
+    //         </span>
+    //       )}
+    //     </div>
+    //     <button type="submit" className={styles["login-button"]}>
+    //       Reset Password
+    //     </button>
+    //   </form>
+    // </main>
   );
 };
 

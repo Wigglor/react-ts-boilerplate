@@ -216,8 +216,97 @@ ReactElement => {
     }
   };
   return (
-    <main className={styles["onboarding"]}>
-      <div className={styles["pricing-widget"]}>
+    // <main className={styles["onboarding"]}>
+    //   <div className={styles["pricing-widget"]}>
+    //     {paidPlan
+    //       ? // <>
+    //         //   <h1>hej</h1>
+    //         //   <p>{JSON.stringify(prices)}</p>
+    //         // </>
+    //         prices &&
+    //         prices.prices?.data.map((price) =>
+    //           price.lookup_key === auth.plan ? (
+    //             <div key={price.id} className={styles["plan"]}>
+    //               <h2>{price.lookup_key}</h2>
+    //               <p>
+    //                 <b>Current Plan</b>
+    //               </p>
+
+    //               {/* <button onClick={() => handlePlanClick(price)}> Start {price.lookup_key} </button> */}
+    //             </div>
+    //           ) : (
+    //             <div key={price.id} className={styles["plan"]}>
+    //               <h2>{price.lookup_key}</h2>
+    //               <p>
+    //                 Price: {price.unit_amount_decimal} {price.currency}
+    //               </p>
+
+    //               <button onClick={() => handlePlanClick(price)}>
+    //                 {" "}
+    //                 Upgrade to {price.lookup_key}{" "}
+    //               </button>
+    //             </div>
+    //           ),
+    //         )
+    //       : prices &&
+    //         prices.prices?.data.map((price) => (
+    //           <div key={price.id} className={styles["plan"]}>
+    //             <h2>{price.lookup_key}</h2>
+    //             <p>
+    //               Price: {price.unit_amount_decimal} {price.currency}
+    //             </p>
+
+    //             <button onClick={() => handlePlanClick(price)}> Start {price.lookup_key} </button>
+    //           </div>
+    //         ))}
+
+    //     {upgradePlan && (
+    //       <div className={styles["modal-overlay"]} onClick={closeUpgradeModal}>
+    //         <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+    //           <h2>Tier {upgradePlan.unit_amount_decimal}</h2>
+    //           <p>
+    //             You have selected the {upgradePlan.lookup_key} Plan. Proceed with your choice or
+    //             click outside this box to cancel.
+    //           </p>
+    //         </div>
+    //       </div>
+    //     )}
+    //     {selectedPrice && (
+    //       <div className={styles["modal-overlay"]} onClick={closeModal}>
+    //         <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+    //           <h2>Tier {selectedPrice.unit_amount_decimal}</h2>
+    //           <p>
+    //             You have selected the {selectedPrice.lookup_key} Plan. Proceed with your choice or
+    //             click outside this box to cancel.
+    //           </p>
+    //           {/* Insert form component here */}
+
+    //           {/* <Elements stripe={stripePromise} options={options}> */}
+    //           {/* <Elements
+    //             stripe={stripePromise}
+    //             options={{
+    //               mode: "subscription",
+    //               amount: selectedPrice.unit_amount,
+    //               currency: selectedPrice.currency,
+    //               appearance: {
+    //                 theme: "flat" as const,
+    //               },
+    //             }}
+    //           > */}
+    //           <form onSubmit={(e) => handleSubmit(e, selectedPrice.id)}>
+    //             <PaymentElement />
+    //             <button type="submit" disabled={!stripe || !elements}>
+    //               Submit
+    //             </button>
+    //           </form>
+    //           <button onClick={closeModal}>Close</button>
+    //         </div>
+    //       </div>
+    //     )}
+    //   </div>
+    // </main>
+    <main>
+      <div>
         {paidPlan
           ? // <>
             //   <h1>hej</h1>
@@ -261,8 +350,8 @@ ReactElement => {
             ))}
 
         {upgradePlan && (
-          <div className={styles["modal-overlay"]} onClick={closeUpgradeModal}>
-            <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+          <div onClick={closeUpgradeModal}>
+            <div onClick={(e) => e.stopPropagation()}>
               <h2>Tier {upgradePlan.unit_amount_decimal}</h2>
               <p>
                 You have selected the {upgradePlan.lookup_key} Plan. Proceed with your choice or
@@ -272,8 +361,8 @@ ReactElement => {
           </div>
         )}
         {selectedPrice && (
-          <div className={styles["modal-overlay"]} onClick={closeModal}>
-            <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+          <div>
+            <div onClick={(e) => e.stopPropagation()}>
               <h2>Tier {selectedPrice.unit_amount_decimal}</h2>
               <p>
                 You have selected the {selectedPrice.lookup_key} Plan. Proceed with your choice or
@@ -321,8 +410,26 @@ const Billing = (): ReactElement => {
   };
 
   return (
-    <main className={styles.Billing}>
-      <div className={styles.stripe_element}>
+    // <main className={styles.Billing}>
+    //   <div className={styles.stripe_element}>
+    //     <Elements
+    //       stripe={stripePromise}
+    //       options={{
+    //         mode: "subscription",
+    //         amount: 0,
+    //         currency: "eur",
+    //         appearance: {
+    //           theme: "flat",
+    //         },
+    //       }}
+    //     >
+    //       <CheckoutForm setTest={setTest} />
+    //       {/* <CheckoutForm onOptionsChange={handleOptionsChange} /> */}
+    //     </Elements>
+    //   </div>
+    // </main>
+    <main>
+      <div>
         <Elements
           stripe={stripePromise}
           options={{

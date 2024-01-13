@@ -2,7 +2,6 @@ import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import styles from "./Account.module.scss";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -61,9 +60,9 @@ const Account = (): ReactElement => {
   }
 
   return (
-    <main className={styles.Account}>
+    <main>
       <h1>Account</h1>
-      <div className={styles.info}>
+      <div>
         <div>
           <div>
             <div>
@@ -82,7 +81,6 @@ const Account = (): ReactElement => {
               <p>
                 <b>email</b>
               </p>
-              {/* <p>{user?.result.UserAttributes[3].Value}</p> */}
             </div>
             <div>
               <p>
@@ -99,6 +97,44 @@ const Account = (): ReactElement => {
         </div>
       </div>
     </main>
+    // <main className={styles.Account}>
+    //   <h1>Account</h1>
+    //   <div className={styles.info}>
+    //     <div>
+    //       <div>
+    //         <div>
+    //           <p>
+    //             <b>Account</b>
+    //           </p>
+    //         </div>
+    //         <div>
+    //           <p>
+    //             <b>Username</b>
+    //           </p>
+
+    //           <p>{user?.result.Username}</p>
+    //         </div>
+    //         <div>
+    //           <p>
+    //             <b>email</b>
+    //           </p>
+    //           {/* <p>{user?.result.UserAttributes[3].Value}</p> */}
+    //         </div>
+    //         <div>
+    //           <p>
+    //             <b>Role Access</b>
+    //           </p>
+    //         </div>
+    //         <div>
+    //           <p>
+    //             <b>Data</b>
+    //           </p>
+    //           <div>{JSON.stringify(user)}</div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </main>
   );
 };
 
