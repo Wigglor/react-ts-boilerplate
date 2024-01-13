@@ -7,6 +7,7 @@ import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
 // import "./style.css";
 // import RequireAuth from "./components/requireAuth";
+
 import "preline/preline";
 import { IStaticMethods } from "preline/preline";
 import PrivateRoute from "./components/PrivateRoute";
@@ -27,6 +28,7 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
 import SocialCallback from "./pages/SocialCallback/SocialCallback";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
+
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;

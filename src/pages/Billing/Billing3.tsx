@@ -4,7 +4,7 @@ import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
 // import axiosPrivate from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import styles from "./Billing.module.scss";
+// import styles from "./Billing.module.scss";
 
 // const stripePromise = loadStripe(process.env.STRIPE_SECRET_KEY as string);
 const stripePromise = loadStripe(
@@ -95,7 +95,20 @@ const BillingForm = (setOptions: any): ReactElement => {
   };
   return (
     // <main className={styles.Billing}>
-    <div className={styles.stripe_element}>
+    // <div className={styles.stripe_element}>
+    //   {/* <Elements stripe={stripePromise} options={options}> */}
+    //   <form onSubmit={handleSubmit}>
+    //     <PaymentElement />
+    //     {/* Payment succeeds - regular card: 4242424242424242 */}
+    //     {/* Payment requires authentication - SCA card: 4000002500003155 */}
+    //     {/* Payment is declined: 4000000000009995 */}
+    //     <button disabled={!stripe}>Submit</button>
+    //     {/* Show error message to your customers */}
+    //     {errorMessage && <div>{errorMessage}</div>}
+    //   </form>
+    //   {/* </Elements> */}
+    // </div>
+    <div>
       {/* <Elements stripe={stripePromise} options={options}> */}
       <form onSubmit={handleSubmit}>
         <PaymentElement />
@@ -115,7 +128,12 @@ const BillingForm = (setOptions: any): ReactElement => {
 const Billing: React.FC = () => {
   const [options, setOptions] = useState<StripeElementsOptions | undefined>(undefined);
   return (
-    <main className={styles.Billing}>
+    // <main className={styles.Billing}>
+    //   <Elements stripe={stripePromise}>
+    //     <BillingForm setOptions={setOptions} />
+    //   </Elements>
+    // </main>
+    <main>
       <Elements stripe={stripePromise}>
         <BillingForm setOptions={setOptions} />
       </Elements>

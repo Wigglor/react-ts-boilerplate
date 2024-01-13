@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import styles from "./Posts.module.scss";
+// import styles from "./Posts.module.scss";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -65,7 +65,7 @@ const Posts = (): ReactElement => {
   //   }
 
   return (
-    <main className={styles.Posts}>
+    <main>
       <h1>Posts</h1>
       <table>
         <thead>
@@ -97,6 +97,38 @@ const Posts = (): ReactElement => {
         </tbody>
       </table>
     </main>
+    // <main className={styles.Posts}>
+    //   <h1>Posts</h1>
+    //   <table>
+    //     <thead>
+    //       <tr>
+    //         <th>ID</th>
+    //         <th>Title</th>
+    //         <th>Content</th>
+    //         <th>Author ID</th>
+    //         <th>Created At</th>
+    //         <th>Updated At</th>
+    //         <th>Actions</th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>
+    //       {posts?.posts.map((item) => (
+    //         <tr key={item.id}>
+    //           <td>{item.id}</td>
+    //           <td>{item.title}</td>
+    //           <td>{item.content}</td>
+    //           <td>{item.authorId}</td>
+    //           <td>{item.createdAt}</td>
+    //           <td>{item.updatedAt}</td>
+    //           <td>
+    //             <button>Edit</button>
+    //             <button>Delete</button>
+    //           </td>
+    //         </tr>
+    //       ))}
+    //     </tbody>
+    //   </table>
+    // </main>
   );
 };
 

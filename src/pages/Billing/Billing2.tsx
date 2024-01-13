@@ -4,7 +4,7 @@ import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-
 import { loadStripe } from "@stripe/stripe-js";
 // import axiosPrivate from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import styles from "./Billing.module.scss";
+// import styles from "./Billing.module.scss";
 
 // const stripePromise = loadStripe(process.env.STRIPE_SECRET_KEY as string);
 const stripePromise = loadStripe(
@@ -174,13 +174,20 @@ const Billing = (): ReactElement => {
   console.log(`app url: ${window.location.origin}`);
 
   return (
-    <main className={styles.Billing}>
-      <div className={styles.stripe_element}>
+    <main>
+      <div>
         <Elements stripe={stripePromise} options={options}>
           <CheckoutForm setOptions={setOptions} />
         </Elements>
       </div>
     </main>
+    // <main className={styles.Billing}>
+    //   <div className={styles.stripe_element}>
+    //     <Elements stripe={stripePromise} options={options}>
+    //       <CheckoutForm setOptions={setOptions} />
+    //     </Elements>
+    //   </div>
+    // </main>
   );
 };
 

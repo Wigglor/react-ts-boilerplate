@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 // import useRefreshToken from "../../hooks/useRefreshToken";
-import styles from "./Login.module.scss";
+// import styles from "./Login.module.scss";
 // import Cookies from 'js-cookie';
 
 const LOGIN_URL = "/cognito/signin";
@@ -130,11 +130,11 @@ const Login = (): ReactElement => {
   return (
     <>
       {
-        <div className={styles.container}>
+        <div>
           <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
             {errMsg}
           </p>
-          <form className={styles["login-form"]} onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <h2>Login</h2>
             <label htmlFor="username">Username</label>
             <input
@@ -156,22 +156,62 @@ const Login = (): ReactElement => {
               value={pwd}
               required
             />
-            <button className={styles["login-button"]} type="submit">
-              Login
-            </button>
+            <button type="submit">Login</button>
 
-            <div className={styles.or}>
+            <div>
               <p>Or</p>
             </div>
-            <div className={styles["register-link"]}>
-              <Link className={styles["register-link__text"]} to="/register">
-                Register
-              </Link>
+            <div>
+              <Link to="/register">Register</Link>
             </div>
           </form>
         </div>
       }
     </>
+    // <>
+    //   {
+    //     <div className={styles.container}>
+    //       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+    //         {errMsg}
+    //       </p>
+    //       <form className={styles["login-form"]} onSubmit={handleSubmit}>
+    //         <h2>Login</h2>
+    //         <label htmlFor="username">Username</label>
+    //         <input
+    //           type="text"
+    //           placeholder="Username"
+    //           id="username"
+    //           ref={userRef}
+    //           autoComplete="off"
+    //           onChange={(e) => setUser(e.target.value)}
+    //           value={user}
+    //           required
+    //         />
+    //         <label htmlFor="username">Password</label>
+    //         <input
+    //           type="password"
+    //           placeholder="Password"
+    //           id="password"
+    //           onChange={(e) => setPwd(e.target.value)}
+    //           value={pwd}
+    //           required
+    //         />
+    //         <button className={styles["login-button"]} type="submit">
+    //           Login
+    //         </button>
+
+    //         <div className={styles.or}>
+    //           <p>Or</p>
+    //         </div>
+    //         <div className={styles["register-link"]}>
+    //           <Link className={styles["register-link__text"]} to="/register">
+    //             Register
+    //           </Link>
+    //         </div>
+    //       </form>
+    //     </div>
+    //   }
+    // </>
   );
 };
 

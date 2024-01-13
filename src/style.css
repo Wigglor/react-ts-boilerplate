@@ -13,11 +13,16 @@ html {
   @apply box-border;
 }
 
-@layer base {
+body {
+  height: 100%;
+  /* height: 100vh; */
+}
+
+/* @layer base {
   h1 {
     @apply text-2xl;
   }
   h2 {
     @apply text-xl;
   }
-}
+} */

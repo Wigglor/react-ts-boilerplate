@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { axiosPrivate } from "../../../api/axios";
-import styles from "./SignupPlan.module.scss";
+// import styles from "./SignupPlan.module.scss";
 
 const stripePromise = loadStripe("your_publishable_key_here");
 
@@ -218,10 +218,10 @@ function SignupPlan2() {
   };
 
   return (
-    <main className={styles["onboarding"]}>
-      <div className={styles["pricing-widget"]}>
+    <main>
+      <div>
         {PLANS.map((plan) => (
-          <div key={plan.name} className={styles["plan"]}>
+          <div key={plan.name}>
             <h2>{plan.name}</h2>
 
             <button onClick={() => handlePlanClick(plan)}> Start {plan.name} Plan</button>
@@ -234,8 +234,8 @@ function SignupPlan2() {
         ))}
 
         {selectedPlan && (
-          <div className={styles["modal-overlay"]} onClick={closeModal}>
-            <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+          <div onClick={closeModal}>
+            <div onClick={(e) => e.stopPropagation()}>
               <h2>{selectedPlan.name} Plan</h2>
               <p>
                 You have selected the {selectedPlan.name} Plan. Proceed with your choice or click
@@ -251,6 +251,39 @@ function SignupPlan2() {
         )}
       </div>
     </main>
+    // <main className={styles["onboarding"]}>
+    //   <div className={styles["pricing-widget"]}>
+    //     {PLANS.map((plan) => (
+    //       <div key={plan.name} className={styles["plan"]}>
+    //         <h2>{plan.name}</h2>
+
+    //         <button onClick={() => handlePlanClick(plan)}> Start {plan.name} Plan</button>
+    //         <ul>
+    //           {plan.features.map((feature) => (
+    //             <li key={feature}>{feature}</li>
+    //           ))}
+    //         </ul>
+    //       </div>
+    //     ))}
+
+    //     {selectedPlan && (
+    //       <div className={styles["modal-overlay"]} onClick={closeModal}>
+    //         <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+    //           <h2>{selectedPlan.name} Plan</h2>
+    //           <p>
+    //             You have selected the {selectedPlan.name} Plan. Proceed with your choice or click
+    //             outside this box to cancel.
+    //           </p>
+    //           {/* <Elements stripe={stripePromise}>
+    //             <StripeForm />
+    //           </Elements> */}
+    //           {StripeForm()}
+    //           <button onClick={closeModal}>Close</button>
+    //         </div>
+    //       </div>
+    //     )}
+    //   </div>
+    // </main>
   );
 }
 
