@@ -1,8 +1,7 @@
 // tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export const content = [
-  // './src/**/*.{html,js}',
-  "./node_modules/preline/dist/*.js",
+  // "./node_modules/preline/dist/*.js",
   "./src/**/*.{js,jsx,ts,tsx}",
   "./node_modules/preline/preline.js",
 ];
