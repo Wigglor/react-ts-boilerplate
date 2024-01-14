@@ -2,27 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities"; */
-
-/* Global Styles */
 html {
   @apply box-border;
 }
 
 body {
   height: 100%;
-  /* height: 100vh; */
 }
-
-/* @layer base {
-  h1 {
-    @apply text-2xl;
-  }
-  h2 {
-    @apply text-xl;
-  }
-} */
