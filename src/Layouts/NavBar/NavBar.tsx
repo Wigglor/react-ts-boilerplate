@@ -272,7 +272,7 @@ const NavBar = (): ReactElement => {
           </div>
         </nav>
       </header>
-      <nav className="bg-gray-800">
+      {/* <nav className="bg-gray-800">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -457,7 +457,7 @@ const NavBar = (): ReactElement => {
             </a>
           </div>
         </div>
-      </nav>
+      </nav> */}
 
       <header>
         <nav>
@@ -486,33 +486,6 @@ const NavBar = (): ReactElement => {
               </ul>
             </li>
           </ul>
-          <div className="hs-dropdown relative inline-flex">
-            <button
-              id="hs-dropdown-unstyled"
-              type="button"
-              className="hs-dropdown-toggle inline-flex justify-center items-center gap-x-2"
-            >
-              Actions
-            </button>
-
-            <div
-              className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-[15rem] bg-white"
-              aria-labelledby="hs-dropdown-unstyled"
-            >
-              <a className="block" href="#">
-                Newsletter
-              </a>
-              <a className="block" href="#">
-                Purchases
-              </a>
-              <a className="block" href="#">
-                Downloads
-              </a>
-              <a className="block" href="#">
-                Team Account
-              </a>
-            </div>
-          </div>
 
           {workSpaces.selectedWorkSpace.id.length > 0 && (
             <div>
