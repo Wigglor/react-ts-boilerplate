@@ -807,8 +807,8 @@ const NavBar = (): ReactElement => {
         </div>
       </nav> */}
 
-      <header className="bg-blue-300 flex-no-wrap relative flex w-full items-center justify-around">
-        <nav className="flex w-full flex-wrap items-center justify-around px-3">
+      <header className="bg-gray-50 border-b p-2 flex-no-wrap relative flex w-full items-center">
+        <nav className="flex w-full flex-wrap items-center justify-between px-3">
           <ul className="flex">
             <li>
               <Link to="/">Home</Link>
@@ -858,17 +858,17 @@ const NavBar = (): ReactElement => {
             <Link to="/account">
               <MdManageAccounts />
             </Link>
-            <ul className="bg-green-400 hidden group-hover:block">
-              <li>
+            <ul className="bg-white shadow-lg p-2 rounded-md border hidden group-hover:block absolute right-0">
+              <li className="px-2 py-1">
                 <p>signed in as</p>
                 <p>
                   <b>Testuser</b>
                 </p>
               </li>
-              <li>
+              <li className="px-2 py-1">
                 <Link to="/account">Account Settings</Link>
               </li>
-              <li>
+              <li className="px-2 py-1">
                 <Link to="/login" onClick={signOut}>
                   Logout
                 </Link>
