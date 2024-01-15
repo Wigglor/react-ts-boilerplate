@@ -7,6 +7,11 @@ export const content = [
 ];
 export const plugins = [require("preline/plugin"), require("@tailwindcss/forms")];
 
+export const theme = {
+  extend: {
+    display: ["group-hover"],
+  },
+};
 // export const theme = {
 //   screens: {
 //     sm: "480px",
