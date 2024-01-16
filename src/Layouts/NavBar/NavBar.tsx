@@ -65,7 +65,7 @@ const NavBar = (): ReactElement => {
   };
   return (
     <>
-      {/* <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-red-300 text-sm py-4 dark:bg-gray-800">
+      <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-red-300 text-sm py-4 dark:bg-gray-800">
         <nav
           className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
           aria-label="Global"
@@ -256,7 +256,7 @@ const NavBar = (): ReactElement => {
             </div>
           </div>
         </nav>
-      </header> */}
+      </header>
       {/* <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-white text-sm py-3 md:py-0 dark:bg-gray-800">
         <nav className="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8" aria-label="Global">
           <div className="relative md:flex md:items-center md:justify-between">
@@ -867,7 +867,7 @@ const NavBar = (): ReactElement => {
               <MdManageAccounts />
             </Link> */}
             <CircleUserRound className="cursor-pointer" />
-            <ul className="bg-white shadow-lg p-2 rounded-md border absolute hidden group-hover:block transition duration-2000 right-2">
+            <ul className="bg-white shadow-lg p-2 rounded-md border absolute hidden group-hover:block transition-all duration-2000 right-2">
               <li className="px-2 py-1">
                 <p>signed in as</p>
                 <p>
