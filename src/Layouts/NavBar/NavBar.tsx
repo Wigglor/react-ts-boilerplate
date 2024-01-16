@@ -1,11 +1,11 @@
 import { ReactElement, useEffect, useState } from "react";
-import { MdManageAccounts } from "react-icons/md";
+// import { MdManageAccounts } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
 // import styles from "./NavBar.module.scss";
-
+import { CircleUserRound, Home } from "lucide-react";
 type Workspace = {
   name: string;
   id: string;
@@ -65,7 +65,7 @@ const NavBar = (): ReactElement => {
   };
   return (
     <>
-      <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-red-300 text-sm py-4 dark:bg-gray-800">
+      {/* <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-red-300 text-sm py-4 dark:bg-gray-800">
         <nav
           className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
           aria-label="Global"
@@ -256,7 +256,7 @@ const NavBar = (): ReactElement => {
             </div>
           </div>
         </nav>
-      </header>
+      </header> */}
       {/* <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-white text-sm py-3 md:py-0 dark:bg-gray-800">
         <nav className="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8" aria-label="Global">
           <div className="relative md:flex md:items-center md:justify-between">
@@ -809,7 +809,12 @@ const NavBar = (): ReactElement => {
 
       <header className="bg-gray-50 border-b p-2 flex-no-wrap relative flex w-full items-center">
         <nav className="flex w-full flex-wrap items-center justify-between px-3">
-          <ul className="flex">
+          <div className="flex">
+            <Link to="/">
+              <Home />
+            </Link>
+          </div>
+          {/* <ul className="flex">
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -819,51 +824,58 @@ const NavBar = (): ReactElement => {
             <li>
               <Link to="/contact">Contact</Link>
             </li>
-            {/* <li>
-              <a href="#">Services</a>
-              <ul>
-                <li>
-                  <a href="#">Service 1</a>
-                </li>
-                <li>
-                  <a href="#">Service 2</a>
-                </li>
-                <li>
-                  <a href="#">Service 3</a>
-                </li>
-              </ul>
-            </li> */}
-          </ul>
+          </ul> */}
 
           {workSpaces.selectedWorkSpace.id.length > 0 && (
             <div>
-              <label>
-                workspace
-                <select value={stateSelectedWorkspace} onChange={handleChange}>
-                  {workSpaces.selectedWorkSpace ? (
-                    workSpaces.availableWorkSpaces.map((item: Workspace) => (
-                      <option key={item.id} value={item.name}>
-                        {item.name}
-                      </option>
-                    ))
-                  ) : (
-                    <></>
-                  )}
-                </select>
-              </label>
+              {/* <label>
+                workspace */}
+              <select
+                className="rounded-lg cursor-pointer"
+                value={stateSelectedWorkspace}
+                onChange={handleChange}
+              >
+                {workSpaces.selectedWorkSpace ? (
+                  workSpaces.availableWorkSpaces.map((item: Workspace) => (
+                    <option key={item.id} value={item.name}>
+                      {item.name}
+                    </option>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </select>
+              {/* </label> */}
             </div>
           )}
 
+          <div className="relative group">
+            <div className="cursor-pointer">
+              <Home />
+            </div>
+
+            <div className="absolute hidden group-hover:block transition duration-500">
+              <ul>
+                <li>Menu Item 1</li>
+                <li>Menu Item 2</li>
+              </ul>
+            </div>
+          </div>
+
           <div className="group">
-            <Link to="/account">
+            {/* <Link to="/account">
               <MdManageAccounts />
-            </Link>
-            <ul className="bg-white shadow-lg p-2 rounded-md border hidden group-hover:block absolute right-0">
+            </Link> */}
+            <CircleUserRound className="cursor-pointer" />
+            <ul className="bg-white shadow-lg p-2 rounded-md border absolute hidden group-hover:block transition duration-2000 right-2">
               <li className="px-2 py-1">
                 <p>signed in as</p>
                 <p>
                   <b>Testuser</b>
                 </p>
+              </li>
+              <li className="px-2 py-1">
+                <Link to="/organization">Organization</Link>
               </li>
               <li className="px-2 py-1">
                 <Link to="/account">Account Settings</Link>
