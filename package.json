@@ -20,8 +20,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
-    "@preline/dropdown": "^2.0.2",
-    "@preline/overlay": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^1.9.1",
@@ -36,7 +34,6 @@
     "clsx": "^2.1.0",
     "joi": "^17.9.2",
     "lucide-react": "^0.309.0",
-    "preline": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",

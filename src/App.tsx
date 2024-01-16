@@ -7,10 +7,8 @@ import PersistLogin from "./components/PersistLogin";
 // import "./style.css";
 // import RequireAuth from "./components/requireAuth";
 
-import "preline/preline";
-import { IStaticMethods } from "preline/preline";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+// import "preline/preline";
+// import { IStaticMethods } from "preline/preline";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
@@ -29,18 +27,18 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
 import SocialCallback from "./pages/SocialCallback/SocialCallback";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
-declare global {
-  interface Window {
-    HSStaticMethods: IStaticMethods;
-  }
-}
+// declare global {
+//   interface Window {
+//     HSStaticMethods: IStaticMethods;
+//   }
+// }
 
 const App = () => {
-  const location = useLocation();
+  // const location = useLocation();
 
-  useEffect(() => {
-    window.HSStaticMethods.autoInit();
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   window.HSStaticMethods.autoInit();
+  // }, [location.pathname]);
 
   const ROLES = {
     pending: "PENDING",

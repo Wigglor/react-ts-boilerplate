@@ -65,7 +65,7 @@ const NavBar = (): ReactElement => {
   };
   return (
     <>
-      <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-red-300 text-sm py-4 dark:bg-gray-800">
+      {/* <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-red-300 text-sm py-4 dark:bg-gray-800">
         <nav
           className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
           aria-label="Global"
@@ -256,7 +256,7 @@ const NavBar = (): ReactElement => {
             </div>
           </div>
         </nav>
-      </header>
+      </header> */}
       {/* <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-white text-sm py-3 md:py-0 dark:bg-gray-800">
         <nav className="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8" aria-label="Global">
           <div className="relative md:flex md:items-center md:justify-between">
@@ -807,7 +807,7 @@ const NavBar = (): ReactElement => {
         </div>
       </nav> */}
 
-      <header className="bg-gray-50 border-b p-2 flex-no-wrap relative flex w-full items-center">
+      <header className="bg-gray-50 z-10 border-b p-2 flex-no-wrap relative flex w-full items-center">
         <nav className="flex w-full flex-wrap items-center justify-between px-3">
           <div className="flex">
             <Link to="/">
@@ -825,6 +825,80 @@ const NavBar = (): ReactElement => {
               <Link to="/contact">Contact</Link>
             </li>
           </ul> */}
+          <div className="relative inline-block text-left">
+            <div>
+              <button
+                type="button"
+                className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                id="menu-button"
+                aria-expanded="true"
+                aria-haspopup="true"
+              >
+                Options
+                <svg
+                  className="-mr-1 h-5 w-5 text-gray-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div
+              className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabIndex={-1}
+            >
+              <div className="py-1" role="none">
+                <a
+                  href="#"
+                  className="text-gray-700 block px-4 py-2 text-sm"
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="menu-item-0"
+                >
+                  Account settings
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-700 block px-4 py-2 text-sm"
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="menu-item-1"
+                >
+                  Support
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-700 block px-4 py-2 text-sm"
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="menu-item-2"
+                >
+                  License
+                </a>
+                <form method="POST" action="#" role="none">
+                  <button
+                    type="submit"
+                    className="text-gray-700 block w-full px-4 py-2 text-left text-sm"
+                    role="menuitem"
+                    tabIndex={-1}
+                    id="menu-item-3"
+                  >
+                    Sign out
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
 
           {workSpaces.selectedWorkSpace.id.length > 0 && (
             <div>
@@ -850,16 +924,26 @@ const NavBar = (): ReactElement => {
           )}
 
           <div className="relative group">
-            <div className="cursor-pointer">
-              <Home />
-            </div>
-
-            <div className="absolute hidden group-hover:block transition duration-500">
-              <ul>
-                <li>Menu Item 1</li>
-                <li>Menu Item 2</li>
-              </ul>
-            </div>
+            <CircleUserRound className="cursor-pointer" />
+            <ul className="hidden absolute group-hover:block transition duration-2000">
+              <li className="">
+                <p>signed in as</p>
+                <p>
+                  <b>Testuser</b>
+                </p>
+              </li>
+              <li className="">
+                <Link to="/organization">Organization</Link>
+              </li>
+              <li className="">
+                <Link to="/account">Account Settings</Link>
+              </li>
+              <li className="">
+                <Link to="/login" onClick={signOut}>
+                  Logout
+                </Link>
+              </li>
+            </ul>
           </div>
 
           <div className="group">
@@ -867,7 +951,7 @@ const NavBar = (): ReactElement => {
               <MdManageAccounts />
             </Link> */}
             <CircleUserRound className="cursor-pointer" />
-            <ul className="bg-white shadow-lg p-2 rounded-md border absolute hidden group-hover:block transition-all duration-2000 right-2">
+            <ul className="bg-white shadow-lg p-2 rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
               <li className="px-2 py-1">
                 <p>signed in as</p>
                 <p>

@@ -27,3 +27,7 @@ https://hygraph.com/blog/react-authentication
 # Security
 
 disable react dev tools in production (should be a npm package for this)
+
+# css
+
+- inspiration: https://tailwindflex.com/@mr-robot/admin-panel/fullscreen-preview

@@ -2,10 +2,13 @@
 /** @type {import('tailwindcss').Config} */
 export const content = [
   // "./node_modules/preline/dist/*.js",
-  "./node_modules/preline/preline.js",
+  // "./node_modules/preline/preline.js",
   "./src/**/*.{js,jsx,ts,tsx}",
 ];
-export const plugins = [require("preline/plugin"), require("@tailwindcss/forms")];
+export const plugins = [
+  // require("preline/plugin"),
+  require("@tailwindcss/forms"),
+];
 
 export const theme = {
   extend: {
