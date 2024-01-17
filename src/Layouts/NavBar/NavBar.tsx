@@ -911,29 +911,6 @@ const NavBar = (): ReactElement => {
             </div>
           )} */}
 
-          <div className="relative group">
-            <CircleUserRound className="cursor-pointer" />
-            <ul className="hidden absolute group-hover:block transition duration-2000">
-              <li className="">
-                <p>signed in as</p>
-                <p>
-                  <b>Testuser</b>
-                </p>
-              </li>
-              <li className="">
-                <Link to="/organization">Organization</Link>
-              </li>
-              <li className="">
-                <Link to="/account">Account Settings</Link>
-              </li>
-              <li className="">
-                <Link to="/login" onClick={signOut}>
-                  Logout
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           <div className="group">
             <CircleUserRound className="cursor-pointer" />
             <ul className="bg-white shadow-lg rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
