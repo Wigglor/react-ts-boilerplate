@@ -1,10 +1,11 @@
 import { ReactElement, useEffect, useState } from "react";
 // import { MdManageAccounts } from "react-icons/md";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
 // import styles from "./NavBar.module.scss";
+import { CircleUserRound, Home } from "lucide-react";
 type Workspace = {
   name: string;
   id: string;
@@ -64,17 +65,17 @@ const NavBar = (): ReactElement => {
   };
   return (
     <>
-      {/* <header className="bg-gray-50 z-10 border-b flex-no-wrap relative flex w-full items-center">
-        <div className="bg-slate-500 p-2">
+      <header className="bg-gray-50 z-10 flex-no-wrap relative flex w-full items-center">
+        <div className="bg-gray-900 p-2 w-1/12">
           <div className="flex">
             <Link to="/">
-              <Home />
+              <Home className="text-slate-50" />
             </Link>
           </div>
         </div>
         <div className="flex w-full flex-wrap items-center p-2 justify-between">
           <div className="relative inline-block text-left"></div>
-
+          {/* 
           {workSpaces.selectedWorkSpace.id.length > 0 && (
             <div>
               <select
@@ -93,7 +94,7 @@ const NavBar = (): ReactElement => {
                 )}
               </select>
             </div>
-          )}
+          )} */}
 
           <div className="group">
             <CircleUserRound className="cursor-pointer" />
@@ -118,7 +119,7 @@ const NavBar = (): ReactElement => {
             </ul>
           </div>
         </div>
-      </header> */}
+      </header>
       <Outlet />
     </>
     // <>
