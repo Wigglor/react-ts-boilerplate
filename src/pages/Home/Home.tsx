@@ -1,6 +1,4 @@
-import { CircleUserRound } from "lucide-react";
 import { ReactElement, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
@@ -66,62 +64,62 @@ const Home = (): ReactElement => {
   }, []);*/
 
   return (
-    <>
-      <header className="bg-gray-500 z-10 flex-no-wrap relative flex items-center">
-        <div className="bg-gray-900 w-1/12">
-          <div className="flex">
-            <Link to="/">
-              <CircleUserRound className="text-slate-50" />
-            </Link>
-          </div>
-        </div>
-        <div className="flex w-full flex-wrap items-center justify-between">
-          <div className="relative inline-block text-left"></div>
+    // <>
+    //   <nav className="bg-gray-500 z-10 mx-auto flex justify-between items-center">
+    //     <div className="bg-gray-900">
+    //       <div className="">
+    //         <Link to="/">
+    //           <CircleUserRound className="text-slate-50" />
+    //         </Link>
+    //       </div>
+    //     </div>
+    //     <div className="flex w-full flex-wrap items-center justify-between">
+    //       <div className="relative inline-block text-left"></div>
 
-          <div className="group">
-            <CircleUserRound className="cursor-pointer" />
-            <ul className="bg-white shadow-lg rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
-              <li className="px-2 ">
-                <p>signed in as</p>
-                <p>
-                  <b>Testuser</b>
-                </p>
-              </li>
-              <li className="px-2">
-                <Link to="/organization">Organization</Link>
-              </li>
-              <li className="px-2">
-                <Link to="/account">Account Settings</Link>
-              </li>
-              <li className="px-2">
-                <Link to="/login" onClick={signOut}>
-                  Logout
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </header>
-      <div className="flex h-full">
-        <aside className="bg-gray-900 w-1/12">
-          <div>
-            <ul className="text-slate-50">
-              <li>Dashboard</li>
-              <li>Organisation</li>
-              <li>Account</li>
-            </ul>
-          </div>
-        </aside>
-        {/* <div className="bg-slate-500 w-[calc(56%-120px)]"> */}
-        <div className="bg-slate-500 w-11/12">
-          <h1>Home Page</h1>
-        </div>
-      </div>
-    </>
-    // <main>
-    //   <h1>Home Page </h1>
-    //   <p>test style test style test style test style test style test style</p>
-    // </main>
+    //       <div className="group">
+    //         <CircleUserRound className="cursor-pointer" />
+    //         <ul className="bg-white shadow-lg rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
+    //           <li className="px-2 ">
+    //             <p>signed in as</p>
+    //             <p>
+    //               <b>Testuser</b>
+    //             </p>
+    //           </li>
+    //           <li className="px-2">
+    //             <Link to="/organization">Organization</Link>
+    //           </li>
+    //           <li className="px-2">
+    //             <Link to="/account">Account Settings</Link>
+    //           </li>
+    //           <li className="px-2">
+    //             <Link to="/login" onClick={signOut}>
+    //               Logout
+    //             </Link>
+    //           </li>
+    //         </ul>
+    //       </div>
+    //     </div>
+    //   </nav>
+
+    //   <div className="flex h-full">
+    //     <nav className="bg-gray-900 ">
+    //       <div>
+    //         <ul className="text-slate-50">
+    //           <li>Dashboard</li>
+    //           <li>Organisation</li>
+    //           <li>Account</li>
+    //         </ul>
+    //       </div>
+    //     </nav>
+    //     <div className="bg-slate-500">
+    //       <h1>Home Page</h1>
+    //     </div>
+    //   </div>
+    // </>
+    <div>
+      <h1>Home Page </h1>
+      <p>test style test style test style test style test style test style</p>
+    </div>
 
     //   {/* {data ? <div>{data.message}</div> : <div>Loading...</div>} */}
     // </main>

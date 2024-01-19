@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 // import "./App.scss";
 import NavBar from "./Layouts/NavBar/NavBar";
-// import Navigation from "./Layouts/Navigation/Navigation";
+import Navigation from "./Layouts/Navigation/Navigation";
 import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
 // import "./style.css";
@@ -86,20 +86,20 @@ const App = () => {
             </Route>
             {/* <Route> */}
             <Route element={<PrivateRoute allowedRoles={[ROLES.user, ROLES.admin]} />}>
-              {/* <Route element={<Navigation />}> */}
-              <Route path="" element={<Home />} />
-              <Route path="paymentstatus" element={<PaymentStatus />} />
-              <Route path="account" element={<Account />} />
-              <Route path="organization" element={<Organization />} />
-              <Route path="posts" element={<Posts />} />
-              <Route path="billing" element={<Billing />} />
-              <Route path="premium" element={<Premium />} />
-              {/* <Route element={<OnboardingRoute />}>
+              <Route element={<Navigation />}>
+                <Route path="" element={<Home />} />
+                <Route path="paymentstatus" element={<PaymentStatus />} />
+                <Route path="account" element={<Account />} />
+                <Route path="organization" element={<Organization />} />
+                <Route path="posts" element={<Posts />} />
+                <Route path="billing" element={<Billing />} />
+                <Route path="premium" element={<Premium />} />
+                {/* <Route element={<OnboardingRoute />}>
                   <Route path="onboardingg" element={<Onboarding />} />
                 </Route> */}
-              {/* </Route> */}
+                {/* </Route> */}
+              </Route>
             </Route>
-            {/* </Route> */}
             {/* </WorkSpacesProvider> */}
           </Route>
         </Route>
