@@ -65,17 +65,17 @@ const NavBar = (): ReactElement => {
   };
   return (
     <>
-      <header className="bg-gray-50 z-10 flex-no-wrap relative flex w-full items-center">
-        <div className="bg-gray-900 p-2 w-1/12">
+      <header className="bg-gray-500 z-10 flex-no-wrap relative flex items-center">
+        <div className="bg-gray-900">
           <div className="flex">
             <Link to="/">
               <Home className="text-slate-50" />
             </Link>
           </div>
         </div>
-        <div className="flex w-full flex-wrap items-center p-2 justify-between">
+        <div className="flex w-full flex-wrap items-center justify-between">
           <div className="relative inline-block text-left"></div>
-          {/* 
+
           {workSpaces.selectedWorkSpace.id.length > 0 && (
             <div>
               <select
@@ -94,7 +94,7 @@ const NavBar = (): ReactElement => {
                 )}
               </select>
             </div>
-          )} */}
+          )}
 
           <div className="group">
             <CircleUserRound className="cursor-pointer" />
