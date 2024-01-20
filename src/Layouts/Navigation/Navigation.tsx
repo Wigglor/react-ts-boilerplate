@@ -13,6 +13,8 @@ const Navigation = (): ReactElement => {
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
 
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
     setSelectedWorkspace(workSpace);
@@ -42,7 +44,8 @@ const Navigation = (): ReactElement => {
       <SideNav /> */}
       <main className="h-full">
         <div className="flex h-full">
-          <nav className="bg-gray-900 w-1/12">
+          {/* <nav className="bg-gray-900 w-1/12"> */}
+          <nav className={`${isCollapsed ? "w-1/12" : "w-48"} bg-gray-900`}>
             <div className="bg-gray-900">
               <div className="">
                 <Link to="/">
