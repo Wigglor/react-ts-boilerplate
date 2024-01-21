@@ -1,4 +1,4 @@
-import { CircleUserRound, Home, Menu } from "lucide-react";
+import { CircleUserRound, Home, LayoutDashboard, Menu, UsersRound } from "lucide-react";
 import { ReactElement, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useLogout from "../../hooks/useLogOut";
@@ -42,6 +42,13 @@ const Navigation = (): ReactElement => {
     await logout();
   };
 
+  const sideNavItems = [
+    { icon: <Home />, text: "Home", to: "/" },
+    { icon: <LayoutDashboard />, text: "Dashboard", to: "/" },
+    { icon: <UsersRound />, text: "Organisation", to: "/organization" },
+    // Add other navigation items as needed
+  ];
+
   return (
     <>
       {/* <NavBar />
@@ -49,30 +56,60 @@ const Navigation = (): ReactElement => {
       <main className="h-full">
         <div className="flex h-full">
           {/* <nav className="bg-gray-900 w-1/12"> */}
-          <nav className={`${isCollapsed ? "w-16" : "w-2/12"} bg-zinc-900`}>
-            <div className="bg-gray-900">
+          <nav
+            className={`flex flex-col content-center transition-width duration-300 ${
+              isCollapsed ? "w-16" : "w-1/12"
+            } bg-zinc-900`}
+          >
+            <div className="bg-orange-400 flex flex-col justify-center items-center">
               <div className="">
                 <Link to="/">
                   <Home className="text-slate-50" />
                 </Link>
               </div>
             </div>
+            {/* <div
+              className={`transition-width duration-300 ${
+                isCollapsed ? "w-12" : "w-48"
+              } h-full fixed top-0 left-0 bg-gray-200 flex flex-col`}
+            >
+              {sideNavItems.map((item, index) => (
+                <Link key={index} to={item.to} className="flex items-center">
+                  {item.icon}
+                  <span className={` ${isCollapsed ? "hidden" : "block"}`}>{item.text}</span>
+                </Link>
+              ))}
+            </div> */}
+
             <div>
-              <ul className="text-slate-50">
-                <li>Dashboard</li>
+              <ul className="text-slate-50 flex flex-col justify-center items-center">
+                {sideNavItems.map((item, index) => (
+                  <li key={index} className="">
+                    <Link to={item.to} className="flex items-center">
+                      {item.icon}
+                      <span className={` ${isCollapsed ? "hidden" : "block"}`}>{item.text}</span>
+                    </Link>
+                  </li>
+                ))}
+
+                {/* <li>Dashboard</li>
                 <li>Organisation</li>
-                <li>Account</li>
+                <li>Account</li> */}
               </ul>
             </div>
           </nav>
-          <div className="w-11/12">
+          <div
+            className={`transition-width duration-300 ${
+              isCollapsed ? "w-[calc(100%-4rem)]" : "w-11/12"
+            }`}
+          >
             <nav className="bg-gray-500 z-10 mx-auto flex justify-between items-center">
               <div className="flex w-full flex-wrap items-center justify-between">
                 {/* <div className="relative inline-block text-left"></div> */}
                 <Menu onClick={() => setIsCollapsed(!isCollapsed)} />
                 {workSpaces.selectedWorkSpace.id.length > 0 && (
                   <div>
-                    <select
+                    {/* <select
                       className="rounded-lg cursor-pointer"
                       value={stateSelectedWorkspace}
                       onChange={handleChange}
@@ -86,7 +123,7 @@ const Navigation = (): ReactElement => {
                       ) : (
                         <></>
                       )}
-                    </select>
+                    </select> */}
                   </div>
                 )}
                 <div className="group">
