@@ -1,4 +1,4 @@
-import { CircleUserRound, Home } from "lucide-react";
+import { CircleUserRound, Home, Menu } from "lucide-react";
 import { ReactElement, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useLogout from "../../hooks/useLogOut";
@@ -34,6 +34,10 @@ const Navigation = (): ReactElement => {
     console.log(`workSpaces: ${JSON.stringify(workSpaces.selectedWorkSpace)}`);
   };
 
+  //   const toggleSidenav = () => {
+  //     setIsCollapsed(!isCollapsed);
+  // };
+
   const signOut = async () => {
     await logout();
   };
@@ -45,7 +49,7 @@ const Navigation = (): ReactElement => {
       <main className="h-full">
         <div className="flex h-full">
           {/* <nav className="bg-gray-900 w-1/12"> */}
-          <nav className={`${isCollapsed ? "w-1/12" : "w-48"} bg-gray-900`}>
+          <nav className={`${isCollapsed ? "w-16" : "w-2/12"} bg-zinc-900`}>
             <div className="bg-gray-900">
               <div className="">
                 <Link to="/">
@@ -64,7 +68,8 @@ const Navigation = (): ReactElement => {
           <div className="w-11/12">
             <nav className="bg-gray-500 z-10 mx-auto flex justify-between items-center">
               <div className="flex w-full flex-wrap items-center justify-between">
-                <div className="relative inline-block text-left"></div>
+                {/* <div className="relative inline-block text-left"></div> */}
+                <Menu onClick={() => setIsCollapsed(!isCollapsed)} />
                 {workSpaces.selectedWorkSpace.id.length > 0 && (
                   <div>
                     <select
