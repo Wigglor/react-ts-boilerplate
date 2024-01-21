@@ -16,13 +16,13 @@ type FormData = {
 };
 
 function CompleteSignup() {
-  const { setAuth, auth } = useAuth();
+  const { setAuth } = useAuth();
   const { setWorkSpaces } = useWorkSpaces();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    control,
+    // control,
     formState: { errors },
   } = useForm<FormData>();
   const [error, setError] = useState<string | null>(null);

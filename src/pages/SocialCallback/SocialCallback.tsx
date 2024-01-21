@@ -40,7 +40,6 @@ const SocialCallback = (): ReactElement => {
           //   // withCredentials: true,
           // },
         );
-        console.log(response);
 
         setAuth({
           user: response.data.user.userName,

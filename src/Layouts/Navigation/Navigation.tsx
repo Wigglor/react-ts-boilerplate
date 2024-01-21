@@ -1,4 +1,11 @@
-import { CircleUserRound, Home, LayoutDashboard, Menu, UsersRound } from "lucide-react";
+import {
+  ArrowRightLeft,
+  CircleDollarSign,
+  CircleUserRound,
+  Home,
+  Menu,
+  Sparkles,
+} from "lucide-react";
 import { ReactElement, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useLogout from "../../hooks/useLogOut";
@@ -43,9 +50,11 @@ const Navigation = (): ReactElement => {
   };
 
   const sideNavItems = [
-    { icon: <Home />, text: "Home", to: "/" },
-    { icon: <LayoutDashboard />, text: "Dashboard", to: "/" },
-    { icon: <UsersRound />, text: "Organisation", to: "/organization" },
+    { icon: <Sparkles />, text: "Premium", to: "/premium" },
+    { icon: <ArrowRightLeft />, text: "Organization", to: "/organization" },
+    { icon: <CircleUserRound />, text: "Account", to: "/account" },
+    { icon: <CircleDollarSign />, text: "Billing", to: "/billing" },
+    // { icon: <Binary />, text: "Payment Status", to: "/paymentstatus" },
     // Add other navigation items as needed
   ];
 
@@ -82,12 +91,15 @@ const Navigation = (): ReactElement => {
             </div> */}
 
             <div>
-              <ul className="text-slate-50 flex flex-col justify-center items-center">
+              {/* <ul className="text-slate-50 flex flex-col justify-center items-center"> */}
+              <ul className={`text-slate-50 flex flex-col ${isCollapsed ? "items-center" : ""}`}>
                 {sideNavItems.map((item, index) => (
                   <li key={index} className="">
                     <Link to={item.to} className="flex items-center">
                       {item.icon}
-                      <span className={` ${isCollapsed ? "hidden" : "block"}`}>{item.text}</span>
+                      <span className={`ml-4 ${isCollapsed ? "hidden" : "block"}`}>
+                        {item.text}
+                      </span>
                     </Link>
                   </li>
                 ))}

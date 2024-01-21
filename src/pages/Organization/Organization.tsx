@@ -79,10 +79,10 @@ type FormData = {
 
 const Organization = (): ReactElement => {
   const {
-    setValue,
+    // setValue,
     handleSubmit,
     register,
-    control,
+    // control,
     reset,
     formState: { errors },
   } = useForm<FormData>();
@@ -91,30 +91,24 @@ const Organization = (): ReactElement => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
-  const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
 
   useEffect(() => {
     console.log(`selectedWorkSpace: ${workSpaces.selectedWorkSpace.id}`);
-    // let isMounted = true;
     const controller = new AbortController();
     const getUser = async () => {
       try {
         const response: ApiResponse<User> = await axiosPrivate.post(
           "/subscription/users",
           JSON.stringify({
-            // workSpaceId: JSON.parse(localStorage.getItem("workSpace") as string)["id"],
             workSpaceId: workSpaces.selectedWorkSpace.id,
-            // accountEmail: data.email,
           }),
           {
             signal: controller.signal,
             withCredentials: true,
           },
         );
-        // setUser(response.data.Username);
-        // console.log(JSON.stringify(response.data.memberships));
         setUser(response.data);
-        // isMounted && setUser(response.data.result);
       } catch (err) {
         console.log("error in organization");
         console.error(err);
@@ -124,13 +118,11 @@ const Organization = (): ReactElement => {
     getUser();
 
     return () => {
-      // isMounted = false;
       controller.abort();
     };
   }, [updateUsers, workSpaces]);
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
-    // event.preventDefault();
     try {
       const inviteResponse: ApiResponse<Invite> = await axiosPrivate.post(
         "/inviteuser",
@@ -173,7 +165,6 @@ const Organization = (): ReactElement => {
                 <li key={membership.id}>
                   <div>
                     <p>{membership.accountEmail}</p>
-                    {/* <p>status: {membership.user.verificationStatus}</p> */}
                     <p>acc email: {membership.accountEmail}</p>
                   </div>
                 </li>
@@ -199,48 +190,6 @@ const Organization = (): ReactElement => {
         </form>
       </div>
     </main>
-    // <main className={styles.Account}>
-    //   {successMessage && <p className={styles["Account-success"]}>{successMessage}</p>}
-    //   {errorMessage && <p className={styles["Account-error"]}>{errorMessage}</p>}
-    //   <div></div>
-    //   <div className={styles.info}>
-    //     <div>
-    //       <ul>
-    //         {user &&
-    //           user.result.memberships.map((membership) => (
-    //             <li key={membership.id}>
-    //               <div>
-    //                 <p>{membership.accountEmail}</p>
-    //                 {/* <p>status: {membership.user.verificationStatus}</p> */}
-    //                 <p>acc email: {membership.accountEmail}</p>
-    //               </div>
-    //             </li>
-    //           ))}
-    //       </ul>
-    //     </div>
-
-    //     <form onSubmit={handleSubmit(onSubmit)}>
-    //       <label htmlFor="email">email</label>
-    //       <input
-    //         id="email"
-    //         {...register("email", {
-    //           required: "required",
-    //           pattern: {
-    //             value: /\S+@\S+\.\S+/,
-    //             message: "Entered value does not match email format",
-    //           },
-    //         })}
-    //         type="email"
-    //       />
-    //       {errors.email && (
-    //         <span className={styles["error-validation"]} role="alert">
-    //           {errors.email.message}
-    //         </span>
-    //       )}
-    //       <button type="submit">Submit</button>
-    //     </form>
-    //   </div>
-    // </main>
   );
 };
 

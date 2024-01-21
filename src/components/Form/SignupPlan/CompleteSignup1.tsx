@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { axiosPrivate } from "../../../api/axios";
 import useAuth from "../../../hooks/useAuth";
-// import styles from "./SignupPlan.module.scss";
 
 const stripePromise = loadStripe("your_publishable_key_here");
 

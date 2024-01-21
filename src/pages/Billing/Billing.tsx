@@ -308,11 +308,7 @@ ReactElement => {
     <main>
       <div>
         {paidPlan
-          ? // <>
-            //   <h1>hej</h1>
-            //   <p>{JSON.stringify(prices)}</p>
-            // </>
-            prices &&
+          ? prices &&
             prices.prices?.data.map((price) =>
               price.lookup_key === auth.plan ? (
                 <div key={price.id}>

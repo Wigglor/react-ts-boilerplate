@@ -3,7 +3,7 @@ import useAxiosPrivate from "./useAxiosPrivate";
 import useWorkSpaces from "./useWorkSpaces";
 
 const useLogout = () => {
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
   const { setWorkSpaces } = useWorkSpaces();
   const axiosPrivate = useAxiosPrivate();
 

@@ -68,7 +68,7 @@ const Register2 = (): ReactElement => {
 
   return (
     <>
-      <main className="w-full max-w-md mx-auto p-6">
+      {/* <main className="w-full max-w-md mx-auto p-6">
         <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <div className="p-4 sm:p-7">
             <div className="text-center">
@@ -301,98 +301,165 @@ const Register2 = (): ReactElement => {
             </div>
           </div>
         </div>
+      </main> */}
+
+      <main>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <h2>Register</h2>
+          {errMsg && <div>{errMsg}</div>}
+          <div>
+            <label htmlFor="email">email</label>
+            <input
+              id="email"
+              {...register("email", {
+                required: "required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              })}
+              type="email"
+            />
+            {errors.email && <span role="alert">{errors.email.message}</span>}
+            <label htmlFor="password">password</label>
+            <input
+              id="password"
+              {...register("password", {
+                required: "required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
+              })}
+              type="password"
+            />
+            {errors.password && <span role="alert">{errors.password.message}</span>}
+            <label htmlFor="firstName">First Name</label>
+            <input
+              id="firstName"
+              {...register("firstName", {
+                required: "required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
+              })}
+              type="text"
+            />
+            {errors.firstName && <span role="alert">{errors.firstName.message}</span>}
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              id="lastName"
+              {...register("lastName", {
+                required: "required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
+              })}
+              type="text"
+            />
+            {errors.lastName && <span role="alert">{errors.lastName.message}</span>}
+          </div>
+          <button type="submit">Register</button>
+          <div>
+            <p>Or</p>
+          </div>
+          <div>
+            <Link to="/login">Login</Link>
+          </div>
+        </form>
+        <button onClick={handleGoogleLogin}>Login with Google</button>
       </main>
 
       {/* <main className={styles["login-container"]}>
-      <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
-        <h2>Register</h2>
-        {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
-        <div>
-          
-
-          <label htmlFor="email">email</label>
-          <input
-            id="email"
-            {...register("email", {
-              required: "required",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Entered value does not match email format",
-              },
-            })}
-            type="email"
-          />
-          {errors.email && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.email.message}
-            </span>
-          )}
-          <label htmlFor="password">password</label>
-          <input
-            id="password"
-            {...register("password", {
-              required: "required",
-              minLength: {
-                value: 5,
-                message: "min length is 5",
-              },
-            })}
-            type="password"
-          />
-          {errors.password && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.password.message}
-            </span>
-          )}
-          <label htmlFor="firstName">First Name</label>
-          <input
-            id="firstName"
-            {...register("firstName", {
-              required: "required",
-              minLength: {
-                value: 5,
-                message: "min length is 5",
-              },
-            })}
-            type="text"
-          />
-          {errors.firstName && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.firstName.message}
-            </span>
-          )}
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            id="lastName"
-            {...register("lastName", {
-              required: "required",
-              minLength: {
-                value: 5,
-                message: "min length is 5",
-              },
-            })}
-            type="text"
-          />
-          {errors.lastName && (
-            <span className={styles["error-validation"]} role="alert">
-              {errors.lastName.message}
-            </span>
-          )}
-        </div>
-        <button type="submit" className={styles["login-button"]}>
-          Register
-        </button>
-        <div className={styles.or}>
-          <p>Or</p>
-        </div>
-        <div className={styles["login-link"]}>
-          <Link className={styles["login-link__text"]} to="/login">
-            Login
-          </Link>
-        </div>
-      </form>
-      <button onClick={handleGoogleLogin}>Login with Google</button>
-    </main> */}
+        <form className={styles["login-form"]} onSubmit={handleSubmit(onSubmit)}>
+          <h2>Register</h2>
+          {errMsg && <div className={styles["login-error"]}>{errMsg}</div>}
+          <div>
+            <label htmlFor="email">email</label>
+            <input
+              id="email"
+              {...register("email", {
+                required: "required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              })}
+              type="email"
+            />
+            {errors.email && (
+              <span className={styles["error-validation"]} role="alert">
+                {errors.email.message}
+              </span>
+            )}
+            <label htmlFor="password">password</label>
+            <input
+              id="password"
+              {...register("password", {
+                required: "required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
+              })}
+              type="password"
+            />
+            {errors.password && (
+              <span className={styles["error-validation"]} role="alert">
+                {errors.password.message}
+              </span>
+            )}
+            <label htmlFor="firstName">First Name</label>
+            <input
+              id="firstName"
+              {...register("firstName", {
+                required: "required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
+              })}
+              type="text"
+            />
+            {errors.firstName && (
+              <span className={styles["error-validation"]} role="alert">
+                {errors.firstName.message}
+              </span>
+            )}
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              id="lastName"
+              {...register("lastName", {
+                required: "required",
+                minLength: {
+                  value: 5,
+                  message: "min length is 5",
+                },
+              })}
+              type="text"
+            />
+            {errors.lastName && (
+              <span className={styles["error-validation"]} role="alert">
+                {errors.lastName.message}
+              </span>
+            )}
+          </div>
+          <button type="submit" className={styles["login-button"]}>
+            Register
+          </button>
+          <div className={styles.or}>
+            <p>Or</p>
+          </div>
+          <div className={styles["login-link"]}>
+            <Link className={styles["login-link__text"]} to="/login">
+              Login
+            </Link>
+          </div>
+        </form>
+        <button onClick={handleGoogleLogin}>Login with Google</button>
+      </main> */}
     </>
   );
 };

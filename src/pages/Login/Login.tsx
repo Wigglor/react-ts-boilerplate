@@ -3,70 +3,21 @@ import { FormEvent, ReactElement, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
-// import useRefreshToken from "../../hooks/useRefreshToken";
-// import styles from "./Login.module.scss";
-// import Cookies from 'js-cookie';
 
 const LOGIN_URL = "/cognito/signin";
 
 const Login = (): ReactElement => {
-  // const { setAuth, persist, setPersist } = useAuth();
   const { setAuth } = useAuth();
   const userRef = useRef(null);
   const errRef = useRef<HTMLParagraphElement>(null);
-  // const history = useHistory();
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [success, setSuccess] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  // const refresh = useRefreshToken();
   const from = location.state?.from?.pathname || "/";
-
-  // useEffect(() => {
-  //   const userRef: RefObject<HTMLInputElement | null> = useRef(null);
-  //   if (userRef.current) {
-  //     userRef.current.focus();
-  //   }
-  // }, []);
-
-  /*useEffect(() => {
-    const verifyRefreshToken = async () => {
-      try {
-        await refresh();
-        setIsAuthenticated(true);
-        // setIsLoading(false);
-        // navigate("/", { replace: true });
-        console.log(`verify refreshToken step: ${JSON.stringify(auth)}`);
-      } catch (err) {
-        console.log("no refresh token available");
-        console.error(err);
-        // } finally {
-        //   isMounted && setIsLoading(false);
-      } finally {
-        // isMounted && setIsLoading(false);
-        setIsLoading(false);
-      }
-    };
-    verifyRefreshToken();
-  }, []);*/
-
-  /*useEffect(() => {
-    console.log(`persisting...${persist}`);
-    console.log(localStorage.getItem("persist"));
-  }, [persist]);*/
-
-  /* useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn) {
-      // Redirect to the homepage
-      navigate("/"); // Replace '/homepage' with the actual route of your homepage
-    }
-  }, []);*/
 
   useEffect(() => {
     setErrMsg("");
@@ -74,7 +25,6 @@ const Login = (): ReactElement => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    console.log(user, pwd);
     try {
       const response = await axios.post(
         LOGIN_URL,
@@ -85,45 +35,20 @@ const Login = (): ReactElement => {
         },
       );
       const accessToken = response?.data.accessToken;
-      console.log(accessToken);
       setAuth({
         user: user,
         accessToken: accessToken,
-        // accountComplete: false,
         role: response?.data.user.roleAccess,
         setup: response?.data.user.setup,
         currentPeriodEnds: response?.data.user.memberships[0].company.account.currentPeriodEnds,
         plan: response?.data.user.memberships[0].company.account.plan.name,
       });
-      // setPersist(true);
-      // const persistState = localStorage.setItem("persist", JSON.stringify(true));
-      console.log(response?.data.user.memberships[0].company.name);
-      // localStorage.setItem("workSpace", response?.data.user.memberships[0].company.name);
       setUser("");
       setPwd("");
-      // const isLoggedIn = true;
-      // localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-      // setSuccess(true);
-      // setPersist(true);
       navigate(from, { replace: true });
     } catch (err: any) {
-      console.log(err);
-      console.log(err.response);
-      console.log(err.response.data.message);
-
       const errorMessage = err.response.data.message;
       setErrMsg(errorMessage);
-      // if (!err?.response) {
-      //   console.log(err);
-      //   setErrMsg("No server response");
-      // } else if (err.response?.status === 400) {
-      //   setErrMsg("Missing username or password");
-      // } else if (err.response?.status === 401) {
-      //   setErrMsg("Unauthorized");
-      // } else {
-      //   setErrMsg("Login failed");
-      // }
-      //   errRef.current?.focus();
     }
   };
 

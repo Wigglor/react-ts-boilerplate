@@ -7,9 +7,6 @@ import { ReactElement, useState } from "react";
 
 const SideNav = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <>

@@ -171,7 +171,6 @@ const Billing = (): ReactElement => {
   //     // },
   //   },
   // };
-  console.log(`app url: ${window.location.origin}`);
 
   return (
     <main>
@@ -181,13 +180,6 @@ const Billing = (): ReactElement => {
         </Elements>
       </div>
     </main>
-    // <main className={styles.Billing}>
-    //   <div className={styles.stripe_element}>
-    //     <Elements stripe={stripePromise} options={options}>
-    //       <CheckoutForm setOptions={setOptions} />
-    //     </Elements>
-    //   </div>
-    // </main>
   );
 };
 
