@@ -305,8 +305,8 @@ ReactElement => {
     //     )}
     //   </div>
     // </main>
-    <main>
-      <div>
+    <div className="h-full">
+      <div className="bg-gray-100 flex justify-evenly text-white">
         {paidPlan
           ? prices &&
             prices.prices?.data.map((price) =>
@@ -335,7 +335,7 @@ ReactElement => {
             )
           : prices &&
             prices.prices?.data.map((price) => (
-              <div key={price.id}>
+              <div className="bg-gray-900" key={price.id}>
                 <h2>{price.lookup_key}</h2>
                 <p>
                   Price: {price.unit_amount_decimal} {price.currency}
@@ -347,7 +347,7 @@ ReactElement => {
 
         {upgradePlan && (
           <div onClick={closeUpgradeModal}>
-            <div onClick={(e) => e.stopPropagation()}>
+            <div className="" onClick={(e) => e.stopPropagation()}>
               <h2>Tier {upgradePlan.unit_amount_decimal}</h2>
               <p>
                 You have selected the {upgradePlan.lookup_key} Plan. Proceed with your choice or
@@ -357,8 +357,8 @@ ReactElement => {
           </div>
         )}
         {selectedPrice && (
-          <div>
-            <div onClick={(e) => e.stopPropagation()}>
+          <div className="fixed top-0 left-0 w-full h-full bg-gray-300 z-40 flex justify-center items-center">
+            <div className="bg-gray-700" onClick={(e) => e.stopPropagation()}>
               <h2>Tier {selectedPrice.unit_amount_decimal}</h2>
               <p>
                 You have selected the {selectedPrice.lookup_key} Plan. Proceed with your choice or
@@ -389,7 +389,7 @@ ReactElement => {
           </div>
         )}
       </div>
-    </main>
+    </div>
     // <main>
     //   <div>
     //     {paidPlan
@@ -513,8 +513,8 @@ const Billing = (): ReactElement => {
     //     </Elements>
     //   </div>
     // </main>
-    <main>
-      <div>
+    <div className="h-full">
+      <div className="h-full">
         <Elements
           stripe={stripePromise}
           options={{
@@ -530,7 +530,7 @@ const Billing = (): ReactElement => {
           {/* <CheckoutForm onOptionsChange={handleOptionsChange} /> */}
         </Elements>
       </div>
-    </main>
+    </div>
   );
 };
 
