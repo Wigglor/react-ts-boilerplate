@@ -165,7 +165,10 @@ const Organization = (): ReactElement => {
                 <li key={membership.id}>
                   <div>
                     <p>{membership.accountEmail}</p>
-                    <p>acc email: {membership.accountEmail}</p>
+                    <p>
+                      acc email: {membership.accountEmail} - Verification Status:{" "}
+                      {membership.user.verificationStatus}
+                    </p>
                   </div>
                 </li>
               ))}
