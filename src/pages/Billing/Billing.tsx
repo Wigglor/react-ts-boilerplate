@@ -354,8 +354,8 @@ ReactElement => {
             <div className="bg-gray-700" onClick={(e) => e.stopPropagation()}>
               <h2>Tier {upgradePlan.unit_amount_decimal}</h2>
               <p>
-                You have selected the {upgradePlan.lookup_key} Plan. Proceed with your choice or
-                click outside this box to cancel.
+                You have selected the {upgradePlan.lookup_key} Plan to upgrade to. Proceed with your
+                choice or click outside this box to cancel.
               </p>
             </div>
           </div>

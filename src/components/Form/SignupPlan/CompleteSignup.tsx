@@ -49,7 +49,7 @@ function CompleteSignup() {
         // currentPeriodEnds:
         //   setupResponse?.data.user.memberships[0]?.company.account.currentPeriodEnds,
         currentPeriodEnds: new Date(),
-        plan: "",
+        plan: undefined,
       });
       setWorkSpaces({
         availableWorkSpaces: [

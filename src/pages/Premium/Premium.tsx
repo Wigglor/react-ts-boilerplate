@@ -28,7 +28,8 @@ const Premium = (): ReactElement => {
   // const axiosPrivate = useAxiosPrivate();
   // const [posts, setPosts] = useState<Post | undefined>(undefined);
   // const navigate = useNavigate();
-  if (["PLAN2", "PLAN3"].includes(auth?.plan as string)) {
+  // if (["PLAN2", "PLAN3"].includes(auth?.plan as string)) {
+  if (["PLAN2", "PLAN3"].includes(auth?.plan as unknown as string)) {
     return (
       <>
         <main>

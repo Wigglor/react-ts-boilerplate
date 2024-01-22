@@ -9,7 +9,8 @@ interface Auth {
   role: string;
   setup: string;
   currentPeriodEnds: Date | null;
-  plan: string;
+  plan: undefined;
+  // plan: string;
 }
 
 interface AuthContextType {
@@ -23,7 +24,8 @@ const INITIAL_STATE: Auth = {
   role: "",
   setup: "",
   currentPeriodEnds: null,
-  plan: "",
+  plan: undefined,
+  // plan: "",
 };
 
 export const AuthContext = createContext<AuthContextType>({

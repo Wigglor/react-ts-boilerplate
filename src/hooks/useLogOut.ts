@@ -14,7 +14,8 @@ const useLogout = () => {
       role: "",
       setup: "",
       currentPeriodEnds: null,
-      plan: "",
+      plan: undefined,
+      // plan: "",
     });
     setWorkSpaces({
       availableWorkSpaces: [

@@ -48,26 +48,39 @@ const SocialCallback = (): ReactElement => {
           setup: response.data.user.setup,
           currentPeriodEnds:
             null /*response?.data.user.memberships[0]?.company?.account.currentPeriodEnds,*/, // CHANGE THIS!!!
-          plan: "" /*response?.data.user.memberships[0]?.company?.account.plan?.name,*/, // CHANGE THIS!!!
+          // plan: "" /*response?.data.user.memberships[0]?.company?.account.plan?.name,*/, // CHANGE THIS!!!
+          plan: undefined /*response?.data.user.memberships[0]?.company?.account.plan?.name,*/, // CHANGE THIS!!!
         });
 
-        /*const workSpaces = response?.data.user.memberships.map((item: Item) => {
-          return { name: item.company.name, id: item.company.id };
-        }); // extend this and return obj with company id etc as well
+        console.log(JSON.stringify(response));
+        console.log(`user: ${JSON.stringify(response.data.user.setup)}`);
+        console.log(`user: ${JSON.stringify(response.data.user)}`);
+        console.log(`------------------------------------------------`);
+        console.log(`userName: ${JSON.stringify(response.data.user.userName)}`);
+        console.log(`accessToken: ${JSON.stringify(response.data.data.access_token)}`);
+        console.log(`role: ${JSON.stringify(response.data.user.userName)}`);
+        console.log(`setup: ${JSON.stringify(response.data.user.setup)}`);
 
-        setWorkSpaces({
-          availableWorkSpaces: workSpaces,
-          selectedWorkSpace: {
-            name: response?.data.user.memberships[0].company.name,
-            id: response?.data.user.memberships[0].company.id,
-          },
-        });
+        // const workSpaces = response?.data.user.memberships.map((item: Item) => {
+        //   return { name: item.company.name, id: item.company.id };
+        // }); // extend this and return obj with company id etc as well
+
+        // setWorkSpaces({
+        //   availableWorkSpaces: workSpaces,
+        //   selectedWorkSpace: {
+        //     name: response?.data.user.memberships[0].company.name,
+        //     id: response?.data.user.memberships[0].company.id,
+        //   },
+        // });
 
         if (response.data.user.setup === "PENDING") {
+          console.log("setup is PENDING");
           navigate("/onboarding", { replace: true });
         } else {
+          console.log("setup is COMPLETED");
+          //navigate("/", { replace: true });
           navigate(from, { replace: true });
-        }*/
+        }
       } catch (err) {
         console.error(err);
       }
