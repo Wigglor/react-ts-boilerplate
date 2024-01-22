@@ -117,6 +117,7 @@ ReactElement => {
   };
 
   const closeModal = () => {
+    console.log("toggling modal");
     setSelectedPrice(null);
   };
   const closeUpgradeModal = () => {
@@ -346,8 +347,11 @@ ReactElement => {
             ))}
 
         {upgradePlan && (
-          <div onClick={closeUpgradeModal}>
-            <div className="" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-gray-300 z-40 flex justify-center items-center"
+            onClick={closeUpgradeModal}
+          >
+            <div className="bg-gray-700" onClick={(e) => e.stopPropagation()}>
               <h2>Tier {upgradePlan.unit_amount_decimal}</h2>
               <p>
                 You have selected the {upgradePlan.lookup_key} Plan. Proceed with your choice or
@@ -357,8 +361,11 @@ ReactElement => {
           </div>
         )}
         {selectedPrice && (
-          <div className="fixed top-0 left-0 w-full h-full bg-gray-300 z-40 flex justify-center items-center">
-            <div className="bg-gray-700" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-gray-300 z-40 flex justify-center items-center"
+            onClick={closeModal}
+          >
+            <div className="bg-gray-700 p-10" onClick={(e) => e.stopPropagation()}>
               <h2>Tier {selectedPrice.unit_amount_decimal}</h2>
               <p>
                 You have selected the {selectedPrice.lookup_key} Plan. Proceed with your choice or
