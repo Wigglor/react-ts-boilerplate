@@ -28,7 +28,7 @@ type GoogleUser = {
   select_by: string;
 };
 
-const ReactFormTest2 = (): ReactElement => {
+const Login2 = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
   const { setAuth } = useAuth();
   const { setWorkSpaces } = useWorkSpaces();
@@ -113,7 +113,7 @@ const ReactFormTest2 = (): ReactElement => {
       const workSpaces = response?.data.user.memberships.map((item: Item) => {
         return { name: item.company.name, id: item.company.id };
       }); // extend this and return obj with company id etc as well
-
+      console.log(`workSpaces...: ${JSON.stringify(workSpaces)}`);
       setWorkSpaces({
         availableWorkSpaces: workSpaces,
         selectedWorkSpace: {
@@ -455,4 +455,4 @@ const ReactFormTest2 = (): ReactElement => {
 //   );
 // };
 
-export default ReactFormTest2;
+export default Login2;
