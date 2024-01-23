@@ -15,7 +15,7 @@ import Organization from "./pages/Organization/Organization";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
 import Premium from "./pages/Premium/Premium";
-import Register2 from "./pages/Register/Register2";
+import Register from "./pages/Register/Register";
 import RegistrationConfirmation from "./pages/RegistrationConfirmation/RegistrationConfirmation";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
@@ -56,7 +56,7 @@ const App = () => {
 
             <Route element={<PublicRoute />}>
               <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register2 />} />
+              <Route path="register" element={<Register />} />
               <Route path="socialcallback" element={<SocialCallback />} />
               <Route path="invite" element={<Invite />} />
               <Route path="forgot-password" element={<ForgotPassword />} />
