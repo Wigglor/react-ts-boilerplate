@@ -28,7 +28,7 @@ type GoogleUser = {
   select_by: string;
 };
 
-const Login2 = (): ReactElement => {
+const Login = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
   const { setAuth } = useAuth();
   const { setWorkSpaces } = useWorkSpaces();
@@ -455,4 +455,4 @@ const Login2 = (): ReactElement => {
 //   );
 // };
 
-export default Login2;
+export default Login;

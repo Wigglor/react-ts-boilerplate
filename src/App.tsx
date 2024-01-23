@@ -1,14 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-// import "./App.scss";
 import NavBar from "./Layouts/NavBar/NavBar";
 import Navigation from "./Layouts/Navigation/Navigation";
 import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
-// import "./style.css";
-// import RequireAuth from "./components/requireAuth";
-
-// import "preline/preline";
-// import { IStaticMethods } from "preline/preline";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Account from "./pages/Account/Account";
@@ -16,7 +10,7 @@ import Billing from "./pages/Billing/Billing";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
 import Invite from "./pages/Invite/Invite";
-import Login2 from "./pages/Login2/Login2";
+import Login from "./pages/Login/Login";
 import Organization from "./pages/Organization/Organization";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Posts from "./pages/Posts/Posts";
@@ -61,7 +55,7 @@ const App = () => {
             </Route>
 
             <Route element={<PublicRoute />}>
-              <Route path="login" element={<Login2 />} />
+              <Route path="login" element={<Login />} />
               <Route path="register" element={<Register2 />} />
               <Route path="socialcallback" element={<SocialCallback />} />
               <Route path="invite" element={<Invite />} />
@@ -78,13 +72,8 @@ const App = () => {
                 <Route path="posts" element={<Posts />} />
                 <Route path="billing" element={<Billing />} />
                 <Route path="premium" element={<Premium />} />
-                {/* <Route element={<OnboardingRoute />}>
-                  <Route path="onboardingg" element={<Onboarding />} />
-                </Route> */}
-                {/* </Route> */}
               </Route>
             </Route>
-            {/* </WorkSpacesProvider> */}
           </Route>
         </Route>
       </Routes>
