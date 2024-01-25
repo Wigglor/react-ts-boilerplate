@@ -34,13 +34,15 @@ const Invite = (): ReactElement => {
 
   // const code = searchParams.get("code");
   const email = searchParams.get("email") as string;
+  const password = searchParams.get("code") as string;
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     try {
       const response = await axios.post(
         COMPLETE_INVITE_URL,
         JSON.stringify({
-          tempPassword: data.tempPassword,
+          // tempPassword: data.tempPassword,
+          tempPassword: password,
           newPassword: data.newPassword,
           email: data.email,
           firstName: data.firstName,
@@ -83,7 +85,7 @@ const Invite = (): ReactElement => {
             })}
             type="email"
           />
-          {errors.email && <span role="alert">{errors.email.message}</span>}
+          {/* {errors.email && <span role="alert">{errors.email.message}</span>}
           <label htmlFor="tempPassword">Temporary Password</label>
           <input
             id="tempPassword"
@@ -95,7 +97,7 @@ const Invite = (): ReactElement => {
               },
             })}
             type="password"
-          />
+          /> */}
           {errors.tempPassword && <span role="alert">{errors.tempPassword.message}</span>}
           <label htmlFor="newPassword">New Password</label>
           <input
