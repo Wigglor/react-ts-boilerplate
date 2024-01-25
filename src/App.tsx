@@ -37,8 +37,8 @@ const App = () => {
             <Route path="unauthorized" element={<Unauthorized />} />
           </Route>
           {/* <Route element={<PublicRoute />}>
-            <Route path="login" element={<ReactFormTest2 />} />
-            <Route path="register" element={<Register2 />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="socialcallback" element={<SocialCallback />} />
             <Route path="invite" element={<Invite />} />
             <Route path="forgot-password" element={<ForgotPassword />} />

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useLocation /*useNavigate*/ } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 
 const RESET_URL = "/resetpassword";
@@ -14,6 +14,7 @@ type FormData = {
 };
 
 const ResetPassword = (): ReactElement => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -46,12 +47,13 @@ const ResetPassword = (): ReactElement => {
           withCredentials: true,
         },
       );
-      /*if (response.status === 200) {
+      if (response.status === 200) {
+        setSuccessMsg("Successfully changed password!");
         navigate("/login", { replace: true });
       } else {
         console.log(JSON.stringify(response));
-      }*/
-      setSuccessMsg("Successfully changed password!");
+      }
+      // setSuccessMsg("Successfully changed password!");
     } catch (err: any) {
       const errorMessage = err.response.data.message;
       setErrMsg(errorMessage);
