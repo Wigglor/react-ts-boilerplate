@@ -303,8 +303,8 @@ const Register = (): ReactElement => {
         </div>
       </main> */}
 
-      <main>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <main className="flex content-center flex-col w-1/2">
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-500">
           <h2>Register</h2>
           {errMsg && <div>{errMsg}</div>}
           <div>
