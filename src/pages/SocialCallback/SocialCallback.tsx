@@ -25,20 +25,12 @@ const SocialCallback = (): ReactElement => {
     async function socialToken() {
       try {
         const response = await axios.post(
-          // "https://test-2023-10.auth.eu-north-1.amazoncognito.com/oauth2/token",
           "/social-token",
-          // AwsBody.toString(),
-          // AwsBody,
           { googleToken: code },
           {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           },
-          // JSON.stringify(AwsBody),
-          // {
-          //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          //   // withCredentials: true,
-          // },
         );
 
         setAuth({
@@ -73,14 +65,13 @@ const SocialCallback = (): ReactElement => {
         //   },
         // });
 
-        if (response.data.user.setup === "PENDING") {
+        /*if (response.data.user.setup === "PENDING") {
           console.log("setup is PENDING");
           navigate("/onboarding", { replace: true });
         } else {
           console.log("setup is COMPLETED");
-          //navigate("/", { replace: true });
           navigate(from, { replace: true });
-        }
+        }*/
       } catch (err) {
         console.error(err);
       }
