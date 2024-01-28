@@ -22,11 +22,12 @@ const SocialCallback = (): ReactElement => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
+    console.log(`code: ${code}`);
     async function socialToken() {
       try {
         const response = await axios.post(
           "/social-token",
-          { googleToken: code },
+          { code: code },
           {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
