@@ -121,7 +121,7 @@ const Navigation = (): ReactElement => {
                 <Menu onClick={() => setIsCollapsed(!isCollapsed)} />
                 {workSpaces.selectedWorkSpace.id.length > 0 && (
                   <div>
-                    {/* <select
+                    <select
                       className="rounded-lg cursor-pointer"
                       value={stateSelectedWorkspace}
                       onChange={handleChange}
@@ -135,7 +135,7 @@ const Navigation = (): ReactElement => {
                       ) : (
                         <></>
                       )}
-                    </select> */}
+                    </select>
                   </div>
                 )}
                 <div className="group">

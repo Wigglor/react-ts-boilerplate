@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./Layouts/NavBar/NavBar";
 import Navigation from "./Layouts/Navigation/Navigation";
@@ -5,6 +6,7 @@ import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
+import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 import Account from "./pages/Account/Account";
 import Billing from "./pages/Billing/Billing";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
@@ -36,17 +38,25 @@ const App = () => {
           <Route element={<NavBar />}>
             <Route path="unauthorized" element={<Unauthorized />} />
           </Route>
-          {/* <Route element={<PublicRoute />}>
-            <Route path="login" element={<Login />} />
+          <Route element={<PublicRoute />}>
+            <Route
+              path="login"
+              element={
+                <WorkSpacesProvider>
+                  <Login />
+                </WorkSpacesProvider>
+              }
+            />
             <Route path="register" element={<Register />} />
             <Route path="socialcallback" element={<SocialCallback />} />
             <Route path="invite" element={<Invite />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset" element={<ResetPassword />} />
             <Route path="register-confirmation" element={<RegistrationConfirmation />} />
-          </Route> */}
+          </Route>
 
           <Route element={<PersistLogin />}>
+            {/* <Route path="login" element={<Login />} /> */}
             {/* Wrap WorkSpacesProvider around something else and move PublicRoute content ABOVE PersistLogin */}
             <Route element={<NavBar />}>
               <Route element={<OnboardingRoute />}>
@@ -54,7 +64,7 @@ const App = () => {
               </Route>
             </Route>
 
-            <Route element={<PublicRoute />}>
+            {/* <Route element={<PublicRoute />}>
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="socialcallback" element={<SocialCallback />} />
@@ -62,7 +72,7 @@ const App = () => {
               <Route path="forgot-password" element={<ForgotPassword />} />
               <Route path="reset" element={<ResetPassword />} />
               <Route path="register-confirmation" element={<RegistrationConfirmation />} />
-            </Route>
+            </Route> */}
             <Route element={<PrivateRoute allowedRoles={[ROLES.user, ROLES.admin]} />}>
               <Route element={<Navigation />}>
                 <Route path="" element={<Home />} />

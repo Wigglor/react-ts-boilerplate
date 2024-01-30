@@ -66,13 +66,13 @@ const SocialCallback = (): ReactElement => {
         //   },
         // });
 
-        /*if (response.data.user.setup === "PENDING") {
+        if (response.data.user.setup === "PENDING") {
           console.log("setup is PENDING");
           navigate("/onboarding", { replace: true });
         } else {
           console.log("setup is COMPLETED");
           navigate(from, { replace: true });
-        }*/
+        }
       } catch (err) {
         console.error(err);
       }
