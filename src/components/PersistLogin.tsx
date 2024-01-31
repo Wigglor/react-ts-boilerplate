@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { WorkSpacesProvider } from "../context/WorkSpacesProvider";
+// import { WorkSpacesProvider } from "../context/WorkSpacesProvider";
 import useAuth from "../hooks/useAuth";
 import useRefreshToken from "../hooks/useRefreshToken";
 
@@ -51,9 +51,9 @@ const PersistLogin = () => {
       {isLoading ? (
         <p>Loading..............</p>
       ) : (
-        <WorkSpacesProvider>
-          <Outlet />
-        </WorkSpacesProvider>
+        // <WorkSpacesProvider>
+        <Outlet />
+        // </WorkSpacesProvider>
       )}
     </>
   );

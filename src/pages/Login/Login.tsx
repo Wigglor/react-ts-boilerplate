@@ -31,7 +31,7 @@ type GoogleUser = {
 const Login = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
   const { setAuth } = useAuth();
-  const { setWorkSpaces } = useWorkSpaces();
+  const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [googleUser, setGoogleUser] = useState<GoogleUser | undefined>(undefined);
   const navigate = useNavigate();
@@ -122,6 +122,9 @@ const Login = (): ReactElement => {
         },
       });
 
+      console.log(JSON.stringify(workSpaces));
+      console.log(JSON.stringify(workSpaces));
+      console.log(JSON.stringify(workSpaces));
       console.log("setting workspace.....................................................");
 
       if (response?.data.setup === "PENDING") {

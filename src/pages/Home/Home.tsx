@@ -25,6 +25,9 @@ const Home = (): ReactElement => {
   });
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    console.log(
+      JSON.stringify(`My available workspaces when logging in: ${JSON.stringify(workSpaces)}`),
+    );
     setSelectedWorkspace(workSpace);
     console.log(JSON.stringify(`selectedWorkspace: ${stateSelectedWorkspace}`));
   }, []);

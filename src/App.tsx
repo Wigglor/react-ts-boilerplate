@@ -6,7 +6,7 @@ import OnboardingRoute from "./components/OnboardingRoute";
 import PersistLogin from "./components/PersistLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
-import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
+import WorkSpaceWrapper from "./components/WorkSpaceWrapper";
 import Account from "./pages/Account/Account";
 import Billing from "./pages/Billing/Billing";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
@@ -23,6 +23,8 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
 import SocialCallback from "./pages/SocialCallback/SocialCallback";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
+// import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
+// import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
 const App = () => {
   const ROLES = {
@@ -39,14 +41,7 @@ const App = () => {
             <Route path="unauthorized" element={<Unauthorized />} />
           </Route>
           <Route element={<PublicRoute />}>
-            <Route
-              path="login"
-              element={
-                <WorkSpacesProvider>
-                  <Login />
-                </WorkSpacesProvider>
-              }
-            />
+            {/* <Route path="login" element={<Login />} /> */}
             <Route path="register" element={<Register />} />
             <Route path="socialcallback" element={<SocialCallback />} />
             <Route path="invite" element={<Invite />} />
@@ -54,17 +49,17 @@ const App = () => {
             <Route path="reset" element={<ResetPassword />} />
             <Route path="register-confirmation" element={<RegistrationConfirmation />} />
           </Route>
-
-          <Route element={<PersistLogin />}>
-            {/* <Route path="login" element={<Login />} /> */}
-            {/* Wrap WorkSpacesProvider around something else and move PublicRoute content ABOVE PersistLogin */}
-            <Route element={<NavBar />}>
-              <Route element={<OnboardingRoute />}>
-                <Route path="onboarding" element={<Onboarding />} />
+          <Route element={<WorkSpaceWrapper />}>
+            <Route path="login" element={<Login />} />
+            <Route element={<PersistLogin />}>
+              {/* Wrap WorkSpacesProvider around something else and move PublicRoute content ABOVE PersistLogin */}
+              <Route element={<NavBar />}>
+                <Route element={<OnboardingRoute />}>
+                  <Route path="onboarding" element={<Onboarding />} />
+                </Route>
               </Route>
-            </Route>
 
-            {/* <Route element={<PublicRoute />}>
+              {/* <Route element={<PublicRoute />}>
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="socialcallback" element={<SocialCallback />} />
@@ -73,15 +68,16 @@ const App = () => {
               <Route path="reset" element={<ResetPassword />} />
               <Route path="register-confirmation" element={<RegistrationConfirmation />} />
             </Route> */}
-            <Route element={<PrivateRoute allowedRoles={[ROLES.user, ROLES.admin]} />}>
-              <Route element={<Navigation />}>
-                <Route path="" element={<Home />} />
-                <Route path="paymentstatus" element={<PaymentStatus />} />
-                <Route path="account" element={<Account />} />
-                <Route path="organization" element={<Organization />} />
-                <Route path="posts" element={<Posts />} />
-                <Route path="billing" element={<Billing />} />
-                <Route path="premium" element={<Premium />} />
+              <Route element={<PrivateRoute allowedRoles={[ROLES.user, ROLES.admin]} />}>
+                <Route element={<Navigation />}>
+                  <Route path="" element={<Home />} />
+                  <Route path="paymentstatus" element={<PaymentStatus />} />
+                  <Route path="account" element={<Account />} />
+                  <Route path="organization" element={<Organization />} />
+                  <Route path="posts" element={<Posts />} />
+                  <Route path="billing" element={<Billing />} />
+                  <Route path="premium" element={<Premium />} />
+                </Route>
               </Route>
             </Route>
           </Route>
