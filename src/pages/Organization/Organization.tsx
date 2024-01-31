@@ -94,12 +94,21 @@ const Organization = (): ReactElement => {
   const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
 
-  const deleteUser = (email: string) => {
+  const deleteUserModal = (email: string) => {
     console.log(JSON.stringify(email));
     // if (paidPlan !== true) {
     //   setSelectedPrice(price);
     // }
     setDeleteEmail(email);
+  };
+
+  const deleteUser = (event: any, email: string) => {
+    console.log(event.target.value);
+    console.log(email);
+    // if (paidPlan !== true) {
+    //   setSelectedPrice(price);
+    // }
+    // setDeleteEmail(email);
   };
 
   const closeModal = () => {
@@ -180,7 +189,7 @@ const Organization = (): ReactElement => {
             <p>
               Please type in the email: <i>{deleteEmail} to delete the user</i>
             </p>
-            <form>
+            <form onClick={(e) => deleteUser(e, deleteEmail)}>
               <input id="email" type="email" />
               <button type="submit">Delete User</button>
             </form>
@@ -199,7 +208,9 @@ const Organization = (): ReactElement => {
                       acc email: {membership.accountEmail} - Verification Status:{" "}
                       {membership.user.verificationStatus}
                     </p>
-                    <button onClick={() => deleteUser(membership.accountEmail)}>Delete User</button>
+                    <button onClick={() => deleteUserModal(membership.accountEmail)}>
+                      Delete User
+                    </button>
                   </div>
                 </li>
               ))}
