@@ -122,7 +122,7 @@ const Navigation = (): ReactElement => {
                 {workSpaces.selectedWorkSpace.id.length > 0 && (
                   <div>
                     <select
-                      className="rounded-lg cursor-pointer"
+                      className="rounded-lg cursor-pointer p-0"
                       value={stateSelectedWorkspace}
                       onChange={handleChange}
                     >

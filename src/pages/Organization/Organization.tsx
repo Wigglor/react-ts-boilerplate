@@ -92,6 +92,20 @@ const Organization = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
   const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
+  const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
+
+  const deleteUser = (email: string) => {
+    console.log(JSON.stringify(email));
+    // if (paidPlan !== true) {
+    //   setSelectedPrice(price);
+    // }
+    setDeleteEmail(email);
+  };
+
+  const closeModal = () => {
+    console.log("toggling modal");
+    setDeleteEmail(null);
+  };
 
   useEffect(() => {
     console.log(`selectedWorkSpace: ${workSpaces.selectedWorkSpace.id}`);
@@ -156,7 +170,23 @@ const Organization = (): ReactElement => {
     <main>
       {successMessage && <p>{successMessage}</p>}
       {errorMessage && <p>{errorMessage}</p>}
-      <div></div>
+      {/* <div></div> */}
+      {deleteEmail && (
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-gray-300 z-40 flex justify-center items-center"
+          onClick={closeModal}
+        >
+          <div className="bg-gray-100 text-black p-2" onClick={(e) => e.stopPropagation()}>
+            <p>
+              Please type in the email: <i>{deleteEmail} to delete the user</i>
+            </p>
+            <form>
+              <input id="email" type="email" />
+              <button type="submit">Delete User</button>
+            </form>
+          </div>
+        </div>
+      )}
       <div>
         <div>
           <ul>
@@ -169,6 +199,7 @@ const Organization = (): ReactElement => {
                       acc email: {membership.accountEmail} - Verification Status:{" "}
                       {membership.user.verificationStatus}
                     </p>
+                    <button onClick={() => deleteUser(membership.accountEmail)}>Delete User</button>
                   </div>
                 </li>
               ))}
