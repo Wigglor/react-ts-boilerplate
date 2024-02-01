@@ -89,10 +89,13 @@ const Organization = (): ReactElement => {
   const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [deleteUserMessage, setDeleteUserMessage] = useState<string | null>(null);
+  const [deleteUserErrorMessage, setDeleteUserErrorMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
   const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
+  const [emailCheckValue, setEmailCheckValue] = useState("");
 
   const deleteUserModal = (email: string) => {
     console.log(JSON.stringify(email));
@@ -100,15 +103,10 @@ const Organization = (): ReactElement => {
     //   setSelectedPrice(price);
     // }
     setDeleteEmail(email);
-  };
-
-  const deleteUser = (event: any, email: string) => {
-    console.log(event.target.value);
-    console.log(email);
-    // if (paidPlan !== true) {
-    //   setSelectedPrice(price);
-    // }
-    // setDeleteEmail(email);
+    setEmailCheckValue("");
+    if (deleteUserErrorMessage !== null) {
+      setDeleteUserErrorMessage(null);
+    }
   };
 
   const closeModal = () => {
@@ -175,10 +173,42 @@ const Organization = (): ReactElement => {
     );
   }
 
+  const handleEmailChange = (e: any) => {
+    setEmailCheckValue(e.target.value);
+  };
+
+  const handleDeleteClick = async (email: string) => {
+    if (emailCheckValue === email) {
+      console.log(`${emailCheckValue} is equal to ${email}`);
+      try {
+        const deleteUserResponse: ApiResponse<string> = await axiosPrivate.post(
+          "/remove-user",
+          JSON.stringify({
+            email: email,
+          }),
+          {
+            withCredentials: true,
+          },
+        );
+        console.log(JSON.stringify(deleteUserResponse));
+        setDeleteUserMessage("User deleted!");
+        setDeleteEmail(null);
+        setEmailCheckValue("");
+      } catch (err) {
+        if (err instanceof AxiosError) {
+          setDeleteUserErrorMessage(err.response?.data.message);
+        }
+      }
+    } else {
+      console.log(`${emailCheckValue} is NOT equal to ${email}`);
+      setDeleteUserErrorMessage("Please submit the correct email address");
+    }
+  };
   return (
     <main>
-      {successMessage && <p>{successMessage}</p>}
-      {errorMessage && <p>{errorMessage}</p>}
+      {successMessage && <p className="bg-green-600 p-3">{successMessage}</p>}
+      {errorMessage && <p className="bg-red-600 p-3">{errorMessage}</p>}
+      {deleteUserMessage && <p className="bg-green-600 p-3">{deleteUserMessage}</p>}
       {/* <div></div> */}
       {deleteEmail && (
         <div
@@ -186,13 +216,17 @@ const Organization = (): ReactElement => {
           onClick={closeModal}
         >
           <div className="bg-gray-100 text-black p-2" onClick={(e) => e.stopPropagation()}>
+            {deleteUserErrorMessage && <p className="bg-red-600 p-3">{deleteUserErrorMessage}</p>}
             <p>
               Please type in the email: <i>{deleteEmail} to delete the user</i>
             </p>
-            <form onClick={(e) => deleteUser(e, deleteEmail)}>
-              <input id="email" type="email" />
-              <button type="submit">Delete User</button>
-            </form>
+            {/* <form onClick={(e) => deleteUser(e, deleteEmail)}> */}
+            {/* <form onSubmit={deleteUser}> */}
+            <input id="email" type="email" value={emailCheckValue} onChange={handleEmailChange} />
+            <button type="button" onClick={() => handleDeleteClick(deleteEmail)}>
+              Delete User
+            </button>
+            {/* </form> */}
           </div>
         </div>
       )}
