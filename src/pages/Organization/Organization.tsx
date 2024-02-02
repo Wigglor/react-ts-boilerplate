@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ChangeEvent, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 // import { axiosPrivate } from "../../api/axios";
 import { AxiosError } from "axios";
@@ -173,7 +173,7 @@ const Organization = (): ReactElement => {
     );
   }
 
-  const handleEmailChange = (e: any) => {
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailCheckValue(e.target.value);
   };
 
