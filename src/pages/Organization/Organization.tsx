@@ -96,8 +96,7 @@ const Organization = (): ReactElement => {
   const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
   const [inviteEmail, setInviteEmail] = useState<boolean>(false);
-  const [inviteEmailValue, setInviteEmailValue] = useState<string | null>(null);
-  const [emailCheckValue, setEmailCheckValue] = useState("");
+  const [emailCheckValue, setEmailCheckValue] = useState<string>("");
 
   const deleteUserModal = (email: string) => {
     console.log(JSON.stringify(email));
@@ -116,13 +115,12 @@ const Organization = (): ReactElement => {
   };
 
   const closeDeleteModal = () => {
-    console.log("toggling modal");
     setDeleteEmail(null);
   };
 
   const closeInviteModal = () => {
-    console.log("toggling modal");
     setInviteEmail(false);
+    reset();
   };
 
   useEffect(() => {
@@ -176,14 +174,6 @@ const Organization = (): ReactElement => {
     }
   };
 
-  if (!user) {
-    return (
-      <div>
-        <p> loading account data....................................................</p>
-      </div>
-    );
-  }
-
   const setters = {
     setEmailCheckValue,
   };
@@ -191,7 +181,6 @@ const Organization = (): ReactElement => {
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>, key: keyof typeof setters) => {
     const setter = setters[key];
     setter(e.target.value);
-    // setEmailCheckValue(e.target.value);
   };
 
   const handleDeleteClick = async (email: string) => {
@@ -221,12 +210,19 @@ const Organization = (): ReactElement => {
       setDeleteUserErrorMessage("Please submit the correct email address");
     }
   };
+
+  if (!user) {
+    return (
+      <div>
+        <p> loading account data....................................................</p>
+      </div>
+    );
+  }
   return (
     <main className="flex justify-center items-center h-full">
       {successMessage && <p className="bg-green-600 p-3">{successMessage}</p>}
-      {/* {errorMessage && <p className="bg-red-600 p-3">{errorMessage}</p>} */}
       {deleteUserMessage && <p className="bg-green-600 p-3">{deleteUserMessage}</p>}
-      {/* <div></div> */}
+
       {deleteEmail && (
         <div
           className="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-80 z-40 flex justify-center items-center"
@@ -237,8 +233,6 @@ const Organization = (): ReactElement => {
             <p>
               Please type in the email: <i>{deleteEmail} to delete the user</i>
             </p>
-            {/* <form onClick={(e) => deleteUser(e, deleteEmail)}> */}
-            {/* <form onSubmit={deleteUser}> */}
             <input
               id="email"
               type="email"
@@ -248,7 +242,6 @@ const Organization = (): ReactElement => {
             <button type="button" onClick={() => handleDeleteClick(deleteEmail)}>
               Delete User
             </button>
-            {/* </form> */}
           </div>
         </div>
       )}
@@ -258,9 +251,6 @@ const Organization = (): ReactElement => {
           onClick={closeInviteModal}
         >
           <div className="" onClick={(e) => e.stopPropagation()}>
-            {/* <body className="dark:bg-slate-900 bg-gray-100 flex h-full items-center py-16"> */}
-            {/* <main className="w-full max-w-md mx-auto p-6"> */}
-
             <div className=" bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
               <div className="p-4 sm:p-7">
                 {errorMessage && (
@@ -321,12 +311,6 @@ const Organization = (): ReactElement => {
                         </p>
                       </div>
 
-                      {/* <button
-                        type="submit"
-                        className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                      >
-                        Invite User
-                      </button> */}
                       <div className="flex justify-end items-center gap-x-2 py-3 px-4 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
                         <button
                           onClick={closeInviteModal}
@@ -348,9 +332,6 @@ const Organization = (): ReactElement => {
                 </div>
               </div>
             </div>
-
-            {/* </main> */}
-            {/* </body> */}
 
             {/* <div className="bg-gray-100 text-black p-2" onClick={(e) => e.stopPropagation()}>
             <form onSubmit={handleSubmit(onSubmit)}>
