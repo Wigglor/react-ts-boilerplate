@@ -166,6 +166,7 @@ const Organization = (): ReactElement => {
       );
       setUpdateUsers((prev) => !prev);
       reset();
+      setInviteEmail(false);
       setSuccessMessage("Invite sent!");
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -220,7 +221,8 @@ const Organization = (): ReactElement => {
   }
   return (
     <main className="flex justify-center items-center h-full">
-      {successMessage && <p className="bg-green-600 p-3">{successMessage}</p>}
+      {/* {successMessage && <p className="bg-green-600 p-3">{successMessage}</p>} */}
+      {/* <p className="absolute bg-green-600 p-3">testing error msg{successMessage}</p> */}
       {deleteUserMessage && <p className="bg-green-600 p-3">{deleteUserMessage}</p>}
 
       {deleteEmail && (
