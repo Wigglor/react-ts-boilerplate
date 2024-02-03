@@ -594,12 +594,16 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                             </td>
                             <td className="h-px w-px whitespace-nowrap">
                               <div className="px-6 py-1.5">
-                                <button
-                                  className="inline-flex items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                  onClick={() => deleteUserModal(membership.accountEmail)}
-                                >
-                                  Delete
-                                </button>
+                                {membership.roleAccess === "USER" ? (
+                                  <button
+                                    className="inline-flex items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                    onClick={() => deleteUserModal(membership.accountEmail)}
+                                  >
+                                    Delete
+                                  </button>
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </td>
                           </tr>
