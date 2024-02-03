@@ -436,7 +436,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                   <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
                     <div>
                       <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                        Users for this workspace
+                        Users for workspace: <span>{workSpaces.selectedWorkSpace.name}</span>
                       </h2>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         Invite and delete users.
@@ -609,7 +609,9 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                   <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
                     <div>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        <span className="font-semibold text-gray-800 dark:text-gray-200">6</span>{" "}
+                        <span className="font-semibold text-gray-800 dark:text-gray-200">
+                          {user?.result.memberships.length}
+                        </span>{" "}
                         results
                       </p>
                     </div>
