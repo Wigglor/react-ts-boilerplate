@@ -75,7 +75,10 @@ const App = () => {
                   <Route path="" element={<Home />} />
                   <Route path="paymentstatus" element={<PaymentStatus />} />
                   <Route path="account" element={<Account />} />
-                  <Route path="organization" element={<Organization />} />
+                  <Route
+                    path="organization"
+                    element={<Organization allowedRoles={[ROLES.user, ROLES.admin]} />}
+                  />
                   <Route path="posts" element={<Posts />} />
                   <Route path="billing" element={<Billing />} />
                   <Route path="premium" element={<Premium />} />

@@ -2,6 +2,7 @@ import { ChangeEvent, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 // import { axiosPrivate } from "../../api/axios";
 import { AxiosError } from "axios";
+import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
 
@@ -77,7 +78,11 @@ type FormData = {
   email: string;
 };
 
-const Organization = (): ReactElement => {
+type RequireAuthProps = {
+  allowedRoles: string[];
+};
+
+const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const {
     // setValue,
     handleSubmit,
@@ -97,6 +102,7 @@ const Organization = (): ReactElement => {
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
   const [inviteEmail, setInviteEmail] = useState<boolean>(false);
   const [emailCheckValue, setEmailCheckValue] = useState<string>("");
+  const { auth } = useAuth();
 
   const deleteUserModal = (email: string) => {
     console.log(JSON.stringify(email));
@@ -212,14 +218,14 @@ const Organization = (): ReactElement => {
     }
   };
 
-  if (!user) {
-    return (
-      <div>
-        <p> loading account data....................................................</p>
-      </div>
-    );
-  }
-  return (
+  // if (!user) {
+  //   return (
+  //     <div>
+  //       <p> loading account data....................................................</p>
+  //     </div>
+  //   );
+  // }
+  return allowedRoles?.includes(auth?.role as string) && auth?.role === "ADMIN" ? (
     <main className="flex justify-center items-center h-full">
       {/* {successMessage && <p className="bg-green-600 p-3">{successMessage}</p>} */}
       {/* <p className="absolute bg-green-600 p-3">testing error msg{successMessage}</p> */}
@@ -237,8 +243,8 @@ const Organization = (): ReactElement => {
             <div className="p-4 sm:p-7">
               <div className="text-center">
                 {/* <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-                  Forgot password?
-                </h1> */}
+                Forgot password?
+              </h1> */}
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                   Please type in the email: <i>{deleteEmail} to delete the user</i>
                 </p>
@@ -292,20 +298,20 @@ const Organization = (): ReactElement => {
           </div>
 
           {/* <div className="bg-gray-100 text-black p-2" onClick={(e) => e.stopPropagation()}>
-            {deleteUserErrorMessage && <p className="bg-red-600 p-3">{deleteUserErrorMessage}</p>}
-            <p>
-              Please type in the email: <i>{deleteEmail} to delete the user</i>
-            </p>
-            <input
-              id="email"
-              type="email"
-              value={emailCheckValue}
-              onChange={(e) => handleEmailChange(e, "setEmailCheckValue")}
-            />
-            <button type="button" onClick={() => handleDeleteClick(deleteEmail)}>
-              Delete User
-            </button>
-          </div> */}
+          {deleteUserErrorMessage && <p className="bg-red-600 p-3">{deleteUserErrorMessage}</p>}
+          <p>
+            Please type in the email: <i>{deleteEmail} to delete the user</i>
+          </p>
+          <input
+            id="email"
+            type="email"
+            value={emailCheckValue}
+            onChange={(e) => handleEmailChange(e, "setEmailCheckValue")}
+          />
+          <button type="button" onClick={() => handleDeleteClick(deleteEmail)}>
+            Delete User
+          </button>
+        </div> */}
         </div>
       )}
       {inviteEmail && (
@@ -397,27 +403,27 @@ const Organization = (): ReactElement => {
             </div>
 
             {/* <div className="bg-gray-100 text-black p-2" onClick={(e) => e.stopPropagation()}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="email">email</label>
-              <input
-                id="email"
-                {...register("email", {
-                  required: "required",
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: "Entered value does not match email format",
-                  },
-                })}
-                type="email"
-              />
-              {errors.email && (
-                <span className="bg-red-600 text-white p-2" role="alert">
-                  {errors.email.message}
-                </span>
-              )}
-              <button type="submit">Invite User</button>
-            </form>
-          </div> */}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="email">email</label>
+            <input
+              id="email"
+              {...register("email", {
+                required: "required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              })}
+              type="email"
+            />
+            {errors.email && (
+              <span className="bg-red-600 text-white p-2" role="alert">
+                {errors.email.message}
+              </span>
+            )}
+            <button type="submit">Invite User</button>
+          </form>
+        </div> */}
           </div>
         </div>
       )}
@@ -468,13 +474,13 @@ const Organization = (): ReactElement => {
                       <tr>
                         <th scope="col" className="ps-6 py-3 text-start">
                           {/* <label htmlFor="hs-at-with-checkboxes-main" className="flex">
-                              <input
-                                type="checkbox"
-                                className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                id="hs-at-with-checkboxes-main"
-                              ></input>
-                              <span className="sr-only">Checkbox</span>
-                            </label> */}
+                            <input
+                              type="checkbox"
+                              className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                              id="hs-at-with-checkboxes-main"
+                            ></input>
+                            <span className="sr-only">Checkbox</span>
+                          </label> */}
                         </th>
 
                         <th scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
@@ -502,19 +508,19 @@ const Organization = (): ReactElement => {
                         </th>
 
                         {/* <th scope="col" className="px-6 py-3 text-start">
-                            <div className="flex items-center gap-x-2">
-                              <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                Portfolio
-                              </span>
-                            </div>
-                          </th> */}
+                          <div className="flex items-center gap-x-2">
+                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                              Portfolio
+                            </span>
+                          </div>
+                        </th> */}
 
                         <th scope="col" className="px-6 py-3 text-start">
                           {/* <div className="flex items-center gap-x-2">
-                              <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                Created
-                              </span>
-                            </div> */}
+                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                              Created
+                            </span>
+                          </div> */}
                         </th>
 
                         <th scope="col" className="px-6 py-3 text-end"></th>
@@ -661,7 +667,10 @@ const Organization = (): ReactElement => {
         </div>
       </div>
     </main>
+  ) : (
+    <p>This page can only be accessed by Admin users.</p>
   );
+  // return (
 };
 
 export default Organization;
