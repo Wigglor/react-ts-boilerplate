@@ -52,7 +52,7 @@ const ForgotPassword = (): ReactElement => {
       const errorMessage = err.response.data.message;
       setErrMsg(errorMessage);
     }
-    // reset();
+    reset();
   };
 
   return (
