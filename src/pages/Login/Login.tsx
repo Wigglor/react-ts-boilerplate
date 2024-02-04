@@ -115,13 +115,15 @@ const Login = (): ReactElement => {
         return { name: item.company.name, id: item.company.id };
       }); // extend this and return obj with company id etc as well
       console.log(`workSpaces...: ${JSON.stringify(workSpaces)}`);
-      setWorkSpaces({
-        availableWorkSpaces: workSpaces,
-        selectedWorkSpace: {
-          name: response?.data.user.memberships[0].company.name,
-          id: response?.data.user.memberships[0].company.id,
-        },
-      });
+      if (response.data.setup !== "PENDING" && response.data.user.membership.length > 0) {
+        setWorkSpaces({
+          availableWorkSpaces: workSpaces,
+          selectedWorkSpace: {
+            name: response?.data.user.memberships[0].company.name,
+            id: response?.data.user.memberships[0].company.id,
+          },
+        });
+      }
 
       console.log(JSON.stringify(workSpaces));
       console.log(JSON.stringify(workSpaces));
