@@ -206,6 +206,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
             withCredentials: true,
           },
         );
+        setUpdateUsers((prev) => !prev);
         console.log(JSON.stringify(deleteUserResponse));
         setDeleteUserMessage(deleteUserResponse.status);
         // setDeleteEmail(null);
