@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 
@@ -314,12 +314,12 @@ const Register = (): ReactElement => {
               <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign up</h1>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                 Already have an account?
-                <a
+                <Link
                   className="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  href="../examples/html/signin.html"
+                  to="/login"
                 >
                   Sign in here
-                </a>
+                </Link>
               </p>
             </div>
 
@@ -506,7 +506,7 @@ const Register = (): ReactElement => {
                       8+ characters required
                     </p>
                   </div>
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     <div className="flex">
                       <input
                         id="remember-me"
@@ -526,7 +526,7 @@ const Register = (): ReactElement => {
                         </a>
                       </label>
                     </div>
-                  </div>
+                  </div> */}
 
                   <button
                     type="submit"
