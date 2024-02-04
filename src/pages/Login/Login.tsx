@@ -91,6 +91,7 @@ const Login = (): ReactElement => {
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data: LoginFormValues) => {
     try {
+      console.log(`form data: ${JSON.stringify(data)}`);
       const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ email: data.email, password: data.password }),

@@ -404,7 +404,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
               <div className=" bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <div className="p-4 sm:p-7">
                   {errorMessage && (
-                    <p className="bg-red-600 p-3 text-white rounded-lg w-full">{errorMessage}</p>
+                    <p className="bg-red-60 p-3 text-white rounded-lg w-full">{errorMessage}</p>
                   )}
                   <div className="text-center">
                     <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
@@ -703,7 +703,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
 
                       <div>
                         <div className="inline-flex gap-x-2">
-                          <button
+                          {/* <button
                             type="button"
                             className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                           >
@@ -743,7 +743,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                             >
                               <path d="m9 18 6-6-6-6" />
                             </svg>
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
