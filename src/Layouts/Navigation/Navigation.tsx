@@ -8,8 +8,10 @@ import {
 } from "lucide-react";
 import { ReactElement, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
+
 type Workspace = {
   name: string;
   id: string;
@@ -19,8 +21,8 @@ const Navigation = (): ReactElement => {
   const logout = useLogout();
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
-
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { setAuth, auth } = useAuth();
 
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
@@ -144,7 +146,8 @@ const Navigation = (): ReactElement => {
                     <li className="px-2 ">
                       <p>signed in as</p>
                       <p>
-                        <b>Testuser</b>
+                        {/* <b>Testuser</b> */}
+                        <b>{auth.user}</b>
                       </p>
                     </li>
                     <li className="px-2">

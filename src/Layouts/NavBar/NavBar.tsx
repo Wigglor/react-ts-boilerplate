@@ -6,6 +6,8 @@ import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
 // import styles from "./NavBar.module.scss";
 import { CircleUserRound, Home } from "lucide-react";
+import useAuth from "../../hooks/useAuth";
+
 type Workspace = {
   name: string;
   id: string;
@@ -34,6 +36,7 @@ const NavBar = (): ReactElement => {
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
+  const { setAuth, auth } = useAuth();
 
   /*useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
@@ -102,7 +105,8 @@ const NavBar = (): ReactElement => {
               <li className="px-2 ">
                 <p>signed in as</p>
                 <p>
-                  <b>Testuser</b>
+                  <b>{auth.user}</b>
+                  {/* <b>Testuser</b> */}
                 </p>
               </li>
               <li className="px-2">
