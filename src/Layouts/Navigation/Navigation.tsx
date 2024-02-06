@@ -1,4 +1,12 @@
-import { CircleDollarSign, CircleUserRound, Home, Menu, Settings, Sparkles } from "lucide-react";
+import {
+  CircleDollarSign,
+  CircleUserRound,
+  Home,
+  LogOut,
+  Menu,
+  Settings,
+  Sparkles,
+} from "lucide-react";
 import { ReactElement, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -545,13 +553,13 @@ const Navigation = (): ReactElement => {
             // <nav
             // className={`flex flex-col content-center transition-width duration-300 ${
             // className={`flex flex-col content-center transition-width duration-300 hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all transform fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700 ${
-            className={`flex flex-col content-center transition-width duration-300 bg-white border-e border-gray-200 pb-10 overflow-y-auto dark:bg-gray-800 dark:border-gray-700 ${
+            className={`flex flex-col content-center transition-width duration-300 bg-white border-e border-gray-200  overflow-y-auto dark:bg-gray-800 dark:border-gray-700 ${
               isCollapsed ? "w-16" : "w-1/12"
             }`}
             // } bg-zinc-900`}
           >
             <nav className="">
-              <div className="bg-gray-50 flex flex-col justify-center items-center">
+              <div className="bg-gray-50 flex p-4 flex-col justify-center items-center">
                 <div className="">
                   <Link to="/">
                     <Home className="text-slate-700" />
@@ -582,18 +590,23 @@ const Navigation = (): ReactElement => {
             {/* </nav> */}
           </div>
           <div
-            className={`transition-width duration-300 ${
+            // className={`transition-width duration-300 ${
+            className={`transition-width duration-300 text-sm"> ${
               isCollapsed ? "w-[calc(100%-4rem)]" : "w-11/12"
             }`}
           >
-            <nav className="bg-gray-500 z-10 mx-auto flex justify-between items-center">
+            <nav className="z-10 mx-auto flex  justify-between items-center py-2 border-gray-200 border-b">
               <div className="flex w-full flex-wrap items-center justify-between">
                 {/* <div className="relative inline-block text-left"></div> */}
-                <Menu onClick={() => setIsCollapsed(!isCollapsed)} />
+                <Menu
+                  className="ml-2 cursor-pointer"
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                />
                 {workSpaces.selectedWorkSpace.id.length > 0 && (
                   <div>
                     <select
-                      className="rounded-lg cursor-pointer p-0"
+                      // className="rounded-lg cursor-pointer p-0"
+                      className=" px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                       value={stateSelectedWorkspace}
                       onChange={handleChange}
                     >
@@ -610,24 +623,31 @@ const Navigation = (): ReactElement => {
                   </div>
                 )}
                 <div className="group">
-                  <CircleUserRound className="cursor-pointer" />
-                  <ul className="bg-white shadow-lg rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
-                    <li className="px-2 ">
+                  <CircleUserRound className="cursor-pointer mr-2 text-slate-700" />
+                  <ul className="bg-white shadow-md rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
+                    <li className="px-2 bg-gray-200 text-slate-700">
                       <p>signed in as</p>
                       <p>
-                        {/* <b>Testuser</b> */}
-                        <b>{auth.user}</b>
+                        <b>Testuser</b>
+                        {/* <b>{auth.user}</b> */}
                       </p>
                     </li>
-                    <li className="px-2">
-                      <Link to="/organization">Organization</Link>
+                    <li className="px-2 py-1.5 text-slate-700">
+                      <Link to="/organization">
+                        <CircleUserRound width="18" height="18" className="inline" />
+                        <span className="pl-2 text-slate-700">Organization</span>
+                      </Link>
                     </li>
-                    <li className="px-2">
-                      <Link to="/account">Account Settings</Link>
+                    <li className="px-2 py-1.5 text-slate-700">
+                      <Link to="/account">
+                        <Settings width="18" height="18" className="inline" />
+                        <span className="pl-2 text-slate-700">Account Settings</span>
+                      </Link>
                     </li>
-                    <li className="px-2">
+                    <li className="px-2 py-1.5 text-slate-700">
                       <Link to="/login" onClick={signOut}>
-                        Logout
+                        <LogOut width="18" height="18" className="inline" />
+                        <span className="pl-2 text-slate-700">Logout</span>
                       </Link>
                     </li>
                   </ul>
