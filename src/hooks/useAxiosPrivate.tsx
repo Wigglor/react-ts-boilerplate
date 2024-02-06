@@ -22,12 +22,22 @@ const useAxiosPrivate = () => {
       (error) => Promise.reject(error),
     );
 
+    const matchResponseStatus = (status: string) => {
+      const list: ReadonlyArray<string> = ["2", "3"];
+      for (const item of list) {
+        if (status.startsWith(item)) {
+          return true;
+        }
+      }
+    };
+
     const responseIntercept = axiosPrivate.interceptors.response.use(
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
         // if (error?.response?.status === 401 && !prevRequest?.sent) {
-        if (!error?.response?.status.toString().startsWith("2") && !prevRequest?.sent) {
+        // if (!error?.response?.status.toString().startsWith("2") && !prevRequest?.sent) {
+        if (!matchResponseStatus(error?.response?.status.toString()) && !prevRequest?.sent) {
           console.log(JSON.stringify(error));
           console.log("starting with something other than 2");
           prevRequest.sent = true;
