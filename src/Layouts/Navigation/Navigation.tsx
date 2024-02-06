@@ -624,7 +624,7 @@ const Navigation = (): ReactElement => {
                 )}
                 <div className="group">
                   <CircleUserRound className="cursor-pointer mr-2 text-slate-700" />
-                  <ul className="bg-white shadow-md rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
+                  <ul className="bg-white shadow-md  rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
                     <li className="px-2 bg-gray-200 text-slate-700">
                       <p>signed in as</p>
                       <p>
@@ -632,24 +632,24 @@ const Navigation = (): ReactElement => {
                         {/* <b>{auth.user}</b> */}
                       </p>
                     </li>
-                    <li className="px-2 py-1.5 text-slate-700">
-                      <Link to="/organization">
+                    <Link to="/organization" className="cursor-pointer">
+                      <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100">
                         <CircleUserRound width="18" height="18" className="inline" />
                         <span className="pl-2 text-slate-700">Organization</span>
-                      </Link>
-                    </li>
-                    <li className="px-2 py-1.5 text-slate-700">
-                      <Link to="/account">
+                      </li>
+                    </Link>
+                    <Link to="/account" className="cursor-pointer">
+                      <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100 ">
                         <Settings width="18" height="18" className="inline" />
                         <span className="pl-2 text-slate-700">Account Settings</span>
-                      </Link>
-                    </li>
-                    <li className="px-2 py-1.5 text-slate-700">
-                      <Link to="/login" onClick={signOut}>
+                      </li>
+                    </Link>
+                    <Link to="/login" className="cursor-pointer" onClick={signOut}>
+                      <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100">
                         <LogOut width="18" height="18" className="inline" />
                         <span className="pl-2 text-slate-700">Logout</span>
-                      </Link>
-                    </li>
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </div>
