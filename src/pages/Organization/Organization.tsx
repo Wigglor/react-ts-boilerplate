@@ -153,8 +153,9 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         console.error(err);
       }
     };
-
-    getUser();
+    if (allowedRoles?.includes(auth?.role as string) && auth?.role === "ADMIN") {
+      getUser();
+    }
 
     return () => {
       controller.abort();

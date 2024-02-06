@@ -77,7 +77,8 @@ const App = () => {
                   <Route path="account" element={<Account />} />
                   <Route
                     path="organization"
-                    element={<Organization allowedRoles={[ROLES.user, ROLES.admin]} />}
+                    // element={<Organization allowedRoles={[ROLES.user, ROLES.admin]} />}
+                    element={<Organization allowedRoles={[ROLES.admin]} />}
                   />
                   <Route path="posts" element={<Posts />} />
                   <Route path="billing" element={<Billing />} />
