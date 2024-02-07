@@ -510,7 +510,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
             </div>
           </div>
         )}
-        <div>
+        <div className="">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
             <div className="flex flex-col">
               <div className="-m-1.5 overflow-x-auto">
