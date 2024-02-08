@@ -1,7 +1,6 @@
 import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
-// import styles from "./SignupPlan.module.scss";
 
 const stripePromise = loadStripe("your_publishable_key_here");
 

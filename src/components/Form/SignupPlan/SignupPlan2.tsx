@@ -3,7 +3,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { axiosPrivate } from "../../../api/axios";
-// import styles from "./SignupPlan.module.scss";
 
 const stripePromise = loadStripe("your_publishable_key_here");
 
