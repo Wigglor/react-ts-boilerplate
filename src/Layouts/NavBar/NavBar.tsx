@@ -1,12 +1,11 @@
 import { ReactElement, useEffect, useState } from "react";
 // import { MdManageAccounts } from "react-icons/md";
+import { CircleUserRound, Home } from "lucide-react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
-// import styles from "./NavBar.module.scss";
-import { CircleUserRound, Home } from "lucide-react";
-import useAuth from "../../hooks/useAuth";
 
 type Workspace = {
   name: string;

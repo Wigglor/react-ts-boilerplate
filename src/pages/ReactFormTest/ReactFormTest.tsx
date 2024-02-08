@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
-// import styles from "./ReactFormTest.module.scss";
 
 // tutorial: https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
 

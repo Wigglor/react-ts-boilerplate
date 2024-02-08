@@ -2,8 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
-// import axios from "axios";
-// import styles from "./Home.module.scss";
+
 type Workspace = {
   name: string;
   id: string;

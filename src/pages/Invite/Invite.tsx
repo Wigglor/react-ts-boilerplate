@@ -3,7 +3,6 @@ import { ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-// import useAuth from "../../hooks/useAuth";
 
 const COMPLETE_INVITE_URL = "/complete-invite";
 

@@ -4,7 +4,6 @@ import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
 // import axiosPrivate from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-// import styles from "./Billing.module.scss";
 
 // const stripePromise = loadStripe(process.env.STRIPE_SECRET_KEY as string);
 const stripePromise = loadStripe(

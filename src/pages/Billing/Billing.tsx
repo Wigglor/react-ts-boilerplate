@@ -4,7 +4,6 @@ import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-// import styles from "./Billing.module.scss";
 
 interface UserAttribute {
   Name: string;
