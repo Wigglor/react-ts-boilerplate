@@ -28,11 +28,9 @@ const Navigation = (): ReactElement => {
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
     setSelectedWorkspace(workSpace);
-    console.log(JSON.stringify(`selectedWorkspace: ${stateSelectedWorkspace}`));
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.target.value);
     const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
       (wp: Workspace) => wp.name === event.target.value,
     );
@@ -40,8 +38,6 @@ const Navigation = (): ReactElement => {
     setWorkSpaces((prevState) => {
       return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
     });
-    console.log(`setSelectedWorkspace: ${stateSelectedWorkspace}`);
-    console.log(`workSpaces: ${JSON.stringify(workSpaces.selectedWorkSpace)}`);
   };
 
   //   const toggleSidenav = () => {

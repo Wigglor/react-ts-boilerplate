@@ -151,8 +151,7 @@ function CompleteSignup() {
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
-    console.log(`data: ${JSON.stringify(data)}`);
-    console.log(`plan: ${JSON.stringify(selectedPlan)}`);
+
     try {
       const setupResponse = await axiosPrivate.post(
         "/completesetup",
@@ -175,7 +174,6 @@ function CompleteSignup() {
         plan: setupResponse?.data.user.memberships[0].company.account.plan.name,
       });
       navigate("/", { replace: true });
-      console.log(JSON.stringify(setupResponse.data));
     } catch (error) {
       setError("An unexpected error occurred. Please try again later.");
       console.log(error);

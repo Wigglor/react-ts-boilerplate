@@ -40,7 +40,6 @@ const Posts = (): ReactElement => {
           signal: controller.signal,
           withCredentials: true,
         });
-        console.log(response.data);
 
         setPosts(response.data);
       } catch (err) {

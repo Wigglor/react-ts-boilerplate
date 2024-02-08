@@ -45,8 +45,6 @@ const ForgotPassword = (): ReactElement => {
       );
       if (response.status === 201) {
         navigate("/register-confirmation", { replace: true });
-      } else {
-        console.log(response);
       }
     } catch (err: any) {
       const errorMessage = err.response.data.message;

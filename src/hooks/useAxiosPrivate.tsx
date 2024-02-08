@@ -15,7 +15,6 @@ const useAxiosPrivate = () => {
             ...config.headers,
             Authorization: `Bearer ${auth?.accessToken}`,
           };
-          // console.log(`config headers: ${JSON.stringify(config.headers)}`);
         }
         return config;
       },
@@ -38,11 +37,8 @@ const useAxiosPrivate = () => {
         // if (error?.response?.status === 401 && !prevRequest?.sent) {
         // if (!error?.response?.status.toString().startsWith("2") && !prevRequest?.sent) {
         if (!matchResponseStatus(error?.response?.status.toString()) && !prevRequest?.sent) {
-          console.log(JSON.stringify(error));
-          console.log("starting with something other than 2");
           prevRequest.sent = true;
           const newAccessToken = await refresh();
-          console.log(`retrieving new access token: ${newAccessToken}`);
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }

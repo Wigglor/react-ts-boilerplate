@@ -100,12 +100,11 @@ ReactElement => {
   const [selectedPrice, setSelectedPrice] = useState<PricesAttribute | null>(null);
 
   const handlePlanClick = (price: PricesAttribute) => {
-    console.log(JSON.stringify(price));
     if (paidPlan !== true) {
       setSelectedPrice(price);
     }
     setUpgradePlan(price);
-    console.log(`paidPlan: ${paidPlan}`);
+
     setTest({
       mode: "subscription",
       amount: price.unit_amount,
@@ -117,7 +116,6 @@ ReactElement => {
   };
 
   const closeModal = () => {
-    console.log("toggling modal");
     setSelectedPrice(null);
   };
   const closeUpgradeModal = () => {
@@ -142,7 +140,6 @@ ReactElement => {
       }
     };
     if (auth.plan !== undefined) {
-      console.log(`price plan is: ${auth.plan}`);
       setPaidPlan(true);
     }
     getPrices();
@@ -177,7 +174,6 @@ ReactElement => {
     const result = await elements.submit();
 
     if (result.error) {
-      console.error(result.error);
       return;
     }
 
@@ -190,7 +186,6 @@ ReactElement => {
         withCredentials: true,
       },
     );
-    console.log(JSON.stringify(billingResponse));
 
     const { type, clientSecret } = await billingResponse.data;
     const confirmIntent = type === "setup" ? stripe.confirmSetup : stripe.confirmPayment;
@@ -207,8 +202,8 @@ ReactElement => {
     if (error) {
       // This point is only reached if there's an immediate error when confirming the Intent.
       // Show the error to your customer (for example, "payment details incomplete").
-      console.log("payment error...");
-      console.log(JSON.stringify(error));
+
+      console.error(JSON.stringify(error));
       handleError(error);
     } else {
       // Your customer is redirected to your `return_url`. For some payment

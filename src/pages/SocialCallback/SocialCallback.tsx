@@ -18,11 +18,10 @@ const SocialCallback = (): ReactElement => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  console.log("ONBOARDING!!!");
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
-    console.log(`code: ${code}`);
+
     async function socialToken() {
       try {
         const response = await axios.post(
@@ -45,15 +44,6 @@ const SocialCallback = (): ReactElement => {
           plan: undefined /*response?.data.user.memberships[0]?.company?.account.plan?.name,*/, // CHANGE THIS!!!
         });
 
-        console.log(JSON.stringify(response));
-        console.log(`user: ${JSON.stringify(response.data.user.setup)}`);
-        console.log(`user: ${JSON.stringify(response.data.user)}`);
-        console.log(`------------------------------------------------`);
-        console.log(`userName: ${JSON.stringify(response.data.user.userName)}`);
-        console.log(`accessToken: ${JSON.stringify(response.data.data.access_token)}`);
-        console.log(`role: ${JSON.stringify(response.data.user.userName)}`);
-        console.log(`setup: ${JSON.stringify(response.data.user.setup)}`);
-
         // const workSpaces = response?.data.user.memberships.map((item: Item) => {
         //   return { name: item.company.name, id: item.company.id };
         // }); // extend this and return obj with company id etc as well
@@ -67,10 +57,8 @@ const SocialCallback = (): ReactElement => {
         // });
 
         if (response.data.user.setup === "PENDING") {
-          console.log("setup is PENDING");
           navigate("/onboarding", { replace: true });
         } else {
-          console.log("setup is COMPLETED");
           navigate(from, { replace: true });
         }
       } catch (err) {

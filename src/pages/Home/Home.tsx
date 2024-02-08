@@ -25,15 +25,11 @@ const Home = (): ReactElement => {
   });
   useEffect(() => {
     const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
-    console.log(
-      JSON.stringify(`My available workspaces when logging in: ${JSON.stringify(workSpaces)}`),
-    );
+
     setSelectedWorkspace(workSpace);
-    console.log(JSON.stringify(`selectedWorkspace: ${stateSelectedWorkspace}`));
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.target.value);
     const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
       (wp: Workspace) => wp.name === event.target.value,
     );
@@ -41,30 +37,11 @@ const Home = (): ReactElement => {
     setWorkSpaces((prevState) => {
       return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
     });
-    console.log(`setSelectedWorkspace: ${stateSelectedWorkspace}`);
-    console.log(`workSpaces: ${JSON.stringify(workSpaces.selectedWorkSpace)}`);
   };
 
   const signOut = async () => {
     await logout();
   };
-  /*const [data, setData] = useState<ApiResponse | null>(null);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await axiosProd.get("index");
-        // const response = await axios.get("http://16.170.240.223:3000/index");
-        setData(response.data);
-
-        console.log(response.data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchPost();
-  }, []);*/
 
   return (
     // <>

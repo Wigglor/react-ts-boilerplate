@@ -64,7 +64,6 @@ function CompleteSignup() {
         },
       });
       navigate("/", { replace: true });
-      console.log(JSON.stringify(setupResponse.data));
     } catch (error) {
       setError("An unexpected error occurred. Please try again later.");
       console.log(error);

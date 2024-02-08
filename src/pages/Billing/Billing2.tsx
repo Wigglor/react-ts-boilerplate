@@ -73,7 +73,6 @@ const CheckoutForm: React.FC<MyComponentProps> = ({ setOptions }) => {
           withCredentials: true,
         },
       );
-      console.log(`billing response: ${JSON.stringify(response)}`);
       const clientSecret = response.data.paymentIntent.client_secret;
 
       const options: Options = {

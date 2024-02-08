@@ -146,7 +146,6 @@ function StripeForm() {
       console.error(result.error.message);
     } else {
       // Send the token to your server for further processing
-      console.log("sending stripe request");
       /*const paymentResponse = await fetch("/process-payment", {
         method: "POST",
         headers: {
@@ -159,7 +158,6 @@ function StripeForm() {
         console.error("Payment failed");
         return;
       }*/
-
       // Handle successful payment
     }
   };

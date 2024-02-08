@@ -8,7 +8,6 @@ const RestrictedRoute = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  console.log("restricted route...");
 
   //   return <Outlet />;
   return !auth?.role ? <Outlet /> : <Navigate to="/login" state={{ from }} replace />;

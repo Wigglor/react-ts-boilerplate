@@ -30,7 +30,7 @@ type GoogleUser = {
 
 const Login = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [googleUser, setGoogleUser] = useState<GoogleUser | undefined>(undefined);
@@ -91,7 +91,6 @@ const Login = (): ReactElement => {
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data: LoginFormValues) => {
     try {
-      console.log(`form data: ${JSON.stringify(data)}`);
       const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ email: data.email, password: data.password }),
@@ -110,11 +109,10 @@ const Login = (): ReactElement => {
         currentPeriodEnds: response?.data.user.memberships[0]?.company?.account.currentPeriodEnds,
         plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
-      console.log("setting auth.....................................................");
       const workSpaces = response?.data.user.memberships.map((item: Item) => {
         return { name: item.company.name, id: item.company.id };
       }); // extend this and return obj with company id etc as well
-      console.log(`workSpaces...: ${JSON.stringify(workSpaces)}`);
+
       if (response.data.setup !== "PENDING" && response.data.user.memberships.length > 0) {
         setWorkSpaces({
           availableWorkSpaces: workSpaces,
@@ -124,11 +122,6 @@ const Login = (): ReactElement => {
           },
         });
       }
-
-      console.log(JSON.stringify(workSpaces));
-      console.log(JSON.stringify(workSpaces));
-      console.log(JSON.stringify(workSpaces));
-      console.log("setting workspace.....................................................");
 
       if (response?.data.setup === "PENDING") {
         navigate("/onboarding", { replace: true });

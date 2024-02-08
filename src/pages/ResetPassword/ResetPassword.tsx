@@ -50,8 +50,6 @@ const ResetPassword = (): ReactElement => {
       if (response.status === 200) {
         setSuccessMsg("Successfully changed password!");
         navigate("/login", { replace: true });
-      } else {
-        console.log(JSON.stringify(response));
       }
       // setSuccessMsg("Successfully changed password!");
     } catch (err: any) {

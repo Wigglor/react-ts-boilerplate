@@ -13,14 +13,7 @@ interface ApiResponse<T> {
   data: T;
 }
 
-// interface UserAttribute {
-//   Name: string;
-//   Value: string;
-// }
-
 interface MembershipsAttribute {
-  // Name: string;
-  // Value: string;
   createdAt: string;
   updatedAt: string;
   id: string;
@@ -33,8 +26,6 @@ interface MembershipsAttribute {
 
 interface User {
   result: {
-    // Username: string;
-    // UserAttributes: UserAttribute[];
     id: string;
     name: string;
     createdAt: string;
@@ -107,7 +98,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const { auth } = useAuth();
 
   const deleteUserModal = (email: string) => {
-    console.log(JSON.stringify(email));
     // if (paidPlan !== true) {
     //   setSelectedPrice(price);
     // }
@@ -133,7 +123,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   };
 
   useEffect(() => {
-    console.log(`selectedWorkSpace: ${workSpaces.selectedWorkSpace.id}`);
     const controller = new AbortController();
     const getUser = async () => {
       try {
@@ -149,7 +138,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         );
         setUser(response.data);
       } catch (err) {
-        console.log("error in organization");
         console.error(err);
       }
     };
@@ -196,7 +184,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
 
   const handleDeleteClick = async (email: string) => {
     if (emailCheckValue === email) {
-      console.log(`${emailCheckValue} is equal to ${email}`);
       try {
         const deleteUserResponse: ApiResponse<string> = await axiosPrivate.post(
           "/remove-user",
@@ -208,7 +195,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
           },
         );
         setUpdateUsers((prev) => !prev);
-        console.log(JSON.stringify(deleteUserResponse));
         setDeleteUserMessage(deleteUserResponse.status);
         // setDeleteEmail(null);
         setDeleteEmailConfirmation(true);
@@ -219,7 +205,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         }
       }
     } else {
-      console.log(`${emailCheckValue} is NOT equal to ${email}`);
       setDeleteUserErrorMessage("Please submit the correct email address");
     }
   };

@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 const OnboardingRoute = () => {
   const { auth } = useAuth();
   const location = useLocation();
-  console.log(`OnboardingRoute: ${JSON.stringify(auth)}`);
+
   return auth?.setup === "PENDING" ? (
     <Outlet />
   ) : (

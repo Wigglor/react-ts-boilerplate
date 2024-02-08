@@ -56,7 +56,7 @@ function StripeForm() {
     } else {
       // Send the token to your server for further processing
       // For instance, you can associate this token with the user in your database
-      console.log(result.token);
+      // console.log(result.token);
     }
   };
 
