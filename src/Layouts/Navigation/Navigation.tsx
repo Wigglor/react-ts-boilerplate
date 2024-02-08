@@ -6,6 +6,7 @@ import {
   Settings,
   Sparkles,
   Target,
+  Users,
 } from "lucide-react";
 import { ReactElement, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
@@ -50,7 +51,7 @@ const Navigation = (): ReactElement => {
 
   const sideNavItems = [
     { icon: <Sparkles width="18" height="18" />, text: "Premium", to: "/premium" },
-    { icon: <CircleUserRound width="18" height="18" />, text: "Organization", to: "/organization" },
+    { icon: <Users width="18" height="18" />, text: "Organization", to: "/organization" },
     { icon: <Settings width="18" height="18" />, text: "Account", to: "/account" },
     { icon: <CircleDollarSign width="18" height="18" />, text: "Billing", to: "/billing" },
     // { icon: <Binary />, text: "Payment Status", to: "/paymentstatus" },
