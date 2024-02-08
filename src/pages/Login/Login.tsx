@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
@@ -30,7 +30,7 @@ type GoogleUser = {
 
 const Login = (): ReactElement => {
   // const { setAuth, persist, setPersist } = useAuth();
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, persist, setPersist } = useAuth();
   const { workSpaces, setWorkSpaces } = useWorkSpaces();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [googleUser, setGoogleUser] = useState<GoogleUser | undefined>(undefined);
@@ -53,6 +53,14 @@ const Login = (): ReactElement => {
     // "https://test-2023-12.auth.eu-north-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&response_type=code&client_id=4drb1mir2pvtr2auf1b7puj449&redirect_uri=http://localhost:8080/socialcallback&state=STATE&scope=email+openid+profile+aws.cognito.signin.user.admin";
     window.location.href = cognitoAuthUrl;
   };
+
+  const togglePersist = () => {
+    setPersist((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", JSON.stringify(persist));
+  }, [persist]);
 
   // const getAwsCredentials = async (googleToken: string) => {
   //   const AwsBody = new URLSearchParams({
@@ -331,6 +339,24 @@ const Login = (): ReactElement => {
                   <p className="hidden text-xs text-red-600 mt-2" id="password-error">
                     8+ characters required
                   </p>
+                </div>
+
+                <div className="flex items-center">
+                  <div className="flex">
+                    <input
+                      id="persist"
+                      name="persist"
+                      type="checkbox"
+                      onChange={togglePersist}
+                      checked={persist}
+                      className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600  focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                    ></input>
+                  </div>
+                  <div className="ms-3">
+                    <label htmlFor="persist" className="text-sm dark:text-white">
+                      Remember me
+                    </label>
+                  </div>
                 </div>
 
                 <button

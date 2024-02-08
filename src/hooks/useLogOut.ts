@@ -26,6 +26,8 @@ const useLogout = () => {
       ],
       selectedWorkSpace: { name: "", id: "" },
     });
+    console.log("setting localStorage to false....");
+    localStorage.setItem("persist", JSON.stringify(false));
     try {
       await axiosPrivate.post("/signout", {
         withCredentials: true,

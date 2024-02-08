@@ -7,7 +7,7 @@ import useRefreshToken from "../hooks/useRefreshToken";
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
-  const { auth } = useAuth();
+  const { auth, persist } = useAuth();
 
   useEffect(() => {
     // let isMounted = true;
@@ -35,9 +35,9 @@ const PersistLogin = () => {
     // } else {
     //   console.log("Persist is Falsy");
     // }
-    // !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
 
-    !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+    // !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+    !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
 
     // return () => (isMounted = false);
     return () => {

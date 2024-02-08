@@ -16,6 +16,8 @@ interface Auth {
 interface AuthContextType {
   auth: Auth;
   setAuth: React.Dispatch<React.SetStateAction<Auth>>;
+  persist: boolean;
+  setPersist: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const INITIAL_STATE: Auth = {
@@ -31,6 +33,8 @@ const INITIAL_STATE: Auth = {
 export const AuthContext = createContext<AuthContextType>({
   auth: INITIAL_STATE,
   setAuth: () => {},
+  persist: false,
+  setPersist: () => {},
 });
 
 interface IAuthProviderProps {
@@ -39,8 +43,13 @@ interface IAuthProviderProps {
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [auth, setAuth] = useState<Auth>(INITIAL_STATE);
+  // const [persist, setPersist] = useState(JSON.parse(localStorage.getItem("persist") || "false"));
+  const [persist, setPersist] = useState(
+    JSON.parse(localStorage.getItem("persist") || "false") === true,
+  );
+
   return (
-    <AuthContext.Provider value={{ auth, setAuth /*persist, setPersist*/ }}>
+    <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
       {children}
     </AuthContext.Provider>
   );
