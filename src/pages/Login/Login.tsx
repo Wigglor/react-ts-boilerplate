@@ -204,7 +204,7 @@ const Login = (): ReactElement => {
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Dont have an account yet?
               <Link
-                className="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                className="ml-1 text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 to="/register"
               >
                 Register
@@ -213,7 +213,7 @@ const Login = (): ReactElement => {
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Need another verification email?
               <Link
-                className="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                className="ml-1 text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 to="/resend-verification"
               >
                 Verify Email
