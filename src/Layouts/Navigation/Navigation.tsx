@@ -1,6 +1,7 @@
 import {
   CircleDollarSign,
   CircleUserRound,
+  Inbox,
   LogOut,
   Menu,
   Settings,
@@ -50,7 +51,9 @@ const Navigation = (): ReactElement => {
   };
 
   const sideNavItems = [
-    { icon: <Sparkles width="18" height="18" />, text: "Premium", to: "/premium" },
+    // { icon: <Sparkles width="18" height="18" />, text: "Premium", to: "/premium" },
+    { icon: <Sparkles width="18" height="18" />, text: "Discover", to: "/premium" },
+    { icon: <Inbox width="18" height="18" />, text: "My Inboxes", to: "/inboxes" },
     { icon: <Users width="18" height="18" />, text: "Organization", to: "/organization" },
     { icon: <Settings width="18" height="18" />, text: "Account", to: "/account" },
     { icon: <CircleDollarSign width="18" height="18" />, text: "Billing", to: "/billing" },

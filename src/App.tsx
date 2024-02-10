@@ -11,6 +11,7 @@ import Account from "./pages/Account/Account";
 import Billing from "./pages/Billing/Billing";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
+import Inboxes from "./pages/Inboxes/Inboxes";
 import Invite from "./pages/Invite/Invite";
 import Login from "./pages/Login/Login";
 import Organization from "./pages/Organization/Organization";
@@ -73,6 +74,7 @@ const App = () => {
                 <Route element={<Navigation />}>
                   <Route path="" element={<Home />} />
                   <Route path="paymentstatus" element={<PaymentStatus />} />
+                  <Route path="inboxes" element={<Inboxes />} />
                   <Route path="account" element={<Account />} />
                   <Route
                     path="organization"
