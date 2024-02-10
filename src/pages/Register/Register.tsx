@@ -375,6 +375,11 @@ const Register = (): ReactElement => {
                         required
                         aria-describedby="email-error"
                       ></input>
+                      {errors.email && (
+                        <div role="alert" className="bg-red-500 p-2 mt-2 rounded-lg">
+                          {errors.email.message}
+                        </div>
+                      )}
                       <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
@@ -456,6 +461,11 @@ const Register = (): ReactElement => {
                         required
                         aria-describedby="firstName-error"
                       ></input>
+                      {errors.firstName && (
+                        <div role="alert" className="bg-red-500 p-2 mt-2 rounded-lg">
+                          {errors.firstName.message}
+                        </div>
+                      )}
                       <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
@@ -494,6 +504,11 @@ const Register = (): ReactElement => {
                         required
                         aria-describedby="lastName-error"
                       ></input>
+                      {errors.lastName && (
+                        <div role="alert" className="bg-red-500 p-2 mt-2 rounded-lg">
+                          {errors.lastName.message}
+                        </div>
+                      )}
                       <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
