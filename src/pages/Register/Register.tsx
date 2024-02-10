@@ -310,6 +310,8 @@ const Register = (): ReactElement => {
           <div className="p-4 sm:p-7">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign up</h1>
+              {errMsg && <div className="bg-red-500 p-2 mt-2 rounded-lg">{errMsg}</div>}
+
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                 Already have an account?
                 <Link
@@ -411,6 +413,11 @@ const Register = (): ReactElement => {
                         required
                         aria-describedby="password-error"
                       ></input>
+                      {errors.password && (
+                        <div className="bg-red-500 p-2 mt-2 rounded-lg" role="alert">
+                          {errors.password.message}
+                        </div>
+                      )}
                       <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
@@ -542,7 +549,7 @@ const Register = (): ReactElement => {
       {/* <main className="flex content-center flex-col w-1/2">
         <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-500">
           <h2>Register</h2>
-          {errMsg && <div>{errMsg}</div>}
+          {errMsg && <div >{errMsg}</div>}
           <div>
             <label htmlFor="email">email</label>
             <input
@@ -569,7 +576,7 @@ const Register = (): ReactElement => {
               })}
               type="password"
             />
-            {errors.password && <span role="alert">{errors.password.message}</span>}
+            {errors.password && <div className="bg-red-500 p-2 mt-2 rounded-lg" role="alert">{errors.password.message}</div>}
             <label htmlFor="firstName">First Name</label>
             <input
               id="firstName"

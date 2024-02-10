@@ -97,7 +97,9 @@ const ForgotPassword = (): ReactElement => {
 
           <div className="mt-5">
             <form onSubmit={handleSubmit(onSubmit)}>
-              {errMsg && <div>{errMsg}</div>}
+              {/* {errMsg && <div>{errMsg}</div>} */}
+              {errMsg && <div className="bg-red-500 p-2 mt-2 rounded-lg">{errMsg}</div>}
+              {/* {successMsg && <div className="bg-green-500 p-2 rounded-lg">{successMsg}</div>} */}
               <div className="grid gap-y-4">
                 <div>
                   <label htmlFor="email" className="block text-sm mb-2 dark:text-white">

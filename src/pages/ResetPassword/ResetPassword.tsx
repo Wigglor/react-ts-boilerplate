@@ -77,8 +77,8 @@ const ResetPassword = (): ReactElement => {
                   Sign in here
                 </Link>
               </p>
-              {errMsg && <div>{errMsg}</div>}
-              {successMsg && <div>{successMsg}</div>}
+              {errMsg && <div className="bg-red-500 p-2 mt-2 rounded-lg">{errMsg}</div>}
+              {successMsg && <div className="bg-green-500 p-2 rounded-lg">{successMsg}</div>}
             </div>
 
             <div className="mt-5">
@@ -113,7 +113,11 @@ const ResetPassword = (): ReactElement => {
                         required
                         aria-describedby="password-error"
                       />
-                      {errors.password && <span role="alert">{errors.password.message}</span>}
+                      {errors.password && (
+                        <div className="bg-red-500 p-2 rounded-lg" role="alert">
+                          {errors.password.message}
+                        </div>
+                      )}
                       <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
@@ -154,7 +158,9 @@ const ResetPassword = (): ReactElement => {
                         aria-describedby="confirmPassword-error"
                       />
                       {errors.confirmPassword && (
-                        <span role="alert">{errors.confirmPassword.message}</span>
+                        <div className="bg-red-500 p-2 rounded-lg" role="alert">
+                          {errors.confirmPassword.message}
+                        </div>
                       )}
 
                       <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">

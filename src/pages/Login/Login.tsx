@@ -151,7 +151,7 @@ const Login = (): ReactElement => {
       {/* <div>
         <form onSubmit={handleSubmit(onSubmit)} className=" bg-slate-400">
           <h2>Login</h2>
-          {errMsg && <div>{errMsg}</div>}
+          {errMsg && <div className="bg-red-500 p-2 mt-2 rounded-lg">{errMsg}</div>}
           <div>
             <label htmlFor="email">email</label>
 
@@ -201,6 +201,7 @@ const Login = (): ReactElement => {
         <div className="p-4 sm:p-7">
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
+            {errMsg && <div className="bg-red-500 p-2 mt-2 rounded-lg">{errMsg}</div>}
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Dont have an account yet?
               <Link
@@ -274,7 +275,11 @@ const Login = (): ReactElement => {
                       required
                       aria-describedby="email-error"
                     />
-                    {errors.email && <span role="alert">*{errors.email.message}</span>}
+                    {errors.email && (
+                      <div className="bg-red-500 p-2 mt-2 rounded-lg" role="alert">
+                        *{errors.email.message}
+                      </div>
+                    )}
                     <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                       <svg
                         className="h-5 w-5 text-red-500"
@@ -322,7 +327,11 @@ const Login = (): ReactElement => {
                       required
                       aria-describedby="password-error"
                     />
-                    {errors.password && <span role="alert">{errors.password.message}</span>}
+                    {errors.password && (
+                      <div role="alert" className="bg-red-500 p-2 mt-2 rounded-lg">
+                        {errors.password.message}
+                      </div>
+                    )}
                     <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                       <svg
                         className="h-5 w-5 text-red-500"

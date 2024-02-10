@@ -249,7 +249,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                         <>{<p className="bg-green-50 p-3">User sucessfully deleted</p>}</>
                       ) : (
                         <>
-                          <p className="bg-red-50 p-3">{deleteUserMessage} An error occurred</p>
+                          <p className="-50 p-3">{deleteUserMessage} An error occurred</p>
                         </>
                       )}
                     </div>
