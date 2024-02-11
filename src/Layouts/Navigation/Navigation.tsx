@@ -121,6 +121,7 @@ const Navigation = (): ReactElement => {
                     className="ml-2 cursor-pointer"
                     onClick={() => setIsCollapsed(!isCollapsed)}
                   />
+
                   {workSpaces.selectedWorkSpace.id.length > 0 && (
                     <div>
                       <select

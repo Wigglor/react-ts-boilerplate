@@ -1,4 +1,5 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
+import Dropdown from "../../components/UI/Dropdown";
 type Workspace = {
   name: string;
   id: string;
@@ -7,6 +8,24 @@ type Workspace = {
 interface ApiResponse {
   message: string;
 }
+
+const dropdownItems = [
+  {
+    id: "item1",
+    label: "Option 1",
+    onClick: () => console.log("Option 1 clicked"),
+  },
+  {
+    id: "item2",
+    label: "Option 2",
+    onClick: () => console.log("Option 2 clicked"),
+  },
+  {
+    id: "item3",
+    label: "Option 3",
+    onClick: () => console.log("Option 3 clicked"),
+  },
+];
 
 const Home = (): ReactElement => {
   // const logout = useLogout();
@@ -118,6 +137,13 @@ const Home = (): ReactElement => {
             ))}
           </ul>
         )}
+      </div>
+      <div className="p-4">
+        <Dropdown
+          buttonLabel="Select Option"
+          items={dropdownItems}
+          className="my-2" // Optional: Additional Tailwind CSS classes for styling
+        />
       </div>
       {/* <div className="mt-4 ml-4">
         <div className="flex flex-col w-1/6 bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
