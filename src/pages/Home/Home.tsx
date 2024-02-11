@@ -37,20 +37,47 @@ const Home = (): ReactElement => {
   // const signOut = async () => {
   //   await logout();
   // };
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-  const options = ["Option 1", "Option 2", "Option 3"]; // Example options
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [selectedOption, setSelectedOption] = useState("");
+  // const options = ["Option 1", "Option 2", "Option 3"]; // Example options
 
-  // Toggle dropdown open state
+  // // Toggle dropdown open state
+  // const toggleDropdown = () => setIsOpen(!isOpen);
+
+  // // Handle option selection
+  // const selectOption = (option: any) => {
+  //   setSelectedOption(option);
+  //   setIsOpen(false); // Close dropdown after selection
+  // };
+
+  // const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   function handleClickOutside(event: MouseEvent) {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+  //       setIsOpen(false);
+  //     }
+  //   }
+
+  //   // Add event listener when the component mounts
+  //   document.addEventListener("mousedown", handleClickOutside);
+
+  //   // Cleanup the event listener when the component unmounts
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+  const options = ["Option 1", "Option 2", "Option 3"]; // Example options
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  // Handle option selection
-  const selectOption = (option: any) => {
+  const selectOption = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false); // Close dropdown after selection
   };
-
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -59,10 +86,7 @@ const Home = (): ReactElement => {
       }
     }
 
-    // Add event listener when the component mounts
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup the event listener when the component unmounts
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -70,7 +94,32 @@ const Home = (): ReactElement => {
 
   return (
     <>
-      <div className="mt-4 ml-4">
+      <div className="relative" ref={dropdownRef}>
+        <button
+          className="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={toggleDropdown}
+        >
+          {selectedOption || "Select an option"}
+        </button>
+        {isOpen && (
+          <ul
+            className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            role="listbox"
+          >
+            {options.map((option, index) => (
+              <li
+                key={index}
+                className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                onClick={() => selectOption(option)}
+                role="option"
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      {/* <div className="mt-4 ml-4">
         <div className="flex flex-col w-1/6 bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
           <div className="p-5 pb-3 flex justify-between items-center">
             <h2 className="inline-block font-semibold text-gray-800 dark:text-neutral-200">
@@ -755,7 +804,7 @@ const Home = (): ReactElement => {
             ))}
           </ul>
         )}
-      </div>
+      </div> */}
     </>
 
     //  { {data ? <div>{data.message}</div> : <div>Loading...</div>} */}

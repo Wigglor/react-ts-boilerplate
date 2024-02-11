@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // "typeRoots": ["node_modules/@types", "src/types"],
     "types": ["react/next", "react-dom/next", "jest"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
