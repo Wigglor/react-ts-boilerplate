@@ -1,5 +1,6 @@
 /* eslint-disable react/no-children-prop */
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./Layouts/NavBar/NavBar";
 import Navigation from "./Layouts/Navigation/Navigation";
 import OnboardingRoute from "./components/OnboardingRoute";
@@ -27,7 +28,21 @@ import Unauthorized from "./pages/Unauthorized/Unauthorized";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
+import "preline/preline";
+import { IStaticMethods } from "preline/preline";
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
+
 const App = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.HSStaticMethods.autoInit();
+  }, [location.pathname]);
+
   const ROLES = {
     pending: "PENDING",
     user: "USER",
