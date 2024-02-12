@@ -2,7 +2,6 @@ import { ReactElement, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
-import useWorkSpaces from "../../hooks/useWorkSpaces";
 
 interface Item {
   company: {
@@ -13,7 +12,7 @@ interface Item {
 
 const SocialCallback = (): ReactElement => {
   const { setAuth } = useAuth();
-  const { setWorkSpaces } = useWorkSpaces();
+  // const { setWorkSpaces } = useWorkSpaces();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";

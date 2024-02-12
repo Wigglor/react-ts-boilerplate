@@ -22,6 +22,7 @@ const useAxiosPrivate = () => {
     );
 
     const matchResponseStatus = (status: string) => {
+      console.log(`statuscode: ${status}`);
       const list: ReadonlyArray<string> = ["2", "3"];
       for (const item of list) {
         if (status.startsWith(item)) {
@@ -36,6 +37,7 @@ const useAxiosPrivate = () => {
         const prevRequest = error?.config;
         // if (error?.response?.status === 401 && !prevRequest?.sent) {
         // if (!error?.response?.status.toString().startsWith("2") && !prevRequest?.sent) {
+        console.log(`error from call: ${JSON.stringify(error)}`);
         if (!matchResponseStatus(error?.response?.status.toString()) && !prevRequest?.sent) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();

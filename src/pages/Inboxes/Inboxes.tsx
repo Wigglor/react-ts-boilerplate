@@ -15,7 +15,8 @@ interface ApiResponse {
 const Home = (): ReactElement => {
   const logout = useLogout();
   const axiosPrivate = useAxiosPrivate();
-  const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  // const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
 
   const [testData, setTestData] = useState<string>(() => {
@@ -23,19 +24,25 @@ const Home = (): ReactElement => {
     return testData;
   });
   useEffect(() => {
-    const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    const workSpace: string | undefined = workspaceData.selectedWorkSpace?.name;
+    // const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
 
     setSelectedWorkspace(workSpace);
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+    // const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+    const selectedWorkSpace_ = workspaceData.availableWorkSpaces.find(
       (wp: Workspace) => wp.name === event.target.value,
     );
     setSelectedWorkspace(event.target.value);
-    setWorkSpaces((prevState) => {
-      return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    updateWorkspaceData({
+      availableWorkSpaces: workspaceData.availableWorkSpaces,
+      selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
     });
+    // setWorkSpaces((prevState) => {
+    //   return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    // });
   };
 
   return (

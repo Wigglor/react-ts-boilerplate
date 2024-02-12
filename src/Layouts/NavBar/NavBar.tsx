@@ -29,10 +29,22 @@ type WorkSpaceResponse = {
   };
 };
 
+type WorkSpaces = {
+  availableWorkSpaces: {
+    name: string;
+    id: string;
+  }[];
+  selectedWorkSpace: {
+    name: string;
+    id: string;
+  };
+};
+
 const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const logout = useLogout();
-  const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  // const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
   const { setAuth, auth } = useAuth();
@@ -44,18 +56,26 @@ const NavBar = (): ReactElement => {
   }, [selectedWorkspace]);*/
 
   useEffect(() => {
-    const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    // const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    const workSpace: string | undefined = workspaceData.selectedWorkSpace?.name;
     setSelectedWorkspace(workSpace);
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+    // const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+    const selectedWorkSpace_ = workspaceData.availableWorkSpaces.find(
       (wp: Workspace) => wp.name === event.target.value,
     );
     setSelectedWorkspace(event.target.value);
-    setWorkSpaces((prevState) => {
-      return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    // setWorkSpaces((prevState) => {
+    updateWorkspaceData({
+      availableWorkSpaces: workspaceData.availableWorkSpaces,
+      selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
     });
+
+    // updateWorkspaceData((prevState: any) => {
+    //   return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    // });
   };
 
   const signOut = async () => {
@@ -74,15 +94,18 @@ const NavBar = (): ReactElement => {
         <div className="flex w-full flex-wrap items-center justify-between">
           <div className="relative inline-block text-left"></div>
 
-          {workSpaces.selectedWorkSpace.id.length > 0 && (
+          {/* {workSpaces.selectedWorkSpace.id.length > 0 && ( */}
+          {workspaceData.selectedWorkSpace.id.length > 0 && (
             <div>
               <select
                 className="rounded-lg cursor-pointer"
                 value={stateSelectedWorkspace}
                 onChange={handleChange}
               >
-                {workSpaces.selectedWorkSpace ? (
-                  workSpaces.availableWorkSpaces.map((item: Workspace) => (
+                {/* {workSpaces.selectedWorkSpace ? ( */}
+                {workspaceData.selectedWorkSpace ? (
+                  // workSpaces.availableWorkSpaces.map((item: Workspace) => (
+                  workspaceData.availableWorkSpaces.map((item: Workspace) => (
                     <option key={item.id} value={item.name}>
                       {item.name}
                     </option>

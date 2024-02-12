@@ -22,24 +22,41 @@ type Workspace = {
 
 const Navigation = (): ReactElement => {
   const logout = useLogout();
-  const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  // const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { setAuth, auth } = useAuth();
 
   useEffect(() => {
-    const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    const workSpace: string | undefined = workspaceData.selectedWorkSpace?.name;
     setSelectedWorkspace(workSpace);
+    // const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
+    // setSelectedWorkspace(workSpace);
   }, []);
-
+  type WorkSpaces = {
+    availableWorkSpaces: {
+      name: string;
+      id: string;
+    }[];
+    selectedWorkSpace: {
+      name: string;
+      id: string;
+    };
+  };
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+    // const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+    const selectedWorkSpace_ = workspaceData.availableWorkSpaces.find(
       (wp: Workspace) => wp.name === event.target.value,
     );
     setSelectedWorkspace(event.target.value);
-    setWorkSpaces((prevState) => {
-      return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    updateWorkspaceData({
+      availableWorkSpaces: workspaceData.availableWorkSpaces,
+      selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
     });
+    // setWorkSpaces((prevState) => {
+    //   return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    // });
   };
 
   //   const toggleSidenav = () => {
@@ -122,7 +139,8 @@ const Navigation = (): ReactElement => {
                     onClick={() => setIsCollapsed(!isCollapsed)}
                   />
 
-                  {workSpaces.selectedWorkSpace.id.length > 0 && (
+                  {/* {workSpaces.selectedWorkSpace.id.length > 0 && ( */}
+                  {workspaceData.selectedWorkSpace.id.length > 0 && (
                     <div>
                       <select
                         // data-hs-select='{
@@ -138,8 +156,10 @@ const Navigation = (): ReactElement => {
                         value={stateSelectedWorkspace}
                         onChange={handleChange}
                       >
-                        {workSpaces.selectedWorkSpace ? (
-                          workSpaces.availableWorkSpaces.map((item: Workspace) => (
+                        {/* {workSpaces.selectedWorkSpace ? ( */}
+                        {workspaceData.selectedWorkSpace ? (
+                          // workSpaces.availableWorkSpaces.map((item: Workspace) => (
+                          workspaceData.availableWorkSpaces.map((item: Workspace) => (
                             <option key={item.id} value={item.name}>
                               {item.name}
                             </option>
@@ -153,7 +173,8 @@ const Navigation = (): ReactElement => {
 
                   <div className="group">
                     <CircleUserRound className="cursor-pointer mr-2 text-slate-700" />
-                    <ul className="bg-white shadow-md  rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2">
+                    {/* <ul className="bg-white shadow-md  rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2"> */}
+                    <ul className="bg-white shadow-md  rounded-md border absolute  group-hover:block transition-all duration-500 ease right-2">
                       <li className="px-2 bg-gray-200 text-slate-700">
                         <p>signed in as</p>
                         <p>

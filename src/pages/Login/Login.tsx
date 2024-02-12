@@ -29,9 +29,9 @@ type GoogleUser = {
 };
 
 const Login = (): ReactElement => {
-  // const { setAuth, persist, setPersist } = useAuth();
   const { auth, setAuth, persist, setPersist } = useAuth();
-  const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  // const { workSpaces, setWorkSpaces } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [googleUser, setGoogleUser] = useState<GoogleUser | undefined>(undefined);
   const navigate = useNavigate();
@@ -122,7 +122,8 @@ const Login = (): ReactElement => {
       }); // extend this and return obj with company id etc as well
 
       if (response.data.setup !== "PENDING" && response.data.user.memberships.length > 0) {
-        setWorkSpaces({
+        // setWorkSpaces({
+        updateWorkspaceData({
           availableWorkSpaces: workSpaces,
           selectedWorkSpace: {
             name: response?.data.user.memberships[0].company.name,

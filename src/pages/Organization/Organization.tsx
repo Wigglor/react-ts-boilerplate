@@ -89,7 +89,8 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const [deleteUserErrorMessage, setDeleteUserErrorMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
-  const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
+  // const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
   const [inviteEmail, setInviteEmail] = useState<boolean>(false);
   const [deleteEmailConfirmation, setDeleteEmailConfirmation] = useState<boolean>(false);
@@ -128,7 +129,8 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         const response: ApiResponse<User> = await axiosPrivate.post(
           "/subscription/users",
           JSON.stringify({
-            workSpaceId: workSpaces.selectedWorkSpace.id,
+            workSpaceId: workspaceData.selectedWorkSpace.id,
+            // workSpaceId: workSpaces.selectedWorkSpace.id,
           }),
           {
             signal: controller.signal,
@@ -147,7 +149,8 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
     return () => {
       controller.abort();
     };
-  }, [updateUsers, workSpaces]);
+  }, [updateUsers, workspaceData]);
+  // }, [updateUsers, workSpaces]);
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     try {
@@ -155,7 +158,8 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         "/inviteuser",
         JSON.stringify({
           email: data.email,
-          companyId: workSpaces.selectedWorkSpace.id,
+          companyId: workspaceData.selectedWorkSpace.id,
+          // companyId: workSpaces.selectedWorkSpace.id,
         }),
         {
           withCredentials: true,
@@ -503,7 +507,8 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                     <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
                       <div>
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                          Users for workspace: <span>{workSpaces.selectedWorkSpace.name}</span>
+                          Users for workspace: <span>{workspaceData.selectedWorkSpace.name}</span>
+                          {/* Users for workspace: <span>{workSpaces.selectedWorkSpace.name}</span> */}
                         </h2>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                           Invite and delete users.

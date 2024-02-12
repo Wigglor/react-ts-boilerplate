@@ -17,7 +17,8 @@ type FormData = {
 
 function CompleteSignup() {
   const { setAuth } = useAuth();
-  const { setWorkSpaces } = useWorkSpaces();
+  // const { setWorkSpaces } = useWorkSpaces();
+  const { updateWorkspaceData } = useWorkSpaces();
   const navigate = useNavigate();
   const {
     register,
@@ -51,7 +52,7 @@ function CompleteSignup() {
         currentPeriodEnds: new Date(),
         plan: undefined,
       });
-      setWorkSpaces({
+      updateWorkspaceData({
         availableWorkSpaces: [
           {
             name: setupResponse.data.result.company.name,
@@ -63,6 +64,18 @@ function CompleteSignup() {
           id: setupResponse.data.result.company.id,
         },
       });
+      // setWorkSpaces({
+      //   availableWorkSpaces: [
+      //     {
+      //       name: setupResponse.data.result.company.name,
+      //       id: setupResponse.data.result.company.id,
+      //     },
+      //   ],
+      //   selectedWorkSpace: {
+      //     name: setupResponse.data.result.company.name,
+      //     id: setupResponse.data.result.company.id,
+      //   },
+      // });
       navigate("/", { replace: true });
     } catch (error) {
       setError("An unexpected error occurred. Please try again later.");

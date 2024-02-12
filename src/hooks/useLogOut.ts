@@ -4,7 +4,9 @@ import useWorkSpaces from "./useWorkSpaces";
 
 const useLogout = () => {
   const { setAuth } = useAuth();
-  const { setWorkSpaces } = useWorkSpaces();
+  // const { setWorkSpaces } = useWorkSpaces();
+  const { updateWorkspaceData } = useWorkSpaces();
+
   const axiosPrivate = useAxiosPrivate();
 
   const logout = async () => {
@@ -17,7 +19,7 @@ const useLogout = () => {
       plan: undefined,
       // plan: "",
     });
-    setWorkSpaces({
+    updateWorkspaceData({
       availableWorkSpaces: [
         {
           name: "",
@@ -26,6 +28,15 @@ const useLogout = () => {
       ],
       selectedWorkSpace: { name: "", id: "" },
     });
+    // setWorkSpaces({
+    //   availableWorkSpaces: [
+    //     {
+    //       name: "",
+    //       id: "",
+    //     },
+    //   ],
+    //   selectedWorkSpace: { name: "", id: "" },
+    // });
     console.log("setting localStorage to false....");
     localStorage.setItem("persist", JSON.stringify(false));
     try {

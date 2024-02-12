@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth";
 const PublicRoute = () => {
   const { auth } = useAuth();
   const location = useLocation();
-  console.log(`auth...: ${JSON.stringify(auth)}`);
+  // console.log(`auth...: ${JSON.stringify(auth)}`);
 
   return !auth?.user ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
 };
