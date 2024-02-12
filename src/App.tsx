@@ -28,19 +28,40 @@ import Unauthorized from "./pages/Unauthorized/Unauthorized";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
-import "preline/preline";
-import { IStaticMethods } from "preline/preline";
+// import "preline/preline";
+import { HSDropdown, IStaticMethods } from "preline/preline";
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
+    DDStaticMethods: HSDropdown;
   }
 }
 
 const App = () => {
   const location = useLocation();
 
+  // useEffect(() => {
+  //   import("preline/preline");
+  // }, []);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     HSDropdown.autoInit();
+  //   }, 100);
+  // }, [location.pathname]);
+
+  // useEffect(() => {
+  //   window.HSStaticMethods.autoInit();
+  // }, [location.pathname]);
+
   useEffect(() => {
-    window.HSStaticMethods.autoInit();
+    const loadPreline = async () => {
+      await import("preline");
+      window.HSStaticMethods.autoInit();
+      // window.DDStaticMethods.;
+      HSDropdown.autoInit();
+    };
+    loadPreline();
   }, [location.pathname]);
 
   const ROLES = {
