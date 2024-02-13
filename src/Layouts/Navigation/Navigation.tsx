@@ -54,6 +54,15 @@ const Navigation = (): ReactElement => {
       availableWorkSpaces: workspaceData.availableWorkSpaces,
       selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
     });
+    // TRY THE BELOW INSTEAD OF MUTATING EXISTING DATA
+    /*updateWorkspaceData({
+      // Use spread operator to create a new array instance if modifications are needed
+      availableWorkSpaces: [...workspaceData.availableWorkSpaces],
+    
+      // Ensure selectedWorkSpace is treated as a new object
+      selectedWorkSpace: {...selectedWorkSpace_ as { name: string; id: string }},
+    });*/
+
     // setWorkSpaces((prevState) => {
     //   return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
     // });
