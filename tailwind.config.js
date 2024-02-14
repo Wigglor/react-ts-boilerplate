@@ -10,7 +10,7 @@ export const plugins = [require("@tailwindcss/forms"), require("preline/plugin")
 
 export const theme = {
   extend: {
-    display: ["group-hover"],
+    display: ["group-hover"], // perhaps exclude this one temporarily?
   },
 };
 // export const theme = {
