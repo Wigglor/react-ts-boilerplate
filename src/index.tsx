@@ -6,6 +6,7 @@ import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 // import { store } from "./store/store";
 import { AuthProvider } from "./context/AuthProvider";
+//import Preline from "./components/Preline"
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
 import "./style.css";

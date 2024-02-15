@@ -123,7 +123,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
     setInviteEmail(false);
     reset();
   };
-
+  // Perhaps use a better fetching technique here. useMemo?
   useEffect(() => {
     const controller = new AbortController();
     const getUser = async () => {
