@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
+// import axios from "axios";
 
 interface ApiResponse<T> {
   status: number;
@@ -95,6 +96,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const [inviteEmail, setInviteEmail] = useState<boolean>(false);
   const [deleteEmailConfirmation, setDeleteEmailConfirmation] = useState<boolean>(false);
   const [emailCheckValue, setEmailCheckValue] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
   const { auth } = useAuth();
 
   const deleteUserModal = (email: string) => {
@@ -137,10 +139,15 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
             withCredentials: true,
           },
         );
+
         setUser(response.data);
       } catch (err) {
         console.error(err);
       }
+      // finally {
+      //   // isMounted && setIsLoading(false);
+      //   setIsLoading(false);
+      // }
     };
     if (allowedRoles?.includes(auth?.role as string) && auth?.role === "ADMIN") {
       getUser();
@@ -221,6 +228,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   // }
   return allowedRoles?.includes(auth?.role as string) && auth?.role === "ADMIN" ? (
     // <main className="flex justify-center items-center h-full">
+
     <main className="h-full">
       <div className="flex justify-center items-center">
         {/* {successMessage && <p className="bg-green-600 p-3">{successMessage}</p>} */}
@@ -498,6 +506,10 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
             </div>
           </div>
         )}
+
+        {/* {isLoading ? (
+          <h1 className="bg-blue-500 p-6 z-50">Page is loading.....</h1>
+        ) : ( */}
         <div className="">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
             <div className="flex flex-col">
@@ -744,6 +756,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
             </div>
           </div>
         </div>
+        {/* // )} */}
       </div>
     </main>
   ) : (

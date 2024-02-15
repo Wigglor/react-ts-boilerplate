@@ -1,3 +1,4 @@
+// import { isCancel } from "axios";
 import { useEffect } from "react";
 import { axiosPrivate } from "../api/axios";
 import useAuth from "./useAuth";
@@ -34,6 +35,13 @@ const useAxiosPrivate = () => {
     const responseIntercept = axiosPrivate.interceptors.response.use(
       (response) => response,
       async (error) => {
+        // if (isCancel(error)) {
+        //   console.log("Request was canceled", error.message);
+        //   // Consider returning a custom response or error to avoid throwing if this is expected
+        //   // eslint-disable-next-line @typescript-eslint/no-empty-function
+        //   return new Promise(() => {}); // This effectively "ignores" the cancellation error
+        // }
+
         const prevRequest = error?.config;
         // if (error?.response?.status === 401 && !prevRequest?.sent) {
         // if (!error?.response?.status.toString().startsWith("2") && !prevRequest?.sent) {
@@ -42,8 +50,10 @@ const useAxiosPrivate = () => {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+
           return axiosPrivate(prevRequest);
         }
+
         return Promise.reject(error);
       },
     );
