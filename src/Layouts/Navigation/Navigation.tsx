@@ -50,10 +50,14 @@ const Navigation = (): ReactElement => {
       (wp: Workspace) => wp.name === event.target.value,
     );
     setSelectedWorkspace(event.target.value);
-    updateWorkspaceData({
-      availableWorkSpaces: workspaceData.availableWorkSpaces,
-      selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
-    });
+    const newWorkspaceData = { ...workspaceData };
+    newWorkspaceData.availableWorkSpaces = workspaceData.availableWorkSpaces;
+    newWorkspaceData.selectedWorkSpace = selectedWorkSpace_ as { name: string; id: string };
+    updateWorkspaceData(newWorkspaceData);
+    // updateWorkspaceData({
+    //   availableWorkSpaces: workspaceData.availableWorkSpaces,
+    //   selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
+    // });
     // TRY THE BELOW INSTEAD OF MUTATING EXISTING DATA
     /*updateWorkspaceData({
       // Use spread operator to create a new array instance if modifications are needed
