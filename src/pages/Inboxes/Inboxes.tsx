@@ -1,50 +1,6 @@
-import { ReactElement, useEffect, useState } from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useLogout from "../../hooks/useLogOut";
-import useWorkSpaces from "../../hooks/useWorkSpaces";
-
-type Workspace = {
-  name: string;
-  id: string;
-};
-
-interface ApiResponse {
-  message: string;
-}
+import { ReactElement } from "react";
 
 const Home = (): ReactElement => {
-  const logout = useLogout();
-  const axiosPrivate = useAxiosPrivate();
-  // const { workSpaces, setWorkSpaces } = useWorkSpaces();
-  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
-  const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
-
-  const [testData, setTestData] = useState<string>(() => {
-    const testData = "test string";
-    return testData;
-  });
-  useEffect(() => {
-    const workSpace: string | undefined = workspaceData.selectedWorkSpace?.name;
-    // const workSpace: string | undefined = workSpaces.selectedWorkSpace?.name;
-
-    setSelectedWorkspace(workSpace);
-  }, []);
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    // const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
-    const selectedWorkSpace_ = workspaceData.availableWorkSpaces.find(
-      (wp: Workspace) => wp.name === event.target.value,
-    );
-    setSelectedWorkspace(event.target.value);
-    updateWorkspaceData({
-      availableWorkSpaces: workspaceData.availableWorkSpaces,
-      selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
-    });
-    // setWorkSpaces((prevState) => {
-    //   return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
-    // });
-  };
-
   return (
     <>
       {/* <div className="mt-6 ml-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-6 gap-2 lg:gap-4">

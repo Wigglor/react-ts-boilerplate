@@ -1,5 +1,5 @@
 /* eslint-disable react/no-children-prop */
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./Layouts/NavBar/NavBar";
 import Navigation from "./Layouts/Navigation/Navigation";
@@ -54,15 +54,19 @@ const App = () => {
   //   window.HSStaticMethods.autoInit();
   // }, [location.pathname]);
 
-  useEffect(() => {
-    const loadPreline = async () => {
-      await import("preline");
-      window.HSStaticMethods.autoInit();
-      // window.DDStaticMethods.;
-      HSDropdown.autoInit();
-    };
-    loadPreline();
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   import("preline/preline");
+  // }, []);
+
+  // useEffect(() => {
+  //   const loadPreline = async () => {
+  //     await import("preline");
+  //     window.HSStaticMethods.autoInit();
+  //     // window.DDStaticMethods.;
+  //     HSDropdown.autoInit();
+  //   };
+  //   loadPreline();
+  // }, [location.pathname]);
 
   const ROLES = {
     pending: "PENDING",

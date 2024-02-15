@@ -6,7 +6,6 @@ import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 // import { store } from "./store/store";
 import { AuthProvider } from "./context/AuthProvider";
-//import Preline from "./components/Preline"
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
 import "./style.css";
@@ -21,7 +20,9 @@ root.render(
       <GoogleOAuthProvider clientId="523632201518-emi1ioba9vvudkc2u8on28gph5cc2cu0.apps.googleusercontent.com">
         <AuthProvider>
           {/* <WorkSpacesProvider> */}
+          {/* <Preline> */}
           <App />
+          {/* </Preline> */}
           {/* </WorkSpacesProvider> */}
         </AuthProvider>
       </GoogleOAuthProvider>

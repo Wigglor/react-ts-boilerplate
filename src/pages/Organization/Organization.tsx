@@ -91,7 +91,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
   // const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
-  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
+  const { workspaceData } = useWorkSpaces();
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
   const [inviteEmail, setInviteEmail] = useState<boolean>(false);
   const [deleteEmailConfirmation, setDeleteEmailConfirmation] = useState<boolean>(false);
