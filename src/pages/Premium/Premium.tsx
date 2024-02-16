@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
@@ -29,6 +29,26 @@ const Premium = (): ReactElement => {
   // const [posts, setPosts] = useState<Post | undefined>(undefined);
   // const navigate = useNavigate();
   // if (["PLAN2", "PLAN3"].includes(auth?.plan as string)) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null); // Create a ref for the dropdown
+
+  // Function to toggle the dropdown visibility
+  const toggleDropdown = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false); // Close dropdown if click is outside
+      }
+    };
+
+    // Add click event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Cleanup the event listener on component unmount
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]); // Depend on dropdownRef so effect runs once
   if (["PLAN2", "PLAN3"].includes(auth?.plan as unknown as string)) {
     return (
       <>
@@ -227,6 +247,136 @@ const Premium = (): ReactElement => {
                   <span className="ms-auto text-xs text-gray-500 dark:text-neutral-500">
                     preline@site.com
                   </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="hs-dropdown relative inline-flex" ref={dropdownRef}>
+            <button
+              id="hs-pro-dbrrtchmd"
+              type="button"
+              onClick={toggleDropdown} // Added onClick event to toggle dropdown
+              className="w-[34px] h-[34px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+            >
+              {/* SVG for the button remains unchanged */}
+              <svg
+                className="flex-shrink-0 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" />
+              </svg>
+            </button>
+
+            {/* Modify the class based on isOpen state to show/hide the dropdown */}
+            <div
+              className={`hs-dropdown-menu ${
+                isOpen ? "opacity-100" : "opacity-0 hidden"
+              } w-44 transition-[opacity,margin] duration-300 z-10 bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:shadow-[0_10px_40px_10px_rgba(0,0,0,0.2)]`}
+              aria-labelledby="hs-pro-dbrrtchmd"
+            >
+              {/* Dropdown items remain unchanged */}
+              {/* ... */}
+              <div className="p-1">
+                <button
+                  type="button"
+                  className="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-[13px] text-gray-800 hover:bg-gray-100 disabled:opacity-50 focus:outline-none focus:bg-gray-100 disabled:pointer-events-none dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                >
+                  <svg
+                    className="flex-shrink-0 w-3.5 h-3.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                    <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+                  </svg>
+                  Share reports
+                </button>
+                <button
+                  type="button"
+                  className="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-[13px] text-gray-800 hover:bg-gray-100 disabled:opacity-50 focus:outline-none focus:bg-gray-100 disabled:pointer-events-none dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                >
+                  <svg
+                    className="flex-shrink-0 w-3.5 h-3.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+                    <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+                    <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+                    <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+                  </svg>
+                  View in fullscreen
+                </button>
+                <button
+                  type="button"
+                  className="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-[13px] text-gray-800 hover:bg-gray-100 disabled:opacity-50 focus:outline-none focus:bg-gray-100 disabled:pointer-events-none dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                >
+                  <svg
+                    className="flex-shrink-0 w-3.5 h-3.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M3 3h6l6 18h6" />
+                    <path d="M14 3h7" />
+                  </svg>
+                  Connect other apps
+                </button>
+
+                <div className="my-1 border-t border-gray-200 dark:border-neutral-700"></div>
+
+                <button
+                  type="button"
+                  className="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-[13px] text-gray-800 hover:bg-gray-100 disabled:opacity-50 focus:outline-none focus:bg-gray-100 disabled:pointer-events-none dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                >
+                  <svg
+                    className="flex-shrink-0 w-3.5 h-3.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    <line x1="9" x2="15" y1="10" y2="10" />
+                    <line x1="12" x2="12" y1="7" y2="13" />
+                  </svg>
+                  Submit Feedback
                 </button>
               </div>
             </div>
