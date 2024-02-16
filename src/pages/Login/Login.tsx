@@ -129,13 +129,23 @@ const Login = (): ReactElement => {
       // localStorage.setItem("persist", JSON.stringify(true));
       if (response.data.setup !== "PENDING" && response.data.user.memberships.length > 0) {
         // setWorkSpaces({
-        updateWorkspaceData({
+        /*updateWorkspaceData({
           availableWorkSpaces: workSpaces,
           selectedWorkSpace: {
             name: response?.data.user.memberships[0].company.name,
             id: response?.data.user.memberships[0].company.id,
           },
-        });
+        });*/
+        const newWorkspaceData = { ...workspaceData };
+        console.log(`previous workspace state: ${JSON.stringify(workspaceData)}`);
+        // newWorkspaceData.availableWorkSpaces = workspaceData.availableWorkSpaces;
+        newWorkspaceData.availableWorkSpaces = workSpaces;
+        // newWorkspaceData.selectedWorkSpace = selectedWorkSpace_ as { name: string; id: string };
+        newWorkspaceData.selectedWorkSpace = {
+          name: response?.data.user.memberships[0].company.name,
+          id: response?.data.user.memberships[0].company.id,
+        };
+        updateWorkspaceData(newWorkspaceData);
       }
 
       if (response?.data.setup === "PENDING") {

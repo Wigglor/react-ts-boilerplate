@@ -18,7 +18,7 @@ type FormData = {
 function CompleteSignup() {
   const { setAuth } = useAuth();
   // const { setWorkSpaces } = useWorkSpaces();
-  const { updateWorkspaceData } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const navigate = useNavigate();
   const {
     register,
@@ -52,18 +52,31 @@ function CompleteSignup() {
         currentPeriodEnds: new Date(),
         plan: undefined,
       });
-      updateWorkspaceData({
-        availableWorkSpaces: [
-          {
-            name: setupResponse.data.result.company.name,
-            id: setupResponse.data.result.company.id,
-          },
-        ],
-        selectedWorkSpace: {
+      // updateWorkspaceData({
+      //   availableWorkSpaces: [
+      //     {
+      //       name: setupResponse.data.result.company.name,
+      //       id: setupResponse.data.result.company.id,
+      //     },
+      //   ],
+      //   selectedWorkSpace: {
+      //     name: setupResponse.data.result.company.name,
+      //     id: setupResponse.data.result.company.id,
+      //   },
+      // });
+      const newWorkspaceData = { ...workspaceData };
+      console.log(`previous workspace state: ${JSON.stringify(workspaceData)}`);
+      newWorkspaceData.availableWorkSpaces = [
+        {
           name: setupResponse.data.result.company.name,
           id: setupResponse.data.result.company.id,
         },
-      });
+      ];
+      newWorkspaceData.selectedWorkSpace = {
+        name: setupResponse.data.result.company.name,
+        id: setupResponse.data.result.company.id,
+      };
+      updateWorkspaceData(newWorkspaceData);
       // setWorkSpaces({
       //   availableWorkSpaces: [
       //     {

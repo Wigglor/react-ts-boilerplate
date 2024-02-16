@@ -6,7 +6,7 @@ import useWorkSpaces from "./useWorkSpaces";
 const useLogout = () => {
   const { setAuth, persist, setPersist } = useAuth();
   // const { setWorkSpaces } = useWorkSpaces();
-  const { updateWorkspaceData } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
 
   useEffect(() => {
     console.log(`useEffect for persist: ${persist}`);
@@ -31,15 +31,26 @@ const useLogout = () => {
       plan: undefined,
       // plan: "",
     });
-    updateWorkspaceData({
-      availableWorkSpaces: [
-        {
-          name: "",
-          id: "",
-        },
-      ],
-      selectedWorkSpace: { name: "", id: "" },
-    });
+    // updateWorkspaceData({
+    //   availableWorkSpaces: [
+    //     {
+    //       name: "",
+    //       id: "",
+    //     },
+    //   ],
+    //   selectedWorkSpace: { name: "", id: "" },
+    // });
+    const newWorkspaceData = { ...workspaceData };
+    console.log(`previous workspace state: ${JSON.stringify(workspaceData)}`);
+    newWorkspaceData.availableWorkSpaces = [
+      {
+        name: "",
+        id: "",
+      },
+    ];
+    // newWorkspaceData.selectedWorkSpace = selectedWorkSpace_ as { name: string; id: string };
+    newWorkspaceData.selectedWorkSpace = { name: "", id: "" };
+    updateWorkspaceData(newWorkspaceData);
     // setWorkSpaces({
     //   availableWorkSpaces: [
     //     {
