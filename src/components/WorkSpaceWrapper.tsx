@@ -9,9 +9,9 @@ const WorkSpaceWrapper = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    console.log(`wp wrapper wps: ${JSON.stringify(localStorage.getItem("workSpaces"))}`);
+    // console.log(`wp wrapper wps: ${JSON.stringify(localStorage.getItem("workSpaces"))}`);
     // console.log(`wp wrapper wps context: ${JSON.stringify(workSpaces)}`);
-    console.log(`wp wrapper wps context: ${JSON.stringify(workspaceData)}`);
+    // console.log(`wp wrapper wps context: ${JSON.stringify(workspaceData)}`);
     return () => {
       abortController.abort();
       // isMounted = false;

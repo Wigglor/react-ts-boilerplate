@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
+// import Preline from "./components/Preline";
 import "./style.css";
 // import "./styles/globals.scss";
 
@@ -17,12 +18,12 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      {/* <Preline /> */}
       <GoogleOAuthProvider clientId="523632201518-emi1ioba9vvudkc2u8on28gph5cc2cu0.apps.googleusercontent.com">
         <AuthProvider>
           {/* <WorkSpacesProvider> */}
-          {/* <Preline> */}
+          {/* <Preline /> */}
           <App />
-          {/* </Preline> */}
           {/* </WorkSpacesProvider> */}
         </AuthProvider>
       </GoogleOAuthProvider>

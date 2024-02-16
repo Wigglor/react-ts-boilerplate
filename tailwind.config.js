@@ -1,12 +1,18 @@
 // tailwind.config.js
+import forms from "@tailwindcss/forms";
+import preline from "preline/plugin";
 /** @type {import('tailwindcss').Config} */
 export const content = [
   // "./node_modules/preline/dist/*.js",
-  // "./node_modules/preline/preline.js",
-  "./node_modules/preline/dist/*.js",
+  "./node_modules/preline/preline.js",
   "./src/**/*.{js,jsx,ts,tsx}",
 ];
-export const plugins = [require("@tailwindcss/forms"), require("preline/plugin")];
+export const plugins = [
+  // require("@tailwindcss/forms"), require("preline/plugin")
+  //  [preline],
+  preline,
+  forms,
+];
 
 export const theme = {
   extend: {

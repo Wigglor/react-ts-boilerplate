@@ -1,5 +1,5 @@
 /* eslint-disable react/no-children-prop */
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./Layouts/NavBar/NavBar";
 import Navigation from "./Layouts/Navigation/Navigation";
@@ -28,7 +28,7 @@ import Unauthorized from "./pages/Unauthorized/Unauthorized";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 // import { WorkSpacesProvider } from "./context/WorkSpacesProvider";
 
-// import "preline/preline";
+import "preline/preline";
 import { HSDropdown, IStaticMethods } from "preline/preline";
 declare global {
   interface Window {
@@ -40,32 +40,44 @@ declare global {
 const App = () => {
   const location = useLocation();
 
+  useEffect(() => {
+    window.HSStaticMethods.autoInit();
+  }, [location.pathname]);
   // useEffect(() => {
-  //   import("preline/preline");
-  // }, []);
+  //   const intervalId = setInterval(() => {
+  //     if (window.HSStaticMethods) {
+  //       console.log("HSStaticMethods is placed on global window");
+  //       window.HSStaticMethods.autoInit();
+  //       clearInterval(intervalId);
+  //     }
+  //   }, 100); /// Check every 100 milliseconds
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     HSDropdown.autoInit();
-  //   }, 100);
+  //   return () => clearInterval(intervalId); // Clean up interval
   // }, [location.pathname]);
-
   // useEffect(() => {
+  // if (window.HSStaticMethods) {
+  //   console.log("HSStaticMethods is placed on global window");
   //   window.HSStaticMethods.autoInit();
+  // }
+  // async function loadAndInitPreline() {
+  //   await import("preline/preline");
+  //   if (window.HSStaticMethods) {
+  //     window.HSStaticMethods.autoInit();
+  //   }
+  // }
+
+  // loadAndInitPreline();
   // }, [location.pathname]);
 
+  // const location = useLocation();
+
   // useEffect(() => {
-  //   import("preline/preline");
+  //   require("preline/preline");
   // }, []);
 
   // useEffect(() => {
-  //   const loadPreline = async () => {
-  //     await import("preline");
-  //     window.HSStaticMethods.autoInit();
-  //     // window.DDStaticMethods.;
-  //     HSDropdown.autoInit();
-  //   };
-  //   loadPreline();
+  //   // @ts-ignore
+  //   HSStaticMethods.autoInit();
   // }, [location.pathname]);
 
   const ROLES = {

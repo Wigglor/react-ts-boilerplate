@@ -1,6 +1,9 @@
-import { HSDropdown, IStaticMethods } from "preline/preline";
 import { useEffect } from "react";
+
 import { useLocation } from "react-router-dom";
+
+// import "preline/preline";
+import { HSDropdown, IStaticMethods } from "preline/preline";
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -16,8 +19,8 @@ const Preline = () => {
   }, []);
 
   useEffect(() => {
-    window.HSStaticMethods.autoInit();
-    // HSStaticMethods.autoInit();
+    // @ts-ignore
+    HSStaticMethods.autoInit();
   }, [location.pathname]);
 
   return <></>;
