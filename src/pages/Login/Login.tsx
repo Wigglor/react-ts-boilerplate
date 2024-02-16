@@ -55,10 +55,12 @@ const Login = (): ReactElement => {
   };
 
   const togglePersist = () => {
+    console.log("toggling persist");
     setPersist((prev) => !prev);
   };
 
   useEffect(() => {
+    console.log(`useEffect for persist: ${persist}`);
     localStorage.setItem("persist", JSON.stringify(persist));
   }, [persist]);
 
@@ -98,6 +100,7 @@ const Login = (): ReactElement => {
   // });
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data: LoginFormValues) => {
+    togglePersist();
     try {
       const response = await axios.post(
         LOGIN_URL,
@@ -117,10 +120,13 @@ const Login = (): ReactElement => {
         currentPeriodEnds: response?.data.user.memberships[0]?.company?.account.currentPeriodEnds,
         plan: response?.data.user.memberships[0]?.company?.account.plan?.name,
       });
+
       const workSpaces = response?.data.user.memberships.map((item: Item) => {
         return { name: item.company.name, id: item.company.id };
       }); // extend this and return obj with company id etc as well
-
+      // setPersist(true);
+      // setPersist((prev) => !prev);
+      // localStorage.setItem("persist", JSON.stringify(true));
       if (response.data.setup !== "PENDING" && response.data.user.memberships.length > 0) {
         // setWorkSpaces({
         updateWorkspaceData({
@@ -2138,7 +2144,7 @@ const Login = (): ReactElement => {
                   </p>
                 </div>
 
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <div className="flex">
                     <input
                       id="persist"
@@ -2154,7 +2160,7 @@ const Login = (): ReactElement => {
                       Remember me
                     </label>
                   </div>
-                </div>
+                </div> */}
 
                 <button
                   type="submit"
