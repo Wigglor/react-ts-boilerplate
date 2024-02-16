@@ -30,6 +30,7 @@ const useAxiosPrivate = () => {
           return true;
         }
       }
+      return false;
     };
 
     const responseIntercept = axiosPrivate.interceptors.response.use(
@@ -46,6 +47,10 @@ const useAxiosPrivate = () => {
         // if (error?.response?.status === 401 && !prevRequest?.sent) {
         // if (!error?.response?.status.toString().startsWith("2") && !prevRequest?.sent) {
         console.log(`error from call: ${JSON.stringify(error)}`);
+        // Sometimes throwing CanceledError when e.g. navigating to Organisation-route. It's due
+        // react strict:
+        // https://stackoverflow.com/questions/73140563/axios-throwing-cancelederror-with-abort-controller-in-react
+        // https://react.dev/blog/2022/03/29/react-v18#new-strict-mode-behaviors
         if (!matchResponseStatus(error?.response?.status.toString()) && !prevRequest?.sent) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
