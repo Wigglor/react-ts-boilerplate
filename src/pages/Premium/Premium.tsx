@@ -63,6 +63,7 @@ const Premium = (): ReactElement => {
       <>
         <main>
           <h1>Premium</h1>
+
           <div className="hs-dropdown relative inline-flex [--auto-close:inside]">
             <button
               id="hs-pro-dnwpd"
@@ -281,6 +282,12 @@ const Premium = (): ReactElement => {
                 isOpen ? "opacity-100" : "opacity-0 hidden"
               } w-44 transition-[opacity,margin] duration-300 z-10 bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:shadow-[0_10px_40px_10px_rgba(0,0,0,0.2)]`}
               aria-labelledby="hs-pro-dbrrtchmd"
+              style={{
+                position: "fixed",
+                inset: "0px auto auto 0px",
+                margin: "0px",
+                transform: "translate(283px, 123px)",
+              }}
             >
               {/* Dropdown items remain unchanged */}
               {/* ... */}

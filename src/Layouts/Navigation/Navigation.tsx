@@ -9,7 +9,7 @@ import {
   Target,
   Users,
 } from "lucide-react";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogOut";
@@ -26,7 +26,9 @@ const Navigation = (): ReactElement => {
   const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { setAuth, auth } = useAuth();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const workSpace: string | undefined = workspaceData.selectedWorkSpace?.name;
@@ -44,6 +46,20 @@ const Navigation = (): ReactElement => {
       id: string;
     };
   };
+  const toggleDropdown = () => setIsOpen(!isOpen);
+  const closeDropdown = () => setIsOpen(false);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     // const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
     const selectedWorkSpace_ = workspaceData.availableWorkSpaces.find(
@@ -101,8 +117,6 @@ const Navigation = (): ReactElement => {
 
   return (
     <>
-      {/* <NavBar />
-      <SideNav /> */}
       <>
         <main className="h-full">
           <div className="flex h-full">
@@ -113,7 +127,6 @@ const Navigation = (): ReactElement => {
               className={`flex flex-col content-center transition-width duration-300 bg-white border-e border-gray-200  overflow-y-auto dark:bg-gray-800 dark:border-gray-700 ${
                 isCollapsed ? "w-16" : "w-1/12"
               }`}
-              // } bg-zinc-900`}
             >
               <nav className="">
                 <div className="bg-gray-50 flex p-4 flex-col justify-center items-center">
@@ -130,13 +143,11 @@ const Navigation = (): ReactElement => {
                   >
                     {sideNavItems.map((item, index) => (
                       <li key={index} className="">
-                        {/* <Link to={item.to} className="flex items-center px-2.5"> */}
                         <Link
                           to={item.to}
                           className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                         >
                           {item.icon}
-                          {/* <span className={`ml-4 ${isCollapsed ? "hidden" : "block"}`}> */}
                           <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span>
                         </Link>
                       </li>
@@ -144,7 +155,6 @@ const Navigation = (): ReactElement => {
                   </ul>
                 </div>
               </nav>
-              {/* </nav> */}
             </div>
             <div
               // className={`transition-width duration-300 ${
@@ -154,13 +164,11 @@ const Navigation = (): ReactElement => {
             >
               <nav className="z-10 mx-auto flex  justify-between items-center py-2 border-gray-200 border-b">
                 <div className="flex w-full flex-wrap items-center justify-between">
-                  {/* <div className="relative inline-block text-left"></div> */}
                   <Menu
                     className="ml-2 cursor-pointer"
                     onClick={() => setIsCollapsed(!isCollapsed)}
                   />
 
-                  {/* {workSpaces.selectedWorkSpace.id.length > 0 && ( */}
                   {workspaceData.selectedWorkSpace.id.length > 0 && (
                     <div>
                       <select
@@ -177,9 +185,7 @@ const Navigation = (): ReactElement => {
                         value={stateSelectedWorkspace}
                         onChange={handleChange}
                       >
-                        {/* {workSpaces.selectedWorkSpace ? ( */}
                         {workspaceData.selectedWorkSpace ? (
-                          // workSpaces.availableWorkSpaces.map((item: Workspace) => (
                           workspaceData.availableWorkSpaces.map((item: Workspace) => (
                             <option key={item.id} value={item.name}>
                               {item.name}
@@ -192,36 +198,45 @@ const Navigation = (): ReactElement => {
                     </div>
                   )}
 
-                  <div className="group">
-                    <CircleUserRound className="cursor-pointer mr-2 text-slate-700" />
-                    {/* <ul className="bg-white shadow-md  rounded-md border absolute hidden group-hover:block transition-all duration-500 ease right-2"> */}
-                    <ul className="bg-white shadow-md  rounded-md border absolute  group-hover:block transition-all duration-500 ease right-2">
-                      <li className="px-2 bg-gray-200 text-slate-700">
-                        <p>signed in as</p>
-                        <p>
-                          <b>Testuser</b>
-                          {/* <b>{auth.user}</b> */}
-                        </p>
-                      </li>
-                      <Link to="/organization" className="cursor-pointer">
-                        <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100">
-                          <CircleUserRound width="18" height="18" className="inline" />
-                          <span className="pl-2 text-slate-700">Organization</span>
-                        </li>
-                      </Link>
-                      <Link to="/account" className="cursor-pointer">
-                        <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100 ">
-                          <Settings width="18" height="18" className="inline" />
-                          <span className="pl-2 text-slate-700">Account Settings</span>
-                        </li>
-                      </Link>
-                      <Link to="/login" className="cursor-pointer" onClick={signOut}>
-                        <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100">
-                          <LogOut width="18" height="18" className="inline" />
-                          <span className="pl-2 text-slate-700">Logout</span>
-                        </li>
-                      </Link>
-                    </ul>
+                  <div className="relative" ref={dropdownRef}>
+                    <CircleUserRound
+                      onClick={toggleDropdown}
+                      className="cursor-pointer mr-2 text-slate-700"
+                    />
+                    {isOpen && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md py-1 z-50">
+                        <ul className="">
+                          <li className="px-2 bg-gray-200 text-slate-700">
+                            <p>signed in as</p>
+                            <p>
+                              <b>Testuser</b>
+                            </p>
+                          </li>
+                          <Link
+                            to="/organization"
+                            className="cursor-pointer"
+                            onClick={closeDropdown}
+                          >
+                            <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100">
+                              <CircleUserRound width="18" height="18" className="inline" />
+                              <span className="pl-2 text-slate-700">Organization</span>
+                            </li>
+                          </Link>
+                          <Link to="/account" className="cursor-pointer" onClick={closeDropdown}>
+                            <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100 ">
+                              <Settings width="18" height="18" className="inline" />
+                              <span className="pl-2 text-slate-700">Account Settings</span>
+                            </li>
+                          </Link>
+                          <Link to="/login" className="cursor-pointer" onClick={closeDropdown}>
+                            <li className="px-3 py-1.5 text-slate-700 hover:bg-gray-100">
+                              <LogOut width="18" height="18" className="inline" />
+                              <span className="pl-2 text-slate-700">Logout</span>
+                            </li>
+                          </Link>
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
               </nav>

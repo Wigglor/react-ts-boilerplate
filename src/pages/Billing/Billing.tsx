@@ -514,24 +514,26 @@ const Billing = (): ReactElement => {
     //     </Elements>
     //   </div>
     // </main>
-    <div className="h-full">
+    <>
       <div className="h-full">
-        <Elements
-          stripe={stripePromise}
-          options={{
-            mode: "subscription",
-            amount: 0,
-            currency: "eur",
-            appearance: {
-              theme: "flat",
-            },
-          }}
-        >
-          <CheckoutForm setTest={setTest} />
-          {/* <CheckoutForm onOptionsChange={handleOptionsChange} /> */}
-        </Elements>
+        <div className="h-full">
+          <Elements
+            stripe={stripePromise}
+            options={{
+              mode: "subscription",
+              amount: 0,
+              currency: "eur",
+              appearance: {
+                theme: "flat",
+              },
+            }}
+          >
+            <CheckoutForm setTest={setTest} />
+            {/* <CheckoutForm onOptionsChange={handleOptionsChange} /> */}
+          </Elements>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
