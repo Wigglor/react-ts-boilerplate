@@ -107,8 +107,8 @@ const Navigation = (): ReactElement => {
   const sideNavItems = [
     // { icon: <Sparkles width="18" height="18" />, text: "Premium", to: "/premium" },
     { icon: <Sparkles width="18" height="18" />, text: "Discover", to: "/premium" },
-    { icon: <Inbox width="18" height="18" />, text: "My Inboxes", to: "/inboxes" },
-    { icon: <Users width="18" height="18" />, text: "Organization", to: "/organization" },
+    { icon: <Inbox width="18" height="18" />, text: "Inboxes", to: "/inboxes" },
+    { icon: <Users width="18" height="18" />, text: "People", to: "/organization" },
     { icon: <Settings width="18" height="18" />, text: "Account", to: "/account" },
     { icon: <CircleDollarSign width="18" height="18" />, text: "Billing", to: "/billing" },
     // { icon: <Binary />, text: "Payment Status", to: "/paymentstatus" },
@@ -121,12 +121,14 @@ const Navigation = (): ReactElement => {
       <SideNav /> */}
       <>
         <main className="h-full">
+          {/* <main className="h-full"> */}
           <div className="flex h-full">
             <div
               // <nav
               // className={`flex flex-col content-center transition-width duration-300 ${
               // className={`flex flex-col content-center transition-width duration-300 hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all transform fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700 ${
-              className={`flex h-full flex-col content-center transition-width bg-slate-300 duration-300  border-e border-gray-200  overflow-y-auto dark:bg-gray-800 dark:border-gray-700 ${
+              className={`flex h-full flex-col content-center transition-width duration-300  border-e border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${
+                // className={`flex h-full flex-col content-center transition-width bg-slate-300 duration-300  border-e border-gray-200  overflow-y-auto dark:bg-gray-800 dark:border-gray-700 ${
                 isCollapsed ? "w-16" : "w-1/12"
               }`}
             >
@@ -143,7 +145,24 @@ const Navigation = (): ReactElement => {
                   <ul
                     className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
                   >
-                    {sideNavItems.map((item, index) => (
+                    {sideNavItems.slice(0, 2).map((item, index) => (
+                      <li key={index} className="">
+                        <Link
+                          to={item.to}
+                          className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        >
+                          {item.icon}
+                          <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
+                  <ul
+                    className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
+                  >
+                    {sideNavItems.slice(-3).map((item, index) => (
                       <li key={index} className="">
                         <Link
                           to={item.to}
