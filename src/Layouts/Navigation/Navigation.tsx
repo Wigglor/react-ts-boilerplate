@@ -123,6 +123,7 @@ const Navigation = (): ReactElement => {
         <main className="h-full">
           {/* <main className="h-full"> */}
           <div className="flex h-full">
+            {/* Sidenav */}
             <div
               // <nav
               // className={`flex flex-col content-center transition-width duration-300 ${

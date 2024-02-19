@@ -6,7 +6,7 @@ html {
   @apply box-border;
   height: 100%;
   /* overflow-y: scroll; */
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   /* min-width: 100%; */
 }
 
