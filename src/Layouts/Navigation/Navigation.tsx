@@ -120,7 +120,7 @@ const Navigation = (): ReactElement => {
   return (
     <>
       <main className="relative min-h-full">
-        <body className="mb-[40px] sm:mb-[64px] bg-gray-50 dark:bg-neutral-950">
+        <div className="mb-[40px] sm:mb-[64px] bg-gray-50 dark:bg-neutral-950">
           <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             <div className="ml-48">
               <div className="relative" ref={dropdownRef}>
@@ -294,8 +294,10 @@ const Navigation = (): ReactElement => {
               </div>
             </div>
           </main> */}
-          <Outlet />
-        </body>
+          <div className="lg:ps-[260px] pt-[59px]">
+            <Outlet />
+          </div>
+        </div>
       </main>
 
       {/* <main className="min-h-full">
