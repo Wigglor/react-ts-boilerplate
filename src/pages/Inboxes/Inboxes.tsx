@@ -185,7 +185,7 @@ const Home = (): ReactElement => {
         </a>
       </div> */}
 
-      <div className="py-3 overflow-y-scroll">
+      <div className="py-3">
         <div className="px-4 sm:px-7 mb-3">
           <h3 className="font-semibold text-gray-800 dark:text-neutral-200">My Inboxes</h3>
         </div>
