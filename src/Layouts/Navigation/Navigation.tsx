@@ -7,7 +7,7 @@ import {
   // Menu,
   Settings,
   Sparkles,
-  // Target,
+  Target,
   Users,
 } from "lucide-react";
 import { ReactElement, useEffect, useRef, useState } from "react";
@@ -121,7 +121,8 @@ const Navigation = (): ReactElement => {
     <>
       <main className="relative min-h-full">
         <div className="mb-[40px] sm:mb-[64px] bg-gray-50 dark:bg-neutral-950">
-          <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
+          <header className="mx-auto lg:ms-[w-48] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
+            {/* <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
             <div className="ml-48">
               <div className="relative" ref={dropdownRef}>
                 <CircleUserRound
@@ -164,11 +165,20 @@ const Navigation = (): ReactElement => {
 
           <aside
             id="hs-pro-sidebar"
-            className="w-[260px] hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90"
+            // className="w-[260px] hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90"
+            className="w-48 hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90"
           >
-            <div className="flex flex-col h-full max-h-full py-3">
-              <header className="px-8 h-[46px]">
-                <a
+            <div className="flex flex-col h-full max-h-full">
+              {/* <header className="px-8 h-[46px]"> */}
+              <header className="bg-slate-400">
+                <div className="flex p-4 flex-col justify-center items-center">
+                  <div className="">
+                    <Link to="/">
+                      <Target className="text-slate-700" />
+                    </Link>
+                  </div>
+                </div>
+                {/* <a
                   className="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
                   href="#"
                   aria-label="Preline"
@@ -206,7 +216,7 @@ const Navigation = (): ReactElement => {
                       fill="currentColor"
                     />
                   </svg>
-                </a>
+                </a> */}
               </header>
               <div className="p-4 pt-5">
                 <ul
