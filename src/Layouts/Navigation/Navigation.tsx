@@ -123,7 +123,7 @@ const Navigation = (): ReactElement => {
         <div className="mb-[40px] sm:mb-[64px] bg-gray-50 dark:bg-neutral-950">
           <header className="mx-auto lg:ms-[w-48] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             {/* <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
-            <div className="ml-48 flex justify-end w-full items-center">
+            <div className="ml-48 p-4 flex justify-end w-full items-center">
               {/* <div className="ml-48 flex justify-end items-center"> */}
               {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
                 <div>
