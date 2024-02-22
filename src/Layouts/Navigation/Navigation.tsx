@@ -108,11 +108,31 @@ const Navigation = (): ReactElement => {
 
   const sideNavItems = [
     // { icon: <Sparkles width="18" height="18" />, text: "Premium", to: "/premium" },
-    { icon: <Sparkles width="18" height="18" />, text: "Discover", to: "/premium" },
-    { icon: <Inbox width="18" height="18" />, text: "Inboxes", to: "/inboxes" },
-    { icon: <Users width="18" height="18" />, text: "People", to: "/organization" },
-    { icon: <Settings width="18" height="18" />, text: "Account", to: "/account" },
-    { icon: <CircleDollarSign width="18" height="18" />, text: "Billing", to: "/billing" },
+    {
+      icon: <Sparkles width="18" height="18" className="bg-red-300" />,
+      text: "Discover",
+      to: "/premium",
+    },
+    {
+      icon: <Inbox width="18" height="18" className="bg-red-300" />,
+      text: "Inboxes",
+      to: "/inboxes",
+    },
+    {
+      icon: <Users width="18" height="18" className="bg-red-300" />,
+      text: "People",
+      to: "/organization",
+    },
+    {
+      icon: <Settings width="18" height="18" className="bg-red-300" />,
+      text: "Account",
+      to: "/account",
+    },
+    {
+      icon: <CircleDollarSign width="18" height="18" className="bg-red-300" />,
+      text: "Billing",
+      to: "/billing",
+    },
     // { icon: <Binary />, text: "Payment Status", to: "/paymentstatus" },
     // Add other navigation items as needed
   ];
@@ -264,8 +284,10 @@ const Navigation = (): ReactElement => {
               </header>
               <div className="p-4 pt-5">
                 <ul
-                  // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
-                  className={`text-slate-700 flex flex-col`}
+                  className={`bg-green-300 transition-all duration-300 text-slate-700 flex flex-col  ${
+                    isCollapsed ? "items-center" : ""
+                  }`}
+                  // className={`bg-green-300 text-slate-700 flex flex-col`}
                 >
                   {sideNavItems.slice(0, 2).map((item, index) => (
                     <li key={index} className="">
@@ -274,8 +296,10 @@ const Navigation = (): ReactElement => {
                         className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         {item.icon}
-                        <span className={``}>{item.text}</span>
-                        {/* <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span> */}
+                        {/* <span className={`hidden bg-red-300`}>{item.text}</span> */}
+                        <span className={`bg-red-300 w-full ${isCollapsed ? "hidden" : ""}`}>
+                          {item.text}
+                        </span>
                       </Link>
                     </li>
                   ))}
@@ -314,17 +338,19 @@ const Navigation = (): ReactElement => {
                 )}
                 <ul
                   // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
-                  className={`text-slate-700 flex flex-col`}
+                  className={`bg-green-300 text-slate-700 flex flex-col`}
                 >
                   {sideNavItems.slice(-3).map((item, index) => (
-                    <li key={index} className="">
+                    <li key={index} className="transition-all duration-300">
                       <Link
                         to={item.to}
                         className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         {item.icon}
-                        <span className={``}>{item.text}</span>
-                        {/* <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span> */}
+                        <span className={`bg-red-300 w-full`}>{item.text}</span>
+                        {/* <span className={`bg-red-300 w-full ${isCollapsed ? "hidden" : ""}`}>
+                          {item.text}
+                        </span> */}
                       </Link>
                     </li>
                   ))}
