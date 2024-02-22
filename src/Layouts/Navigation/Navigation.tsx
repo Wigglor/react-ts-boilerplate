@@ -284,8 +284,9 @@ const Navigation = (): ReactElement => {
               </header>
               <div className="p-4 pt-5">
                 <ul
-                  className={`bg-green-300 transition-all duration-300 text-slate-700 flex flex-col  ${
-                    isCollapsed ? "items-center" : ""
+                  // transition-all duration-300
+                  className={`bg-green-300  text-slate-700 flex flex-col  ${
+                    isCollapsed ? "items-center" : "items-center"
                   }`}
                   // className={`bg-green-300 text-slate-700 flex flex-col`}
                 >
@@ -297,9 +298,9 @@ const Navigation = (): ReactElement => {
                       >
                         {item.icon}
                         {/* <span className={`hidden bg-red-300`}>{item.text}</span> */}
-                        <span className={`bg-red-300 w-full ${isCollapsed ? "hidden" : ""}`}>
+                        {/* <span className={` bg-red-300 w-full ${isCollapsed ? "hidden" : ""}`}>
                           {item.text}
-                        </span>
+                        </span> */}
                       </Link>
                     </li>
                   ))}
@@ -338,19 +339,22 @@ const Navigation = (): ReactElement => {
                 )}
                 <ul
                   // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
-                  className={`bg-green-300 text-slate-700 flex flex-col`}
+                  // transition-all duration-300
+                  className={`bg-green-300 text-slate-700 flex flex-col  ${
+                    isCollapsed ? "items-center" : ""
+                  }`}
                 >
                   {sideNavItems.slice(-3).map((item, index) => (
-                    <li key={index} className="transition-all duration-300">
+                    <li key={index} className="">
                       <Link
                         to={item.to}
                         className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         {item.icon}
-                        <span className={`bg-red-300 w-full`}>{item.text}</span>
-                        {/* <span className={`bg-red-300 w-full ${isCollapsed ? "hidden" : ""}`}>
+                        {/* <span className={`bg-red-300 w-full`}>{item.text}</span> */}
+                        <span className={`bg-red-300 w-full ${isCollapsed ? "hidden" : ""}`}>
                           {item.text}
-                        </span> */}
+                        </span>
                       </Link>
                     </li>
                   ))}
