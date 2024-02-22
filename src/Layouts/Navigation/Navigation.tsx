@@ -4,7 +4,7 @@ import {
   CircleUserRound,
   Inbox,
   LogOut,
-  // Menu,
+  Menu,
   Settings,
   Sparkles,
   Target,
@@ -98,9 +98,9 @@ const Navigation = (): ReactElement => {
     // });
   };
 
-  //   const toggleSidenav = () => {
-  //     setIsCollapsed(!isCollapsed);
-  // };
+  const toggleSidenav = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   const signOut = async () => {
     await logout();
@@ -121,9 +121,20 @@ const Navigation = (): ReactElement => {
     <>
       <main className="relative min-h-full">
         <div className="mb-[40px] sm:mb-[64px] bg-gray-50 dark:bg-neutral-950">
-          <header className="mx-auto lg:ms-[w-48] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
-            {/* <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
-            <div className="ml-48 p-4 flex justify-end w-full items-center">
+          {/* <header className="mx-auto lg:ms-[w-48] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
+          {/* <header
+            className={`transition-width duration-300 text-sm ${
+              isCollapsed ? "w-[calc(100%-4rem)]" : "w-11/12"
+            } mx-auto lg:ms-[w-48] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700`}
+          > */}
+          {/* <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
+          <header
+            // "w-24" : "w-48"
+            className={`${
+              isCollapsed ? "w-[calc(100%-4rem)]" : "w-11/12"
+            } fixed top-0 inset-x-48 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700`}
+          >
+            <div className="p-4 flex justify-between w-full items-center">
               {/* <div className="ml-48 flex justify-end items-center"> */}
               {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
                 <div>
@@ -153,6 +164,7 @@ const Navigation = (): ReactElement => {
                   </select>
                 </div>
               )} */}
+              <Menu className="ml-2 cursor-pointer" onClick={() => setIsCollapsed(!isCollapsed)} />
               <div className="relative" ref={dropdownRef}>
                 <CircleUserRound
                   onClick={toggleDropdown}
@@ -195,7 +207,10 @@ const Navigation = (): ReactElement => {
           <aside
             id="hs-pro-sidebar"
             // className="w-[260px] hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90"
-            className="w-48 hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90"
+            // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
+            className={`${
+              isCollapsed ? "w-24" : "w-48"
+            } hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90`}
           >
             <div className="flex flex-col h-full max-h-full">
               {/* <header className="px-8 h-[46px]"> */}
@@ -249,7 +264,8 @@ const Navigation = (): ReactElement => {
               </header>
               <div className="p-4 pt-5">
                 <ul
-                  className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
+                  // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
+                  className={`text-slate-700 flex flex-col`}
                 >
                   {sideNavItems.slice(0, 2).map((item, index) => (
                     <li key={index} className="">
@@ -258,7 +274,8 @@ const Navigation = (): ReactElement => {
                         className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         {item.icon}
-                        <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span>
+                        <span className={``}>{item.text}</span>
+                        {/* <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span> */}
                       </Link>
                     </li>
                   ))}
@@ -296,7 +313,8 @@ const Navigation = (): ReactElement => {
                   </div>
                 )}
                 <ul
-                  className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
+                  // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
+                  className={`text-slate-700 flex flex-col`}
                 >
                   {sideNavItems.slice(-3).map((item, index) => (
                     <li key={index} className="">
@@ -305,7 +323,8 @@ const Navigation = (): ReactElement => {
                         className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         {item.icon}
-                        <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span>
+                        <span className={``}>{item.text}</span>
+                        {/* <span className={`${isCollapsed ? "hidden" : "block"}`}>{item.text}</span> */}
                       </Link>
                     </li>
                   ))}
