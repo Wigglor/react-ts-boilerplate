@@ -410,8 +410,15 @@ const Navigation = (): ReactElement => {
               </div>
             </div>
           </main> */}
-          {/* <div className=""> */}
-          <div className="lg:ps-[260px] pt-[59px] h-full">
+
+          {/* <div className="lg:ps-[260px] pt-[59px] "> */}
+          <div
+            className={`transition-all duration-300 ${
+              isCollapsed
+                ? " inset-x-24 w-[calc(100%-6rem)] pt-14 lg:ps-[160px]"
+                : "w-[calc(100%-12rem)] pt-14 lg:ps-[260px]"
+            }`}
+          >
             <Outlet />
           </div>
         </div>

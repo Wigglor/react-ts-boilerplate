@@ -557,7 +557,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         <div className="">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
             <div className="relative">
-              {workspaceData.selectedWorkSpace.id.length > 0 && (
+              {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
                 <div>
                   <select
                     // data-hs-select='{
@@ -584,7 +584,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                     )}
                   </select>
                 </div>
-              )}
+              )} */}
               {/* <div className="relative">
                 <select className="appearance-none w-full bg-white border border-gray-200 rounded-lg py-2 px-3 text-sm text-gray-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-1 dark:focus:ring-neutral-600 cursor-pointer">
                   <option value="">Select option...</option>
