@@ -138,6 +138,46 @@ const Home = (): ReactElement => {
           </ul>
         )}
       </div>
+      <div className="relative">
+        <select
+          data-hs-select='{
+      "placeholder": "Select option...",
+      "toggleTag": "<button type=\"button\"></button>",
+      "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative -ms-2 py-1.5 ps-2.5 pe-6 w-full inline-flex flex-shrink-0 items-center gap-x-1.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 before:absolute before:inset-0 before:z-[1] dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-700",
+      "dropdownClasses": "mt-2 z-50 w-full p-1 space-y-0.5 bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:bg-neutral-900",
+      "optionClasses": "hs-selected:bg-gray-100 dark:hs-selected:bg-neutral-800 py-1.5 px-2 w-full text-[13px] text-gray-800 rounded-lg cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700",
+      "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 w-3.5 h-3.5 text-gray-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+    }'
+          className="hidden"
+        >
+          <option value="">Choose</option>
+          <option selected>Revenue</option>
+          <option>Total sales</option>
+          <option>New sales</option>
+          <option>Refunds</option>
+          <option>New subscriptions</option>
+          <option>Trial conversion rate</option>
+          <option>Affiliate revenue</option>
+          <option>Affiliate clicks</option>
+        </select>
+
+        <div className="absolute top-1/2 end-3.5 -translate-y-1/2">
+          <svg
+            className="flex-shrink-0 w-3.5 h-3.5 text-gray-600 dark:text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </div>
+      </div>
       <div className="p-4">
         <Dropdown
           buttonLabel="Select Option"
