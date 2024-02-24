@@ -23,7 +23,7 @@ const useAxiosPrivate = () => {
     );
 
     const matchResponseStatus = (status: string) => {
-      console.log(`statuscode: ${status}`);
+      // console.log(`statuscode: ${status}`);
       const list: ReadonlyArray<string> = ["2", "3"];
       for (const item of list) {
         if (status.startsWith(item)) {

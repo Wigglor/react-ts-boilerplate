@@ -60,7 +60,7 @@ const Login = (): ReactElement => {
   };
 
   useEffect(() => {
-    console.log(`useEffect for persist: ${persist}`);
+    // console.log(`useEffect for persist: ${persist}`);
     localStorage.setItem("persist", JSON.stringify(persist));
   }, [persist]);
 

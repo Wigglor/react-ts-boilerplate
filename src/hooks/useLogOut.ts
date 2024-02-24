@@ -9,7 +9,7 @@ const useLogout = () => {
   const { workspaceData, updateWorkspaceData } = useWorkSpaces();
 
   useEffect(() => {
-    console.log(`useEffect for persist: ${persist}`);
+    // console.log(`useEffect for persist: ${persist}`);
     localStorage.setItem("persist", JSON.stringify(persist));
   }, [persist]);
 

@@ -66,6 +66,10 @@ interface Invite {
   };
 }
 
+interface workspaceResponse {
+  workspace: Workspace;
+}
+
 type FormData = {
   email: string;
 };
@@ -94,6 +98,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
 
   const {
     register: workspaceForm,
+    reset: resetAddworkspaceForm,
     handleSubmit: handleAddWorkspaceForm,
     formState: { errors: workspaceErrorsForm },
   } = useForm<WorkspaceInput>();
@@ -170,6 +175,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
 
   const closeWorkspaceModal = () => {
     setAddWorkspace(false);
+    resetAddworkspaceForm();
   };
 
   const inviteUserModal = () => {
@@ -283,23 +289,42 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   // const handleWorkspaceClick = async (workspace: string) => {
   const handleWorkspaceClick: SubmitHandler<WorkspaceInput> = async (data: WorkspaceInput) => {
     try {
-      const workspaceResponse: ApiResponse<string> = await axiosPrivate.post(
+      const workspaceResponse: ApiResponse<workspaceResponse> = await axiosPrivate.post(
         "/subscription/workspace",
         JSON.stringify({
-          email: data.workspace,
+          workspace: data.workspace,
         }),
         {
           withCredentials: true,
         },
       );
-      console.log(JSON.stringify(workspaceResponse));
-      // setUpdateUsers((prev) => !prev);
-      // setDeleteUserMessage(deleteUserResponse.status);
-      // // setDeleteEmail(null);
-      // setDeleteEmailConfirmation(true);
-      // setEmailCheckValue("");
+
+      resetAddworkspaceForm();
+      setAddWorkspace(false);
+      console.log(JSON.stringify(workspaceResponse.data.workspace));
+      // const addedWorkspace = [
+      //   {
+      //     name: workspaceResponse.data.workspace.name,
+      //     id: workspaceResponse.data.workspace.id,
+      //   },
+      // ];
+      const newWorkspaceData = { ...workspaceData };
+      console.log(JSON.stringify(newWorkspaceData));
+      // console.log(JSON.stringify(addedWorkspace));
+      newWorkspaceData.availableWorkSpaces.push(
+        ...[
+          {
+            name: workspaceResponse.data.workspace.name,
+            id: workspaceResponse.data.workspace.id,
+          },
+        ],
+      );
+      console.log(JSON.stringify(newWorkspaceData));
+      updateWorkspaceData(newWorkspaceData);
     } catch (err) {
-      console.log(err);
+      if (err instanceof AxiosError) {
+        setErrorMessage(err.response?.data.message);
+      }
     }
   };
 
