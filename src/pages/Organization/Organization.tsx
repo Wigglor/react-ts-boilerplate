@@ -286,7 +286,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
     }
   };
 
-  // const handleWorkspaceClick = async (workspace: string) => {
   const handleWorkspaceClick: SubmitHandler<WorkspaceInput> = async (data: WorkspaceInput) => {
     try {
       const workspaceResponse: ApiResponse<workspaceResponse> = await axiosPrivate.post(
@@ -298,19 +297,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
           withCredentials: true,
         },
       );
-
-      resetAddworkspaceForm();
-      setAddWorkspace(false);
-      console.log(JSON.stringify(workspaceResponse.data.workspace));
-      // const addedWorkspace = [
-      //   {
-      //     name: workspaceResponse.data.workspace.name,
-      //     id: workspaceResponse.data.workspace.id,
-      //   },
-      // ];
       const newWorkspaceData = { ...workspaceData };
-      console.log(JSON.stringify(newWorkspaceData));
-      // console.log(JSON.stringify(addedWorkspace));
       newWorkspaceData.availableWorkSpaces.push(
         ...[
           {
@@ -319,8 +306,9 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
           },
         ],
       );
-      console.log(JSON.stringify(newWorkspaceData));
       updateWorkspaceData(newWorkspaceData);
+      resetAddworkspaceForm();
+      setAddWorkspace(false);
     } catch (err) {
       if (err instanceof AxiosError) {
         setErrorMessage(err.response?.data.message);
