@@ -74,6 +74,11 @@ type RequireAuthProps = {
   allowedRoles: string[];
 };
 
+type Workspace = {
+  name: string;
+  id: string;
+};
+
 const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const {
     // setValue,
@@ -83,6 +88,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
     reset,
     formState: { errors },
   } = useForm<FormData>();
+
   const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -91,13 +97,51 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [updateUsers, setUpdateUsers] = useState(false);
   // const { workSpaces /*setWorkSpaces*/ } = useWorkSpaces();
-  const { workspaceData } = useWorkSpaces();
+  const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
   const [inviteEmail, setInviteEmail] = useState<boolean>(false);
   const [deleteEmailConfirmation, setDeleteEmailConfirmation] = useState<boolean>(false);
   const [emailCheckValue, setEmailCheckValue] = useState<string>("");
+  const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const { auth } = useAuth();
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log("handleChange....");
+    // const selectedWorkSpace_ = workSpaces.availableWorkSpaces.find(
+    const selectedWorkSpace_ = workspaceData.availableWorkSpaces.find(
+      (wp: Workspace) => wp.name === event.target.value,
+    );
+    setSelectedWorkspace(event.target.value);
+    const newWorkspaceData = { ...workspaceData };
+    newWorkspaceData.availableWorkSpaces = workspaceData.availableWorkSpaces;
+    newWorkspaceData.selectedWorkSpace = selectedWorkSpace_ as { name: string; id: string };
+    updateWorkspaceData(newWorkspaceData);
+    // updateWorkspaceData({
+    //   availableWorkSpaces: workspaceData.availableWorkSpaces,
+    //   selectedWorkSpace: selectedWorkSpace_ as { name: string; id: string },
+    // });
+    // TRY THE BELOW INSTEAD OF MUTATING EXISTING DATA
+    /*updateWorkspaceData({
+      // Use spread operator to create a new array instance if modifications are needed
+      availableWorkSpaces: [...workspaceData.availableWorkSpaces],
+    
+      // Ensure selectedWorkSpace is treated as a new object
+      selectedWorkSpace: {...selectedWorkSpace_ as { name: string; id: string }},
+    });
+    
+    -- OR(???):
+    const newWorkspaceData = {...workspaceData};
+    newWorkspaceData.availableWorkSpaces = workspaceData.availableWorkSpaces
+    newWorkspaceData.selectedWorkSpace = selectedWorkSpace_ as { name: string; id: string }
+    updateWorkspaceData(newWorkspaceData)
+    
+    */
+
+    // setWorkSpaces((prevState) => {
+    //   return { ...prevState, selectedWorkSpace: selectedWorkSpace_! };
+    // });
+  };
 
   const deleteUserModal = (email: string) => {
     // if (paidPlan !== true) {
@@ -512,6 +556,127 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         ) : ( */}
         <div className="">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+            <div className="relative">
+              {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
+                <div>
+                  <select
+                    // data-hs-select='{
+                    //   "placeholder": "Select option...",
+                    //   "toggleTag": "<button type=\"button\"></button>",
+                    //   "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-3 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600",
+                    //   "dropdownClasses": "mt-2 z-50 w-full max-h-[300px] p-1 space-y-0.5 overflow-hidden overflow-y-auto bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900",
+                    //   "optionClasses": "hs-selected:bg-gray-100 dark:hs-selected:bg-neutral-800 py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800",
+                    //   "optionTemplate": "<div className=\"flex justify-between items-center w-full\"><span data-title></span><span className=\"hidden hs-selected:block\"><svg className=\"flex-shrink-0 w-3.5 h-3.5 text-gray-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                    // }'
+                    // className="hidden"
+                    className="px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                    value={stateSelectedWorkspace}
+                    onChange={handleChange}
+                  >
+                    {workspaceData.selectedWorkSpace ? (
+                      workspaceData.availableWorkSpaces.map((item: Workspace) => (
+                        <option key={item.id} value={item.name}>
+                          {item.name}
+                        </option>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+                  </select>
+                </div>
+              )} */}
+              {/* <div className="relative">
+                <select className="appearance-none w-full bg-white border border-gray-200 rounded-lg py-2 px-3 text-sm text-gray-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-1 dark:focus:ring-neutral-600 cursor-pointer">
+                  <option value="">Select option...</option>
+                  <option selected>Monday</option>
+                  <option>Tuesday</option>
+                  <option>Wednesday</option>
+                  <option>Thursday</option>
+                  <option>Friday</option>
+                  <option>Saturday</option>
+                  <option>Sunday</option>
+                </select>
+
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-neutral-500">
+                  <svg
+                    className="w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 3a1 1 0 01.707.293l6 6a1 1 0 01-1.414 1.414L10 5.414 4.707 10.707a1 1 0 01-1.414-1.414l6-6A1 1 0 0110 3zm0 14a1 1 0 01-.707-.293l-6-6a1 1 0 011.414-1.414L10 14.586l5.293-5.293a1 1 0 011.414 1.414l-6 6A1 1 0 0110 17z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div> */}
+
+              {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
+                <div className="relative">
+                  <select
+                    data-hs-select='{
+      "toggleTag": "<button type=\"button\"></button>",
+      "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-3 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600",
+      "dropdownClasses": "mt-2 z-50 w-full max-h-[300px] p-1 space-y-0.5 overflow-hidden overflow-y-auto bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900",
+      "optionClasses": "hs-selected:bg-gray-100 dark:hs-selected:bg-neutral-800 py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800",
+      "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 w-3.5 h-3.5 text-gray-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+    }'
+                    // className="hidden"
+                    value={stateSelectedWorkspace}
+                    onChange={handleChange}
+                  >
+                    {workspaceData.selectedWorkSpace ? (
+                      workspaceData.availableWorkSpaces.map((item: Workspace) => (
+                        <option key={item.id} value={item.name}>
+                          {item.name}
+                        </option>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+                   
+                  </select>
+
+                  <div className="absolute top-1/2 end-2.5 -translate-y-1/2">
+                    <svg
+                      className="flex-shrink-0 w-3.5 h-3.5 text-gray-500 dark:text-neutral-500"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m7 15 5 5 5-5" />
+                      <path d="m7 9 5-5 5 5" />
+                    </svg>
+                  </div>
+                </div>
+              )} */}
+
+              {/* <div className="absolute top-1/2 end-2.5 -translate-y-1/2">
+                <svg
+                  className="flex-shrink-0 w-3.5 h-3.5 text-gray-500 dark:text-neutral-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m7 15 5 5 5-5" />
+                  <path d="m7 9 5-5 5 5" />
+                </svg>
+              </div> */}
+            </div>
             <div className="flex flex-col">
               <div className="-m-1.5 overflow-x-auto">
                 <div className="p-1.5 min-w-full inline-block align-middle">

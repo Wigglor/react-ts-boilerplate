@@ -150,7 +150,7 @@ const Navigation = (): ReactElement => {
           {/* <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
           <header
             // "w-24" : "w-48"
-            className={`fixed top-0 inset-x-48 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300 ${
+            className={`fixed top-0 inset-x-48 flex flex-wrap md:justify-start md:flex-nowrap z-0 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300 ${
               isCollapsed ? "bg-slate-500 inset-x-24 w-[calc(100%-6rem)]" : "w-[calc(100%-12rem)]"
             }`}
           >
@@ -230,7 +230,7 @@ const Navigation = (): ReactElement => {
             // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
             className={`${
               isCollapsed ? "w-24" : "w-48"
-            } hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90`}
+            } hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[0] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90`}
           >
             <div className="flex flex-col h-full max-h-full">
               {/* <header className="px-8 h-[46px]"> */}
@@ -410,8 +410,15 @@ const Navigation = (): ReactElement => {
               </div>
             </div>
           </main> */}
-          {/* <div className=""> */}
-          <div className="lg:ps-[260px] pt-[59px]">
+
+          {/* <div className="lg:ps-[260px] pt-[59px] "> */}
+          <div
+            className={`transition-all duration-300 ${
+              isCollapsed
+                ? " inset-x-24 w-[calc(100%-6rem)] pt-14 lg:ps-[160px]"
+                : "w-[calc(100%-12rem)] pt-14 lg:ps-[260px]"
+            }`}
+          >
             <Outlet />
           </div>
         </div>
