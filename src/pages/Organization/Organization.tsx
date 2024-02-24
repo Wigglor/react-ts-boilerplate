@@ -78,6 +78,9 @@ type Workspace = {
   name: string;
   id: string;
 };
+type WorkspaceInput = {
+  workspace: string;
+};
 
 const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const {
@@ -88,6 +91,12 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
     reset,
     formState: { errors },
   } = useForm<FormData>();
+
+  const {
+    register: workspaceForm,
+    handleSubmit: handleAddWorkspaceForm,
+    formState: { errors: workspaceErrorsForm },
+  } = useForm<WorkspaceInput>();
 
   const axiosPrivate = useAxiosPrivate();
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -100,6 +109,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
   const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [deleteEmail, setDeleteEmail] = useState<string | null>(null);
   const [inviteEmail, setInviteEmail] = useState<boolean>(false);
+  const [AddWorkspace, setAddWorkspace] = useState<boolean>(false);
   const [deleteEmailConfirmation, setDeleteEmailConfirmation] = useState<boolean>(false);
   const [emailCheckValue, setEmailCheckValue] = useState<string>("");
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
@@ -154,6 +164,14 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
     }
   };
 
+  const addWorkspaceModal = () => {
+    setAddWorkspace(true);
+  };
+
+  const closeWorkspaceModal = () => {
+    setAddWorkspace(false);
+  };
+
   const inviteUserModal = () => {
     setInviteEmail(true);
   };
@@ -201,7 +219,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
       controller.abort();
     };
   }, [updateUsers, workspaceData]);
-  // }, [updateUsers, workSpaces]);
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     try {
@@ -263,6 +280,29 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
     }
   };
 
+  // const handleWorkspaceClick = async (workspace: string) => {
+  const handleWorkspaceClick: SubmitHandler<WorkspaceInput> = async (data: WorkspaceInput) => {
+    try {
+      const workspaceResponse: ApiResponse<string> = await axiosPrivate.post(
+        "/subscription/workspace",
+        JSON.stringify({
+          email: data.workspace,
+        }),
+        {
+          withCredentials: true,
+        },
+      );
+      console.log(JSON.stringify(workspaceResponse));
+      // setUpdateUsers((prev) => !prev);
+      // setDeleteUserMessage(deleteUserResponse.status);
+      // // setDeleteEmail(null);
+      // setDeleteEmailConfirmation(true);
+      // setEmailCheckValue("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // if (!user) {
   //   return (
   //     <div>
@@ -286,15 +326,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
           >
             {deleteEmailConfirmation ? (
               <>
-                {/* <button
-                  onClick={closeDeleteModal}
-                  type="button"
-                  className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  data-hs-overlay="#hs-notifications"
-                >
-                  Close
-                </button> */}
-
                 <div
                   className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700"
                   onClick={(e) => e.stopPropagation()}
@@ -354,9 +385,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                 >
                   <div className="p-4 sm:p-7">
                     <div className="text-center">
-                      {/* <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-                Forgot password?
-              </h1> */}
                       <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                         Please type in the email: <i>{deleteEmail} to delete the user</i>
                       </p>
@@ -419,22 +447,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                 </div>
               </>
             )}
-
-            {/* <div className="bg-gray-100 text-black p-2" onClick={(e) => e.stopPropagation()}>
-          {deleteUserErrorMessage && <p className="bg-red-600 p-3">{deleteUserErrorMessage}</p>}
-          <p>
-            Please type in the email: <i>{deleteEmail} to delete the user</i>
-          </p>
-          <input
-            id="email"
-            type="email"
-            value={emailCheckValue}
-            onChange={(e) => handleEmailChange(e, "setEmailCheckValue")}
-          />
-          <button type="button" onClick={() => handleDeleteClick(deleteEmail)}>
-            Delete User
-          </button>
-        </div> */}
           </div>
         )}
         {inviteEmail && (
@@ -453,7 +465,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                       Invite User
                     </h1>
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                      Provider the email you want to send an invite to
+                      Provide the email you want to send an invite to
                     </p>
                   </div>
 
@@ -524,31 +536,222 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                   </div>
                 </div>
               </div>
-
-              {/* <div className="bg-gray-100 text-black p-2" onClick={(e) => e.stopPropagation()}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="email">email</label>
-            <input
-              id="email"
-              {...register("email", {
-                required: "required",
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: "Entered value does not match email format",
-                },
-              })}
-              type="email"
-            />
-            {errors.email && (
-              <span className="bg-red-600 text-white p-2" role="alert">
-                {errors.email.message}
-              </span>
-            )}
-            <button type="submit">Invite User</button>
-          </form>
-        </div> */}
             </div>
           </div>
+        )}
+
+        {AddWorkspace && (
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-80 z-40 flex justify-center items-center"
+            onClick={closeWorkspaceModal}
+          >
+            <div
+              className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-4 sm:p-7">
+                <div className="text-center">
+                  <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                    Add New Workspace
+                  </h1>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    Name your workspace
+                  </p>
+                </div>
+
+                <div className="mt-5">
+                  {deleteUserErrorMessage && (
+                    <p className="bg-red-600 p-3">{deleteUserErrorMessage}</p>
+                  )}
+                  <div className="mt-5">
+                    <form onSubmit={handleAddWorkspaceForm(handleWorkspaceClick)}>
+                      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+                      <div className="grid gap-y-4">
+                        <div>
+                          <input
+                            id="workspace"
+                            type="text"
+                            {...workspaceForm("workspace")}
+                            name="workspace"
+                            className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                            required
+                          ></input>
+                          {workspaceErrorsForm.workspace && (
+                            <span className="bg-red-600 text-white p-2" role="alert">
+                              {workspaceErrorsForm.workspace.message}
+                            </span>
+                          )}
+
+                          <div className="relative">
+                            <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
+                              <svg
+                                className="h-5 w-5 text-red-500"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                              >
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                              </svg>
+                            </div>
+                          </div>
+                          <p className="hidden text-xs text-red-600 mt-2" id="email-error">
+                            Please include a valid email address so we can get back to you
+                          </p>
+                        </div>
+
+                        <div className="flex justify-end items-center gap-x-2 py-3 px-4 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
+                          <button
+                            onClick={closeWorkspaceModal}
+                            type="button"
+                            className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                            data-hs-overlay="#hs-notifications"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            // onClick={() => handleWorkspaceClick("test wp")}
+                            className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                          >
+                            Add Workspace
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  {/* <div className="grid gap-y-4">
+                    <div>
+                      <label htmlFor="email" className="block text-sm mb-2 dark:text-white">
+                        Email address:
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="email"
+                          type="email"
+                          value={emailCheckValue}
+                          onChange={(e) => handleEmailChange(e, "setEmailCheckValue")}
+                          name="email"
+                          className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                          required
+                          aria-describedby="email-error"
+                        ></input>
+                        <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
+                          <svg
+                            className="h-5 w-5 text-red-500"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                          >
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex justify-end items-center gap-x-2 py-3 px-4 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
+                      <button
+                        onClick={closeWorkspaceModal}
+                        type="button"
+                        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        data-hs-overlay="#hs-notifications"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleWorkspaceClick("test wp")}
+                        className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                      >
+                        Add Workspace
+                      </button>
+                    </div>
+                  </div> */}
+                </div>
+              </div>
+            </div>
+          </div>
+          // <div
+          //   className="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-80 z-40 flex justify-center items-center"
+          //   onClick={closeWorkspaceModal}
+          // >
+          //   <div className="" onClick={(e) => e.stopPropagation()}>
+          //     <div className=" bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          //       <div className="p-4 sm:p-7">
+          //         {errorMessage && (
+          //           <p className="bg-red-60 p-3 text-white rounded-lg w-full">{errorMessage}</p>
+          //         )}
+          //         <div className="text-center">
+          //           <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+          //             Add New Workspace
+          //           </h1>
+          //           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          //             Name your workspace
+          //           </p>
+          //         </div>
+
+          //         <div className="mt-5">
+          //           <form onSubmit={handleSubmit(onSubmit)}>
+          //             <div className="grid gap-y-4">
+          //               <div>
+
+          //              <input
+          //                     id="workspace"
+          //                     type="text"
+          //                     value={emailCheckValue}
+          //                     onChange={(e) => handleEmailChange(e, "setEmailCheckValue")}
+
+          //                     name="workspace"
+          //                     className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+          //                     required
+
+          //                   ></input>
+
+          //                 <div className="relative">
+          //                   <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
+          //                     <svg
+          //                       className="h-5 w-5 text-red-500"
+          //                       width="16"
+          //                       height="16"
+          //                       fill="currentColor"
+          //                       viewBox="0 0 16 16"
+          //                       aria-hidden="true"
+          //                     >
+          //                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+          //                     </svg>
+          //                   </div>
+          //                 </div>
+          //                 <p className="hidden text-xs text-red-600 mt-2" id="email-error">
+          //                   Please include a valid email address so we can get back to you
+          //                 </p>
+          //               </div>
+
+          //               <div className="flex justify-end items-center gap-x-2 py-3 px-4 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
+          //                 <button
+          //                   onClick={closeWorkspaceModal}
+          //                   type="button"
+          //                   className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          //                   data-hs-overlay="#hs-notifications"
+          //                 >
+          //                   Cancel
+          //                 </button>
+          //                 <button
+          //                   type="submit"
+          //                   onClick={() => handleDeleteClick("test wp")}
+          //                   className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          //                 >
+          //                   Add Workspace
+          //                 </button>
+          //               </div>
+          //             </div>
+          //           </form>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </div>
+          // </div>
         )}
 
         {/* {isLoading ? (
@@ -556,92 +759,17 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
         ) : ( */}
         <div className="">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-            <div className="relative">
-              {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
-                <div>
-                  <select
-                    // data-hs-select='{
-                    //   "placeholder": "Select option...",
-                    //   "toggleTag": "<button type=\"button\"></button>",
-                    //   "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-3 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600",
-                    //   "dropdownClasses": "mt-2 z-50 w-full max-h-[300px] p-1 space-y-0.5 overflow-hidden overflow-y-auto bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900",
-                    //   "optionClasses": "hs-selected:bg-gray-100 dark:hs-selected:bg-neutral-800 py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800",
-                    //   "optionTemplate": "<div className=\"flex justify-between items-center w-full\"><span data-title></span><span className=\"hidden hs-selected:block\"><svg className=\"flex-shrink-0 w-3.5 h-3.5 text-gray-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
-                    // }'
-                    // className="hidden"
-                    className="px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                    value={stateSelectedWorkspace}
-                    onChange={handleChange}
-                  >
-                    {workspaceData.selectedWorkSpace ? (
-                      workspaceData.availableWorkSpaces.map((item: Workspace) => (
-                        <option key={item.id} value={item.name}>
-                          {item.name}
-                        </option>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </select>
-                </div>
-              )} */}
-              {/* <div className="relative">
-                <select className="appearance-none w-full bg-white border border-gray-200 rounded-lg py-2 px-3 text-sm text-gray-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-1 dark:focus:ring-neutral-600 cursor-pointer">
-                  <option value="">Select option...</option>
-                  <option selected>Monday</option>
-                  <option>Tuesday</option>
-                  <option>Wednesday</option>
-                  <option>Thursday</option>
-                  <option>Friday</option>
-                  <option>Saturday</option>
-                  <option>Sunday</option>
-                </select>
-
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-neutral-500">
-                  <svg
-                    className="w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 3a1 1 0 01.707.293l6 6a1 1 0 01-1.414 1.414L10 5.414 4.707 10.707a1 1 0 01-1.414-1.414l6-6A1 1 0 0110 3zm0 14a1 1 0 01-.707-.293l-6-6a1 1 0 011.414-1.414L10 14.586l5.293-5.293a1 1 0 011.414 1.414l-6 6A1 1 0 0110 17z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div> */}
-
-              {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
-                <div className="relative">
-                  <select
-                    data-hs-select='{
-      "toggleTag": "<button type=\"button\"></button>",
-      "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-3 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600",
-      "dropdownClasses": "mt-2 z-50 w-full max-h-[300px] p-1 space-y-0.5 overflow-hidden overflow-y-auto bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900",
-      "optionClasses": "hs-selected:bg-gray-100 dark:hs-selected:bg-neutral-800 py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800",
-      "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 w-3.5 h-3.5 text-gray-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
-    }'
-                    // className="hidden"
-                    value={stateSelectedWorkspace}
-                    onChange={handleChange}
-                  >
-                    {workspaceData.selectedWorkSpace ? (
-                      workspaceData.availableWorkSpaces.map((item: Workspace) => (
-                        <option key={item.id} value={item.name}>
-                          {item.name}
-                        </option>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                   
-                  </select>
-
-                  <div className="absolute top-1/2 end-2.5 -translate-y-1/2">
+            <div className="relative"></div>
+            <div className="p-5 mb-4 flex justify-center bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+              <a
+                className="block py-2 px-3 sm:p-4 group bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 focus:outline-none focus:bg-gray-50 dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                href="#"
+                onClick={addWorkspaceModal}
+              >
+                <div className="flex gap-x-2 sm:gap-x-4">
+                  <span className="mt-1 flex-shrink-0 w-8 h-8 flex justify-center items-center bg-gray-100 text-gray-800 rounded-full group-hover:bg-gray-200 dark:bg-neutral-700 dark:text-white dark:group-hover:bg-neutral-600">
                     <svg
-                      className="flex-shrink-0 w-3.5 h-3.5 text-gray-500 dark:text-neutral-500"
+                      className="w-5 h-5 rounded-full"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -652,30 +780,18 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path d="m7 15 5 5 5-5" />
-                      <path d="m7 9 5-5 5 5" />
+                      <path d="M5 12h14" />
+                      <path d="M12 5v14" />
                     </svg>
+                  </span>
+
+                  <div className="grow">
+                    <p className="font-semibold text-lg text-gray-800 dark:text-white">
+                      Add New Workspace
+                    </p>
                   </div>
                 </div>
-              )} */}
-
-              {/* <div className="absolute top-1/2 end-2.5 -translate-y-1/2">
-                <svg
-                  className="flex-shrink-0 w-3.5 h-3.5 text-gray-500 dark:text-neutral-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m7 15 5 5 5-5" />
-                  <path d="m7 9 5-5 5 5" />
-                </svg>
-              </div> */}
+              </a>
             </div>
             <div className="flex flex-col">
               <div className="-m-1.5 overflow-x-auto">
@@ -685,7 +801,6 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                       <div>
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
                           Users for workspace: <span>{workspaceData.selectedWorkSpace.name}</span>
-                          {/* Users for workspace: <span>{workSpaces.selectedWorkSpace.name}</span> */}
                         </h2>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                           Invite and delete users.
@@ -721,16 +836,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                       <thead className="bg-gray-50 dark:bg-slate-800">
                         <tr>
-                          <th scope="col" className="ps-6 py-3 text-start">
-                            {/* <label htmlFor="hs-at-with-checkboxes-main" className="flex">
-                            <input
-                              type="checkbox"
-                              className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                              id="hs-at-with-checkboxes-main"
-                            ></input>
-                            <span className="sr-only">Checkbox</span>
-                          </label> */}
-                          </th>
+                          <th scope="col" className="ps-6 py-3 text-start"></th>
 
                           <th scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
                             <div className="flex items-center gap-x-2">
@@ -756,21 +862,7 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
                             </div>
                           </th>
 
-                          {/* <th scope="col" className="px-6 py-3 text-start">
-                          <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                              Portfolio
-                            </span>
-                          </div>
-                        </th> */}
-
-                          <th scope="col" className="px-6 py-3 text-start">
-                            {/* <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                              Created
-                            </span>
-                          </div> */}
-                          </th>
+                          <th scope="col" className="px-6 py-3 text-start"></th>
 
                           <th scope="col" className="px-6 py-3 text-end"></th>
                         </tr>
@@ -921,13 +1013,11 @@ const Organization = ({ allowedRoles }: RequireAuthProps): ReactElement => {
             </div>
           </div>
         </div>
-        {/* // )} */}
       </div>
     </main>
   ) : (
     <p>This page can only be accessed by Admin users.</p>
   );
-  // return (
 };
 
 export default Organization;
