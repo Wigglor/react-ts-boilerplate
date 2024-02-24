@@ -150,10 +150,16 @@ const Navigation = (): ReactElement => {
           {/* <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
           <header
             // "w-24" : "w-48"
+            className={`fixed top-0 ml-48 flex flex-wrap md:justify-start md:flex-nowrap z-0 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300 ${
+              isCollapsed ? "bg-slate-500 ml-24 w-[calc(100%-6rem)]" : "w-[calc(100%-12rem)]"
+            }`}
+          >
+            {/* <header
+            // "w-24" : "w-48"
             className={`fixed top-0 inset-x-48 flex flex-wrap md:justify-start md:flex-nowrap z-0 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300 ${
               isCollapsed ? "bg-slate-500 inset-x-24 w-[calc(100%-6rem)]" : "w-[calc(100%-12rem)]"
             }`}
-          >
+          > */}
             <div className="p-4 flex justify-between w-full items-center">
               {/* <div className="ml-48 flex justify-end items-center"> */}
               {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
@@ -184,7 +190,8 @@ const Navigation = (): ReactElement => {
                   </select>
                 </div>
               )} */}
-              <Menu className="ml-2 cursor-pointer" onClick={() => setIsCollapsed(!isCollapsed)} />
+              <Menu className="ml-2 cursor-pointer" onClick={() => toggleSidenav()} />
+              {/* <Menu className="ml-2 cursor-pointer" onClick={() => setIsCollapsed(!isCollapsed)} /> */}
               <div className="relative" ref={dropdownRef}>
                 <CircleUserRound
                   onClick={toggleDropdown}
@@ -226,14 +233,11 @@ const Navigation = (): ReactElement => {
 
           <aside
             id="hs-pro-sidebar"
-            // className="w-[260px] hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90"
-            // className={`text-slate-700 flex flex-col  ${isCollapsed ? "items-center" : ""}`}
             className={`${
               isCollapsed ? "w-24" : "w-48"
             } hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[0] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:bg-neutral-800 dark:border-neutral-700 dark:hs-overlay-backdrop-open:bg-neutral-900/90`}
           >
-            <div className="flex flex-col h-full max-h-full">
-              {/* <header className="px-8 h-[46px]"> */}
+            <div className="flex flex-col h-full">
               <header className="bg-slate-400">
                 <div className="flex p-4 flex-col justify-center items-center">
                   <div className="">
