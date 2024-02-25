@@ -150,16 +150,11 @@ const Navigation = (): ReactElement => {
           {/* <header className="lg:ms-[260px] fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"> */}
           <header
             // "w-24" : "w-48"
-            className={`fixed top-0 ml-48 flex flex-wrap md:justify-start md:flex-nowrap z-0 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300 ${
-              isCollapsed ? "bg-slate-500 ml-24 w-[calc(100%-6rem)]" : "w-[calc(100%-12rem)]"
+            className={`fixed top-0 ml-48 flex flex-wrap md:justify-start md:flex-nowrap z-100 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300 ${
+              // isCollapsed ? "bg-slate-400" : ""
+              isCollapsed ? "bg-slate-500 w-[calc(100%-6rem)]" : "w-[calc(100%-12rem)]"
             }`}
           >
-            {/* <header
-            // "w-24" : "w-48"
-            className={`fixed top-0 inset-x-48 flex flex-wrap md:justify-start md:flex-nowrap z-0 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300 ${
-              isCollapsed ? "bg-slate-500 inset-x-24 w-[calc(100%-6rem)]" : "w-[calc(100%-12rem)]"
-            }`}
-          > */}
             <div className="p-4 flex justify-between w-full items-center">
               {/* <div className="ml-48 flex justify-end items-center"> */}
               {/* {workspaceData.selectedWorkSpace.id.length > 0 && (

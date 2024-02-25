@@ -140,6 +140,7 @@ const Home = (): ReactElement => {
       </div>
       <div className="relative">
         <select
+          // value={item.name}
           data-hs-select='{
       "placeholder": "Select option...",
       "toggleTag": "<button type=\"button\"></button>",
@@ -150,15 +151,10 @@ const Home = (): ReactElement => {
     }'
           className="hidden"
         >
-          <option value="">Choose</option>
-          <option selected>Revenue</option>
-          <option>Total sales</option>
-          <option>New sales</option>
-          <option>Refunds</option>
-          <option>New subscriptions</option>
-          <option>Trial conversion rate</option>
-          <option>Affiliate revenue</option>
-          <option>Affiliate clicks</option>
+          <option key={1}>Choose</option>
+          <option key={2}>Revenue</option>
+          <option key={3}>Total sales</option>
+          <option key={4}>New sales</option>
         </select>
 
         <div className="absolute top-1/2 end-3.5 -translate-y-1/2">
@@ -185,35 +181,7 @@ const Home = (): ReactElement => {
           className="my-2" // Optional: Additional Tailwind CSS classes for styling
         />
       </div>
-      <div className="hs-dropdown relative inline-flex">
-        <button
-          id="hs-dropdown-how-it-works"
-          type="button"
-          className="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-        >
-          Actions
-          <svg
-            className="hs-dropdown-open:rotate-180 size-2.5 text-gray-600"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
 
-        <div
-          className="hs-dropdown-menu hs-dropdown-open:opacity-100 w-72 hidden z-10 transition-[margin,opacity] opacity-0 duration-300 mt-2 min-w-60 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
-          aria-labelledby="hs-dropdown-how-it-works"
-        ></div>
-      </div>
       <div className="hs-dropdown relative inline-flex">
         <button
           id="hs-pro-dbrrtchmd"
