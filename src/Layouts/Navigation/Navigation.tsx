@@ -501,7 +501,7 @@ const Navigation = (): ReactElement => {
         <header
           className={`${
             isCollapsed ? "lg:ms-[96px]" : "lg:ms-[192px]"
-          } transition-all duration-300 fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700`}
+          } transition-all duration-300 fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-40 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700`}
         >
           <div
             className="flex justify-between basis-full items-center w-full py-2.5 px-2 sm:px-5"
@@ -553,41 +553,45 @@ const Navigation = (): ReactElement => {
         <aside
           id="hs-pro-sidebar"
           // className={`bg-blue-950 hs-overlay -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
-          className={`bg-gray-800 hs-overlay transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
+          className={`bg-gray-800 hs-overlay transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[40] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
             // isCollapsed ? "w-32" : "w-64"
             isCollapsed ? "w-24" : "w-48"
           }`}
         >
-          <div className="flex justify-center bg-blue-900 basis-full items-center w-full py-2.5">
-            <Link to="/">
-              <Target className="text-white/80" />
-            </Link>
-          </div>
-          <div className="p-4 pt-5 flex justify-center">
-            <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
-              {sideNavItems.slice(0, 2).map((item, index) => (
-                // <li key={index} className="">
-                //   <Link
-                //     to={item.to}
-                //     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                //   >
-                //     {item.icon}
-                //   </Link>
-                // </li>
-                <li key={index} className="">
-                  <Link
-                    to={item.to}
-                    className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  >
-                    {item.icon}
-                    <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>{item.text}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
-            {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
+          <div>
+            <div className="flex justify-center bg-gray-800 basis-full items-center w-full py-2.5">
+              <Link to="/">
+                <Target className="text-white/80" />
+              </Link>
+            </div>
+            <div className="flex flex-col justify-between">
+              <div className="p-4 pt-5 flex justify-center">
+                <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
+                  {sideNavItems.slice(0, 2).map((item, index) => (
+                    // <li key={index} className="">
+                    //   <Link
+                    //     to={item.to}
+                    //     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    //   >
+                    //     {item.icon}
+                    //   </Link>
+                    // </li>
+                    <li key={index} className="">
+                      <Link
+                        to={item.to}
+                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                      >
+                        {item.icon}
+                        <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
+                          {item.text}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
+                {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
               <div>
                 <select
                   className="px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
@@ -606,19 +610,23 @@ const Navigation = (): ReactElement => {
                 </select>
               </div>
             )} */}
-            <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
-              {sideNavItems.slice(-3).map((item, index) => (
-                <li key={index} className="">
-                  <Link
-                    to={item.to}
-                    className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  >
-                    {item.icon}
-                    <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>{item.text}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
+                  {sideNavItems.slice(-3).map((item, index) => (
+                    <li key={index} className="">
+                      <Link
+                        to={item.to}
+                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                      >
+                        {item.icon}
+                        <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
+                          {item.text}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </aside>
 
