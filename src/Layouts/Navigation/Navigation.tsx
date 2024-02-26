@@ -6,10 +6,11 @@ import {
   Menu,
   Settings,
   Sparkles,
+  Target,
   Users,
 } from "lucide-react";
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogOut";
 import useWorkSpaces from "../../hooks/useWorkSpaces";
@@ -499,7 +500,7 @@ const Navigation = (): ReactElement => {
       <div className="bg-gray-50 dark:bg-neutral-950">
         <header
           className={`${
-            isCollapsed ? "lg:ms-[128px]" : "lg:ms-[256px]"
+            isCollapsed ? "lg:ms-[96px]" : "lg:ms-[192px]"
           } transition-all duration-300 fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700`}
         >
           <div
@@ -551,38 +552,79 @@ const Navigation = (): ReactElement => {
 
         <aside
           id="hs-pro-sidebar"
-          className={` hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
-            isCollapsed ? "w-32" : "w-64"
+          // className={`bg-blue-950 hs-overlay -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
+          className={`bg-gray-800 hs-overlay transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
+            // isCollapsed ? "w-32" : "w-64"
+            isCollapsed ? "w-24" : "w-48"
           }`}
         >
-          <div className="lg:hidden absolute top-3 -end-3 z-10">
-            <button
-              type="button"
-              className="w-6 h-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-              data-hs-overlay="#hs-pro-sidebar"
-              aria-controls="hs-pro-sidebar"
-              aria-label="Toggle navigation"
-            >
-              <svg
-                className="flex-shrink-0 w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m15 18-6-6 6-6" />
-              </svg>
-            </button>
+          <div className="flex justify-center bg-blue-900 basis-full items-center w-full py-2.5">
+            <Link to="/">
+              <Target className="text-white/80" />
+            </Link>
+          </div>
+          <div className="p-4 pt-5 flex justify-center">
+            <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
+              {sideNavItems.slice(0, 2).map((item, index) => (
+                // <li key={index} className="">
+                //   <Link
+                //     to={item.to}
+                //     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                //   >
+                //     {item.icon}
+                //   </Link>
+                // </li>
+                <li key={index} className="">
+                  <Link
+                    to={item.to}
+                    className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  >
+                    {item.icon}
+                    <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>{item.text}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
+            {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
+              <div>
+                <select
+                  className="px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  value={stateSelectedWorkspace}
+                  onChange={handleChange}
+                >
+                  {workspaceData.selectedWorkSpace ? (
+                    workspaceData.availableWorkSpaces.map((item: Workspace) => (
+                      <option key={item.id} value={item.name}>
+                        {item.name}
+                      </option>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </select>
+              </div>
+            )} */}
+            <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
+              {sideNavItems.slice(-3).map((item, index) => (
+                <li key={index} className="">
+                  <Link
+                    to={item.to}
+                    className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  >
+                    {item.icon}
+                    <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>{item.text}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </aside>
 
-        <main id="content" role="main" className="lg:ps-[260px] pt-[59px]">
-          <div className="p-2 sm:p-5 md:pt-5 space-y-5">
+        <main id="content" role="main" className="h-screen lg:ps-[256px] pt-[59px]">
+          <Outlet />
+          {/* <div className="p-2 sm:p-5 md:pt-5 space-y-5">
             <div className="p-4 flex flex-col justify-center h-72 md:h-96 min-h-[calc(100vh-75px)] sm:min-h-[calc(100vh-99px)] bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
               <div className="relative h-full border border-dashed border-gray-200 rounded-xl overflow-hidden dark:border-neutral-700">
                 <div className="absolute inset-0 w-full h-full">
@@ -597,7 +639,7 @@ const Navigation = (): ReactElement => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </main>
       </div>
     </>
