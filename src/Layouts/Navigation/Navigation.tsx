@@ -1,4 +1,5 @@
 import {
+  BarChart4,
   CircleDollarSign,
   CircleUserRound,
   Inbox,
@@ -98,6 +99,11 @@ const Navigation = (): ReactElement => {
       icon: <Sparkles width="18" height="18" />,
       text: "Discover",
       to: "/premium",
+    },
+    {
+      icon: <BarChart4 width="18" height="18" />,
+      text: "Analytics",
+      to: "/analytics",
     },
     {
       icon: <Inbox width="18" height="18" />,
@@ -551,14 +557,14 @@ const Navigation = (): ReactElement => {
         </header>
 
         <aside
-          id="hs-pro-sidebar"
+          // id="hs-pro-sidebar"
           // className={`bg-blue-950 hs-overlay -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
           className={`bg-gray-800 hs-overlay transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[40] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
             // isCollapsed ? "w-32" : "w-64"
             isCollapsed ? "w-24" : "w-48"
           }`}
         >
-          <div>
+          <div className="">
             <div className="flex justify-center bg-gray-800 basis-full items-center w-full py-2.5">
               <Link to="/">
                 <Target className="text-white/80" />
@@ -567,7 +573,7 @@ const Navigation = (): ReactElement => {
             <div className="flex flex-col justify-between">
               <div className="p-4 pt-5 flex justify-center">
                 <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
-                  {sideNavItems.slice(0, 2).map((item, index) => (
+                  {sideNavItems.slice(0, 3).map((item, index) => (
                     // <li key={index} className="">
                     //   <Link
                     //     to={item.to}
@@ -590,7 +596,7 @@ const Navigation = (): ReactElement => {
                   ))}
                 </ul>
               </div>
-              <div className="flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
+              <div className="absolute bottom-0 inset-x-0 flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
                 {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
               <div>
                 <select
