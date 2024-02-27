@@ -579,7 +579,7 @@ const Navigation = (): ReactElement => {
                     <li key={index} className="">
                       <Link
                         to={item.to}
-                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         {item.icon}
                         <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
@@ -615,7 +615,7 @@ const Navigation = (): ReactElement => {
                     <li key={index} className="">
                       <Link
                         to={item.to}
-                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         {item.icon}
                         <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
