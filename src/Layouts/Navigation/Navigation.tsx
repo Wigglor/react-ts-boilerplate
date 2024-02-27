@@ -630,7 +630,16 @@ const Navigation = (): ReactElement => {
           </div>
         </aside>
 
-        <main id="content" role="main" className="h-screen lg:ps-[256px] pt-[59px]">
+        <main
+          id="content"
+          role="main"
+          className={`transition-all duration-300 transform ${
+            isCollapsed ? "lg:ms-[96px]" : "lg:ms-[192px]"
+          } h-screen pt-[59px]`}
+          // className={`${
+          //   isCollapsed ? "lg:ms-[96px]" : "lg:ms-[192px]"
+          // } h-screen lg:ps-[256px] pt-[59px]`}
+        >
           <Outlet />
           {/* <div className="p-2 sm:p-5 md:pt-5 space-y-5">
             <div className="p-4 flex flex-col justify-center h-72 md:h-96 min-h-[calc(100vh-75px)] sm:min-h-[calc(100vh-99px)] bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
