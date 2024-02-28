@@ -507,7 +507,7 @@ const Navigation = (): ReactElement => {
         <header
           className={`${
             isCollapsed ? "lg:ms-[96px]" : "lg:ms-[192px]"
-          } transition-all duration-300 fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-40 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700`}
+          } transition-all duration-300 fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-30 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700`}
         >
           <div
             className="flex justify-between basis-full items-center w-full py-2.5 px-2 sm:px-5"
@@ -559,7 +559,7 @@ const Navigation = (): ReactElement => {
         <aside
           // id="hs-pro-sidebar"
           // className={`bg-blue-950 hs-overlay -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
-          className={`bg-gray-800 hs-overlay transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[40] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
+          className={`bg-gray-800 hs-overlay transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-30 border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
             // isCollapsed ? "w-32" : "w-64"
             isCollapsed ? "w-24" : "w-48"
           }`}
