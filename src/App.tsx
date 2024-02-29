@@ -21,6 +21,7 @@ import Posts from "./pages/Posts/Posts";
 import Premium from "./pages/Premium/Premium";
 import Register from "./pages/Register/Register";
 import RegistrationConfirmation from "./pages/RegistrationConfirmation/RegistrationConfirmation";
+import ResendVerification from "./pages/ResendVerification/ResendVerification";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Onboarding from "./pages/Signup/Onboarding";
 import SocialCallback from "./pages/SocialCallback/SocialCallback";
@@ -117,6 +118,7 @@ const App = () => {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="socialcallback" element={<SocialCallback />} />
+                <Route path="resend-verification" element={<ResendVerification />} />
                 <Route path="invite" element={<Invite />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset" element={<ResetPassword />} />

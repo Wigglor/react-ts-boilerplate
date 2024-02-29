@@ -2,12 +2,14 @@ import {
   BarChart4,
   CircleDollarSign,
   CircleUserRound,
+  Home,
   Inbox,
   LogOut,
   Menu,
   Settings,
   Sparkles,
   Target,
+  User,
   Users,
 } from "lucide-react";
 import { ReactElement, useEffect, useRef, useState } from "react";
@@ -22,6 +24,11 @@ type Workspace = {
 };
 
 const Navigation = (): ReactElement => {
+  const sidebarItems = [
+    { icon: Home, text: "Home" },
+    { icon: User, text: "Profile" },
+    { icon: Settings, text: "Settings" },
+  ];
   // import {
   //   CircleDollarSign,
   //   CircleUserRound,
@@ -38,6 +45,7 @@ const Navigation = (): ReactElement => {
   const { workspaceData, updateWorkspaceData } = useWorkSpaces();
   const [stateSelectedWorkspace, setSelectedWorkspace] = useState<string>("");
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const { setAuth, auth } = useAuth();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -94,7 +102,6 @@ const Navigation = (): ReactElement => {
   };
 
   const sideNavItems = [
-    // { icon: <Sparkles width="18" height="18" />, text: "Premium", to: "/premium" },
     {
       icon: <Sparkles width="18" height="18" />,
       text: "Discover",
@@ -125,8 +132,38 @@ const Navigation = (): ReactElement => {
       text: "Billing",
       to: "/billing",
     },
-    // { icon: <Binary />, text: "Payment Status", to: "/paymentstatus" },
-    // Add other navigation items as needed
+  ];
+  const sideNavItems2 = [
+    {
+      icon: Sparkles,
+      text: "Discover",
+      to: "/premium",
+    },
+    {
+      icon: BarChart4,
+      text: "Analytics",
+      to: "/analytics",
+    },
+    {
+      icon: Inbox,
+      text: "Inboxes",
+      to: "/inboxes",
+    },
+    {
+      icon: Users,
+      text: "People",
+      to: "/organization",
+    },
+    {
+      icon: Settings,
+      text: "Account",
+      to: "/account",
+    },
+    {
+      icon: CircleDollarSign,
+      text: "Billing",
+      to: "/billing",
+    },
   ];
 
   return (
@@ -556,6 +593,35 @@ const Navigation = (): ReactElement => {
           </div>
         </header>
 
+        {/* <div
+          className={`flex flex-col ${
+            isCollapsed ? "w-20" : "w-64"
+          } h-full bg-gray-800 text-white transition-all duration-300`}
+        >
+          <button className="mx-auto my-4" onClick={() => setIsCollapsed(!isCollapsed)}>
+            Toggle
+          </button>
+          <ul className="flex-1">
+            {sidebarItems.map((item, index) => (
+              <li key={index} className="flex items-center p-2">
+                <item.icon className="w-6 h-6 mx-auto" />
+                <div
+                  className={`flex-1 overflow-hidden ${
+                    isCollapsed ? "w-0" : "w-auto"
+                  } transition-all duration-300`}
+                >
+                  <span
+                    className={`opacity-0 ${
+                      !isCollapsed ? "opacity-100 delay-100" : ""
+                    } transition-opacity duration-200`}
+                  >
+                    {item.text}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div> */}
         <aside
           // id="hs-pro-sidebar"
           // className={`bg-blue-950 hs-overlay -translate-x-full transition-all duration-300 transform hidden fixed inset-y-0 start-0 z-[60] border-e border-gray-200 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 dark:border-neutral-700  ${
@@ -573,62 +639,96 @@ const Navigation = (): ReactElement => {
             <div className="flex flex-col justify-between">
               <div className="p-4 pt-5 flex justify-center">
                 <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
-                  {sideNavItems.slice(0, 3).map((item, index) => (
-                    // <li key={index} className="">
-                    //   <Link
-                    //     to={item.to}
-                    //     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    //   >
-                    //     {item.icon}
-                    //   </Link>
-                    // </li>
-                    <li key={index} className="">
+                  {sideNavItems2.slice(0, 3).map((item, index) => (
+                    <li key={index} className="flex items-center p-2">
                       <Link
                         to={item.to}
                         className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
-                        {item.icon}
-                        <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
-                          {item.text}
-                        </span>
+                        <item.icon className="w-6 h-6 mx-auto" />
+                        <div
+                          className={`flex-1 overflow-hidden ${
+                            isCollapsed ? "w-0" : "w-auto"
+                          } transition-all duration-300`}
+                        >
+                          <span
+                            className={`opacity-0 ${
+                              !isCollapsed ? "opacity-100 delay-100" : ""
+                            } transition-opacity duration-200`}
+                          >
+                            {item.text}
+                          </span>
+                        </div>
                       </Link>
                     </li>
+                    // <li key={index} className="">
+                    //   <Link
+                    //     to={item.to}
+                    //     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    //   >
+                    //     {item.icon}
+                    //     <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
+                    //       {item.text}
+                    //     </span>
+                    //   </Link>
+                    // </li>
                   ))}
                 </ul>
               </div>
               <div className="absolute bottom-0 inset-x-0 flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
                 {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
-              <div>
-                <select
-                  className="px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                  value={stateSelectedWorkspace}
-                  onChange={handleChange}
-                >
-                  {workspaceData.selectedWorkSpace ? (
-                    workspaceData.availableWorkSpaces.map((item: Workspace) => (
-                      <option key={item.id} value={item.name}>
-                        {item.name}
-                      </option>
-                    ))
-                  ) : (
-                    <></>
-                  )}
-                </select>
-              </div>
-            )} */}
-                <ul className={` text-white/80  ${isCollapsed ? "items-center" : ""}`}>
-                  {sideNavItems.slice(-3).map((item, index) => (
-                    <li key={index} className="">
+                  <div>
+                    <select
+                      className="px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                      value={stateSelectedWorkspace}
+                      onChange={handleChange}
+                    >
+                      {workspaceData.selectedWorkSpace ? (
+                        workspaceData.availableWorkSpaces.map((item: Workspace) => (
+                          <option key={item.id} value={item.name}>
+                            {item.name}
+                          </option>
+                        ))
+                      ) : (
+                        <></>
+                      )}
+                    </select>
+                  </div>
+                )} */}
+                <ul className={` text-white/80 ${isCollapsed ? "items-center" : ""}`}>
+                  {sideNavItems2.slice(-3).map((item, index) => (
+                    <li key={index} className="flex items-center p-2">
                       <Link
                         to={item.to}
                         className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
-                        {item.icon}
-                        <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
-                          {item.text}
-                        </span>
+                        <item.icon className="w-6 h-6 mx-auto" />
+                        <div
+                          className={`flex-1 overflow-hidden ${
+                            isCollapsed ? "w-0" : "w-auto"
+                          } transition-all duration-300`}
+                        >
+                          <span
+                            className={`opacity-0 ${
+                              !isCollapsed ? "opacity-100 delay-100" : ""
+                            } transition-opacity duration-200`}
+                          >
+                            {item.text}
+                          </span>
+                        </div>
                       </Link>
                     </li>
+                    // <li key={index} className="">
+                    //   <Link
+                    //     to={item.to}
+                    //     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white/80 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    //   >
+                    //     {item.icon}
+                    //     <span className={` w-full ${isCollapsed ? "hidden" : ""}`}>
+                    //       {item.text}
+                    //     </span>
+                    //   </Link>
+                    // </li>
                   ))}
                 </ul>
               </div>
