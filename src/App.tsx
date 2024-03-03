@@ -94,16 +94,7 @@ const App = () => {
           <Route element={<NavBar />}>
             <Route path="unauthorized" element={<Unauthorized />} />
           </Route>
-          {/* <Route element={<PublicRoute />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="resend-verification" element={<ResendVerification />} />
-            <Route path="socialcallback" element={<SocialCallback />} />
-            <Route path="invite" element={<Invite />} />
-            <Route path="forgot-password" element={<ForgotPassword />} />
-            <Route path="reset" element={<ResetPassword />} />
-            <Route path="register-confirmation" element={<RegistrationConfirmation />} />
-          </Route> */}
+
           <Route element={<WorkSpaceWrapper />}>
             {/* <Route path="login" element={<Login />} /> */}
             <Route element={<PersistLogin />}>
