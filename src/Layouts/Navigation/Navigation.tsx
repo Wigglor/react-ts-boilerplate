@@ -675,8 +675,9 @@ const Navigation = (): ReactElement => {
                   ))}
                 </ul>
               </div>
-              <div className="absolute bottom-0 inset-x-0 flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
-                {/* {workspaceData.selectedWorkSpace.id.length > 0 && (
+              <div className="absolute bottom-0 inset-x-0 p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent">
+                {/* <div className="absolute bottom-0 inset-x-0 flex justify-center p-4 pt-5 mt-3 mb-1.5 border-t border-gray-200 first:border-transparent first:pt-0 dark:border-neutral-700 dark:first:border-transparent"> */}
+                {workspaceData.selectedWorkSpace.id.length > 0 && (
                   <div>
                     <select
                       className="px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
@@ -694,7 +695,7 @@ const Navigation = (): ReactElement => {
                       )}
                     </select>
                   </div>
-                )} */}
+                )}
                 <ul className={` text-white/80 ${isCollapsed ? "items-center" : ""}`}>
                   {sideNavItems2.slice(-3).map((item, index) => (
                     <li key={index} className="flex items-center p-2">
