@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import WorkSpaceWrapper from "./components/WorkSpaceWrapper";
 import Account from "./pages/Account/Account";
+import Analytics from "./pages/Analytics/Analytics";
 import Billing from "./pages/Billing/Billing";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
@@ -120,7 +121,7 @@ const App = () => {
                   <Route path="" element={<Home />} />
                   <Route path="paymentstatus" element={<PaymentStatus />} />
                   <Route path="inboxes" element={<Inboxes />} />
-                  <Route path="analytics" element={<Inboxes />} />
+                  <Route path="analytics" element={<Analytics />} />
                   <Route path="account" element={<Account />} />
                   <Route
                     path="organization"
