@@ -120,6 +120,7 @@ const App = () => {
                   <Route path="" element={<Home />} />
                   <Route path="paymentstatus" element={<PaymentStatus />} />
                   <Route path="inboxes" element={<Inboxes />} />
+                  <Route path="analytics" element={<Inboxes />} />
                   <Route path="account" element={<Account />} />
                   <Route
                     path="organization"
