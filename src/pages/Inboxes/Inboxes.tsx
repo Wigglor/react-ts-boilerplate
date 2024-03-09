@@ -1,9 +1,21 @@
 import { ReactElement, useState } from "react";
 import { createPortal } from "react-dom";
+import { useForm } from "react-hook-form";
+
+type FormData = {
+  inbox: string;
+};
 
 const Inboxes = (): ReactElement => {
   const [addInbox, setAddInbox] = useState<boolean>(false);
-
+  const {
+    // setValue,
+    handleSubmit,
+    register,
+    // control,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>();
   const toggleInbox = () => {
     setAddInbox((prev) => !prev);
   };
@@ -26,10 +38,10 @@ const Inboxes = (): ReactElement => {
                       )} */}
                       <div className="text-center">
                         <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-                          Invite User
+                          Create an Inbox
                         </h1>
                         <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                          Provide the email you want to send an invite to
+                          Name the inbox - receive an email email alias
                         </p>
                       </div>
 
@@ -39,28 +51,28 @@ const Inboxes = (): ReactElement => {
                           <div className="grid gap-y-4">
                             <div>
                               <label htmlFor="email" className="block text-sm mb-2 dark:text-white">
-                                Email address
+                                Name Inbox
                               </label>
-                              {/* <input
-                                type="email"
-                                id="email"
+                              <input
+                                type="text"
+                                id="inbox"
                                 className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                                 required
                                 aria-describedby="email-error"
-                                {...register("email", {
+                                {...register("inbox", {
                                   required: "required",
-                                  pattern: {
-                                    value: /\S+@\S+\.\S+/,
-                                    message: "Entered value does not match email format",
+                                  minLength: {
+                                    value: 2,
+                                    message: "min length is 2",
                                   },
                                 })}
-                              ></input> */}
+                              ></input>
 
-                              {/* {errors.email && (
+                              {errors.inbox && (
                                 <span className="bg-red-600 text-white p-2" role="alert">
-                                  {errors.email.message}
+                                  {errors.inbox.message}
                                 </span>
-                              )} */}
+                              )}
                               <div className="relative">
                                 <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                                   <svg
