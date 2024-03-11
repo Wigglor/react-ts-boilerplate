@@ -1,13 +1,37 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+
+interface ApiResponse<T> {
+  status: number;
+  success: boolean;
+  message: string;
+  data: T;
+}
 
 type FormData = {
   inbox: string;
 };
 
+type Alias = {
+  data: {
+    alias: {
+      id: string;
+      createdAt: string;
+      updatedAt: string;
+      name: string;
+      alias: string;
+      domainId: string;
+    }[];
+  };
+};
+
 const Inboxes = (): ReactElement => {
   const [addInbox, setAddInbox] = useState<boolean>(false);
+  const [aliasStatus, setAliasStatus] = useState<boolean>(false);
+  const [aliases, setAliases] = useState<Alias>();
+  const axiosPrivate = useAxiosPrivate();
   const {
     // setValue,
     handleSubmit,
@@ -19,6 +43,38 @@ const Inboxes = (): ReactElement => {
   const toggleInbox = () => {
     setAddInbox((prev) => !prev);
   };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const getAliases = async () => {
+      try {
+        const response: ApiResponse<Alias> = await axiosPrivate.get(
+          "/get-aliases",
+
+          {
+            signal: controller.signal,
+            withCredentials: true,
+          },
+        );
+
+        if (response.data.data.alias !== null) {
+          console.log("domain IS NOT null");
+          setAliasStatus(true);
+          setAliases(response.data);
+        } else if (response.data?.data === null) {
+          console.log("domain IS null");
+        }
+        // console.log(JSON.stringify(response.data.data));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getAliases();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   return (
     <>
@@ -105,7 +161,7 @@ const Inboxes = (): ReactElement => {
                                 type="submit"
                                 className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                               >
-                                Invite User
+                                Create Inbox
                               </button>
                             </div>
                           </div>
@@ -156,42 +212,31 @@ const Inboxes = (): ReactElement => {
               </div>
             </a>
           </div>
-          <div className="w-32">
-            <a
-              className="p-4 group flex flex-col bg-white border border-gray-200 rounded-xl focus:outline-none dark:bg-neutral-900 dark:border-neutral-700"
-              href="#"
-            >
-              <div className="mb-4 flex flex-col justify-center items-center h-full">
-                <span className="flex justify-center items-center h-12 w-12 xl:h-16 xl:w-16 mx-auto border-2 border-dotted border-gray-300 text-gray-400 rounded-2xl dark:border-neutral-700 dark:text-neutral-500">
-                  <svg
-                    className="flex-shrink-0 w-5 h-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="M12 5v14" />
-                  </svg>
-                </span>
-              </div>
-              <div className="text-center mt-auto">
-                <p className="truncate text-xs xl:text-sm font-medium text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-neutral-400 dark:group-focus:text-neutral-400">
-                  Import Emails
-                </p>
-              </div>
-            </a>
-          </div>
         </div>
       </div>
 
       <div className="pb-7 px-1 sm:px-5 sm:pb-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-5"></div>
+        {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-5"> */}
+        <div className="">
+          {aliasStatus ? (
+            <h1 className="bg-gray-800 p-6 z-50">
+              {aliases && (
+                <>
+                  <div>
+                    {aliases.data.alias.map((item) => (
+                      <div className="text-gray-100" key={item.id}>
+                        <p>{item.alias}</p>
+                        <p>{item.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </h1>
+          ) : (
+            <h2 className="">You have no inboxes yet. Please go ahead and add some</h2>
+          )}
+        </div>
       </div>
     </>
   );
