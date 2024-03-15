@@ -1591,7 +1591,7 @@ const Inboxes = (): ReactElement => {
           </div>
         </div>
       </div>
-
+      {/* separate here */}
       <div
         id="hs-pro-dupfmdl"
         className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none [--close-when-click-inside:true] dark:hs-overlay-backdrop-open:bg-neutral-900/90"
