@@ -215,30 +215,6 @@ const Inboxes = (): ReactElement => {
         </div>
       </div>
 
-      <div className="pb-7 px-1 sm:px-5 sm:pb-10">
-        {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-5"> */}
-        <div className="">
-          {aliasStatus ? (
-            <h1 className="bg-gray-800 p-6 z-50">
-              {aliases && (
-                <>
-                  <div>
-                    {aliases.data.alias.map((item) => (
-                      <div className="text-gray-100" key={item.id}>
-                        <p>{item.alias}</p>
-                        <p>{item.name}</p>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </h1>
-          ) : (
-            <h2 className="">You have no inboxes yet. Please go ahead and add some</h2>
-          )}
-        </div>
-      </div>
-
       <div className="xl:p-5 space-y-4 flex flex-col xl:bg-white xl:border xl:border-gray-200 xl:shadow-sm xl:rounded-xl dark:xl:bg-neutral-800 dark:xl:border-neutral-700">
         <div className="flex justify-between items-center gap-x-2">
           <h2 className="font-semibold text-gray-800 dark:text-neutral-200">9 results</h2>
@@ -1066,122 +1042,402 @@ const Inboxes = (): ReactElement => {
             </div>
           </div>
         </div>
-
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-5">
-          <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-            <div className="relative group">
-              <div className="h-36 sm:h-[170px] flex flex-col justify-center items-center">
-                <svg
-                  className="flex-shrink-0 w-16 h-16"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.3333 32C14.2773 32 16.6667 29.6106 16.6667 26.6666V21.3333H11.3333C8.38933 21.3333 6 23.7226 6 26.6666C6 29.6106 8.38933 32 11.3333 32Z"
-                    fill="#0ACF83"
-                  />
-                  <path
-                    d="M6 16C6 13.056 8.38933 10.6667 11.3333 10.6667H16.6667V21.3334H11.3333C8.38933 21.3334 6 18.944 6 16Z"
-                    fill="#A259FF"
-                  />
-                  <path
-                    d="M6 5.33333C6 2.38933 8.38933 0 11.3333 0H16.6667V10.6667H11.3333C8.38933 10.6667 6 8.27733 6 5.33333Z"
-                    fill="#F24E1E"
-                  />
-                  <path
-                    d="M16.6667 0H22C24.944 0 27.3334 2.38933 27.3334 5.33333C27.3334 8.27733 24.944 10.6667 22 10.6667H16.6667V0Z"
-                    fill="#FF7262"
-                  />
-                  <path
-                    d="M27.3334 16C27.3334 18.944 24.944 21.3334 22 21.3334C19.056 21.3334 16.6667 18.944 16.6667 16C16.6667 13.056 19.056 10.6667 22 10.6667C24.944 10.6667 27.3334 13.056 27.3334 16Z"
-                    fill="#1ABCFE"
-                  />
-                </svg>
-              </div>
-
-              <div className="absolute top-3 end-3 group-hover:opacity-100 lg:opacity-0">
-                <div className="p-0.5 sm:p-1 inline-flex items-center bg-white border border-gray-200 lg:shadow rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
-                  <div className="hs-tooltip inline-block">
-                    <a
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      href="https://images.unsplash.com/photo-1635776062360-af423602aff3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-                      target="_blank"
-                      download
-                      rel="noreferrer"
-                    >
+        <div className="pb-7 px-1 sm:px-5 sm:pb-10">
+          {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-5"> */}
+          <div className="">
+            {aliasStatus ? (
+              <h1 className="bg-gray-800 p-6 z-50">
+                {aliases && (
+                  <>
+                    <div>
+                      {aliases.data.alias.map((item) => (
+                        <div className="text-gray-100" key={item.id}>
+                          <p>{item.alias}</p>
+                          <p>{item.name}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </h1>
+            ) : (
+              // <h2 className="">You have no inboxes yet. Please go ahead and add some</h2>
+              <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-5">
+                <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                  <div className="relative group">
+                    <div className="h-36 sm:h-[170px] flex flex-col justify-center items-center">
                       <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
+                        className="flex-shrink-0 w-16 h-16"
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
                         fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" x2="12" y1="15" y2="3" />
+                        <path
+                          d="M11.3333 32C14.2773 32 16.6667 29.6106 16.6667 26.6666V21.3333H11.3333C8.38933 21.3333 6 23.7226 6 26.6666C6 29.6106 8.38933 32 11.3333 32Z"
+                          fill="#0ACF83"
+                        />
+                        <path
+                          d="M6 16C6 13.056 8.38933 10.6667 11.3333 10.6667H16.6667V21.3334H11.3333C8.38933 21.3334 6 18.944 6 16Z"
+                          fill="#A259FF"
+                        />
+                        <path
+                          d="M6 5.33333C6 2.38933 8.38933 0 11.3333 0H16.6667V10.6667H11.3333C8.38933 10.6667 6 8.27733 6 5.33333Z"
+                          fill="#F24E1E"
+                        />
+                        <path
+                          d="M16.6667 0H22C24.944 0 27.3334 2.38933 27.3334 5.33333C27.3334 8.27733 24.944 10.6667 22 10.6667H16.6667V0Z"
+                          fill="#FF7262"
+                        />
+                        <path
+                          d="M27.3334 16C27.3334 18.944 24.944 21.3334 22 21.3334C19.056 21.3334 16.6667 18.944 16.6667 16C16.6667 13.056 19.056 10.6667 22 10.6667C24.944 10.6667 27.3334 13.056 27.3334 16Z"
+                          fill="#1ABCFE"
+                        />
                       </svg>
-                    </a>
+                    </div>
 
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Download
-                    </span>
+                    <div className="absolute top-3 end-3 group-hover:opacity-100 lg:opacity-0">
+                      <div className="p-0.5 sm:p-1 inline-flex items-center bg-white border border-gray-200 lg:shadow rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+                        <div className="hs-tooltip inline-block">
+                          <a
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            href="https://images.unsplash.com/photo-1635776062360-af423602aff3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
+                            target="_blank"
+                            download
+                            rel="noreferrer"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="7 10 12 15 17 10" />
+                              <line x1="12" x2="12" y1="15" y2="3" />
+                            </svg>
+                          </a>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Download
+                          </span>
+                        </div>
+
+                        <div className="hs-tooltip inline-block">
+                          <button
+                            type="button"
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            data-hs-overlay="#hs-pro-dupfmsh"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <circle cx="18" cy="5" r="3" />
+                              <circle cx="6" cy="12" r="3" />
+                              <circle cx="18" cy="19" r="3" />
+                              <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                              <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+                            </svg>
+                          </button>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Share
+                          </span>
+                        </div>
+
+                        <div className="w-px h-5 mx-1 bg-gray-200 dark:bg-neutral-700"></div>
+
+                        <div className="hs-tooltip inline-block">
+                          <button
+                            type="button"
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-red-600 hover:bg-red-100  disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-red-100 dark:text-red-500 dark:hover:bg-red-500/20 dark:focus:bg-red-500/20"
+                            data-hs-overlay="#hs-pro-dupfmdl"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M3 6h18" />
+                              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                              <line x1="10" x2="10" y1="11" y2="17" />
+                              <line x1="14" x2="14" y1="11" y2="17" />
+                            </svg>
+                          </button>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Delete
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="hs-tooltip inline-block">
-                    <button
-                      type="button"
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      data-hs-overlay="#hs-pro-dupfmsh"
-                    >
+                  <div className="p-3 flex items-center gap-x-3">
+                    <span className="flex flex-shrink-0 justify-center items-center w-7 h-7 sm:w-[38px] sm:h-[38px] bg-white border border-gray-200 rounded-lg sm:rounded-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300">
                       <svg
-                        className="flex-shrink-0 w-4 h-4"
+                        className="flex-shrink-0 w-3.5 h-3.5 sm:w-5 sm:h-5"
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
                       >
-                        <circle cx="18" cy="5" r="3" />
-                        <circle cx="6" cy="12" r="3" />
-                        <circle cx="18" cy="19" r="3" />
-                        <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
-                        <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+                        <path
+                          fillRule="evenodd"
+                          d="M14 4.5V14a2 2 0 0 1-2 2h-2v-1h2a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.928 15.849v-3.337h1.136v-.662H0v.662h1.134v3.337h.794Zm4.689-3.999h-.894L4.9 13.289h-.035l-.832-1.439h-.932l1.228 1.983-1.24 2.016h.862l.853-1.415h.035l.85 1.415h.907l-1.253-1.992 1.274-2.007Zm1.93.662v3.337h-.794v-3.337H6.619v-.662h3.064v.662H8.546Z"
+                        />
                       </svg>
-                    </button>
-
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Share
                     </span>
+
+                    <div className="grow truncate">
+                      <p className="block truncate text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                        Preline UI Figma.fig
+                      </p>
+                      <p className="block truncate text-xs text-gray-500 dark:text-neutral-500">
+                        James Aug 5th, 2021
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                  <div className="relative group">
+                    <div className="h-36 sm:h-[170px] flex flex-col justify-center items-center">
+                      <svg
+                        className="flex-shrink-0 w-16 h-16"
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M20.0324 1.91994H9.45071C9.09999 1.91994 8.76367 2.05926 8.51567 2.30725C8.26767 2.55523 8.12839 2.89158 8.12839 3.24228V8.86395L20.0324 15.8079L25.9844 18.3197L31.9364 15.8079V8.86395L20.0324 1.91994Z"
+                          fill="#21A366"
+                        />
+                        <path
+                          d="M8.12839 8.86395H20.0324V15.8079H8.12839V8.86395Z"
+                          fill="#107C41"
+                        />
+                        <path
+                          d="M30.614 1.91994H20.0324V8.86395H31.9364V3.24228C31.9364 2.89158 31.7971 2.55523 31.5491 2.30725C31.3011 2.05926 30.9647 1.91994 30.614 1.91994Z"
+                          fill="#33C481"
+                        />
+                        <path
+                          d="M20.0324 15.8079H8.12839V28.3736C8.12839 28.7243 8.26767 29.0607 8.51567 29.3087C8.76367 29.5567 9.09999 29.6959 9.45071 29.6959H30.6141C30.9647 29.6959 31.3011 29.5567 31.549 29.3087C31.797 29.0607 31.9364 28.7243 31.9364 28.3736V22.7519L20.0324 15.8079Z"
+                          fill="#185C37"
+                        />
+                        <path
+                          d="M20.0324 15.8079H31.9364V22.7519H20.0324V15.8079Z"
+                          fill="#107C41"
+                        />
+                        <path
+                          opacity="0.1"
+                          d="M16.7261 6.87994H8.12839V25.7279H16.7261C17.0764 25.7269 17.4121 25.5872 17.6599 25.3395C17.9077 25.0917 18.0473 24.756 18.0484 24.4056V8.20226C18.0473 7.8519 17.9077 7.51616 17.6599 7.2684C17.4121 7.02064 17.0764 6.88099 16.7261 6.87994Z"
+                          fill="black"
+                        />
+                        <path
+                          opacity="0.2"
+                          d="M15.7341 7.87194H8.12839V26.7199H15.7341C16.0844 26.7189 16.4201 26.5792 16.6679 26.3315C16.9157 26.0837 17.0553 25.748 17.0564 25.3976V9.19426C17.0553 8.84386 16.9157 8.50818 16.6679 8.26042C16.4201 8.01266 16.0844 7.87299 15.7341 7.87194Z"
+                          fill="black"
+                        />
+                        <path
+                          opacity="0.2"
+                          d="M15.7341 7.87194H8.12839V24.7359H15.7341C16.0844 24.7349 16.4201 24.5952 16.6679 24.3475C16.9157 24.0997 17.0553 23.764 17.0564 23.4136V9.19426C17.0553 8.84386 16.9157 8.50818 16.6679 8.26042C16.4201 8.01266 16.0844 7.87299 15.7341 7.87194Z"
+                          fill="black"
+                        />
+                        <path
+                          opacity="0.2"
+                          d="M14.7421 7.87194H8.12839V24.7359H14.7421C15.0924 24.7349 15.4281 24.5952 15.6759 24.3475C15.9237 24.0997 16.0633 23.764 16.0644 23.4136V9.19426C16.0633 8.84386 15.9237 8.50818 15.6759 8.26042C15.4281 8.01266 15.0924 7.87299 14.7421 7.87194Z"
+                          fill="black"
+                        />
+                        <path
+                          d="M1.51472 7.87194H14.7421C15.0927 7.87194 15.4291 8.01122 15.6771 8.25922C15.925 8.50722 16.0644 8.84354 16.0644 9.19426V22.4216C16.0644 22.7723 15.925 23.1087 15.6771 23.3567C15.4291 23.6047 15.0927 23.7439 14.7421 23.7439H1.51472C1.16402 23.7439 0.827672 23.6047 0.579686 23.3567C0.3317 23.1087 0.192383 22.7723 0.192383 22.4216V9.19426C0.192383 8.84354 0.3317 8.50722 0.579686 8.25922C0.827672 8.01122 1.16402 7.87194 1.51472 7.87194Z"
+                          fill="#107C41"
+                        />
+                        <path
+                          d="M3.69711 20.7679L6.90722 15.794L3.96694 10.8479H6.33286L7.93791 14.0095C8.08536 14.3091 8.18688 14.5326 8.24248 14.68H8.26328C8.36912 14.4407 8.47984 14.2079 8.5956 13.9817L10.3108 10.8479H12.4822L9.46656 15.7663L12.5586 20.7679H10.2473L8.3932 17.2959C8.30592 17.148 8.23184 16.9927 8.172 16.8317H8.14424C8.09016 16.9891 8.01824 17.1399 7.92998 17.2811L6.02236 20.7679H3.69711Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </div>
+
+                    <div className="absolute top-3 end-3 group-hover:opacity-100 lg:opacity-0">
+                      <div className="p-0.5 sm:p-1 inline-flex items-center bg-white border border-gray-200 lg:shadow rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+                        <div className="hs-tooltip inline-block">
+                          <a
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            href="https://images.unsplash.com/photo-1635776062360-af423602aff3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
+                            target="_blank"
+                            download
+                            rel="noreferrer"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="7 10 12 15 17 10" />
+                              <line x1="12" x2="12" y1="15" y2="3" />
+                            </svg>
+                          </a>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Download
+                          </span>
+                        </div>
+
+                        <div className="hs-tooltip inline-block">
+                          <button
+                            type="button"
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            data-hs-overlay="#hs-pro-dupfmsh"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <circle cx="18" cy="5" r="3" />
+                              <circle cx="6" cy="12" r="3" />
+                              <circle cx="18" cy="19" r="3" />
+                              <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                              <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+                            </svg>
+                          </button>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Share
+                          </span>
+                        </div>
+
+                        <div className="w-px h-5 mx-1 bg-gray-200 dark:bg-neutral-700"></div>
+
+                        <div className="hs-tooltip inline-block">
+                          <button
+                            type="button"
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-red-600 hover:bg-red-100  disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-red-100 dark:text-red-500 dark:hover:bg-red-500/20 dark:focus:bg-red-500/20"
+                            data-hs-overlay="#hs-pro-dupfmdl"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M3 6h18" />
+                              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                              <line x1="10" x2="10" y1="11" y2="17" />
+                              <line x1="14" x2="14" y1="11" y2="17" />
+                            </svg>
+                          </button>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Delete
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="w-px h-5 mx-1 bg-gray-200 dark:bg-neutral-700"></div>
-
-                  <div className="hs-tooltip inline-block">
-                    <button
-                      type="button"
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-red-600 hover:bg-red-100  disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-red-100 dark:text-red-500 dark:hover:bg-red-500/20 dark:focus:bg-red-500/20"
-                      data-hs-overlay="#hs-pro-dupfmdl"
-                    >
+                  <div className="p-3 flex items-center gap-x-3">
+                    <span className="flex flex-shrink-0 justify-center items-center w-7 h-7 sm:w-[38px] sm:h-[38px] bg-white border border-gray-200 rounded-lg sm:rounded-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300">
                       <svg
-                        className="flex-shrink-0 w-4 h-4"
+                        className="flex-shrink-0 w-3.5 h-3.5 sm:w-5 sm:h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M14 4.5V14a2 2 0 0 1-2 2h-2v-1h2a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.928 15.849v-3.337h1.136v-.662H0v.662h1.134v3.337h.794Zm4.689-3.999h-.894L4.9 13.289h-.035l-.832-1.439h-.932l1.228 1.983-1.24 2.016h.862l.853-1.415h.035l.85 1.415h.907l-1.253-1.992 1.274-2.007Zm1.93.662v3.337h-.794v-3.337H6.619v-.662h3.064v.662H8.546Z"
+                        />
+                      </svg>
+                    </span>
+
+                    <div className="grow truncate">
+                      <p className="block truncate text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                        weekly_report.xls
+                      </p>
+                      <p className="block truncate text-xs text-gray-500 dark:text-neutral-500">
+                        James Oct 17th, 2021
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                  <div className="relative group">
+                    <div className="h-36 sm:h-[170px] flex flex-col justify-center items-center">
+                      <svg
+                        className="flex-shrink-0 w-12 h-12 text-gray-400 dark:text-neutral-600"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
@@ -1192,402 +1448,150 @@ const Inboxes = (): ReactElement => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
-                        <path d="M3 6h18" />
-                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                        <line x1="10" x2="10" y1="11" y2="17" />
-                        <line x1="14" x2="14" y1="11" y2="17" />
+                        <line x1="21" x2="3" y1="6" y2="6" />
+                        <line x1="15" x2="3" y1="12" y2="12" />
+                        <line x1="17" x2="3" y1="18" y2="18" />
                       </svg>
-                    </button>
+                    </div>
 
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Delete
+                    <div className="absolute top-3 end-3 group-hover:opacity-100 lg:opacity-0">
+                      <div className="p-0.5 sm:p-1 inline-flex items-center bg-white border border-gray-200 lg:shadow rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+                        <div className="hs-tooltip inline-block">
+                          <a
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            href="https://images.unsplash.com/photo-1635776062360-af423602aff3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
+                            target="_blank"
+                            download
+                            rel="noreferrer"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="7 10 12 15 17 10" />
+                              <line x1="12" x2="12" y1="15" y2="3" />
+                            </svg>
+                          </a>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Download
+                          </span>
+                        </div>
+
+                        <div className="hs-tooltip inline-block">
+                          <button
+                            type="button"
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            data-hs-overlay="#hs-pro-dupfmsh"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <circle cx="18" cy="5" r="3" />
+                              <circle cx="6" cy="12" r="3" />
+                              <circle cx="18" cy="19" r="3" />
+                              <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                              <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+                            </svg>
+                          </button>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Share
+                          </span>
+                        </div>
+
+                        <div className="w-px h-5 mx-1 bg-gray-200 dark:bg-neutral-700"></div>
+
+                        <div className="hs-tooltip inline-block">
+                          <button
+                            type="button"
+                            className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-red-600 hover:bg-red-100  disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-red-100 dark:text-red-500 dark:hover:bg-red-500/20 dark:focus:bg-red-500/20"
+                            data-hs-overlay="#hs-pro-dupfmdl"
+                          >
+                            <svg
+                              className="flex-shrink-0 w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M3 6h18" />
+                              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                              <line x1="10" x2="10" y1="11" y2="17" />
+                              <line x1="14" x2="14" y1="11" y2="17" />
+                            </svg>
+                          </button>
+
+                          <span
+                            className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
+                            role="tooltip"
+                          >
+                            Delete
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-3 flex items-center gap-x-3">
+                    <span className="flex flex-shrink-0 justify-center items-center w-7 h-7 sm:w-[38px] sm:h-[38px] bg-white border border-gray-200 rounded-lg sm:rounded-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300">
+                      <svg
+                        className="flex-shrink-0 w-3.5 h-3.5 sm:w-5 sm:h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM4.151 15.29a1.176 1.176 0 0 1-.111-.449h.764a.578.578 0 0 0 .255.384c.07.049.154.087.25.114.095.028.201.041.319.041.164 0 .301-.023.413-.07a.559.559 0 0 0 .255-.193.507.507 0 0 0 .084-.29.387.387 0 0 0-.152-.326c-.101-.08-.256-.144-.463-.193l-.618-.143a1.72 1.72 0 0 1-.539-.214 1.001 1.001 0 0 1-.352-.367 1.068 1.068 0 0 1-.123-.524c0-.244.064-.457.19-.639.128-.181.304-.322.528-.422.225-.1.484-.149.777-.149.304 0 .564.05.779.152.217.102.384.239.5.41.12.17.186.359.2.566h-.75a.56.56 0 0 0-.12-.258.624.624 0 0 0-.246-.181.923.923 0 0 0-.37-.068c-.216 0-.387.05-.512.152a.472.472 0 0 0-.185.384c0 .121.048.22.144.3a.97.97 0 0 0 .404.175l.621.143c.217.05.406.12.566.211a1 1 0 0 1 .375.358c.09.148.135.335.135.56 0 .247-.063.466-.188.656a1.216 1.216 0 0 1-.539.439c-.234.105-.52.158-.858.158-.254 0-.476-.03-.665-.09a1.404 1.404 0 0 1-.478-.252 1.13 1.13 0 0 1-.29-.375Zm-3.104-.033a1.32 1.32 0 0 1-.082-.466h.764a.576.576 0 0 0 .074.27.499.499 0 0 0 .454.246c.19 0 .33-.055.422-.164.091-.11.137-.265.137-.466v-2.745h.791v2.725c0 .44-.119.774-.357 1.005-.237.23-.565.345-.985.345a1.59 1.59 0 0 1-.568-.094 1.145 1.145 0 0 1-.407-.266 1.14 1.14 0 0 1-.243-.39Zm9.091-1.585v.522c0 .256-.039.47-.117.641a.862.862 0 0 1-.322.387.877.877 0 0 1-.47.126.883.883 0 0 1-.47-.126.87.87 0 0 1-.32-.387 1.55 1.55 0 0 1-.117-.641v-.522c0-.258.039-.471.117-.641a.87.87 0 0 1 .32-.387.868.868 0 0 1 .47-.129c.177 0 .333.043.47.129a.862.862 0 0 1 .322.387c.078.17.117.383.117.641Zm.803.519v-.513c0-.377-.069-.701-.205-.973a1.46 1.46 0 0 0-.59-.63c-.253-.146-.559-.22-.916-.22-.356 0-.662.074-.92.22a1.441 1.441 0 0 0-.589.628c-.137.271-.205.596-.205.975v.513c0 .375.068.699.205.973.137.271.333.48.589.626.258.145.564.217.92.217.357 0 .663-.072.917-.217.256-.146.452-.355.589-.626.136-.274.205-.598.205-.973Zm1.29-.935v2.675h-.746v-3.999h.662l1.752 2.66h.032v-2.66h.75v4h-.656l-1.761-2.676h-.032Z"
+                        />
+                      </svg>
                     </span>
+
+                    <div className="grow truncate">
+                      <p className="block truncate text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                        gitignore.json
+                      </p>
+                      <p className="block truncate text-xs text-gray-500 dark:text-neutral-500">
+                        James Apr 21st, 2020
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="p-3 flex items-center gap-x-3">
-              <span className="flex flex-shrink-0 justify-center items-center w-7 h-7 sm:w-[38px] sm:h-[38px] bg-white border border-gray-200 rounded-lg sm:rounded-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300">
-                <svg
-                  className="flex-shrink-0 w-3.5 h-3.5 sm:w-5 sm:h-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M14 4.5V14a2 2 0 0 1-2 2h-2v-1h2a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.928 15.849v-3.337h1.136v-.662H0v.662h1.134v3.337h.794Zm4.689-3.999h-.894L4.9 13.289h-.035l-.832-1.439h-.932l1.228 1.983-1.24 2.016h.862l.853-1.415h.035l.85 1.415h.907l-1.253-1.992 1.274-2.007Zm1.93.662v3.337h-.794v-3.337H6.619v-.662h3.064v.662H8.546Z"
-                  />
-                </svg>
-              </span>
-
-              <div className="grow truncate">
-                <p className="block truncate text-sm font-semibold text-gray-800 dark:text-neutral-200">
-                  Preline UI Figma.fig
-                </p>
-                <p className="block truncate text-xs text-gray-500 dark:text-neutral-500">
-                  James Aug 5th, 2021
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-            <div className="relative group">
-              <div className="h-36 sm:h-[170px] flex flex-col justify-center items-center">
-                <svg
-                  className="flex-shrink-0 w-16 h-16"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M20.0324 1.91994H9.45071C9.09999 1.91994 8.76367 2.05926 8.51567 2.30725C8.26767 2.55523 8.12839 2.89158 8.12839 3.24228V8.86395L20.0324 15.8079L25.9844 18.3197L31.9364 15.8079V8.86395L20.0324 1.91994Z"
-                    fill="#21A366"
-                  />
-                  <path d="M8.12839 8.86395H20.0324V15.8079H8.12839V8.86395Z" fill="#107C41" />
-                  <path
-                    d="M30.614 1.91994H20.0324V8.86395H31.9364V3.24228C31.9364 2.89158 31.7971 2.55523 31.5491 2.30725C31.3011 2.05926 30.9647 1.91994 30.614 1.91994Z"
-                    fill="#33C481"
-                  />
-                  <path
-                    d="M20.0324 15.8079H8.12839V28.3736C8.12839 28.7243 8.26767 29.0607 8.51567 29.3087C8.76367 29.5567 9.09999 29.6959 9.45071 29.6959H30.6141C30.9647 29.6959 31.3011 29.5567 31.549 29.3087C31.797 29.0607 31.9364 28.7243 31.9364 28.3736V22.7519L20.0324 15.8079Z"
-                    fill="#185C37"
-                  />
-                  <path d="M20.0324 15.8079H31.9364V22.7519H20.0324V15.8079Z" fill="#107C41" />
-                  <path
-                    opacity="0.1"
-                    d="M16.7261 6.87994H8.12839V25.7279H16.7261C17.0764 25.7269 17.4121 25.5872 17.6599 25.3395C17.9077 25.0917 18.0473 24.756 18.0484 24.4056V8.20226C18.0473 7.8519 17.9077 7.51616 17.6599 7.2684C17.4121 7.02064 17.0764 6.88099 16.7261 6.87994Z"
-                    fill="black"
-                  />
-                  <path
-                    opacity="0.2"
-                    d="M15.7341 7.87194H8.12839V26.7199H15.7341C16.0844 26.7189 16.4201 26.5792 16.6679 26.3315C16.9157 26.0837 17.0553 25.748 17.0564 25.3976V9.19426C17.0553 8.84386 16.9157 8.50818 16.6679 8.26042C16.4201 8.01266 16.0844 7.87299 15.7341 7.87194Z"
-                    fill="black"
-                  />
-                  <path
-                    opacity="0.2"
-                    d="M15.7341 7.87194H8.12839V24.7359H15.7341C16.0844 24.7349 16.4201 24.5952 16.6679 24.3475C16.9157 24.0997 17.0553 23.764 17.0564 23.4136V9.19426C17.0553 8.84386 16.9157 8.50818 16.6679 8.26042C16.4201 8.01266 16.0844 7.87299 15.7341 7.87194Z"
-                    fill="black"
-                  />
-                  <path
-                    opacity="0.2"
-                    d="M14.7421 7.87194H8.12839V24.7359H14.7421C15.0924 24.7349 15.4281 24.5952 15.6759 24.3475C15.9237 24.0997 16.0633 23.764 16.0644 23.4136V9.19426C16.0633 8.84386 15.9237 8.50818 15.6759 8.26042C15.4281 8.01266 15.0924 7.87299 14.7421 7.87194Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M1.51472 7.87194H14.7421C15.0927 7.87194 15.4291 8.01122 15.6771 8.25922C15.925 8.50722 16.0644 8.84354 16.0644 9.19426V22.4216C16.0644 22.7723 15.925 23.1087 15.6771 23.3567C15.4291 23.6047 15.0927 23.7439 14.7421 23.7439H1.51472C1.16402 23.7439 0.827672 23.6047 0.579686 23.3567C0.3317 23.1087 0.192383 22.7723 0.192383 22.4216V9.19426C0.192383 8.84354 0.3317 8.50722 0.579686 8.25922C0.827672 8.01122 1.16402 7.87194 1.51472 7.87194Z"
-                    fill="#107C41"
-                  />
-                  <path
-                    d="M3.69711 20.7679L6.90722 15.794L3.96694 10.8479H6.33286L7.93791 14.0095C8.08536 14.3091 8.18688 14.5326 8.24248 14.68H8.26328C8.36912 14.4407 8.47984 14.2079 8.5956 13.9817L10.3108 10.8479H12.4822L9.46656 15.7663L12.5586 20.7679H10.2473L8.3932 17.2959C8.30592 17.148 8.23184 16.9927 8.172 16.8317H8.14424C8.09016 16.9891 8.01824 17.1399 7.92998 17.2811L6.02236 20.7679H3.69711Z"
-                    fill="white"
-                  />
-                </svg>
-              </div>
-
-              <div className="absolute top-3 end-3 group-hover:opacity-100 lg:opacity-0">
-                <div className="p-0.5 sm:p-1 inline-flex items-center bg-white border border-gray-200 lg:shadow rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
-                  <div className="hs-tooltip inline-block">
-                    <a
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      href="https://images.unsplash.com/photo-1635776062360-af423602aff3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-                      target="_blank"
-                      download
-                      rel="noreferrer"
-                    >
-                      <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" x2="12" y1="15" y2="3" />
-                      </svg>
-                    </a>
-
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Download
-                    </span>
-                  </div>
-
-                  <div className="hs-tooltip inline-block">
-                    <button
-                      type="button"
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      data-hs-overlay="#hs-pro-dupfmsh"
-                    >
-                      <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="18" cy="5" r="3" />
-                        <circle cx="6" cy="12" r="3" />
-                        <circle cx="18" cy="19" r="3" />
-                        <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
-                        <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
-                      </svg>
-                    </button>
-
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Share
-                    </span>
-                  </div>
-
-                  <div className="w-px h-5 mx-1 bg-gray-200 dark:bg-neutral-700"></div>
-
-                  <div className="hs-tooltip inline-block">
-                    <button
-                      type="button"
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-red-600 hover:bg-red-100  disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-red-100 dark:text-red-500 dark:hover:bg-red-500/20 dark:focus:bg-red-500/20"
-                      data-hs-overlay="#hs-pro-dupfmdl"
-                    >
-                      <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M3 6h18" />
-                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                        <line x1="10" x2="10" y1="11" y2="17" />
-                        <line x1="14" x2="14" y1="11" y2="17" />
-                      </svg>
-                    </button>
-
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Delete
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-3 flex items-center gap-x-3">
-              <span className="flex flex-shrink-0 justify-center items-center w-7 h-7 sm:w-[38px] sm:h-[38px] bg-white border border-gray-200 rounded-lg sm:rounded-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300">
-                <svg
-                  className="flex-shrink-0 w-3.5 h-3.5 sm:w-5 sm:h-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M14 4.5V14a2 2 0 0 1-2 2h-2v-1h2a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.928 15.849v-3.337h1.136v-.662H0v.662h1.134v3.337h.794Zm4.689-3.999h-.894L4.9 13.289h-.035l-.832-1.439h-.932l1.228 1.983-1.24 2.016h.862l.853-1.415h.035l.85 1.415h.907l-1.253-1.992 1.274-2.007Zm1.93.662v3.337h-.794v-3.337H6.619v-.662h3.064v.662H8.546Z"
-                  />
-                </svg>
-              </span>
-
-              <div className="grow truncate">
-                <p className="block truncate text-sm font-semibold text-gray-800 dark:text-neutral-200">
-                  weekly_report.xls
-                </p>
-                <p className="block truncate text-xs text-gray-500 dark:text-neutral-500">
-                  James Oct 17th, 2021
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-            <div className="relative group">
-              <div className="h-36 sm:h-[170px] flex flex-col justify-center items-center">
-                <svg
-                  className="flex-shrink-0 w-12 h-12 text-gray-400 dark:text-neutral-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="21" x2="3" y1="6" y2="6" />
-                  <line x1="15" x2="3" y1="12" y2="12" />
-                  <line x1="17" x2="3" y1="18" y2="18" />
-                </svg>
-              </div>
-
-              <div className="absolute top-3 end-3 group-hover:opacity-100 lg:opacity-0">
-                <div className="p-0.5 sm:p-1 inline-flex items-center bg-white border border-gray-200 lg:shadow rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
-                  <div className="hs-tooltip inline-block">
-                    <a
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      href="https://images.unsplash.com/photo-1635776062360-af423602aff3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-                      target="_blank"
-                      download
-                      rel="noreferrer"
-                    >
-                      <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" x2="12" y1="15" y2="3" />
-                      </svg>
-                    </a>
-
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Download
-                    </span>
-                  </div>
-
-                  <div className="hs-tooltip inline-block">
-                    <button
-                      type="button"
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      data-hs-overlay="#hs-pro-dupfmsh"
-                    >
-                      <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="18" cy="5" r="3" />
-                        <circle cx="6" cy="12" r="3" />
-                        <circle cx="18" cy="19" r="3" />
-                        <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
-                        <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
-                      </svg>
-                    </button>
-
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Share
-                    </span>
-                  </div>
-
-                  <div className="w-px h-5 mx-1 bg-gray-200 dark:bg-neutral-700"></div>
-
-                  <div className="hs-tooltip inline-block">
-                    <button
-                      type="button"
-                      className="hs-tooltip-toggle w-[30px] h-[30px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-red-600 hover:bg-red-100  disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-red-100 dark:text-red-500 dark:hover:bg-red-500/20 dark:focus:bg-red-500/20"
-                      data-hs-overlay="#hs-pro-dupfmdl"
-                    >
-                      <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M3 6h18" />
-                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                        <line x1="10" x2="10" y1="11" y2="17" />
-                        <line x1="14" x2="14" y1="11" y2="17" />
-                      </svg>
-                    </button>
-
-                    <span
-                      className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700"
-                      role="tooltip"
-                    >
-                      Delete
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-3 flex items-center gap-x-3">
-              <span className="flex flex-shrink-0 justify-center items-center w-7 h-7 sm:w-[38px] sm:h-[38px] bg-white border border-gray-200 rounded-lg sm:rounded-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300">
-                <svg
-                  className="flex-shrink-0 w-3.5 h-3.5 sm:w-5 sm:h-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM4.151 15.29a1.176 1.176 0 0 1-.111-.449h.764a.578.578 0 0 0 .255.384c.07.049.154.087.25.114.095.028.201.041.319.041.164 0 .301-.023.413-.07a.559.559 0 0 0 .255-.193.507.507 0 0 0 .084-.29.387.387 0 0 0-.152-.326c-.101-.08-.256-.144-.463-.193l-.618-.143a1.72 1.72 0 0 1-.539-.214 1.001 1.001 0 0 1-.352-.367 1.068 1.068 0 0 1-.123-.524c0-.244.064-.457.19-.639.128-.181.304-.322.528-.422.225-.1.484-.149.777-.149.304 0 .564.05.779.152.217.102.384.239.5.41.12.17.186.359.2.566h-.75a.56.56 0 0 0-.12-.258.624.624 0 0 0-.246-.181.923.923 0 0 0-.37-.068c-.216 0-.387.05-.512.152a.472.472 0 0 0-.185.384c0 .121.048.22.144.3a.97.97 0 0 0 .404.175l.621.143c.217.05.406.12.566.211a1 1 0 0 1 .375.358c.09.148.135.335.135.56 0 .247-.063.466-.188.656a1.216 1.216 0 0 1-.539.439c-.234.105-.52.158-.858.158-.254 0-.476-.03-.665-.09a1.404 1.404 0 0 1-.478-.252 1.13 1.13 0 0 1-.29-.375Zm-3.104-.033a1.32 1.32 0 0 1-.082-.466h.764a.576.576 0 0 0 .074.27.499.499 0 0 0 .454.246c.19 0 .33-.055.422-.164.091-.11.137-.265.137-.466v-2.745h.791v2.725c0 .44-.119.774-.357 1.005-.237.23-.565.345-.985.345a1.59 1.59 0 0 1-.568-.094 1.145 1.145 0 0 1-.407-.266 1.14 1.14 0 0 1-.243-.39Zm9.091-1.585v.522c0 .256-.039.47-.117.641a.862.862 0 0 1-.322.387.877.877 0 0 1-.47.126.883.883 0 0 1-.47-.126.87.87 0 0 1-.32-.387 1.55 1.55 0 0 1-.117-.641v-.522c0-.258.039-.471.117-.641a.87.87 0 0 1 .32-.387.868.868 0 0 1 .47-.129c.177 0 .333.043.47.129a.862.862 0 0 1 .322.387c.078.17.117.383.117.641Zm.803.519v-.513c0-.377-.069-.701-.205-.973a1.46 1.46 0 0 0-.59-.63c-.253-.146-.559-.22-.916-.22-.356 0-.662.074-.92.22a1.441 1.441 0 0 0-.589.628c-.137.271-.205.596-.205.975v.513c0 .375.068.699.205.973.137.271.333.48.589.626.258.145.564.217.92.217.357 0 .663-.072.917-.217.256-.146.452-.355.589-.626.136-.274.205-.598.205-.973Zm1.29-.935v2.675h-.746v-3.999h.662l1.752 2.66h.032v-2.66h.75v4h-.656l-1.761-2.676h-.032Z"
-                  />
-                </svg>
-              </span>
-
-              <div className="grow truncate">
-                <p className="block truncate text-sm font-semibold text-gray-800 dark:text-neutral-200">
-                  gitignore.json
-                </p>
-                <p className="block truncate text-xs text-gray-500 dark:text-neutral-500">
-                  James Apr 21st, 2020
-                </p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
