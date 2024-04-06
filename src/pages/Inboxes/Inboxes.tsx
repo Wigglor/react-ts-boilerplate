@@ -16,15 +16,13 @@ type FormData = {
 
 type Alias = {
   data: {
-    alias: {
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      alias: string;
-      domainId: string;
-    }[];
-  };
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    name: string;
+    alias: string;
+    domainId: string;
+  }[];
 };
 
 const Inboxes = (): ReactElement => {
@@ -49,7 +47,7 @@ const Inboxes = (): ReactElement => {
     const getAliases = async () => {
       try {
         const response: ApiResponse<Alias> = await axiosPrivate.get(
-          "/get-aliases",
+          "/check-domain",
 
           {
             signal: controller.signal,
@@ -57,7 +55,7 @@ const Inboxes = (): ReactElement => {
           },
         );
 
-        if (response.data.data.alias !== null) {
+        if (response.data.data) {
           console.log("domain IS NOT null");
           setAliasStatus(true);
           setAliases(response.data);
@@ -1050,7 +1048,7 @@ const Inboxes = (): ReactElement => {
                 {aliases && (
                   <>
                     <div>
-                      {aliases.data.alias.map((item) => (
+                      {aliases.data.map((item) => (
                         <div className="text-gray-100" key={item.id}>
                           <p>{item.alias}</p>
                           <p>{item.name}</p>
@@ -1062,6 +1060,22 @@ const Inboxes = (): ReactElement => {
               </h1>
             ) : (
               // <h2 className="">You have no inboxes yet. Please go ahead and add some</h2>
+              // <h1 className="bg-gray-800 p-6 z-50">
+              //   {aliases && (
+              //     <>
+              //       <div>
+              //         {aliases.data.alias.map((item) => (
+              //           <div className="text-gray-100" key={item.id}>
+              //             <p>{item.alias}</p>
+              //             <p>{item.name}</p>
+              //           </div>
+              //         ))}
+              //       </div>
+              //     </>
+              //   )}
+              // </h1>
+              // <h2 className="">You have no inboxes yet. Please go ahead and add some</h2>
+
               <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-5">
                 <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
                   <div className="relative group">
