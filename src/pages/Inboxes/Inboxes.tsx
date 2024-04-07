@@ -55,12 +55,9 @@ const Inboxes = (): ReactElement => {
           },
         );
 
-        if (response.data.data) {
-          console.log("domain IS NOT null");
+        if (response.data.data.length > 0) {
           setAliasStatus(true);
           setAliases(response.data);
-        } else if (response.data?.data === null) {
-          console.log("domain IS null");
         }
         // console.log(JSON.stringify(response.data.data));
       } catch (err) {
