@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,6 +10,17 @@ interface ApiResponse<T> {
   message: string;
   data: T;
 }
+
+type inboxNameResponse = {
+  uniqueAlias: {
+    id: string;
+    inboxName: string;
+    alias: string;
+    createdAt: string;
+    updatedAt: string;
+    accountId: string;
+  };
+};
 
 type FormData = {
   inbox: string;
@@ -32,6 +44,7 @@ type AliasInput = {
 const Inboxes = (): ReactElement => {
   const [addInbox, setAddInbox] = useState<boolean>(false);
   const [aliasStatus, setAliasStatus] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [aliases, setAliases] = useState<Alias>();
   const axiosPrivate = useAxiosPrivate();
   // const {
@@ -50,39 +63,30 @@ const Inboxes = (): ReactElement => {
   } = useForm<AliasInput>();
 
   const toggleInbox = () => {
-    setAddInbox((prev) => !prev);
     resetInboxNameForm();
+    setAddInbox((prev) => !prev);
   };
 
   const handleInboxNameClick: SubmitHandler<AliasInput> = async (data: AliasInput) => {
     console.log(`AliasInput: ${JSON.stringify(data)}`);
-    // try {
-    //   const workspaceResponse: ApiResponse<workspaceResponse> = await axiosPrivate.post(
-    //     "/subscription/workspace",
-    //     JSON.stringify({
-    //       workspace: data.workspace,
-    //     }),
-    //     {
-    //       withCredentials: true,
-    //     },
-    //   );
-    //   const newWorkspaceData = { ...workspaceData };
-    //   newWorkspaceData.availableWorkSpaces.push(
-    //     ...[
-    //       {
-    //         name: workspaceResponse.data.workspace.name,
-    //         id: workspaceResponse.data.workspace.id,
-    //       },
-    //     ],
-    //   );
-    //   updateWorkspaceData(newWorkspaceData);
-    //   resetAddworkspaceForm();
-    //   setAddWorkspace(false);
-    // } catch (err) {
-    //   if (err instanceof AxiosError) {
-    //     setErrorMessage(err.response?.data.message);
-    //   }
-    // }
+    try {
+      const workspaceResponse: ApiResponse<inboxNameResponse> = await axiosPrivate.post(
+        "/assign-alias",
+        JSON.stringify({
+          inboxName: data.inboxName,
+        }),
+        {
+          withCredentials: true,
+        },
+      );
+
+      resetInboxNameForm();
+      setAddInbox((prev) => !prev);
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setErrorMessage(err.response?.data.message);
+      }
+    }
   };
 
   useEffect(() => {
