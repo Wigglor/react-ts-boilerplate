@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 interface ApiResponse<T> {
@@ -25,21 +25,64 @@ type Alias = {
   }[];
 };
 
+type AliasInput = {
+  inboxName: string;
+};
+
 const Inboxes = (): ReactElement => {
   const [addInbox, setAddInbox] = useState<boolean>(false);
   const [aliasStatus, setAliasStatus] = useState<boolean>(false);
   const [aliases, setAliases] = useState<Alias>();
   const axiosPrivate = useAxiosPrivate();
+  // const {
+  //   // setValue,
+  //   handleSubmit,
+  //   register,
+  //   // control,
+  //   reset,
+  //   formState: { errors },
+  // } = useForm<FormData>();
   const {
-    // setValue,
-    handleSubmit,
-    register,
-    // control,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>();
+    register: inboxNameForm,
+    reset: resetInboxNameForm,
+    handleSubmit: handleInboxNameForm,
+    formState: { errors: inboxNameErrorsForm },
+  } = useForm<AliasInput>();
+
   const toggleInbox = () => {
     setAddInbox((prev) => !prev);
+    resetInboxNameForm();
+  };
+
+  const handleInboxNameClick: SubmitHandler<AliasInput> = async (data: AliasInput) => {
+    console.log(`AliasInput: ${JSON.stringify(data)}`);
+    // try {
+    //   const workspaceResponse: ApiResponse<workspaceResponse> = await axiosPrivate.post(
+    //     "/subscription/workspace",
+    //     JSON.stringify({
+    //       workspace: data.workspace,
+    //     }),
+    //     {
+    //       withCredentials: true,
+    //     },
+    //   );
+    //   const newWorkspaceData = { ...workspaceData };
+    //   newWorkspaceData.availableWorkSpaces.push(
+    //     ...[
+    //       {
+    //         name: workspaceResponse.data.workspace.name,
+    //         id: workspaceResponse.data.workspace.id,
+    //       },
+    //     ],
+    //   );
+    //   updateWorkspaceData(newWorkspaceData);
+    //   resetAddworkspaceForm();
+    //   setAddWorkspace(false);
+    // } catch (err) {
+    //   if (err instanceof AxiosError) {
+    //     setErrorMessage(err.response?.data.message);
+    //   }
+    // }
   };
 
   useEffect(() => {
@@ -93,7 +136,7 @@ const Inboxes = (): ReactElement => {
                       </div>
 
                       <div className="mt-5">
-                        <form>
+                        <form onSubmit={handleInboxNameForm(handleInboxNameClick)}>
                           {/* <form onSubmit={handleSubmit(onSubmit)}> */}
                           <div className="grid gap-y-4">
                             <div>
@@ -101,6 +144,19 @@ const Inboxes = (): ReactElement => {
                                 Name Inbox
                               </label>
                               <input
+                                id="inboxName"
+                                type="text"
+                                {...inboxNameForm("inboxName")}
+                                name="inboxName"
+                                className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                                required
+                              ></input>
+                              {inboxNameErrorsForm.inboxName && (
+                                <span className="bg-red-600 text-white p-2" role="alert">
+                                  {inboxNameErrorsForm.inboxName.message}
+                                </span>
+                              )}
+                              {/* <input
                                 type="text"
                                 id="inbox"
                                 className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
@@ -119,7 +175,7 @@ const Inboxes = (): ReactElement => {
                                 <span className="bg-red-600 text-white p-2" role="alert">
                                   {errors.inbox.message}
                                 </span>
-                              )}
+                              )} */}
                               <div className="relative">
                                 <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                                   <svg
