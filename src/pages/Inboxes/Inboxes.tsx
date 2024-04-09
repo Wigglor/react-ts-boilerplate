@@ -22,10 +22,6 @@ type inboxNameResponse = {
   };
 };
 
-type FormData = {
-  inbox: string;
-};
-
 type Alias = {
   data: {
     id: string;
@@ -47,14 +43,7 @@ const Inboxes = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [aliases, setAliases] = useState<Alias>();
   const axiosPrivate = useAxiosPrivate();
-  // const {
-  //   // setValue,
-  //   handleSubmit,
-  //   register,
-  //   // control,
-  //   reset,
-  //   formState: { errors },
-  // } = useForm<FormData>();
+
   const {
     register: inboxNameForm,
     reset: resetInboxNameForm,
@@ -141,7 +130,6 @@ const Inboxes = (): ReactElement => {
 
                       <div className="mt-5">
                         <form onSubmit={handleInboxNameForm(handleInboxNameClick)}>
-                          {/* <form onSubmit={handleSubmit(onSubmit)}> */}
                           <div className="grid gap-y-4">
                             <div>
                               <label htmlFor="email" className="block text-sm mb-2 dark:text-white">
@@ -160,26 +148,6 @@ const Inboxes = (): ReactElement => {
                                   {inboxNameErrorsForm.inboxName.message}
                                 </span>
                               )}
-                              {/* <input
-                                type="text"
-                                id="inbox"
-                                className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                                required
-                                aria-describedby="email-error"
-                                {...register("inbox", {
-                                  required: "required",
-                                  minLength: {
-                                    value: 2,
-                                    message: "min length is 2",
-                                  },
-                                })}
-                              ></input>
-
-                              {errors.inbox && (
-                                <span className="bg-red-600 text-white p-2" role="alert">
-                                  {errors.inbox.message}
-                                </span>
-                              )} */}
                               <div className="relative">
                                 <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                                   <svg
@@ -228,6 +196,10 @@ const Inboxes = (): ReactElement => {
         )}
         <div className="px-4 sm:px-7 mb-3">
           <h3 className="font-semibold text-gray-800 dark:text-neutral-200">My Inboxes</h3>
+          {/* CHANGE THIS LATER */}
+          {errorMessage && (
+            <p className="bg-red-60 p-3 text-white rounded-lg w-full">{errorMessage}</p>
+          )}
         </div>
 
         <div className="px-4 sm:px-7 flex">
