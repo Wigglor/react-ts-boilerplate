@@ -59,7 +59,8 @@ const Inboxes = (): ReactElement => {
   const handleInboxNameClick: SubmitHandler<AliasInput> = async (data: AliasInput) => {
     console.log(`AliasInput: ${JSON.stringify(data)}`);
     try {
-      const workspaceResponse: ApiResponse<inboxNameResponse> = await axiosPrivate.post(
+      // const workspaceResponse: ApiResponse<inboxNameResponse> = await axiosPrivate.post(
+      await axiosPrivate.post(
         "/assign-alias",
         JSON.stringify({
           inboxName: data.inboxName,
