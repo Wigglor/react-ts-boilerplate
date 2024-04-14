@@ -2,13 +2,13 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
-// import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-// interface ApiResponse<T> {
-//   success: boolean;
-//   message: string;
-//   data: T;
-// }
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
 
 // interface PostAttribute {
 //   id: number;
@@ -22,8 +22,12 @@ import useAuth from "../../hooks/useAuth";
 // interface Post {
 //   posts: PostAttribute[];
 // }
+interface EmailContent {
+  data: string;
+}
 
 const Premium = (): ReactElement => {
+  const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
   // const axiosPrivate = useAxiosPrivate();
   // const [posts, setPosts] = useState<Post | undefined>(undefined);
@@ -32,23 +36,54 @@ const Premium = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); // Create a ref for the dropdown
 
-  // Function to toggle the dropdown visibility
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  // const [emailHtml, setEmailHtml] = useState<string>("");
+
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false); // Close dropdown if click is outside
+    const controller = new AbortController();
+    const getEmailContent = async () => {
+      console.log("calling email-content");
+      try {
+        const response: ApiResponse<EmailContent> = await axiosPrivate.get(
+          "/email-content",
+
+          {
+            signal: controller.signal,
+            withCredentials: true,
+          },
+        );
+
+        // const sanitizedHtml = sanitizeHtml(response.data.data, {
+        //   allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+        // });
+        // console.log(sanitizedHtml);
+        // setEmailHtml(sanitizedHtml);
+      } catch (err) {
+        console.error(err);
       }
     };
-
-    // Add click event listener
-    document.addEventListener("mousedown", handleClickOutside);
+    getEmailContent();
 
     return () => {
-      // Cleanup the event listener on component unmount
-      document.removeEventListener("mousedown", handleClickOutside);
+      controller.abort();
     };
-  }, [dropdownRef]); // Depend on dropdownRef so effect runs once
+  }, []);
+  // Function to toggle the dropdown visibility
+  const toggleDropdown = () => setIsOpen(!isOpen);
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+  //       setIsOpen(false); // Close dropdown if click is outside
+  //     }
+  //   };
+
+  //   // Add click event listener
+  //   document.addEventListener("mousedown", handleClickOutside);
+
+  //   return () => {
+  //     // Cleanup the event listener on component unmount
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [dropdownRef]); // Depend on dropdownRef so effect runs once
   if (["PLAN2", "PLAN3"].includes(auth?.plan as unknown as string)) {
     return (
       <>
@@ -63,8 +98,8 @@ const Premium = (): ReactElement => {
       <>
         <main>
           <h1>Premium</h1>
-
-          <div className="hs-dropdown relative inline-flex [--auto-close:inside]">
+          {/* <div>{ReactHtmlParser(emailHtml)}</div> */}
+          {/* <div className="hs-dropdown relative inline-flex [--auto-close:inside]">
             <button
               id="hs-pro-dnwpd"
               type="button"
@@ -259,7 +294,6 @@ const Premium = (): ReactElement => {
               onClick={toggleDropdown} // Added onClick event to toggle dropdown
               className="w-[34px] h-[34px] inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
             >
-              {/* SVG for the button remains unchanged */}
               <svg
                 className="flex-shrink-0 w-4 h-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +310,6 @@ const Premium = (): ReactElement => {
               </svg>
             </button>
 
-            {/* Modify the class based on isOpen state to show/hide the dropdown */}
             <div
               className={`hs-dropdown-menu ${
                 isOpen ? "opacity-100" : "opacity-0 hidden"
@@ -289,8 +322,7 @@ const Premium = (): ReactElement => {
                 transform: "translate(283px, 123px)",
               }}
             >
-              {/* Dropdown items remain unchanged */}
-              {/* ... */}
+              
               <div className="p-1">
                 <button
                   type="button"
@@ -387,7 +419,7 @@ const Premium = (): ReactElement => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </main>
       </>
     );
