@@ -146,17 +146,16 @@ const Premium = (): ReactElement => {
           {emailList && (
             <>
               {emailList.map((item) => (
-                <div className="text-gray-100 bg-slate-500" key={item.s3Id}>
-                  <p>From: {item.emailSender}</p>
-                  <p>Subject: {item.emailSubject}</p>
-                </div>
+                <>
+                  <div className="text-gray-100 bg-slate-500" key={item.s3Id}>
+                    <p>From: {item.emailSender}</p>
+                    <p>Subject: {item.emailSubject}</p>
+                  </div>
+                  <div>
+                    <div dangerouslySetInnerHTML={{ __html: item.emailBody }}></div>
+                  </div>
+                </>
               ))}
-              <div>
-                <div>
-                  <span></span>
-                </div>
-                <div></div>
-              </div>
             </>
           )}
           {/* <iframe
