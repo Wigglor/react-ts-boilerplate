@@ -43,6 +43,8 @@ type EmailItems = {
   emailSubject: string;
   updatedAt: string;
   emailBody: string;
+  s3Id: string;
+  dkimVerdict: string;
 };
 interface EmailList {
   data: {
@@ -140,7 +142,23 @@ const Premium = (): ReactElement => {
           > */}
           {/* <div>{ReactHtmlParser(emailHtml)}</div> */}
           {/* </iframe> */}
-          <div dangerouslySetInnerHTML={{ __html: emailHtml }}></div>
+          {/* <div dangerouslySetInnerHTML={{ __html: emailHtml }}></div> */}
+          {emailList && (
+            <>
+              {emailList.map((item) => (
+                <div className="text-gray-100 bg-slate-500" key={item.s3Id}>
+                  <p>From: {item.emailSender}</p>
+                  <p>Subject: {item.emailSubject}</p>
+                </div>
+              ))}
+              <div>
+                <div>
+                  <span></span>
+                </div>
+                <div></div>
+              </div>
+            </>
+          )}
           {/* <iframe
             srcDoc={emailHtml}
             style={{ width: "100%", height: "1000px", border: "none" }}
