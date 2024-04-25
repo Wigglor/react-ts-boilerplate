@@ -30,6 +30,26 @@ interface EmailContent {
   };
 }
 
+type EmailItems = {
+  spfVerdict: string;
+  dmarcVerdict: string;
+  displayEmail: boolean;
+  emailReceived: string;
+  virusVerdict: string;
+  emailAlias: string;
+  createdAt: string;
+  spamVerdict: string;
+  emailSender: string;
+  emailSubject: string;
+  updatedAt: string;
+  emailBody: string;
+};
+interface EmailList {
+  data: {
+    Items: EmailItems[];
+  };
+}
+
 const Premium = (): ReactElement => {
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
@@ -41,22 +61,34 @@ const Premium = (): ReactElement => {
   const dropdownRef = useRef<HTMLDivElement>(null); // Create a ref for the dropdown
 
   const [emailHtml, setEmailHtml] = useState<string>("");
+  const [emailList, setEmailList] = useState<EmailItems[]>();
 
   useEffect(() => {
     const controller = new AbortController();
     const getEmailContent = async () => {
       console.log("calling email-content");
       try {
-        const response: ApiResponse<EmailContent> = await axiosPrivate.get(
-          "/email-content",
-
+        const response: ApiResponse<EmailList> = await axiosPrivate.post(
+          "/fetch-emails",
+          JSON.stringify({
+            emailAlias: "john@postpeek.xyz",
+          }),
           {
             signal: controller.signal,
             withCredentials: true,
           },
         );
+        // const response: ApiResponse<EmailContent> = await axiosPrivate.get(
+        //   "/email-content",
 
-        setEmailHtml(response.data.data.html);
+        //   {
+        //     signal: controller.signal,
+        //     withCredentials: true,
+        //   },
+        // );
+
+        // setEmailHtml(response.data.data.html);
+        setEmailList(response.data.data.Items);
       } catch (err) {
         console.error(err);
       }
