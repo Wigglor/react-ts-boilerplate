@@ -11,16 +11,16 @@ interface ApiResponse<T> {
   data: T;
 }
 
-type inboxNameResponse = {
-  uniqueAlias: {
-    id: string;
-    inboxName: string;
-    alias: string;
-    createdAt: string;
-    updatedAt: string;
-    accountId: string;
-  };
-};
+// type inboxNameResponse = {
+//   uniqueAlias: {
+//     id: string;
+//     inboxName: string;
+//     alias: string;
+//     createdAt: string;
+//     updatedAt: string;
+//     accountId: string;
+//   };
+// };
 
 type Alias = {
   data: {
