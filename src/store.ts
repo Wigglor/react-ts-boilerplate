@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import exampleReducer from "./features/exampleFeature/slice";
 
+// Change to email store
 export const store = configureStore({
   reducer: {
     exampleFeature: exampleReducer,
