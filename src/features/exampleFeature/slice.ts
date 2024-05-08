@@ -14,7 +14,6 @@ export const exampleSlice = createSlice({
   reducers: {
     increment: (state) => {
       state.value += 1;
-      // add mail function
     },
     decrement: (state) => {
       state.value -= 1;
