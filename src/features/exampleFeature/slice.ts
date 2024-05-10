@@ -8,7 +8,6 @@ const initialState: ExampleState = {
   value: 0,
 };
 
-// several slices in one file?
 export const exampleSlice = createSlice({
   name: "example",
   initialState,
