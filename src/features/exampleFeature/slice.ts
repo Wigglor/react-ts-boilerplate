@@ -7,7 +7,7 @@ interface ExampleState {
 const initialState: ExampleState = {
   value: 0,
 };
-
+// slice update
 export const exampleSlice = createSlice({
   name: "example",
   initialState,
