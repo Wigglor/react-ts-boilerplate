@@ -8,7 +8,6 @@ export default axios.create({
 
 export const axiosProd = axios.create({
   baseURL: "http://16.170.240.223:3000/",
-  // headers: { "Content-Type": "application/json" },
 });
 
 export const axiosPrivate = axios.create({
