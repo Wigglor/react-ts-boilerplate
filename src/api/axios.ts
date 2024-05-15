@@ -11,7 +11,7 @@ export const axiosProd = axios.create({
 }); // fetch
 
 export const axiosPrivate = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_URL, //fetch privste
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
