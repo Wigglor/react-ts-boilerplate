@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 interface ApiResponse<T> {
@@ -251,6 +252,7 @@ const Inboxes = (): ReactElement => {
                       <div className="text-gray-100" key={item.id}>
                         <p>{item.alias}</p>
                         <p>{item.inboxName}</p>
+                        <Link to={`/${item.id}`}></Link>
                       </div>
                     ))}
                   </div>
