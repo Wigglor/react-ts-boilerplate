@@ -32,11 +32,11 @@ const Inboxes = (): ReactElement => {
   const [aliases, setAliases] = useState<Alias>();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
-  const { name } = location.state || { name: "Unknown" };
+  const { inboxName } = location.state || { name: "Unknown" };
 
   return (
     <>
-      <div className="py-3">My inbox</div>
+      <div className="py-3">My inbox: {inboxName}</div>
     </>
   );
 };

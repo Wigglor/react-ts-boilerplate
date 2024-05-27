@@ -253,7 +253,7 @@ const Inboxes = (): ReactElement => {
                         <p>{item.alias}</p>
 
                         {/* <Link to={{ pathname: `/inboxes/${item.id}`, state: { name: item.name } }}> */}
-                        <Link to={`/inboxes/${item.id}`}>
+                        <Link to={`/inboxes/${item.id}`} state={{ inboxName: item.inboxName }}>
                           <p>{item.inboxName}</p>
                         </Link>
                       </div>
