@@ -30,6 +30,7 @@ type Alias = {
     name: string;
     alias: string;
     domainId: string;
+    inboxName: string;
   }[];
 };
 
@@ -249,7 +250,7 @@ const Inboxes = (): ReactElement => {
                     {aliases.data.map((item) => (
                       <div className="text-gray-100" key={item.id}>
                         <p>{item.alias}</p>
-                        <p>{item.name}</p>
+                        <p>{item.inboxName}</p>
                       </div>
                     ))}
                   </div>
