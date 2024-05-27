@@ -121,6 +121,7 @@ const App = () => {
                   <Route path="" element={<Home />} />
                   <Route path="paymentstatus" element={<PaymentStatus />} />
                   <Route path="inboxes" element={<Inboxes />} />
+                  <Route path="inboxes/:id" element={<Inboxes />} />
                   <Route path="analytics" element={<Analytics />} />
                   <Route path="account" element={<Account />} />
                   <Route
