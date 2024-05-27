@@ -251,8 +251,10 @@ const Inboxes = (): ReactElement => {
                     {aliases.data.map((item) => (
                       <div className="text-gray-100" key={item.id}>
                         <p>{item.alias}</p>
-                        <p>{item.inboxName}</p>
-                        <Link to={`/${item.id}`}></Link>
+
+                        <Link to={`/inboxes/${item.id}`}>
+                          <p>{item.inboxName}</p>
+                        </Link>
                       </div>
                     ))}
                   </div>
