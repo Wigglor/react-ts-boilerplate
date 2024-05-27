@@ -1,4 +1,5 @@
 import { ReactElement, useState } from "react";
+import { useLocation } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 interface ApiResponse<T> {
@@ -30,6 +31,8 @@ const Inboxes = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [aliases, setAliases] = useState<Alias>();
   const axiosPrivate = useAxiosPrivate();
+  const location = useLocation();
+  const { name } = location.state || { name: "Unknown" };
 
   return (
     <>

@@ -252,6 +252,7 @@ const Inboxes = (): ReactElement => {
                       <div className="text-gray-100" key={item.id}>
                         <p>{item.alias}</p>
 
+                        {/* <Link to={{ pathname: `/inboxes/${item.id}`, state: { name: item.name } }}> */}
                         <Link to={`/inboxes/${item.id}`}>
                           <p>{item.inboxName}</p>
                         </Link>
