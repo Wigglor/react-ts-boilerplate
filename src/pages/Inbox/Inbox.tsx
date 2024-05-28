@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
@@ -32,7 +32,36 @@ const Inboxes = (): ReactElement => {
   const [aliases, setAliases] = useState<Alias>();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
-  const { inboxName } = location.state || { name: "Unknown" };
+  const { inboxName, alias } = location.state || { name: "Unknown" };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const getAliases = async () => {
+      try {
+        const response: ApiResponse<Alias> = await axiosPrivate.post(
+          "/fetch-emails",
+
+          JSON.stringify({ emailAlias: alias }),
+          {
+            signal: controller.signal,
+            withCredentials: true,
+          },
+        );
+
+        if (response.data.data.length > 0) {
+          setAliasStatus(true);
+          setAliases(response.data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getAliases();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   return (
     <>
