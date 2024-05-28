@@ -109,6 +109,10 @@ const Inboxes = (): ReactElement => {
     };
   }, []);
 
+  if (!aliasStatus) {
+    return <h1 className="p-6 bg-gray-800 text-gray-100">Loading...</h1>;
+  }
+
   return (
     <>
       <div className="py-3">
@@ -243,33 +247,27 @@ const Inboxes = (): ReactElement => {
 
       <div className="pb-7 px-1 sm:px-5 sm:pb-10">
         <div className="">
-          {aliasStatus ? (
-            <h1 className="bg-gray-800 p-6 z-50">
-              {aliases && (
-                <>
-                  <div>
-                    {aliases.data.map((item) => (
-                      <div className="text-gray-100" key={item.id}>
-                        <p>{item.alias}</p>
+          <h1 className="bg-gray-800 p-6 z-50">
+            {aliases && (
+              <>
+                <div>
+                  {aliases.data.map((item) => (
+                    <div className="text-gray-100" key={item.id}>
+                      <p>{item.alias}</p>
 
-                        {/* <Link to={{ pathname: `/inboxes/${item.id}`, state: { name: item.name } }}> */}
-                        <Link
-                          to={`/inboxes/${item.id}`}
-                          state={{ inboxName: item.inboxName, alias: item.alias }}
-                        >
-                          <p>{item.inboxName}</p>
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </h1>
-          ) : (
-            <>
-              <h1 className="p-6 bg-gray-800">Loading</h1>
-            </>
-          )}
+                      {/* <Link to={{ pathname: `/inboxes/${item.id}`, state: { name: item.name } }}> */}
+                      <Link
+                        to={`/inboxes/${item.id}`}
+                        state={{ inboxName: item.inboxName, alias: item.alias }}
+                      >
+                        <p>{item.inboxName}</p>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </h1>
         </div>
       </div>
     </>

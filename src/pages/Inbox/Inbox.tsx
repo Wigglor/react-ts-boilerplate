@@ -67,6 +67,10 @@ const Inboxes = (): ReactElement => {
     };
   }, []);
 
+  if (!emailStatus) {
+    return <h1 className="p-6 bg-gray-800 text-gray-100">Loading...</h1>;
+  }
+
   return (
     <>
       <div className="py-3">
