@@ -9,16 +9,20 @@ interface ApiResponse<T> {
   data: T;
 }
 
-type Alias = {
+type Email = {
   data: {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    name: string;
-    alias: string;
-    domainId: string;
-    inboxName: string;
-  }[];
+    Count: number;
+    Items: {
+      dmarcVerdict: string;
+      displayEmail: string;
+      emailReceived: string;
+      virusVerdict: string;
+      emailAlias: string;
+      createdAt: string;
+      spamVerdict: string;
+      s3Id: string;
+    }[];
+  };
 };
 
 type AliasInput = {
@@ -29,7 +33,7 @@ const Inboxes = (): ReactElement => {
   const [addInbox, setAddInbox] = useState<boolean>(false);
   const [emailStatus, setEmailStatus] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [aliases, setEmails] = useState<Alias>();
+  const [aliases, setEmails] = useState<Email>();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
   const { inboxName, alias } = location.state || { name: "Unknown" };
@@ -38,7 +42,7 @@ const Inboxes = (): ReactElement => {
     const controller = new AbortController();
     const getEmails = async () => {
       try {
-        const response: ApiResponse<Alias> = await axiosPrivate.post(
+        const response: ApiResponse<Email> = await axiosPrivate.post(
           "/fetch-emails",
 
           JSON.stringify({ emailAlias: alias }),
@@ -48,7 +52,7 @@ const Inboxes = (): ReactElement => {
           },
         );
 
-        if (response.data.data.length > 0) {
+        if (response.data.data.Items.length > 0) {
           setEmailStatus(true);
           setEmails(response.data);
         }
@@ -65,7 +69,26 @@ const Inboxes = (): ReactElement => {
 
   return (
     <>
-      <div className="py-3">My inbox: {inboxName}</div>
+      <div className="py-3">
+        <h1></h1>My inbox: {inboxName}
+      </div>
+      {aliases && (
+        <>
+          <div>
+            <ul className="">
+              {aliases.data.Items.map((item) => (
+                <div className="text-gray-100 bg-green-700" key={item.s3Id}>
+                  <li>email received: {item.emailReceived}</li>
+                  <li>email: {item.emailAlias}</li>
+                  <li>dmarcVerdict: {item.dmarcVerdict}</li>
+                  <li>spamVerdict: {item.spamVerdict}</li>
+                  <li>virusVerdict: {item.virusVerdict}</li>
+                </div>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </>
   );
 };
