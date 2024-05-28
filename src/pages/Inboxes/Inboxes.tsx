@@ -266,7 +266,9 @@ const Inboxes = (): ReactElement => {
               )}
             </h1>
           ) : (
-            <></>
+            <>
+              <h1 className="p-6 bg-gray-800">Loading</h1>
+            </>
           )}
         </div>
       </div>

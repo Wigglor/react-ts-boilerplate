@@ -27,9 +27,9 @@ type AliasInput = {
 
 const Inboxes = (): ReactElement => {
   const [addInbox, setAddInbox] = useState<boolean>(false);
-  const [aliasStatus, setAliasStatus] = useState<boolean>(false);
+  const [emailStatus, setEmailStatus] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [aliases, setAliases] = useState<Alias>();
+  const [aliases, setEmails] = useState<Alias>();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
   const { inboxName, alias } = location.state || { name: "Unknown" };
@@ -49,8 +49,8 @@ const Inboxes = (): ReactElement => {
         );
 
         if (response.data.data.length > 0) {
-          setAliasStatus(true);
-          setAliases(response.data);
+          setEmailStatus(true);
+          setEmails(response.data);
         }
       } catch (err) {
         console.error(err);
