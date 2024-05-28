@@ -36,7 +36,7 @@ const Inboxes = (): ReactElement => {
 
   useEffect(() => {
     const controller = new AbortController();
-    const getAliases = async () => {
+    const getEmails = async () => {
       try {
         const response: ApiResponse<Alias> = await axiosPrivate.post(
           "/fetch-emails",
@@ -56,7 +56,7 @@ const Inboxes = (): ReactElement => {
         console.error(err);
       }
     };
-    getAliases();
+    getEmails();
 
     return () => {
       controller.abort();
