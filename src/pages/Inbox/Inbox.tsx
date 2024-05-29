@@ -21,6 +21,7 @@ type Email = {
       createdAt: string;
       spamVerdict: string;
       s3Id: string;
+      emailBody: string;
     }[];
   };
 };
@@ -74,7 +75,8 @@ const Inboxes = (): ReactElement => {
   return (
     <>
       <div className="py-3">
-        <h1></h1>My inbox: {inboxName}
+        <h1>My inbox: {inboxName}</h1>
+        <h2>Number of emails: {aliases?.data.Count}</h2>
       </div>
       {aliases && (
         <>
@@ -87,6 +89,7 @@ const Inboxes = (): ReactElement => {
                   <li>dmarcVerdict: {item.dmarcVerdict}</li>
                   <li>spamVerdict: {item.spamVerdict}</li>
                   <li>virusVerdict: {item.virusVerdict}</li>
+                  <li>{item.emailBody}</li>
                 </div>
               ))}
             </ul>
