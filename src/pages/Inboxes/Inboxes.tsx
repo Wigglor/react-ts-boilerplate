@@ -247,27 +247,25 @@ const Inboxes = (): ReactElement => {
 
       <div className="pb-7 px-1 sm:px-5 sm:pb-10">
         <div className="">
-          <h1 className="bg-gray-800 p-6 z-50">
-            {aliases && (
-              <>
-                <div>
-                  {aliases.data.map((item) => (
-                    <div className="text-gray-100" key={item.id}>
-                      <p>{item.alias}</p>
+          {aliases && (
+            <>
+              <div>
+                {aliases.data.map((item) => (
+                  <div className="text-gray-100 bg-gray-600 p-2 m-2" key={item.id}>
+                    <p>{item.alias}</p>
 
-                      {/* <Link to={{ pathname: `/inboxes/${item.id}`, state: { name: item.name } }}> */}
-                      <Link
-                        to={`/inboxes/${item.id}`}
-                        state={{ inboxName: item.inboxName, alias: item.alias }}
-                      >
-                        <p>{item.inboxName}</p>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </h1>
+                    {/* <Link to={{ pathname: `/inboxes/${item.id}`, state: { name: item.name } }}> */}
+                    <Link
+                      to={`/inboxes/${item.id}`}
+                      state={{ inboxName: item.inboxName, alias: item.alias }}
+                    >
+                      <p>{item.inboxName}</p>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className="flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
