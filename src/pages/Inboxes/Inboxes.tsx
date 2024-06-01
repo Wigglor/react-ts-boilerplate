@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { ReactElement, useEffect, useState } from "react";
+import { ChangeEvent, ReactElement, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -12,27 +12,27 @@ interface ApiResponse<T> {
   data: T;
 }
 
-// type inboxNameResponse = {
-//   uniqueAlias: {
-//     id: string;
-//     inboxName: string;
-//     alias: string;
-//     createdAt: string;
-//     updatedAt: string;
-//     accountId: string;
-//   };
-// };
+type AliasItems = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  alias: string;
+  domainId: string;
+  inboxName: string;
+};
 
 type Alias = {
-  data: {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    name: string;
-    alias: string;
-    domainId: string;
-    inboxName: string;
-  }[];
+  data: AliasItems[];
+  // data: {
+  //   id: string;
+  //   createdAt: string;
+  //   updatedAt: string;
+  //   name: string;
+  //   alias: string;
+  //   domainId: string;
+  //   inboxName: string;
+  // }[];
 };
 
 type AliasInput = {
@@ -44,6 +44,7 @@ const Inboxes = (): ReactElement => {
   const [aliasStatus, setAliasStatus] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [aliases, setAliases] = useState<Alias>();
+  const [searchVal, setSearchVal] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
 
   const {
@@ -56,6 +57,10 @@ const Inboxes = (): ReactElement => {
   const toggleInbox = () => {
     resetInboxNameForm();
     setAddInbox((prev) => !prev);
+  };
+
+  const filterSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchVal(e.target.value);
   };
 
   const handleInboxNameClick: SubmitHandler<AliasInput> = async (data: AliasInput) => {
@@ -108,6 +113,10 @@ const Inboxes = (): ReactElement => {
       controller.abort();
     };
   }, []);
+
+  const filteredData = aliases?.data.filter((item) =>
+    item.inboxName.toLowerCase().includes(searchVal.toLowerCase()),
+  ) as AliasItems[];
 
   if (!aliasStatus) {
     return <h1 className="p-6 bg-gray-800 text-gray-100">Loading...</h1>;
@@ -267,9 +276,12 @@ const Inboxes = (): ReactElement => {
                 </svg>
               </div>
               <input
+                onChange={(e) => setSearchVal(e.target.value)}
+                // onChange={(e) => filterSearch(e)}
                 type="text"
+                value={searchVal}
                 className="py-[7px] px-3 ps-10 block w-full bg-stone-100 border-transparent rounded-lg text-sm placeholder:text-stone-500 focus:border-gray-500 focus:ring-gray-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-600"
-                placeholder="Search orders"
+                placeholder="Search inbox"
               ></input>
             </div>
           </div>
@@ -1316,7 +1328,7 @@ const Inboxes = (): ReactElement => {
                 </span>
               </button>
 
-              <div
+              {/* <div
                 className="hs-dropdown-menu hs-dropdown-open:opacity-100 w-44 transition-[opacity,margin] duration opacity-0 hidden z-10 bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_10px_rgba(0,0,0,0.2)] dark:bg-neutral-900"
                 aria-labelledby="hs-pro-dupfind"
               >
@@ -1426,7 +1438,7 @@ const Inboxes = (): ReactElement => {
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -1435,7 +1447,8 @@ const Inboxes = (): ReactElement => {
       <div className="sm:mx-7 grid grid-cols-1 sm:grid-cols-4 gap-3">
         {aliases && (
           <>
-            {aliases.data.map((item) => (
+            {/* {aliases.data.map((item) => ( */}
+            {filteredData.map((item) => (
               <div
                 key={item.id}
                 className="p-4 group relative flex flex-col border border-gray-200 bg-white hover:border-gray-300 dark:bg-neutral-800 dark:border-neutral-700/50 dark:hover:border-neutral-700 rounded-lg"
