@@ -89,7 +89,7 @@ const Inboxes = (): ReactElement => {
                   <li>dmarcVerdict: {item.dmarcVerdict}</li>
                   <li>spamVerdict: {item.spamVerdict}</li>
                   <li>virusVerdict: {item.virusVerdict}</li>
-                  <li>{item.emailBody}</li>
+                  {/* <li>{item.emailBody}</li> */}
                 </div>
               ))}
             </ul>

@@ -201,7 +201,7 @@ const Inboxes = (): ReactElement => {
             )}
           </>
         )}
-        <div className="px-4 sm:px-7 mb-3">
+        <div className="px-4 sm:mx-7 mb-3">
           <h3 className="font-semibold text-gray-800 dark:text-neutral-200">My Inboxes</h3>
           {/* CHANGE THIS LATER */}
           {errorMessage && (
@@ -245,9 +245,1194 @@ const Inboxes = (): ReactElement => {
         </div>
       </div>
 
-      {/* <div className="pb-7 px-1 sm:px-5 sm:pb-10"> */}
+      <div className="sm:mx-7 p-5 space-y-4 mb-4 flex flex-col bg-gray-700 border border-stone-200 shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+        <div className="grid md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-5">
+          <div>
+            <div className="relative">
+              <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
+                <svg
+                  className="flex-shrink-0 size-4 text-stone-500 dark:text-neutral-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                className="py-[7px] px-3 ps-10 block w-full bg-stone-100 border-transparent rounded-lg text-sm placeholder:text-stone-500 focus:border-gray-500 focus:ring-gray-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-600"
+                placeholder="Search orders"
+              ></input>
+            </div>
+          </div>
 
-      <div className="sm:px-7 grid grid-cols-1 sm:grid-cols-4 gap-3 px-">
+          <div className="flex md:justify-end items-center gap-x-2">
+            {/* <div className="hs-dropdown [--auto-close:inside] inline-flex">
+              <button
+                id="hs-pro-dnic"
+                type="button"
+                className="py-2 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-stone-200 bg-white text-stone-800 shadow-sm hover:bg-stone-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+              >
+                25 Jul - 25 Aug
+                <svg
+                  className="flex-shrink-0 size-3.5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+
+              <div
+                className="hs-dropdown-menu hs-dropdown-open:opacity-100 w-[318px] sm:w-[636px] transition-[opacity,margin] duration opacity-0 hidden z-50 bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_10px_rgba(0,0,0,0.2)] dark:bg-neutral-900"
+                aria-labelledby="hs-pro-dnic"
+              >
+                <div className="sm:flex">
+                  <div className="p-3 space-y-0.5">
+                    <div className="grid grid-cols-5 items-center gap-x-3 mx-1.5 pb-3">
+                      <div className="col-span-1">
+                        <button
+                          type="button"
+                          className="size-8 flex justify-center items-center text-stone-800 hover:bg-stone-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        >
+                          <svg
+                            className="flex-shrink-0 size-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m15 18-6-6 6-6" />
+                          </svg>
+                        </button>
+                      </div>
+                      <div className="col-span-3 flex justify-center items-center gap-x-1">
+                        <div className="relative">
+                          <select
+                            data-hs-select='{
+                        "placeholder": "Select month",
+                        "toggleTag": "<button type=\"button\"></button>",
+                        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative flex text-nowrap w-full cursor-pointer text-start font-medium text-stone-800 hover:text-stone-600 focus:outline-none focus:text-stone-600 before:absolute before:inset-0 before:z-[1] dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300",
+                        "dropdownClasses": "mt-2 z-50 w-32 max-h-72 p-1 space-y-0.5 bg-white border border-stone-200 rounded-lg shadow-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-stone-100 [&::-webkit-scrollbar-thumb]:bg-stone-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                        "optionClasses": "p-2 w-full text-sm text-stone-800 cursor-pointer hover:bg-stone-100 rounded-lg focus:outline-none focus:bg-stone-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-stone-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                      }'
+                            className="hidden"
+                          >
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6" selected>
+                              July
+                            </option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                          </select>
+                        </div>
+
+                        <span className="text-stone-800 dark:text-neutral-200">/</span>
+
+                        <div className="relative">
+                          <select
+                            data-hs-select='{
+                        "placeholder": "Select year",
+                        "toggleTag": "<button type=\"button\"></button>",
+                        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative flex text-nowrap w-full cursor-pointer text-start font-medium text-stone-800 hover:text-stone-600 focus:outline-none focus:text-stone-600 before:absolute before:inset-0 before:z-[1] dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300",
+                        "dropdownClasses": "mt-2 z-50 w-20 max-h-72 p-1 space-y-0.5 bg-white border border-stone-200 rounded-lg shadow-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-stone-100 [&::-webkit-scrollbar-thumb]:bg-stone-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                        "optionClasses": "p-2 w-full text-sm text-stone-800 cursor-pointer hover:bg-stone-100 rounded-lg focus:outline-none focus:bg-stone-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-stone-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                      }'
+                            className="hidden"
+                          >
+                            <option selected>2023</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                            <option>2027</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-span-1 flex justify-end">
+                        <button
+                          type="button"
+                          className="opacity-0 pointer-events-none size-8 flex justify-center items-center text-stone-800 hover:bg-stone-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        >
+                          <svg
+                            className="flex-shrink-0 size-4"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m9 18 6-6-6-6" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex pb-1.5">
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Mo
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Tu
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        We
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Th
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Fr
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Sa
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Su
+                      </span>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                          disabled
+                        >
+                          26
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                          disabled
+                        >
+                          27
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                          disabled
+                        >
+                          28
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                          disabled
+                        >
+                          29
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                          disabled
+                        >
+                          30
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          1
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          2
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          3
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          4
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          5
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          6
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          7
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          8
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          9
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          10
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          11
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          12
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          13
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          14
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          15
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          16
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          17
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          18
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          19
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          20
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          21
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          22
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          23
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          24
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 rounded-s-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center bg-green-600 border border-transparent text-sm font-medium text-white hover:border-green-600 rounded-full dark:bg-green-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:hover:border-neutral-700"
+                        >
+                          25
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          26
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          27
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          28
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          29
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          30
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          31
+                        </button>
+                      </div>
+                      <div className="bg-gradient-to-r from-stone-100 dark:from-stone-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          1
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          2
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          3
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          4
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          5
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          6
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-3 space-y-0.5">
+                    <div className="grid grid-cols-5 items-center gap-x-3 mx-1.5 pb-3">
+                      <div className="col-span-1">
+                        <button
+                          type="button"
+                          className="opacity-0 pointer-events-none size-8 flex justify-center items-center text-stone-800 hover:bg-stone-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        >
+                          <svg
+                            className="flex-shrink-0 size-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m15 18-6-6 6-6" />
+                          </svg>
+                        </button>
+                      </div>
+                      <div className="col-span-3 flex justify-center items-center gap-x-1">
+                        <div className="relative">
+                          <select
+                            data-hs-select='{
+                        "placeholder": "Select month",
+                        "toggleTag": "<button type=\"button\"></button>",
+                        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative flex text-nowrap w-full cursor-pointer text-start font-medium text-stone-800 hover:text-stone-600 focus:outline-none focus:text-stone-600 before:absolute before:inset-0 before:z-[1] dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300",
+                        "dropdownClasses": "mt-2 z-50 w-32 max-h-72 p-1 space-y-0.5 bg-white border border-stone-200 rounded-lg shadow-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-stone-100 [&::-webkit-scrollbar-thumb]:bg-stone-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                        "optionClasses": "p-2 w-full text-sm text-stone-800 cursor-pointer hover:bg-stone-100 rounded-lg focus:outline-none focus:bg-stone-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-stone-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                      }'
+                            className="hidden"
+                          >
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6" selected>
+                              July
+                            </option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                          </select>
+                        </div>
+
+                        <span className="text-stone-800 dark:text-neutral-200">/</span>
+
+                        <div className="relative">
+                          <select
+                            data-hs-select='{
+                        "placeholder": "Select year",
+                        "toggleTag": "<button type=\"button\"></button>",
+                        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative flex text-nowrap w-full cursor-pointer text-start font-medium text-stone-800 hover:text-stone-600 focus:outline-none focus:text-stone-600 before:absolute before:inset-0 before:z-[1] dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300",
+                        "dropdownClasses": "mt-2 z-50 w-20 max-h-72 p-1 space-y-0.5 bg-white border border-stone-200 rounded-lg shadow-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-stone-100 [&::-webkit-scrollbar-thumb]:bg-stone-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                        "optionClasses": "p-2 w-full text-sm text-stone-800 cursor-pointer hover:bg-stone-100 rounded-lg focus:outline-none focus:bg-stone-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-stone-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                      }'
+                            className="hidden"
+                          >
+                            <option selected>2023</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                            <option>2027</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-span-1 flex justify-end">
+                        <button
+                          type="button"
+                          className="size-8 flex justify-center items-center text-stone-800 hover:bg-stone-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        >
+                          <svg
+                            className="flex-shrink-0 size-4"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m9 18 6-6-6-6" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex pb-1.5">
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Mo
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Tu
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        We
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Th
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Fr
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Sa
+                      </span>
+                      <span className="m-px w-10 block text-center text-sm text-stone-500 dark:text-neutral-500">
+                        Su
+                      </span>
+                    </div>
+                    <div className="flex">
+                      <div className="bg-gradient-to-l from-stone-100 dark:from-stone-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          31
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                        >
+                          1
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                        >
+                          2
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                        >
+                          3
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                        >
+                          4
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          5
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          6
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          7
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          8
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          9
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          10
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          11
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          12
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          13
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          14
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          15
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          16
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          17
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          18
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          19
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          20
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          21
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          22
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          23
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 first:rounded-s-full last:rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          24
+                        </button>
+                      </div>
+                      <div className="bg-stone-100 rounded-e-full dark:bg-neutral-800">
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center bg-green-600 border border-transparent text-sm font-medium text-white hover:border-green-600 rounded-full dark:bg-green-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:hover:border-neutral-700"
+                        >
+                          25
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          26
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          27
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          28
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          29
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          30
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 rounded-full hover:border-green-600 hover:text-green-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-green-600 focus:text-green-600 dark:text-neutral-200"
+                        >
+                          31
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          1
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          2
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          3
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          4
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          5
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          6
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          7
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          8
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          9
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="m-px size-10 flex justify-center items-center border border-transparent text-sm text-stone-800 hover:border-green-600 hover:text-green-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700"
+                          disabled
+                        >
+                          10
+                        </button>
+                      </div>
+                    </div>
+                    <div className="pt-4 flex justify-end gap-x-2">
+                      <button
+                        type="button"
+                        className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-stone-200 bg-white text-stone-800 shadow-sm hover:bg-stone-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                        data-hs-overlay="#hs-pro-edmad"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        className="py-2 px-3  inline-flex justify-center items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-green-500"
+                        data-hs-overlay="#hs-pro-edmad"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+
+            <div className="hs-dropdown [--auto-close:inside] [--placement:bottom-right] relative inline-flex">
+              <button
+                id="hs-pro-dupfind"
+                type="button"
+                className="py-2 px-2.5 inline-flex items-center gap-x-1.5 text-xs rounded-lg border border-stone-200 bg-white text-stone-800 shadow-sm hover:bg-stone-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+              >
+                <svg
+                  className="flex-shrink-0 size-3.5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="21" x2="14" y1="4" y2="4" />
+                  <line x1="10" x2="3" y1="4" y2="4" />
+                  <line x1="21" x2="12" y1="12" y2="12" />
+                  <line x1="8" x2="3" y1="12" y2="12" />
+                  <line x1="21" x2="16" y1="20" y2="20" />
+                  <line x1="12" x2="3" y1="20" y2="20" />
+                  <line x1="14" x2="14" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="10" y2="14" />
+                  <line x1="16" x2="16" y1="18" y2="22" />
+                </svg>
+                Filter
+                <span className="font-medium text-[10px] py-0.5 px-[5px] bg-stone-800 text-white leading-3 rounded-full dark:bg-neutral-500">
+                  7
+                </span>
+              </button>
+
+              <div
+                className="hs-dropdown-menu hs-dropdown-open:opacity-100 w-44 transition-[opacity,margin] duration opacity-0 hidden z-10 bg-white rounded-xl shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_10px_rgba(0,0,0,0.2)] dark:bg-neutral-900"
+                aria-labelledby="hs-pro-dupfind"
+              >
+                <div className="p-1">
+                  <div className="flex items-center gap-x-3 py-1.5 px-2 cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-neutral-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600">
+                    <input
+                      type="checkbox"
+                      className="shrink-0 border-stone-300 rounded text-green-600 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-neutral-800"
+                      id="hs-pro-dupfindch2"
+                      checked
+                    ></input>
+                    <label
+                      htmlFor="hs-pro-dupfindch2"
+                      className="flex flex-1 items-center gap-x-3 cursor-pointer text-[13px] text-stone-800 dark:text-neutral-300"
+                    >
+                      Order
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-x-3 py-1.5 px-2 cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-neutral-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600">
+                    <input
+                      type="checkbox"
+                      className="shrink-0 border-stone-300 rounded text-green-600 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-neutral-800"
+                      id="hs-pro-dupfindch3"
+                      checked
+                    ></input>
+                    <label
+                      htmlFor="hs-pro-dupfindch3"
+                      className="flex flex-1 items-center gap-x-3 cursor-pointer text-[13px] text-stone-800 dark:text-neutral-300"
+                    >
+                      Purchased
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-x-3 py-1.5 px-2 cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-neutral-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600">
+                    <input
+                      type="checkbox"
+                      className="shrink-0 border-stone-300 rounded text-green-600 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-neutral-800"
+                      id="hs-pro-dupfindch4"
+                      checked
+                    ></input>
+                    <label
+                      htmlFor="hs-pro-dupfindch4"
+                      className="flex flex-1 items-center gap-x-3 cursor-pointer text-[13px] text-stone-800 dark:text-neutral-300"
+                    >
+                      Status
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-x-3 py-1.5 px-2 cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-neutral-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600">
+                    <input
+                      type="checkbox"
+                      className="shrink-0 border-stone-300 rounded text-green-600 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-neutral-800"
+                      id="hs-pro-dupfindch5"
+                      checked
+                    ></input>
+                    <label
+                      htmlFor="hs-pro-dupfindch5"
+                      className="flex flex-1 items-center gap-x-3 cursor-pointer text-[13px] text-stone-800 dark:text-neutral-300"
+                    >
+                      Customer
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-x-3 py-1.5 px-2 cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-neutral-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600">
+                    <input
+                      type="checkbox"
+                      className="shrink-0 border-stone-300 rounded text-green-600 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-neutral-800"
+                      id="hs-pro-dupfindch6"
+                      checked
+                    ></input>
+                    <label
+                      htmlFor="hs-pro-dupfindch6"
+                      className="flex flex-1 items-center gap-x-3 cursor-pointer text-[13px] text-stone-800 dark:text-neutral-300"
+                    >
+                      Payment Method
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-x-3 py-1.5 px-2 cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-neutral-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600">
+                    <input
+                      type="checkbox"
+                      className="shrink-0 border-stone-300 rounded text-green-600 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-neutral-800"
+                      id="hs-pro-dupfindch7"
+                      checked
+                    ></input>
+                    <label
+                      htmlFor="hs-pro-dupfindch7"
+                      className="flex flex-1 items-center gap-x-3 cursor-pointer text-[13px] text-stone-800 dark:text-neutral-300"
+                    >
+                      Payment Status
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-x-3 py-1.5 px-2 cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-neutral-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600">
+                    <input
+                      type="checkbox"
+                      className="shrink-0 border-stone-300 rounded text-green-600 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-neutral-800"
+                      id="hs-pro-dupfindch8"
+                      checked
+                    ></input>
+                    <label
+                      htmlFor="hs-pro-dupfindch8"
+                      className="flex flex-1 items-center gap-x-3 cursor-pointer text-[13px] text-stone-800 dark:text-neutral-300"
+                    >
+                      Items
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="sm:mx-7 grid grid-cols-1 sm:grid-cols-4 gap-3">
         {aliases && (
           <>
             {aliases.data.map((item) => (
@@ -270,7 +1455,7 @@ const Inboxes = (): ReactElement => {
                         </Link>
 
                         <p className="mt-1 text-sm text-gray-500 dark:text-neutral-500">
-                          Connect a slack workspace in order to setup automated notifications.
+                          Alias: {item.alias}
                         </p>
                       </div>
                     </div>
