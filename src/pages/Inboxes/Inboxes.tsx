@@ -277,40 +277,6 @@ const Inboxes = (): ReactElement => {
                   </div>
                 </div>
               </div>
-              // <div
-              //   key={item.id}
-              //   className="p-4 group relative flex flex-col border border-gray-200 bg-white hover:border-gray-300 dark:bg-neutral-800 dark:border-neutral-700/50 dark:hover:border-neutral-700 rounded-lg"
-              // >
-              //   <div className="h-full flex gap-x-5">
-              //     <div className="grow">
-              //
-              //         <div>
-              //           <Link
-              //             to={`/inboxes/${item.id}`}
-              //             state={{ inboxName: item.inboxName, alias: item.alias }}
-              //           >
-              //             <h3 className="inline-flex items-center gap-x-1 font-medium text-gray-800 dark:text-neutral-200">
-              //               {item.inboxName}
-              //             </h3>
-              //             <p>{item.id}</p>
-              //           </Link>
-
-              //           <p className="mt-1 text-sm text-gray-500 dark:text-neutral-500">
-              //             Connect a slack workspace in order to setup automated notifications.
-              //           </p>
-              //         </div>
-
-              //         <div className="pt-1 mt-auto">
-              //           <span className="inline-flex items-center gap-x-2 text-sm font-medium group-disabled:opacity-50 group-disabled:pointer-events-none text-blue-600 group-hover:text-blue-700 group-hover:underline group-hover:decoration-2 dark:text-blue-500 dark:group-hover:text-blue-400">
-              //             {item.alias}
-              //           </span>
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </div>
-
-              //   <a className="after:absolute after:inset-0 after:z-10" href="#"></a>
-              // </div>
             ))}
           </>
         )}
