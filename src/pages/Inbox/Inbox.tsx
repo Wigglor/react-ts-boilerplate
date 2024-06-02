@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 interface ApiResponse<T> {
@@ -9,24 +9,41 @@ interface ApiResponse<T> {
   data: T;
 }
 
+type AliasItems = {
+  dmarcVerdict: string;
+  displayEmail: string;
+  emailReceived: string;
+  virusVerdict: string;
+  emailAlias: string;
+  createdAt: string;
+  spamVerdict: string;
+  s3Id: string;
+  emailBody: string;
+  emailSubject: string;
+  emailSender: string;
+  dkimVerdict: string;
+  spfVerdict: string;
+};
+
 type Email = {
   data: {
     Count: number;
-    Items: {
-      dmarcVerdict: string;
-      displayEmail: string;
-      emailReceived: string;
-      virusVerdict: string;
-      emailAlias: string;
-      createdAt: string;
-      spamVerdict: string;
-      s3Id: string;
-      emailBody: string;
-      emailSubject: string;
-      emailSender: string;
-      dkimVerdict: string;
-      spfVerdict: string;
-    }[];
+    Items: AliasItems[];
+    // Items: {
+    //   dmarcVerdict: string;
+    //   displayEmail: string;
+    //   emailReceived: string;
+    //   virusVerdict: string;
+    //   emailAlias: string;
+    //   createdAt: string;
+    //   spamVerdict: string;
+    //   s3Id: string;
+    //   emailBody: string;
+    //   emailSubject: string;
+    //   emailSender: string;
+    //   dkimVerdict: string;
+    //   spfVerdict: string;
+    // }[];
   };
 };
 
@@ -41,7 +58,9 @@ const Inboxes = (): ReactElement => {
   const [aliases, setEmails] = useState<Email>();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
+  const [searchVal, setSearchVal] = useState<string>("");
   const { inboxName, alias } = location.state || { name: "Unknown" };
+  const { id } = useParams();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -72,6 +91,10 @@ const Inboxes = (): ReactElement => {
     };
   }, []);
 
+  const filteredData = aliases?.data.Items.filter((item) =>
+    item.emailBody.toLowerCase().includes(searchVal.toLowerCase()),
+  ) as AliasItems[];
+
   if (!emailStatus) {
     return <h1 className="p-6 bg-gray-800 text-gray-100">Loading...</h1>;
   }
@@ -79,7 +102,9 @@ const Inboxes = (): ReactElement => {
   return (
     <>
       <div className="py-3">
-        <h1>My inbox: {inboxName}</h1>
+        <h1>
+          My inbox: {inboxName} id: {id}
+        </h1>
         <h2>Number of emails: {aliases?.data.Count}</h2>
       </div>
 
@@ -105,12 +130,11 @@ const Inboxes = (): ReactElement => {
                 </svg>
               </div>
               <input
-                // onChange={(e) => setSearchVal(e.target.value)}
-                // onChange={(e) => filterSearch(e)}
+                onChange={(e) => setSearchVal(e.target.value)}
                 type="text"
-                // value={searchVal}
+                value={searchVal}
                 className="py-[7px] px-3 ps-10 block w-full bg-stone-100 border-transparent rounded-lg text-sm placeholder:text-stone-500 focus:border-gray-500 focus:ring-gray-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-600"
-                placeholder="Search inbox"
+                placeholder="Search email"
               ></input>
             </div>
           </div>
@@ -156,17 +180,9 @@ const Inboxes = (): ReactElement => {
 
       {aliases && (
         <div className="sm:mx-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* <div>
-            <ul className=""> */}
-          {aliases.data.Items.map((item) => (
+          {/* {aliases.data.Items.map((item) => ( */}
+          {filteredData.map((item) => (
             <>
-              {/* <div className="text-gray-100 bg-green-700" key={item.s3Id}>
-                <li>email received: {item.emailReceived}</li>
-                <li>email: {item.emailAlias}</li>
-                <li>dmarcVerdict: {item.dmarcVerdict}</li>
-                <li>spamVerdict: {item.spamVerdict}</li>
-                <li>virusVerdict: {item.virusVerdict}</li>
-              </div> */}
               <div className="p-4 flex flex-col h-192 bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
                 <div className="flex justify-between items-center gap-x-2">
                   <a
@@ -537,13 +553,15 @@ const Inboxes = (): ReactElement => {
                 </div>
 
                 <div className="mt-5">
-                  <button
-                    type="button"
-                    className="py-2 px-3 w-full inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                    data-hs-overlay="#hs-pro-dtlam"
-                  >
-                    View Email
-                  </button>
+                  <Link to={`/inboxes/${id}/${item.s3Id}`} state={{ emailContent: item.emailBody }}>
+                    <button
+                      type="button"
+                      className="py-2 px-3 w-full inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                      data-hs-overlay="#hs-pro-dtlam"
+                    >
+                      View Email
+                    </button>
+                  </Link>
                 </div>
               </div>
             </>

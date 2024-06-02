@@ -11,6 +11,7 @@ import WorkSpaceWrapper from "./components/WorkSpaceWrapper";
 import Account from "./pages/Account/Account";
 import Analytics from "./pages/Analytics/Analytics";
 import Billing from "./pages/Billing/Billing";
+import Email from "./pages/Email/Email";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
 import Inbox from "./pages/Inbox/Inbox";
@@ -123,6 +124,8 @@ const App = () => {
                   <Route path="paymentstatus" element={<PaymentStatus />} />
                   <Route path="inboxes" element={<Inboxes />} />
                   <Route path="inboxes/:id" element={<Inbox />} />
+
+                  <Route path="inboxes/:id/:emailId" element={<Email />} />
                   <Route path="analytics" element={<Analytics />} />
                   <Route path="account" element={<Account />} />
                   <Route
