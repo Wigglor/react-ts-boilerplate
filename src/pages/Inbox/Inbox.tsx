@@ -29,26 +29,7 @@ type Email = {
   data: {
     Count: number;
     Items: AliasItems[];
-    // Items: {
-    //   dmarcVerdict: string;
-    //   displayEmail: string;
-    //   emailReceived: string;
-    //   virusVerdict: string;
-    //   emailAlias: string;
-    //   createdAt: string;
-    //   spamVerdict: string;
-    //   s3Id: string;
-    //   emailBody: string;
-    //   emailSubject: string;
-    //   emailSender: string;
-    //   dkimVerdict: string;
-    //   spfVerdict: string;
-    // }[];
   };
-};
-
-type AliasInput = {
-  inboxName: string;
 };
 
 const Inboxes = (): ReactElement => {

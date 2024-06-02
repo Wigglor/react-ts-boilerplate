@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -57,10 +57,6 @@ const Inboxes = (): ReactElement => {
   const toggleInbox = () => {
     resetInboxNameForm();
     setAddInbox((prev) => !prev);
-  };
-
-  const filterSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchVal(e.target.value);
   };
 
   const handleInboxNameClick: SubmitHandler<AliasInput> = async (data: AliasInput) => {
