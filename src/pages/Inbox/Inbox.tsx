@@ -32,6 +32,12 @@ type Email = {
   };
 };
 
+type EmailDates = {
+  data: {
+    data: string;
+  };
+};
+
 const Inboxes = (): ReactElement => {
   const [addInbox, setAddInbox] = useState<boolean>(false);
   const [emailStatus, setEmailStatus] = useState<boolean>(false);
@@ -66,6 +72,44 @@ const Inboxes = (): ReactElement => {
       }
     };
     getEmails();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const getEmailDates = async () => {
+      try {
+        const response: ApiResponse<EmailDates> = await axiosPrivate.post(
+          "/email-interval",
+
+          JSON.stringify({
+            emailAlias: alias,
+            // startDate: "2024-05-21T00:00:00",
+            startDate: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString(),
+            // endDate: "2024-06-02T23:59:59",
+            endDate: new Date().toISOString(),
+          }),
+          {
+            signal: controller.signal,
+            withCredentials: true,
+          },
+        );
+        const currentDate = new Date().toDateString();
+        console.log(JSON.stringify(response));
+        console.log(currentDate);
+
+        // if (response.data.data.Items.length > 0) {
+        //   setEmailStatus(true);
+        //   setEmails(response.data);
+        // }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getEmailDates();
 
     return () => {
       controller.abort();
