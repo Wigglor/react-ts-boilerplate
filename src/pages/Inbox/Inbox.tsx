@@ -83,8 +83,79 @@ const Inboxes = (): ReactElement => {
         <h2>Number of emails: {aliases?.data.Count}</h2>
       </div>
 
+      <div className="sm:mx-7 p-5 space-y-4 mb-4 flex flex-col bg-gray-700 border border-stone-200 shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+        <div className="grid md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-5">
+          <div>
+            <div className="relative">
+              <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
+                <svg
+                  className="flex-shrink-0 size-4 text-stone-500 dark:text-neutral-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+              </div>
+              <input
+                // onChange={(e) => setSearchVal(e.target.value)}
+                // onChange={(e) => filterSearch(e)}
+                type="text"
+                // value={searchVal}
+                className="py-[7px] px-3 ps-10 block w-full bg-stone-100 border-transparent rounded-lg text-sm placeholder:text-stone-500 focus:border-gray-500 focus:ring-gray-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-600"
+                placeholder="Search inbox"
+              ></input>
+            </div>
+          </div>
+
+          <div className="flex md:justify-end items-center gap-x-2">
+            <div className="hs-dropdown [--auto-close:inside] [--placement:bottom-right] relative inline-flex">
+              <button
+                id="hs-pro-dupfind"
+                type="button"
+                className="py-2 px-2.5 inline-flex items-center gap-x-1.5 text-xs rounded-lg border border-stone-200 bg-white text-stone-800 shadow-sm hover:bg-stone-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-stone-100 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+              >
+                <svg
+                  className="flex-shrink-0 size-3.5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="21" x2="14" y1="4" y2="4" />
+                  <line x1="10" x2="3" y1="4" y2="4" />
+                  <line x1="21" x2="12" y1="12" y2="12" />
+                  <line x1="8" x2="3" y1="12" y2="12" />
+                  <line x1="21" x2="16" y1="20" y2="20" />
+                  <line x1="12" x2="3" y1="20" y2="20" />
+                  <line x1="14" x2="14" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="10" y2="14" />
+                  <line x1="16" x2="16" y1="18" y2="22" />
+                </svg>
+                Filter
+                <span className="font-medium text-[10px] py-0.5 px-[5px] bg-stone-800 text-white leading-3 rounded-full dark:bg-neutral-500">
+                  7
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {aliases && (
-        <div className="sm:mx-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="sm:mx-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* <div>
             <ul className=""> */}
           {aliases.data.Items.map((item) => (
@@ -96,7 +167,7 @@ const Inboxes = (): ReactElement => {
                 <li>spamVerdict: {item.spamVerdict}</li>
                 <li>virusVerdict: {item.virusVerdict}</li>
               </div> */}
-              <div className="p-4 flex flex-col bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+              <div className="p-4 flex flex-col h-192 bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
                 <div className="flex justify-between items-center gap-x-2">
                   <a
                     href="#"
@@ -237,11 +308,15 @@ const Inboxes = (): ReactElement => {
                 <p className="mt-1 text-sm text-gray-500 dark:text-neutral-500 mb-3">
                   <b>Sent:</b> {item.emailReceived}
                 </p>
-                <img
+                {/* <img
                   className="mb-4 w-full object-cover rounded-xl"
                   src="https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
                   alt="Image Description"
-                ></img>
+                ></img> */}
+                <div
+                  className="max-w-full break-words overflow-hidden"
+                  dangerouslySetInnerHTML={{ __html: item.emailBody }}
+                ></div>
 
                 <div className="mt-3 -mx-1">
                   <div className="flex flex-col gap-y-2">

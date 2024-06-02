@@ -18,6 +18,11 @@ export const plugins = [
 export const theme = {
   extend: {
     display: ["group-hover"], // perhaps exclude this one temporarily?
+    height: {
+      128: "32rem", // custom height
+      192: "48rem",
+      "half-screen": "50vh", // half the height of the viewport
+    },
   },
 };
 // export const theme = {
