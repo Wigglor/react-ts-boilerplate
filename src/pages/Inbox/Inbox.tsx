@@ -34,7 +34,9 @@ type Email = {
 
 type EmailDates = {
   data: {
-    data: string;
+    Items: {
+      emailReceived: Date;
+    }[];
   };
 };
 
@@ -43,6 +45,7 @@ const Inboxes = (): ReactElement => {
   const [emailStatus, setEmailStatus] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [aliases, setEmails] = useState<Email>();
+  const [receivedDate, setReceivedDate] = useState<EmailDates>();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
   const [searchVal, setSearchVal] = useState<string>("");
@@ -88,7 +91,7 @@ const Inboxes = (): ReactElement => {
           JSON.stringify({
             emailAlias: alias,
             // startDate: "2024-05-21T00:00:00",
-            startDate: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString(),
+            startDate: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString(),
             // endDate: "2024-06-02T23:59:59",
             endDate: new Date().toISOString(),
           }),
@@ -100,6 +103,9 @@ const Inboxes = (): ReactElement => {
         const currentDate = new Date().toDateString();
         console.log(JSON.stringify(response));
         console.log(currentDate);
+        if (response.data.data.Items.length > 0) {
+          setReceivedDate(response.data);
+        }
 
         // if (response.data.data.Items.length > 0) {
         //   setEmailStatus(true);
