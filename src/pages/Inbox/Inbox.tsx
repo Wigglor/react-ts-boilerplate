@@ -817,7 +817,10 @@ const Inboxes = (): ReactElement => {
           {/* {aliases.data.Items.map((item) => ( */}
           {filteredData.map((item) => (
             <>
-              <div className="p-4 flex flex-col h-192 bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+              <div
+                key={item.s3Id}
+                className="p-4 flex flex-col h-192 bg-white border border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
+              >
                 <div className="flex justify-between items-center gap-x-2">
                   <a
                     href="#"
