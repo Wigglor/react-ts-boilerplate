@@ -814,7 +814,6 @@ const Inboxes = (): ReactElement => {
 
       {aliases && (
         <div className="sm:mx-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* {aliases.data.Items.map((item) => ( */}
           {filteredData.map((item) => (
             <>
               <div
@@ -961,11 +960,7 @@ const Inboxes = (): ReactElement => {
                 <p className="mt-1 text-sm text-gray-500 dark:text-neutral-500 mb-3">
                   <b>Sent:</b> {item.emailReceived}
                 </p>
-                {/* <img
-                  className="mb-4 w-full object-cover rounded-xl"
-                  src="https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-                  alt="Image Description"
-                ></img> */}
+
                 <div
                   className="max-w-full break-words overflow-hidden"
                   dangerouslySetInnerHTML={{ __html: item.emailBody }}
@@ -1203,8 +1198,6 @@ const Inboxes = (): ReactElement => {
               </div>
             </>
           ))}
-          {/* </ul>
-          </div> */}
         </div>
       )}
     </>
