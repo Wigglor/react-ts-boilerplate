@@ -201,10 +201,7 @@ const Email = (): ReactElement => {
             </div>
           </div>
         </div>
-        <div
-          //   className="max-w-full break-words overflow-hidden"
-          dangerouslySetInnerHTML={{ __html: emailContent }}
-        ></div>
+        <div dangerouslySetInnerHTML={{ __html: emailContent }}></div>
       </div>
     </>
   );
