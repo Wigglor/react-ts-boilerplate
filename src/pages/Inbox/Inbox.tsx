@@ -106,11 +106,6 @@ const Inboxes = (): ReactElement => {
         if (response.data.data.Items.length > 0) {
           setReceivedDate(response.data);
         }
-
-        // if (response.data.data.Items.length > 0) {
-        //   setEmailStatus(true);
-        //   setEmails(response.data);
-        // }
       } catch (err) {
         console.error(err);
       }
